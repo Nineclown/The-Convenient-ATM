@@ -1,0 +1,14 @@
+language: java
+script: gradle build
+
+deploy:
+  provider: releases
+  api_key:
+    secure: #"여기엔 github token 이 필요합니다."
+  file_glob: true
+  file:
+    - "/home/travis/build/nineclown/The-Convenient-ATM/build/libs/*" #여기엔 경로.
+  skip_cleanup : true
+  on:
+    all_branches: true
+    repo: Nineclown/The-Convenient-ATM
