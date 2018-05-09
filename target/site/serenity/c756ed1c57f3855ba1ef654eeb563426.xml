@@ -1,0 +1,6 @@
+<acceptance-test-run title="Should interpreting based on" name="shouldInterpretingBasedOn" steps="0" successful="0" failures="0" skipped="0" ignored="0" pending="0" result="SUCCESS" duration="281" timestamp="2018-05-09T17:29:13.614+09:00" test-source="JUnit">
+  <user-story id="WhenInterpretingInstructions" name="When interpreting instructions" path=""/>
+  <tags>
+    <tag name="When interpreting instructions" type="story"/>
+  </tags>
+</acceptance-test-run>
