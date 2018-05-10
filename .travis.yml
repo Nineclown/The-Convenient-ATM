@@ -1,10 +1,9 @@
-language: java
+﻿language: java
 script: gradle build
 
 deploy:
   provider: releases
-  api_key:
-    secure: #"여기엔 github token 이 필요합니다."
+  api_key: bec8849f6b30ca60eb5d2e73b379d3f34a967ae9
   file_glob: true
   file:
     - "/home/travis/build/nineclown/The-Convenient-ATM/build/libs/*" #여기엔 경로.
