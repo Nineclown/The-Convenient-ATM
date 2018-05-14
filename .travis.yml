@@ -2,7 +2,7 @@
 script: gradle build
 
 deploy:
-  provider: releases
+  provider: nineclown
   api_key: "bec8849f6b30ca60eb5d2e73b379d3f34a967ae9"
   file_glob: true
   file:
