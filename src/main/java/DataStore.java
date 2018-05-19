@@ -13,7 +13,7 @@ public class DataStore{
         Account acct=null;
         Gson gson = new Gson();
         try{
-            BufferedReader br = new BufferedReader(new FileReader("data/" + bank + "/" + accountNo));
+            BufferedReader br = new BufferedReader(new FileReader("data/" + bank + "/" + accountNo + ".json"));
             acct = gson.fromJson(br, Account.class);
         }catch(IOException e){
             acct = null;
@@ -32,7 +32,7 @@ public class DataStore{
             if(!bankdir.exists()){
                 bankdir.mkdirs();
             }
-            FileWriter fileWriter = new FileWriter(new File(bankdir, account.getAccountNo()));
+            FileWriter fileWriter = new FileWriter(new File(bankdir, account.getAccountNo()+".json"));
             PrintWriter printWriter = new PrintWriter(fileWriter);
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             printWriter.print(gson.toJson(account));

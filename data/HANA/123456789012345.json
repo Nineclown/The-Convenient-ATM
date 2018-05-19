@@ -2,7 +2,7 @@
   "bank": "HANA",
   "accountNumber": "123456789012345",
   "password": 5555,
-  "balance": 1001800,
+  "balance": 1004200,
   "state": true,
   "transactions": [
     {
@@ -14,6 +14,16 @@
       "type": "Deposit",
       "amount": 1200,
       "time": "May 19, 2018 12:49:46 PM"
+    },
+    {
+      "type": "Deposit",
+      "amount": 1200,
+      "time": "May 19, 2018 3:16:27 PM"
+    },
+    {
+      "type": "Deposit",
+      "amount": 1200,
+      "time": "May 19, 2018 3:16:59 PM"
     }
   ]
 }
