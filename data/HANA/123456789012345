@@ -1,0 +1,1 @@
+{"bank":"HANA","accountNumber":"123456789012345","password":5555,"balance":1000400,"state":true,"transactions":[{"amount":100,"time":"May 19, 2018 8:08:39 AM"},{"amount":100,"time":"May 19, 2018 8:47:34 AM"},{"amount":100,"time":"May 19, 2018 8:57:01 AM"},{"amount":100,"time":"May 19, 2018 8:59:00 AM"}]}
