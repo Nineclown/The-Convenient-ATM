@@ -1,4 +1,5 @@
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -33,7 +34,7 @@ public class DataStore{
             }
             FileWriter fileWriter = new FileWriter(new File(bankdir, account.getAccountNo()));
             PrintWriter printWriter = new PrintWriter(fileWriter);
-            Gson gson = new Gson();
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
             printWriter.print(gson.toJson(account));
             printWriter.close();
         }catch(Exception e){

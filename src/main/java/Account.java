@@ -74,10 +74,6 @@ public class Account {
         return this.accountNumber;
     }
 
-    public void setBank(Bank bank){
-        this.bank = bank;
-    }
-
     public void saveAccount()
     {
         datastore.saveAccountData(this);
