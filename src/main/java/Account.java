@@ -77,12 +77,6 @@ public class Account {
         return this.accountNumber;
     }
 
-    public void filltest(){
-        this.accountNumber = "123456789012345";
-        this.balance = 1000000;
-        this.password = 5555;
-    }
-
 
     //DB에 저장하는 부분인가? 모르겠어서 놔둠
     public void saveAccount()
