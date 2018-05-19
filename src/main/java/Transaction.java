@@ -6,6 +6,10 @@ public class Transaction {
     private int amount;
     private Date time;
 
+    public Transaction(TransactionType type){
+        this.type = type;
+    }
+
     public void setAccount(Account account)
     {
         this.account = account;
