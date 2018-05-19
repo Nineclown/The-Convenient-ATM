@@ -1,13 +1,26 @@
 ﻿language: java
-script: gradle build
+jdk:
+ - oraclejdk8
+before_install:
+  - chmod +x gradlew
+install: true
+##start
+#addons:
+#  sonarcloud:
+#    organization: nineclown-github
+#    token:
+#      secure: 20cccee07ce13984260fc360c226cdc1ad1b0ed5
+script: gradle clean build
 
-deploy:
-  provider: Nineclown
-  api_key: "bec8849f6b30ca60eb5d2e73b379d3f34a967ae9"
-  file_glob: true
-  file:
-    - "/home/travis/build/nineclown/The-Convenient-ATM/build/libs/*" #여기엔 경로.
-  skip_cleanup : true
-  on:
-    all_branches: true
-    repo: Nineclown/The-Convenient-ATM
+#
+#deploy:
+#  provider: Nineclown
+#  api_key: "bec8849f6b30ca60eb5d2e73b379d3f34a967ae9"
+#  file_glob: true
+#  file:
+#    - "/home/travis/build/nineclown/The-Convenient-ATM/build/libs/*" #여기엔 경로.
+#  skip_cleanup : true
+#  on:
+#    all_branches: true
+#    repo: Nineclown/The-Convenient-ATM
+##end
