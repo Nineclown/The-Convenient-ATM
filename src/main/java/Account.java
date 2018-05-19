@@ -11,18 +11,25 @@ public class Account {
     private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
     private transient DataStore datastore = new DataStore();
 
-
-    public void Account(String accountNo)
+//    안쓴대서 주석 처리 해놈
+//    public void Account(Bank bank,String accountNo)
+//    {
+//    }
+    
+    public int getBalance()
     {
-        this.accountNumber = new String(accountNo);
+        return this.balance;
     }
-
+    public Bank getBank(){
+        return this.bank;
+    }
+    public String getAccountNo(){
+        return this.accountNumber;
+    }
     public void changeBalance(int cashAmount)
     {
         this.balance +=cashAmount;
     }
-
-
     public void addTransaction(Transaction transaction)
     {
         transactions.add(transaction);
@@ -59,19 +66,6 @@ public class Account {
             }
         }
         return list;
-    }
-
-    public int getBalance()
-    {
-        return this.balance;
-    }
-
-    public Bank getBank(){
-        return this.bank;
-    }
-
-    public String getAccountNo(){
-        return this.accountNumber;
     }
 
     public void saveAccount()
