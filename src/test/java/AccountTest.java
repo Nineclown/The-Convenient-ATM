@@ -5,8 +5,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
-import static org.junit.Assert.assertEquals;
-
 @RunWith(SerenityRunner.class)
 public class AccountTest {
 
@@ -18,6 +16,12 @@ public class AccountTest {
 
     @Test
     public void shouldInterpretingBasedOn() {
-        
+        DataStore ds = new DataStore();
+        Account acct = ds.loadAccountData("123456789012345");
+        System.out.println(acct.getAccountNo());
+        Transaction tr = new Transaction();
+        tr.setAccount(acct);
+        tr.setAmount(100);
+        tr.processTransaction();
     }
 }

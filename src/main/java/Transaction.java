@@ -2,7 +2,7 @@ import java.util.Date;
 
 public class Transaction {
     private TransactionType type;
-    private Account account;
+    private transient Account  account;
     private int amount;
     private Date time;
 
@@ -22,7 +22,11 @@ public class Transaction {
 
     public void processTransaction()
     {
-
+        this.calcFee();
+        this.setTime();
+        this.account.changeBalance(amount);
+        account.addTransaction(this);
+        account.saveAccount();
     }
 
     public void calcFee()

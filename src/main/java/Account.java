@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
-
 
 public class Account {
 
@@ -10,6 +8,7 @@ public class Account {
     private int balance = 0;
     private boolean state = true;
     private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
+    private transient DataStore datastore = new DataStore();
     //은행 enum 이 안에다가 선언?
     // private enum bank
 
@@ -74,11 +73,21 @@ public class Account {
         return this.balance;
     }
 
+    public String getAccountNo(){
+        return this.accountNumber;
+    }
+
+    public void filltest(){
+        this.accountNumber = "123456789012345";
+        this.balance = 1000000;
+        this.password = 5555;
+    }
+
 
     //DB에 저장하는 부분인가? 모르겠어서 놔둠
     public void saveAccount()
     {
-
+        datastore.saveAccountData(this);
     }
 
 }
