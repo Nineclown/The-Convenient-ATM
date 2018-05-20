@@ -49,14 +49,10 @@ public class System {
         try{
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        
-            // optional default is GET
             con.setRequestMethod("GET");
-            //add request header 헤더를 만들어주는것.
-            int responseCode = con.getResponseCode();
+            con.getResponseCode();
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
-            StringBuffer response = new StringBuffer();
             if((inputLine = in.readLine()) != null){
                 currency = Double.parseDouble(inputLine.substring(inputLine.indexOf(':')+1, inputLine.length()-1));
             }
@@ -79,7 +75,6 @@ public class System {
     }
 
     public void enterPeriodToQuery(Date start, Date end) {
-
     }
 
     public void enterUserId(String userId) {

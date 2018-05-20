@@ -22,16 +22,10 @@ public class Lottery {
         try{
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        
-            // optional default is GET
             con.setRequestMethod("GET");
-        
-            //add request header 헤더를 만들어주는것.
-            int responseCode = con.getResponseCode();
+            con.getResponseCode();
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
-            StringBuffer response = new StringBuffer();
-            
             if((inputLine = in.readLine()) != null){
                 rank = Integer.parseInt(inputLine.substring(2,3));
             }
