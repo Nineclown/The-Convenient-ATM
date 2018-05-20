@@ -52,20 +52,17 @@ public class System {
         
             // optional default is GET
             con.setRequestMethod("GET");
-        
             //add request header 헤더를 만들어주는것.
             int responseCode = con.getResponseCode();
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
             StringBuffer response = new StringBuffer();
-            
             if((inputLine = in.readLine()) != null){
-                currency = Double.parseDouble(inputLine.substring(inputLine.indexOf(':'),-1));
+                currency = Double.parseDouble(inputLine.substring(inputLine.indexOf(':')+1, inputLine.length()-1));
             }
         }catch(Exception e){
             
         }
-
         return currency;
     }
 
