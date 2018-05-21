@@ -8,6 +8,12 @@ public class Main extends JFrame {
         SelectFunction selectFunctionPanel = new SelectFunction();
         AdminSelectFunction adminSelectFunctionPanel = new AdminSelectFunction();
 
+        try {
+            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+
         JFrame userFrame = new JFrame("C++, The Convenient ATM");
         userFrame.setContentPane(new SelectFunction().getPanel());
         userFrame.setSize(800, 600);
