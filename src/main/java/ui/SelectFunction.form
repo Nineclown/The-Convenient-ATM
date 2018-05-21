@@ -10,122 +10,143 @@
     <children>
       <component id="573a7" class="javax.swing.JButton" binding="foreignWithdrawButton" default-binding="true">
         <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="60"/>
+          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="60"/>
+            <preferred-size width="300" height="60"/>
           </grid>
         </constraints>
         <properties>
+          <font size="16"/>
           <text value="Foreign Withdraw"/>
         </properties>
       </component>
       <component id="44d01" class="javax.swing.JButton" binding="depositButton">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="60"/>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="60"/>
+            <preferred-size width="300" height="60"/>
           </grid>
         </constraints>
         <properties>
+          <font size="16"/>
           <text value="Deposit"/>
         </properties>
       </component>
       <component id="10f75" class="javax.swing.JButton" binding="queryBalanceButton" default-binding="true">
         <constraints>
-          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="60"/>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="60"/>
+            <preferred-size width="300" height="60"/>
           </grid>
         </constraints>
         <properties>
+          <font size="16"/>
           <text value="Query Balance"/>
         </properties>
       </component>
       <component id="386b9" class="javax.swing.JButton" binding="queryTransactionListButton" default-binding="true">
         <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="60"/>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="60"/>
+            <preferred-size width="300" height="60"/>
           </grid>
         </constraints>
         <properties>
+          <font size="16"/>
           <text value="Query Transaction List"/>
         </properties>
       </component>
       <component id="a605e" class="javax.swing.JButton" binding="foreignDepositButton" default-binding="true">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="60"/>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="60"/>
+            <preferred-size width="300" height="60"/>
           </grid>
         </constraints>
         <properties>
+          <font size="16"/>
           <text value="Foreign Deposit"/>
         </properties>
       </component>
       <component id="26d90" class="javax.swing.JButton" binding="withdrawButton" default-binding="true">
         <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="60"/>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="60"/>
+            <preferred-size width="300" height="60"/>
           </grid>
         </constraints>
         <properties>
+          <font size="16"/>
           <text value="Withdraw"/>
         </properties>
       </component>
       <component id="4cd87" class="javax.swing.JButton" binding="reportLostCardButton" default-binding="true">
         <constraints>
-          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="60"/>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="60"/>
+            <preferred-size width="300" height="60"/>
           </grid>
         </constraints>
         <properties>
+          <font size="16"/>
           <text value="Report Lost Card"/>
         </properties>
       </component>
       <component id="ea053" class="javax.swing.JButton" binding="transferButton" default-binding="true">
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="60"/>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="60"/>
+            <preferred-size width="300" height="60"/>
           </grid>
         </constraints>
         <properties>
+          <font size="16"/>
           <text value="Transfer"/>
         </properties>
       </component>
       <component id="12a61" class="javax.swing.JButton" binding="splitPayButton" default-binding="true">
         <constraints>
-          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="60"/>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="60"/>
+            <preferred-size width="300" height="60"/>
           </grid>
         </constraints>
         <properties>
+          <font size="16"/>
           <text value="Split Pay"/>
         </properties>
       </component>
       <component id="cc617" class="javax.swing.JButton" binding="getLotteryPrizeButton" default-binding="true">
         <constraints>
-          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="60"/>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="60"/>
+            <preferred-size width="300" height="60"/>
           </grid>
         </constraints>
         <properties>
+          <font size="16"/>
           <text value="Get Lottery Prize"/>
         </properties>
       </component>
       <component id="3fc11" class="javax.swing.JButton" binding="changeLocaleButton" default-binding="true">
         <constraints>
-          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="60"/>
+          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="7" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <minimum-size width="200" height="60"/>
+            <preferred-size width="300" height="60"/>
           </grid>
         </constraints>
         <properties>
+          <font size="16"/>
           <text value="Change Locale"/>
         </properties>
       </component>
-      <component id="fd309" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="85ff8" class="javax.swing.JLabel">
         <constraints>
-          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="60"/>
-          </grid>
+          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value=""/>
+          <font size="24"/>
+          <text value="T2"/>
         </properties>
       </component>
     </children>

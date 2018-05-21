@@ -17,7 +17,6 @@ public class SelectFunction {
     private JButton splitPayButton;
     private JButton getLotteryPrizeButton;
     private JButton changeLocaleButton;
-    private JTextField textField1;
 
     public SelectFunction() {
         depositButton.addMouseListener(new MouseAdapter() {
