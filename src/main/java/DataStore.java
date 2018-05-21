@@ -11,97 +11,107 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class DataStore{
-    public Account loadAccountData(Bank bank, String accountNo){
-        Account acct=null;
+public class DataStore {
+    public Account loadAccountData(Bank bank, String accountNo) {
+        Account account;
         Gson gson = new Gson();
-        try{
+        try {
             BufferedReader br = new BufferedReader(new FileReader("data/" + bank + "/" + accountNo + ".json"));
-            acct = gson.fromJson(br, Account.class);
-        }catch(IOException e){
-            acct = null;
+            account = gson.fromJson(br, Account.class);
+        } catch (IOException e) {
+            account = null;
         }
-        return acct;
+        return account;
     }
 
-    public void saveAccountData(Account account){
-        try{
-            File datadir = new File("data");
-            if(!datadir.exists()){
-                datadir.mkdirs();
+    public void saveAccountData(Account account) throws DataStoreError {
+        try {
+            File dataDirectory = new File("data");
+            if (!dataDirectory.exists()) {
+                dataDirectory.mkdirs();
             }
-            File bankdir = new File(datadir, account.getBank()+"");
-            if(!bankdir.exists()){
-                bankdir.mkdirs();
+
+            File bankDirectory = new File(dataDirectory, account.getBank() + "");
+            if (!bankDirectory.exists()) {
+                bankDirectory.mkdirs();
             }
-            BufferedWriter output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(bankdir, account.getAccountNo() + ".json")), "UTF8"));
+
+            BufferedWriter output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(bankDirectory, account.getAccountNo() + ".json")), "UTF8"));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             output.write(gson.toJson(account));
             output.close();
-        }catch(Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new DataStoreError(e.getMessage());
         }
 
     }
 
-    public User loadUserData(String userId){
-        User user=null;
+    public User loadUserData(String userId) {
+        User user;
         Gson gson = new Gson();
-        try{
+
+        try {
             BufferedReader br = new BufferedReader(new FileReader("data/user/" + userId + ".json"));
             user = gson.fromJson(br, User.class);
-        }catch(IOException e){
+        } catch (IOException e) {
             user = null;
         }
+
         return user;
     }
 
-    public void saveUserData(User user){
-        try{
-            File datadir = new File("data");
-            if(!datadir.exists()){
-                datadir.mkdirs();
+    public void saveUserData(User user) throws DataStoreError {
+        try {
+            File dataDirectory = new File("data");
+            if (!dataDirectory.exists()) {
+                dataDirectory.mkdirs();
             }
-            File userdir = new File(datadir, "user");
-            if(!userdir.exists()){
-                userdir.mkdirs();
+
+            File userDirectory = new File(dataDirectory, "user");
+            if (!userDirectory.exists()) {
+                userDirectory.mkdirs();
             }
-            BufferedWriter output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(userdir, user.getUserId() + ".json")), "UTF-8"));
+
+            BufferedWriter output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(userDirectory, user.getUserId() + ".json")), "UTF-8"));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             output.write(gson.toJson(user));
             output.close();
-        }catch(Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new DataStoreError(e.getMessage());
         }
     }
 
-    public ArrayList<Admin> loadAdminData(){
+    public ArrayList<Admin> loadAdminData() {
         ArrayList<Admin> admins;
         Gson gson = new Gson();
-        try{
+
+        try {
             BufferedReader br = new BufferedReader(new FileReader("data/admins.json"));
-            admins = gson.fromJson(br, new TypeToken<ArrayList<Admin>>(){}.getType());
-        }catch(IOException e){
+            admins = gson.fromJson(br, new TypeToken<ArrayList<Admin>>() {
+            }.getType());
+        } catch (IOException e) {
             admins = null;
         }
+
         return admins;
     }
 
-    public void saveAdminData(ArrayList<Admin> admins){
-        try{
-            File datadir = new File("data");
-            if(!datadir.exists()){
-                datadir.mkdirs();
+    public void saveAdminData(ArrayList<Admin> admins) throws DataStoreError {
+        try {
+            File dataDirectory = new File("data");
+            if (!dataDirectory.exists()) {
+                dataDirectory.mkdirs();
             }
-            OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream(new File(datadir, "admins.json")), "UTF-8");
+
+            OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream(new File(dataDirectory, "admins.json")), "UTF-8");
             BufferedWriter bw = new BufferedWriter(output);
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             gson.toJson(admins, output);
             bw.write(gson.toJson(admins));
             bw.write("aa");
             output.close();
-        }catch(Exception e){
-            e.printStackTrace();
+        } catch (Exception e) {
+            throw new DataStoreError(e.getMessage());
         }
     }
 }

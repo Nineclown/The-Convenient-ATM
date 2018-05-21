@@ -1,6 +1,4 @@
-
-public enum TransactionType
-{
+public enum TransactionType {
     Deposit,
     ForeignDeposit,
     Withdraw,

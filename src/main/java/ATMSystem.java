@@ -15,27 +15,43 @@ public class ATMSystem {
     private Account account;
 
     private ArrayList<Admin> admins;
+    private Admin currentAdmin;
 
     private Transaction fromTransaction;
     private Transaction toTransaction;
     private ArrayList<Transaction> splitToTransaction;
 
 
+    private transient DataStore dataStore;
+
     public int getCashAmount() {
         return this.cashAmount;
+    }
+
+    public Account getAccount() {
+        return this.account;
+    }
+
+    public int getSelectedCardNumber() {
+        return this.selectedCardNumber;
     }
 
     public void setCashAmount(int value) {
         this.cashAmount = value;
     }
 
+    public Admin[] getAdmins() {
+        return this.admins.stream().toArray(Admin[]::new);
+    }
+
     public ATMSystem() {
         this.cashAmount = 0;
         this.selectedCardNumber = 0;
+        this.dataStore = new DataStore();
         this.admins = new ArrayList<Admin>();
     }
 
-    public void selectFunction(FunctionType function) {
+    public void selectFunction(FunctionType function) throws NoneOfFunctionSelected {
         switch (function) {
             case Deposit:
                 this.toTransaction = new Transaction(TransactionType.Deposit);
@@ -55,16 +71,20 @@ public class ATMSystem {
                 break;
             case SplitPay:
                 this.toTransaction = new Transaction(TransactionType.ReceiveTransfer);
+                this.splitToTransaction = new ArrayList<Transaction>();
                 break;
             case QueryBalance:
                 break;
             case QueryTransactionList:
                 break;
-            case AddAdmin:
+            case GetLotteryPrize:
                 break;
             case ReportLostCard:
                 break;
-            case GetLotteryPrize:
+            case ChangeLocale:
+                break;
+            // Admin only functions
+            case AddAdmin:
                 break;
             case RemoveAdmin:
                 break;
@@ -72,14 +92,28 @@ public class ATMSystem {
                 break;
             case QueryATMBalance:
                 break;
+            default:
+                throw new NoneOfFunctionSelected();
         }
     }
 
-    public void enterAccountInfo(Bank bank, String accountNo) {
+    public void enterAccountInfo(Bank bank, String accountNo) throws AccountDoesNotExist {
+        this.account = dataStore.loadAccountData(bank, accountNo);
 
+        if (this.account == null) {
+            throw new AccountDoesNotExist();
+        }
+
+        if (this.fromTransaction != null) {
+            this.fromTransaction.setAccount(account);
+        }
+
+        if (this.toTransaction != null) {
+            this.toTransaction.setAccount(account);
+        }
     }
 
-    public void enterBill(int[] billAmount) throws InvalidBillException {
+    public void enterBill(int[] billAmount) throws InvalidBillException, DataStoreError {
         int total = 0;
 
         if (billAmount.length != BillType.wonSize) {
@@ -91,10 +125,18 @@ public class ATMSystem {
         total += BillType.count(BillType.TenThousand, billAmount[2]);
         total += BillType.count(BillType.FiftyThousand, billAmount[3]);
 
-        this.cashAmount += total;
+        if (this.fromTransaction != null) {
+            this.fromTransaction.setAmount(total);
+            this.fromTransaction.processTransaction();
+        }
+
+        if (this.toTransaction != null) {
+            this.toTransaction.setAmount(total);
+            this.toTransaction.processTransaction();
+        }
     }
 
-    public void enterBillAsDollar(int[] billAmount) throws InvalidBillException {
+    public void enterBillAsDollar(int[] billAmount) throws InvalidBillException, DataStoreError {
         int totalDollar = 0;
 
         if (billAmount.length != BillType.dollarSize) {
@@ -108,11 +150,39 @@ public class ATMSystem {
         totalDollar += BillType.count(BillType.DollarHundred, billAmount[4]);
 
         this.cashAmount += (int) (this.getCurrency() * totalDollar);
+        totalDollar += (int) (this.getCurrency() * totalDollar);
+
+        if (this.fromTransaction != null) {
+            this.fromTransaction.setAmount(totalDollar);
+            this.fromTransaction.processTransaction();
+        }
+
+        if (this.toTransaction != null) {
+            this.toTransaction.setAmount(totalDollar);
+            this.toTransaction.processTransaction();
+        }
     }
 
-    public void enterPassword(int password) {
+    public void enterPassword(int password) throws InvalidPasswordException, AccountDoesNotExist {
+        int retry = 0;
+        final int maxRetry = 5;
 
+        if (this.account == null) {
+            throw new AccountDoesNotExist();
+        }
+
+        for (; retry < maxRetry; retry++) {
+            if (this.account.checkAccountPassword(password)) {
+                break;
+            }
+        }
+
+        if (retry == maxRetry) {
+            this.account.freezeAccount();
+            throw new InvalidPasswordException();
+        }
     }
+
 
     public void enterBillAmountToWithdraw(int cashAmount) {
         this.cashAmount = cashAmount;
@@ -159,7 +229,7 @@ public class ATMSystem {
     }
 
     public double getCurrency() {
-        double currency = 0;
+        double currency = 1000; //default currency
 
         String url = "https://free.currencyconverterapi.com/api/v5/convert?q=USD_KRW&compact=ultra";
         try {
@@ -179,19 +249,42 @@ public class ATMSystem {
     }
 
     public void enterCashAmountToTransfer(int cashAmount) {
-
+        this.cashAmount = cashAmount;
     }
 
     public void enterTotalCashAmountToGet(int cashAmount) {
-
+        this.cashAmount = cashAmount;
     }
 
-    public void enterNumberOfUsers(int userNumber) {
+    public void enterNumberOfUsers(int userNumber) throws TooFewUser, TooManyUsers {
+        int amountPerUser;
+        Transaction transaction;
 
+        if (userNumber == 0) {
+            throw new TooFewUser();
+        }
+
+        if (userNumber > this.cashAmount) {
+            throw new TooManyUsers();
+        }
+
+        amountPerUser = this.cashAmount / userNumber;
+
+        for (int i = 0; i < userNumber; i++) {
+            transaction = new Transaction(TransactionType.Withdraw);
+            transaction.setAmount(amountPerUser);
+            this.splitToTransaction.add(transaction);
+        }
     }
 
-    public void enterPeriodToQuery(Date start, Date end) {
+    public void enterPeriodToQuery(Date start, Date end) throws AccountDoesNotExist {
+        Transaction[] transactions;
 
+        if (this.account == null) {
+            throw new AccountDoesNotExist();
+        }
+
+        transactions = this.account.getTransactions(start, end);
     }
 
     public void enterUserId(String userId) {
@@ -199,11 +292,11 @@ public class ATMSystem {
     }
 
     public void selectCard(String cardNumber) {
-
+        this.selectedCardNumber = Integer.parseInt(cardNumber);
     }
 
     public void requestStopCard(String cardNumber) {
-
+        this.selectedCardNumber = Integer.parseInt(cardNumber);
     }
 
     public void askRenewCard(boolean answer) {
@@ -222,12 +315,21 @@ public class ATMSystem {
         }
     }
 
-    public void enterLottery(Lottery lottery) {
+    public void enterLottery(Lottery lottery) throws LotteryFailed {
+        int result = lottery.checkResult();
 
+        if (result == 0) {
+            throw new LotteryFailed();
+        }
+
+        this.toTransaction = new Transaction(TransactionType.Deposit);
+        this.toTransaction.setAmount(result);
     }
 
-    public void enterAdminInfo(String adminId, String adminPw) {
+    public void enterAdminInfo(String adminPw, String contact) {
+        Admin newAdmin = new Admin(this.createAdminId(), adminPw, contact);
 
+        this.admins.add(newAdmin);
     }
 
     public String createAdminId() {

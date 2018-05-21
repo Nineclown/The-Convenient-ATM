@@ -13,6 +13,7 @@ public class Lottery {
 
     /**
      * Lottery constructor
+     *
      * @param week
      * @param numbers
      */
@@ -25,6 +26,7 @@ public class Lottery {
 
     /**
      * Check lottery's result
+     *
      * @return Lottery winning prize's price
      */
     public int checkResult() {

@@ -6,71 +6,67 @@ public class Transaction {
     private int amount;
     private Date time;
 
-    public Transaction(TransactionType type){
+    public Transaction(TransactionType type) {
         this.tcType = type;
     }
 
     // Getter
 
-    public Date getTime()
-    {
+    public Date getTime() {
         return this.time;
     }
+
     public int getAmount() {
         return this.amount;
     }
+
     public Account getAccount() {
         return this.account;
     }
 
     // Setter
-    public void setAccount(Account account)
-    {
+    public void setAccount(Account account) {
         this.account = account;
     }
-    public void setAmount(int cashAmount)
-    {
+
+    public void setAmount(int cashAmount) {
         this.amount = cashAmount;
     }
-    public void addAmount(int cashAmount)
-    {
-        this.amount+=cashAmount;
+
+    public void addAmount(int cashAmount) {
+        this.amount += cashAmount;
     }
-    public void setTime()
-    {
+
+    public void setTime() {
         this.time = new Date();
     }
 
-    public void processTransaction()
-    {
-        this.calcFee();
-        this.setTime();
-        this.account.changeBalance(amount);
-        this.account.addTransaction(this);
-        this.account.saveAccount();
+    public void processTransaction() throws DataStoreError {
+        try {
+            this.calcFee();
+            this.setTime();
+            this.account.changeBalance(amount);
+            this.account.addTransaction(this);
+            this.account.saveAccount();
+        } catch (DataStoreError e) {
+            throw e;
+        }
     }
 
-    public void calcFee()
-    {
+    public void calcFee() {
         int fee;
-        if(this.account.getBank() == Bank.HANA)
-        {
-            if(this.tcType == TransactionType.Deposit)
-            {
+
+        if (this.account.getBank() == Bank.HANA) {
+            if (this.tcType == TransactionType.Deposit) {
                 fee = 0;
-            }
-            else
-            {
+            } else {
                 fee = 500;
             }
-        }
-        else
-        {
+        } else {
             fee = 1000;
         }
+
         this.amount -= fee;
     }
-
-
 }
 

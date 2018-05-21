@@ -37,11 +37,14 @@ public class TransactionTest {
         Transaction transaction = new Transaction(TransactionType.Deposit);
         transaction.setAccount(account);
         transaction.setAmount(10000);
-        transaction.processTransaction();
+        try {
+            transaction.processTransaction();
+        } catch (Exception e) {
+            fail("throw Exception");
+        }
 
         assertEquals(account.getTransactions(new Date(118,4,20,0,0,0),new Date(118,4,21,23,0,0)).length,5);
         assertEquals(account.getBalance(),1014200);
         assertEquals(transaction.getTime().after(new Date(118,4,20,0,0,0)),true);
-
     }
 }
