@@ -19,12 +19,13 @@ public class DataStoreTest {
     WebDriver browser;
 
 
-    @Test (expected = DataStoreError.class)
-    public void loadAccountDataShouldRaiseExceptionWhenAccountIsInvalid() throws DataStoreError{
+    @Test
+    public void loadAccountDataShouldRaiseExceptionWhenAccountIsInvalid(){
         Account account = new DataStore().loadAccountData(Bank.HANA, "1234567890");
+        assertNull(account);
     }
 
-    @Test (expected = DataStoreError.class)
+    @Test 
     public void saveAccountDataCreatesFile() throws DataStoreError {
         Account account = new Account(Bank.KOOKMIN, "1010101010101010");
         account.saveAccount();
@@ -34,9 +35,10 @@ public class DataStoreTest {
         file.delete();
     }
 
-    @Test (expected = DataStoreError.class)
-    public void loadUserDataShouldRaiseExceptionWhenAccountIsInvalid() throws DataStoreError{
+    @Test 
+    public void loadUserDataShouldRaiseExceptionWhenAccountIsInvalid(){
         User user = new DataStore().loadUserData("1234567890");
+        assertNull(user);
     }
 
 
