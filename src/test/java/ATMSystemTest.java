@@ -32,12 +32,12 @@ public class ATMSystemTest {
         system.enterBillAsDollar(billAmount);
     }
     @Test(expected = AccountDoesNotExist.class)
-    public void enterAccountInfoRaisesExceptionIfAccountDoesNotExistOnDataStore() throws AccountDoesNotExist {
+    public void enterAccountInfoRaisesExceptionIfAccountDoesNotExistOnDataStore() throws AccountDoesNotExist, DataStoreError {
         system.enterAccountInfo(Bank.WOORI, "DOESNOTEXIST");
     }
 
     @Test
-    public void enterAccountInfoChangesProperty()  {
+    public void enterAccountInfoChangesProperty() throws DataStoreError {
         try {
             system.enterAccountInfo(Bank.HANA, "123456789012345");
         } catch (AccountDoesNotExist e) {
