@@ -6,7 +6,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 
-public class System {
+public class ATMSystem {
     private int cashAmount;
     private int selectedCardNumber;
 
@@ -57,7 +57,7 @@ public class System {
                 currency = Double.parseDouble(inputLine.substring(inputLine.indexOf(':')+1, inputLine.length()-1));
             }
         }catch(Exception e){
-            
+
         }
         return currency;
     }

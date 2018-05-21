@@ -5,13 +5,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
-import static org.junit.Assert.*;
-
 @RunWith(SerenityRunner.class)
-public class SystemTest {
+public class ATMSystemTest {
 
     @Steps
-    System sys = new System();
+    ATMSystem sys = new ATMSystem();
 
     @Managed(driver = "chrome")
     WebDriver browser;
