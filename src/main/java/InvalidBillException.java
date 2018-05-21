@@ -1,10 +1,10 @@
 public class InvalidBillException extends Exception {
     // Parameterless Constructor
-    public InvalidBillException() {}
+    public InvalidBillException() {
+    }
 
     // Constructor that accepts a message
-    public InvalidBillException(String message)
-    {
+    public InvalidBillException(String message) {
         super(message);
     }
 }

@@ -3,14 +3,11 @@ public class SystemState {
     private boolean state = true;
     private Locale locale;
 
-    public void changeSystemLocale(Locale locale)
-    {
+    public void changeSystemLocale(Locale locale) {
         this.locale = locale;
     }
-    public void toggleSystem()
-    {
+
+    public void toggleSystem() {
         this.state = !state;
     }
-
-
 }

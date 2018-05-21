@@ -33,7 +33,7 @@ public class User {
     }
 
     public void saveUser() throws DataStoreError {
-        if(datastore == null){
+        if (datastore == null) {
             datastore = new DataStore();
         }
 
