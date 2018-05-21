@@ -36,7 +36,6 @@ public class User {
         if (datastore == null) {
             datastore = new DataStore();
         }
-
         try {
             datastore.saveUserData(this);
         } catch (DataStoreError e) {

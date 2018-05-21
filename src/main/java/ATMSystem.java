@@ -17,6 +17,7 @@ public class ATMSystem {
 
     private ArrayList<Admin> admins;
     private Admin currentAdmin;
+    private User user;
 
     private Transaction fromTransaction;
     private Transaction toTransaction;
@@ -54,6 +55,7 @@ public class ATMSystem {
         this.selectedCardNumber = 0;
         this.dataStore = new DataStore();
         this.admins = new ArrayList<Admin>();
+        this.user = new User();
     }
 
     public void selectFunction(FunctionType function) throws NoneOfFunctionSelected {
@@ -116,7 +118,7 @@ public class ATMSystem {
         if (this.toTransaction != null) {
             this.toTransaction.setAccount(account);
 
-            if ( this.toTransaction.getAmount() > 0 ) {
+            if (this.toTransaction.getAmount() > 0) {
                 // Get Lottery Prize
                 this.toTransaction.processTransaction();
             }
@@ -209,7 +211,7 @@ public class ATMSystem {
 
     public int[] calcBillAmount(int cashAmount, String cashType) {
 
-        int[] bill= new int[] {0,0,0,0};
+        int[] bill = new int[]{0, 0, 0, 0};
         int[] billType;
         int length = bill.length;
 
@@ -295,7 +297,7 @@ public class ATMSystem {
     }
 
     public void enterUserId(String userId) {
-
+        this.user = dataStore.loadUserData(userId);
     }
 
     public void selectCard(String cardNumber) {
@@ -304,23 +306,25 @@ public class ATMSystem {
 
     public void requestStopCard(String cardNumber) {
         this.selectedCardNumber = Integer.parseInt(cardNumber);
+        //카드를 중지했다는 메세지가 뜨게 함
     }
 
-    public void askRenewCard(boolean answer) {
+    public void askRenewCard(boolean answer) throws DataStoreError {
         if (answer) {
-
+            this.user.saveUser();
         } else {
-
+            return;
         }
     }
 
     public void requestRenewCard(boolean answer) {
         if (answer) {
-
+            // 재발급 신청이 완료되었다는 메시지 띄워주기
         } else {
-
+            return;
         }
     }
+
 
     public void enterLottery(Lottery lottery) throws LotteryFailed {
         int result = lottery.checkResult();
