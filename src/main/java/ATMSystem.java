@@ -39,7 +39,7 @@ public class ATMSystem {
         this.admins = new ArrayList<Admin>();
     }
 
-    public void selectFunction(FunctionType function) {
+    public void selectFunction(FunctionType function) throws NoneOfFunctionSelected {
         switch (function) {
             case Deposit:
                 this.toTransaction = new Transaction(TransactionType.Deposit);
@@ -76,6 +76,10 @@ public class ATMSystem {
                 break;
             case QueryATMBalance:
                 break;
+            case ChangeLocale:
+                break;
+            default:
+                throw new NoneOfFunctionSelected();
         }
     }
 
@@ -247,7 +251,7 @@ public class ATMSystem {
         if (result == 0) {
             throw new LotteryFailed();
         }
-        
+
         this.toTransaction = new Transaction(TransactionType.Deposit);
         this.toTransaction.setAmount(result);
     }
