@@ -119,7 +119,7 @@ public class Account {
     public Transaction[] getTransactions(Date startDateTime, Date endDateTime)
     {
         // 최근거래 50개까지만 출력
-        Transaction[] list = new Transaction[50];
+        Transaction[] list = new Transaction[transactions.size()];
 
         for(int i = 0; i<transactions.size();i++)
         {

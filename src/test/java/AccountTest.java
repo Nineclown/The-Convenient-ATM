@@ -33,16 +33,16 @@ public class AccountTest {
     {
         Account account = this.dataStore.loadAccountData(Bank.HANA,"123456789012345");
         account.changeBalance(5000);
-        assertEquals(account.getBalance(),10555);
+        assertEquals(account.getBalance(),1009200);
     }
 
     @Test
     public void shouldGetCorrectTransactions()
     {
         Account account = this.dataStore.loadAccountData(Bank.HANA,"123456789012345");
-        Transaction [] transactions = account.getTransactions(new Date(2018,5,19,12,0,0),new Date(2018,5,20,0,0,0));
+        Transaction [] transactions = account.getTransactions(new Date(118,4,19,12,0,0),new Date(118,4,20,0,0,0));
         assertEquals(transactions[1].getAmount(),1200);
-        assertEquals(transactions[2].getTime(),new Date(2018,5,19,15,16,27 ));
+        assertEquals(transactions[2].getTime(),new Date(118,4,19,15,16,27 ));
         assertEquals(transactions.length,4);
     }
 
@@ -55,7 +55,7 @@ public class AccountTest {
         transaction.setTime();
         Account acc = this.dataStore.loadAccountData(Bank.HANA,"123456789012345");
         acc.addTransaction(transaction);
-        Transaction [] transactions = acc.getTransactions(new Date(2018,5,19,12,0,0),new Date(2018,5,30,0,0,0));
+        Transaction [] transactions = acc.getTransactions(new Date(118,4,19,12,0,0),new Date(118,4,30,0,0,0));
         assertEquals(transactions[4].getAmount(),5100);
     }
 }
