@@ -27,8 +27,20 @@ public class ATMSystem {
         return this.cashAmount;
     }
 
+    public Account getAccount() {
+        return this.account;
+    }
+
+    public int getSelectedCardNumber() {
+        return this.selectedCardNumber;
+    }
+
     public void setCashAmount(int value) {
         this.cashAmount = value;
+    }
+
+    public Admin[] getAdmins() {
+        return this.admins.stream().toArray(Admin[]::new);
     }
 
     public ATMSystem() {
