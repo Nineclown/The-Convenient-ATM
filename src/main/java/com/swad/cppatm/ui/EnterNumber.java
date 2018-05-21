@@ -100,4 +100,8 @@ public class EnterNumber extends JFrame {
             }
         });
     }
+
+    public JPanel getPanel() {
+        return this.enterNumberPanel;
+    }
 }

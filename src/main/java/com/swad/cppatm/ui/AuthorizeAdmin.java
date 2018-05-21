@@ -10,12 +10,12 @@ public class AuthorizeAdmin extends JFrame {
     private JPanel authorizeAdminPanel;
     private JButton confirmButton;
     private JButton cancelButton;
-    private JPasswordField adminIdField;
-    private JTextField adminPwField;
-    private JLabel atmStateField;
+    private JTextField adminIdField;
+    private JPasswordField adminPwField;
+    private JLabel atmStateLabel;
 
     public AuthorizeAdmin(final JFrame parentFrame, final ATMSystem system) {
-        atmStateField.setText(system.getState().available() ? "Active": "Frozen");
+        atmStateLabel.setText(system.getState().available() ? "Active": "Frozen");
 
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override

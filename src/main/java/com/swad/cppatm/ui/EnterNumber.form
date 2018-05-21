@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.swad.cppatm.ui.EnterNumber">
-  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="true" same-size-vertically="false" hgap="30" vgap="-1">
+  <grid id="27dc6" binding="enterNumberPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="true" same-size-vertically="false" hgap="30" vgap="-1">
     <margin top="30" left="30" bottom="30" right="30"/>
     <constraints>
       <xy x="20" y="20" width="800" height="600"/>
@@ -31,7 +31,7 @@
               <text value="최대 금액 : 100만원 이하"/>
             </properties>
           </component>
-          <component id="1ff0a" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+          <component id="1ff0a" class="javax.swing.JTextField" binding="numberField">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                 <preferred-size width="150" height="-1"/>
