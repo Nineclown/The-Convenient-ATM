@@ -13,7 +13,7 @@ public class AdminSelectFunction {
     private JPanel adminSelectFunctionPanel;
     private JButton queryATMBalanceButton;
     private JButton changeLocaleButton;
-    private JTextPane isFreezePane;
+    private JLabel atmStateLabel;
 
     public AdminSelectFunction() {
         addAdminButton.addMouseListener(new MouseAdapter() {
