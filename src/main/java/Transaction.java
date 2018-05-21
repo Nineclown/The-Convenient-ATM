@@ -9,6 +9,21 @@ public class Transaction {
     public Transaction(TransactionType type){
         this.tcType = type;
     }
+
+    // Getter
+
+    public Date getTime()
+    {
+        return this.time;
+    }
+    public int getAmount() {
+        return this.amount;
+    }
+    public Account getAccount() {
+        return this.account;
+    }
+
+    // Setter
     public void setAccount(Account account)
     {
         this.account = account;
@@ -24,10 +39,6 @@ public class Transaction {
     public void setTime()
     {
         this.time = new Date();
-    }
-    public Date getTime()
-    {
-        return this.time;
     }
 
     public void processTransaction()

@@ -15,11 +15,11 @@ public class Account {
     private transient DataStore datastore;
 
     /**
-     * Creates Empty Account
+     * Account constructor
      * @param bank Which bank that manages this account.
      * @param accountNo Account Number
      */
-    public void Account(Bank bank,String accountNo)
+    public Account(Bank bank, String accountNo)
     {
         this.bank = bank;
         this.accountNumber = accountNo;
