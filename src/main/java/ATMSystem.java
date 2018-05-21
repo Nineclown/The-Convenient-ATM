@@ -27,7 +27,9 @@ public class ATMSystem {
         return this.cashAmount;
     }
 
-    public void setCashAmount(int value) { this.cashAmount = value; }
+    public void setCashAmount(int value) {
+        this.cashAmount = value;
+    }
 
     public ATMSystem() {
         this.cashAmount = 0;
@@ -80,15 +82,15 @@ public class ATMSystem {
     public void enterAccountInfo(Bank bank, String accountNo) throws AccountDoesNotExist {
         this.account = dataStore.loadAccountData(bank, accountNo);
 
-        if ( this.account == null ) {
+        if (this.account == null) {
             throw new AccountDoesNotExist();
         }
 
-        if ( this.fromTransaction != null ) {
+        if (this.fromTransaction != null) {
             this.fromTransaction.setAccount(account);
         }
 
-        if ( this.toTransaction != null ) {
+        if (this.toTransaction != null) {
             this.toTransaction.setAccount(account);
         }
     }
@@ -96,7 +98,7 @@ public class ATMSystem {
     public void enterBill(int[] billAmount) throws InvalidBillException, DataStoreError {
         int total = 0;
 
-        if ( billAmount.length != BillType.wonSize ) {
+        if (billAmount.length != BillType.wonSize) {
             throw new InvalidBillException();
         }
 
@@ -105,12 +107,12 @@ public class ATMSystem {
         total += BillType.count(BillType.TenThousand, billAmount[2]);
         total += BillType.count(BillType.FiftyThousand, billAmount[3]);
 
-        if ( this.fromTransaction != null ) {
+        if (this.fromTransaction != null) {
             this.fromTransaction.setAmount(total);
             this.fromTransaction.processTransaction();
         }
 
-        if ( this.toTransaction != null ) {
+        if (this.toTransaction != null) {
             this.toTransaction.setAmount(total);
             this.toTransaction.processTransaction();
         }
@@ -119,7 +121,7 @@ public class ATMSystem {
     public void enterBillAsDollar(int[] billAmount) throws InvalidBillException, DataStoreError {
         int totalDollar = 0;
 
-        if ( billAmount.length != BillType.dollarSize ) {
+        if (billAmount.length != BillType.dollarSize) {
             throw new InvalidBillException();
         }
 
@@ -129,14 +131,14 @@ public class ATMSystem {
         totalDollar += BillType.count(BillType.DollarFifty, billAmount[3]);
         totalDollar += BillType.count(BillType.DollarHundred, billAmount[4]);
 
-        totalDollar += (int)(this.getCurrency() * totalDollar);
+        totalDollar += (int) (this.getCurrency() * totalDollar);
 
-        if ( this.fromTransaction != null ) {
+        if (this.fromTransaction != null) {
             this.fromTransaction.setAmount(totalDollar);
             this.fromTransaction.processTransaction();
         }
 
-        if ( this.toTransaction != null ) {
+        if (this.toTransaction != null) {
             this.toTransaction.setAmount(totalDollar);
             this.toTransaction.processTransaction();
         }
@@ -146,17 +148,17 @@ public class ATMSystem {
         int retry = 0;
         final int maxRetry = 5;
 
-        if ( this.account == null ) {
+        if (this.account == null) {
             throw new AccountDoesNotExist();
         }
 
-        for ( ; retry < maxRetry ; retry++ ) {
-            if ( this.account.checkAccountPassword(password) ) {
+        for (; retry < maxRetry; retry++) {
+            if (this.account.checkAccountPassword(password)) {
                 break;
             }
         }
 
-        if ( retry == maxRetry ) {
+        if (retry == maxRetry) {
             this.account.freezeAccount();
             throw new InvalidPasswordException();
         }
@@ -179,17 +181,17 @@ public class ATMSystem {
 
         String url = "https://free.currencyconverterapi.com/api/v5/convert?q=USD_KRW&compact=ultra";
 
-        try{
+        try {
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             con.setRequestMethod("GET");
             con.getResponseCode();
             BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
             String inputLine;
-            if((inputLine = in.readLine()) != null){
-                currency = Double.parseDouble(inputLine.substring(inputLine.indexOf(':')+1, inputLine.length()-1));
+            if ((inputLine = in.readLine()) != null) {
+                currency = Double.parseDouble(inputLine.substring(inputLine.indexOf(':') + 1, inputLine.length() - 1));
             }
-        }catch(Exception e){
+        } catch (Exception e) {
 
         }
         return currency;
@@ -224,7 +226,7 @@ public class ATMSystem {
     }
 
     public void askRenewCard(boolean answer) {
-        if ( answer ) {
+        if (answer) {
 
         } else {
 
@@ -232,15 +234,22 @@ public class ATMSystem {
     }
 
     public void requestRenewCard(boolean answer) {
-        if ( answer ) {
+        if (answer) {
 
         } else {
 
         }
     }
 
-    public void enterLottery(Lottery lottery) {
+    public void enterLottery(Lottery lottery) throws LotteryFailed {
+        int result = lottery.checkResult();
 
+        if (result == 0) {
+            throw new LotteryFailed();
+        }
+        
+        this.toTransaction = new Transaction(TransactionType.Deposit);
+        this.toTransaction.setAmount(result);
     }
 
     public void enterAdminInfo(String adminPw, String contact) {
@@ -250,18 +259,18 @@ public class ATMSystem {
     }
 
     public String createAdminId() {
-        if ( this.admins.size() == 0 ) {
+        if (this.admins.size() == 0) {
             return "0";
         }
         return MessageFormat.format("{0}",
-            Integer.parseInt(this.admins.get(this.admins.size() - 1).getId()+1));
+            Integer.parseInt(this.admins.get(this.admins.size() - 1).getId() + 1));
     }
 
     public int enterATMBalance(int[] billAmount) throws InvalidBillException {
         int balance = 0;
         double currency = this.getCurrency();
 
-        if ( billAmount.length != (BillType.wonSize + BillType.dollarSize) ) {
+        if (billAmount.length != (BillType.wonSize + BillType.dollarSize)) {
             throw new InvalidBillException();
         }
 
