@@ -24,7 +24,7 @@ public class DataStoreTest {
         Account account = new DataStore().loadAccountData(Bank.HANA, "1234567890");
     }
 
-    @Test
+    @Test (expected = DataStoreError.class)
     public void saveAccountDataCreatesFile() throws DataStoreError {
         Account account = new Account(Bank.KOOKMIN, "1010101010101010");
         account.saveAccount();
@@ -34,7 +34,7 @@ public class DataStoreTest {
         file.delete();
     }
 
-    @Test (expected = DataStoreTest.class)
+    @Test (expected = DataStoreError.class)
     public void loadUserDataShouldRaiseExceptionWhenAccountIsInvalid() throws DataStoreError{
         User user = new DataStore().loadUserData("1234567890");
     }
