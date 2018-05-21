@@ -15,7 +15,7 @@ gradle bulid
 
 [Serenity Documentation](http://www.thucydides.info/docs/serenity)
 
-[JUnit User Guide](https://junit.org/junit5/docs/current/user-guide/)
+[JUnit User Guide](https://github.com/junit-team/junit4/wiki)
 
 [Gradle User Guide](https://docs.gradle.org/current/userguide/userguide.html)
 
