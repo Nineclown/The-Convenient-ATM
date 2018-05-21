@@ -24,6 +24,8 @@ public class ATMSystem {
         return this.cashAmount;
     }
 
+    public void setCashAmount(int value) { this.cashAmount = value; }
+
     public ATMSystem() {
         this.cashAmount = 0;
         this.selectedCardNumber = 0;
@@ -103,7 +105,7 @@ public class ATMSystem {
         totalDollar += BillType.count(BillType.DollarFifty, billAmount[3]);
         totalDollar += BillType.count(BillType.DollarHundred, billAmount[4]);
 
-        this.cashAmount += this.getCurrency() * totalDollar;
+        this.cashAmount += (int)(this.getCurrency() * totalDollar);
     }
 
     public void enterPassword(int password) {
