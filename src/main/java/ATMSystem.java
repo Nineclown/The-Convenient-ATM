@@ -1,3 +1,5 @@
+import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import java.net.URL;
@@ -10,20 +12,98 @@ public class ATMSystem {
     private int cashAmount;
     private int selectedCardNumber;
 
-    public void selectFunction(FunctionType function) {
+    private Account account;
 
+    private ArrayList<Admin> admins;
+
+    private Transaction fromTransaction;
+    private Transaction toTransaction;
+    private ArrayList<Transaction> splitToTransaction;
+
+    public int getCashAmount() {
+        return this.cashAmount;
+    }
+
+    public ATMSystem() {
+        this.cashAmount = 0;
+        this.selectedCardNumber = 0;
+
+        this.admins = new ArrayList<Admin>();
+    }
+
+    public void selectFunction(FunctionType function) {
+        switch (function) {
+            case Deposit:
+                this.toTransaction = new Transaction(TransactionType.Deposit);
+                break;
+            case Withdraw:
+                this.toTransaction = new Transaction(TransactionType.Withdraw);
+                break;
+            case ForeignDeposit:
+                this.toTransaction = new Transaction(TransactionType.ForeignDeposit);
+                break;
+            case ForeignWithdraw:
+                this.toTransaction = new Transaction(TransactionType.ForeignWithdraw);
+                break;
+            case Transfer:
+                this.fromTransaction = new Transaction(TransactionType.SendTransfer);
+                this.toTransaction = new Transaction(TransactionType.ReceiveTransfer);
+                break;
+            case SplitPay:
+                this.toTransaction = new Transaction(TransactionType.ReceiveTransfer);
+                break;
+            case QueryBalance:
+                break;
+            case QueryTransactionList:
+                break;
+            case AddAdmin:
+                break;
+            case ReportLostCard:
+                break;
+            case GetLotteryPrize:
+                break;
+            case RemoveAdmin:
+                break;
+            case ToggleATMState:
+                break;
+            case QueryATMBalance:
+                break;
+        }
     }
 
     public void enterAccountInfo(Bank bank, String accountNo) {
 
     }
 
-    public void enterBill(int[] billAmount) {
+    public void enterBill(int[] billAmount) throws InvalidBillException {
+        int total = 0;
 
+        if ( billAmount.length != BillType.wonSize ) {
+            throw new InvalidBillException();
+        }
+
+        total += BillType.count(BillType.Thousand, billAmount[0]);
+        total += BillType.count(BillType.FiveThousand, billAmount[1]);
+        total += BillType.count(BillType.TenThousand, billAmount[2]);
+        total += BillType.count(BillType.FiftyThousand, billAmount[3]);
+
+        this.cashAmount += total;
     }
 
-    public void enterBillAsDollar(int[] billAmount) {
+    public void enterBillAsDollar(int[] billAmount) throws InvalidBillException {
+        int totalDollar = 0;
 
+        if ( billAmount.length != BillType.dollarSize ) {
+            throw new InvalidBillException();
+        }
+
+        totalDollar += BillType.count(BillType.DollarOne, billAmount[0]);
+        totalDollar += BillType.count(BillType.DollarTwo, billAmount[1]);
+        totalDollar += BillType.count(BillType.DollarTen, billAmount[2]);
+        totalDollar += BillType.count(BillType.DollarFifty, billAmount[3]);
+        totalDollar += BillType.count(BillType.DollarHundred, billAmount[4]);
+
+        this.cashAmount += this.getCurrency() * totalDollar;
     }
 
     public void enterPassword(int password) {
@@ -75,6 +155,7 @@ public class ATMSystem {
     }
 
     public void enterPeriodToQuery(Date start, Date end) {
+
     }
 
     public void enterUserId(String userId) {
@@ -89,6 +170,56 @@ public class ATMSystem {
 
     }
 
-    public static void main(String [] args) throws Exception {
+    public void askRenewCard(boolean answer) {
+        if ( answer ) {
+
+        } else {
+
+        }
+    }
+
+    public void requestRenewCard(boolean answer) {
+        if ( answer ) {
+
+        } else {
+
+        }
+    }
+
+    public void enterLottery(Lottery lottery) {
+
+    }
+
+    public void enterAdminInfo(String adminId, String adminPw) {
+
+    }
+
+    public String createAdminId() {
+        if ( this.admins.size() == 0 ) {
+            return "0";
+        }
+        return MessageFormat.format("{0}",
+            Integer.parseInt(this.admins.get(this.admins.size() - 1).getId()+1));
+    }
+
+    public int enterATMBalance(int[] billAmount) throws InvalidBillException {
+        int balance = 0;
+        double currency = this.getCurrency();
+
+        if ( billAmount.length != (BillType.wonSize + BillType.dollarSize) ) {
+            throw new InvalidBillException();
+        }
+
+        balance += BillType.count(BillType.Thousand, billAmount[0]);
+        balance += BillType.count(BillType.FiveThousand, billAmount[1]);
+        balance += BillType.count(BillType.TenThousand, billAmount[2]);
+        balance += BillType.count(BillType.FiftyThousand, billAmount[3]);
+        balance += BillType.dollarCount(BillType.DollarOne, billAmount[4]);
+        balance += BillType.dollarCount(BillType.DollarTwo, billAmount[5]);
+        balance += BillType.dollarCount(BillType.DollarTen, billAmount[6]);
+        balance += BillType.dollarCount(BillType.DollarFifty, billAmount[7]);
+        balance += BillType.dollarCount(BillType.DollarHundred, billAmount[8]);
+
+        return balance;
     }
 }
