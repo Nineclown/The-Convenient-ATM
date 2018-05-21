@@ -9,6 +9,18 @@ public class Admin {
         this.contact = contact;
     }
 
+    public String getId() {
+        return this.id;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public String getContact() {
+        return this.contact;
+    }
+
     public boolean checkAdminAccount(String adminID, String adminPW)
     {
         if(this.id.equals(adminID))
