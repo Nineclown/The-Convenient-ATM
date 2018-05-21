@@ -10,9 +10,6 @@ import static org.junit.Assert.*;
 @RunWith(SerenityRunner.class)
 public class UserTest {
 
-    @Steps
-    Account account;
-
     @Managed(driver = "chrome")
     WebDriver browser;
 

@@ -10,9 +10,6 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SerenityRunner.class)
 public class LotteryTest {
 
-    @Steps
-    Account account;
-
     @Managed(driver = "chrome")
     WebDriver browser;
 
