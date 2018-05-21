@@ -1,0 +1,29 @@
+{
+  "bank": "WOORI",
+  "accountNumber": "110412644105",
+  "password": 1111,
+  "balance": 0,
+  "state": true,
+  "transactions": [
+    {
+      "type": "Deposit",
+      "amount": 100,
+      "time": "April 29, 2018 12:48:36 PM"
+    },
+    {
+      "type": "Deposit",
+      "amount": 1200,
+      "time": "May 02, 2018 12:49:46 PM"
+    },
+    {
+      "type": "Deposit",
+      "amount": 1300,
+      "time": "May 16, 2018 3:16:27 PM"
+    },
+    {
+      "type": "Deposit",
+      "amount": 1400,
+      "time": "May 19, 2018 3:16:59 PM"
+    }
+  ]
+}
