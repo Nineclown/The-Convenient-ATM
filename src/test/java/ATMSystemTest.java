@@ -1,71 +1,35 @@
 import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Managed;
-import net.thucydides.core.annotations.Steps;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 @RunWith(SerenityRunner.class)
 public class ATMSystemTest {
-
-    @Steps
-    ATMSystem sys = new ATMSystem();
-
-    @Managed(driver = "chrome")
-    WebDriver browser;
-
-    @Test
-    public void selectFunctionCreatesTransactionByType() {
-
-    }
-
-    @Test
-    public void enterAccountInfoLoadsAccountData() {
-
-    }
-
-    @Test
-    public void enterAccountInfoRaisesExceptionWhenAccountNumberIsInvalid() {
-
-    }
-
     @Test
     public void enterBillCorrectlyCountsBills() {
+        ATMSystem system = new ATMSystem();
+        int [] billAmount = { 1, 2, 3, 4 };
 
+        try {
+            system.enterBill(billAmount);
+        } catch (InvalidBillException e ) {
+
+        }
+
+        assertEquals(system.getCashAmount(),  1 * 1000 + 2 * 5000 + 3 * 10000 + 4 * 50000);
     }
 
-    @Test
-    public void enterBillDoesNotDoAnythingIfArgumentIsEmpty() {
+    @Test(expected = InvalidBillException.class)
+    public void enterBillRaisesExceptionIfLengthIsInvalid() {
+        ATMSystem system = new ATMSystem();
+        int [] billAmount = { 1, 2 };
 
-    }
-
-    @Test
-    public void enterBillAsDolarUsesConvertedCashAmount() {
-
-    }
-
-    @Test
-    public void enterBillAsDollarCorrectlyCountsBills() {
-
-    }
-
-    @Test
-    public void enterBillAsDollarDoesNotDoAnythingIfArgumentIsEmpty() {
-
-    }
-
-    @Test
-    public void enterPasswordPassWhenPasswordIsValid() {
-
-    }
-
-    @Test
-    public void enterPasswordAccountInfoMustBeExist() {
-
-    }
-
-    @Test
-    public void enterPasswordRejectsAfterFiveTimesOfIncorrectness() {
-
+        try {
+            system.enterBill(billAmount);
+        } catch (InvalidBillException e) {
+            assertNull("throw InvalidBillException", e);
+        }
     }
 }
