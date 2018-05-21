@@ -97,7 +97,7 @@ public class ATMSystem {
         }
     }
 
-    public void enterAccountInfo(Bank bank, String accountNo) throws AccountDoesNotExist {
+    public void enterAccountInfo(Bank bank, String accountNo) throws AccountDoesNotExist, DataStoreError {
         this.account = dataStore.loadAccountData(bank, accountNo);
 
         if (this.account == null) {
@@ -110,6 +110,11 @@ public class ATMSystem {
 
         if (this.toTransaction != null) {
             this.toTransaction.setAccount(account);
+
+            if ( this.toTransaction.getAmount() > 0 ) {
+                // Get Lottery Prize
+                this.toTransaction.processTransaction();
+            }
         }
     }
 
