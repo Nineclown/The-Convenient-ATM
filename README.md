@@ -11,3 +11,14 @@ gradle clean test # Run unit test
 gradle bulid
 ```
 
+## Read also
+
+[Serenity Documentation](http://www.thucydides.info/docs/serenity)
+
+[JUnit User Guide](https://junit.org/junit5/docs/current/user-guide/)
+
+[Gradle User Guide](https://docs.gradle.org/current/userguide/userguide.html)
+
+[Java Basics](https://docs.oracle.com/javase/tutorial/java/)
+
+[Travis CI Documentation](https://docs.travis-ci.com/)
