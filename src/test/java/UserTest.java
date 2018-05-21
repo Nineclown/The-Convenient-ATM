@@ -9,10 +9,6 @@ import static org.junit.Assert.*;
 
 @RunWith(SerenityRunner.class)
 public class UserTest {
-
-    @Managed(driver = "chrome")
-    WebDriver browser;
-
     @Test
     public void loadUserTest() {
         DataStore ds = new DataStore();
@@ -26,7 +22,13 @@ public class UserTest {
     public void removeCardListTest() {
         DataStore ds = new DataStore();
         User us = ds.loadUserData("9512221234567");
-        us.removeCard("1234567890");
+
+        try {
+            us.removeCard("1234567890");
+        } catch (DataStoreError e) {
+            fail("throw DataStoreError: " + e.getMessage());
+        }
+
         for(int i = 0 ; i < us.getCardList().length ; i++){
             assertNotEquals("1234567890", us.getCardList()[i]);
         }

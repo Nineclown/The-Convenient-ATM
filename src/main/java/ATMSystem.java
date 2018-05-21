@@ -93,7 +93,7 @@ public class ATMSystem {
         }
     }
 
-    public void enterBill(int[] billAmount) throws InvalidBillException {
+    public void enterBill(int[] billAmount) throws InvalidBillException, DataStoreError {
         int total = 0;
 
         if ( billAmount.length != BillType.wonSize ) {
@@ -106,15 +106,17 @@ public class ATMSystem {
         total += BillType.count(BillType.FiftyThousand, billAmount[3]);
 
         if ( this.fromTransaction != null ) {
-            fromTransaction.setAmount(total);
+            this.fromTransaction.setAmount(total);
+            this.fromTransaction.processTransaction();
         }
 
         if ( this.toTransaction != null ) {
             this.toTransaction.setAmount(total);
+            this.toTransaction.processTransaction();
         }
     }
 
-    public void enterBillAsDollar(int[] billAmount) throws InvalidBillException, Exception {
+    public void enterBillAsDollar(int[] billAmount) throws InvalidBillException, DataStoreError {
         int totalDollar = 0;
 
         if ( billAmount.length != BillType.dollarSize ) {

@@ -24,7 +24,7 @@ public class DataStore {
         return account;
     }
 
-    public void saveAccountData(Account account) throws Exception {
+    public void saveAccountData(Account account) throws DataStoreError {
         try {
             File dataDirectory = new File("data");
             if (!dataDirectory.exists()) {
@@ -41,7 +41,7 @@ public class DataStore {
             output.write(gson.toJson(account));
             output.close();
         } catch (Exception e) {
-            throw e;
+            throw new DataStoreError(e.getMessage());
         }
 
     }
@@ -60,7 +60,7 @@ public class DataStore {
         return user;
     }
 
-    public void saveUserData(User user) {
+    public void saveUserData(User user) throws DataStoreError {
         try {
             File dataDirectory = new File("data");
             if (!dataDirectory.exists()) {
@@ -77,7 +77,7 @@ public class DataStore {
             output.write(gson.toJson(user));
             output.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new DataStoreError(e.getMessage());
         }
     }
 
@@ -96,7 +96,7 @@ public class DataStore {
         return admins;
     }
 
-    public void saveAdminData(ArrayList<Admin> admins) throws Exception {
+    public void saveAdminData(ArrayList<Admin> admins) throws DataStoreError {
         try {
             File dataDirectory = new File("data");
             if (!dataDirectory.exists()) {
@@ -111,7 +111,7 @@ public class DataStore {
             bw.write("aa");
             output.close();
         } catch (Exception e) {
-            throw e;
+            throw new DataStoreError(e.getMessage());
         }
     }
 }

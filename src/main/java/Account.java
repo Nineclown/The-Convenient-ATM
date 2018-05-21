@@ -141,10 +141,10 @@ public class Account {
     /**
      * Save account data to DataStore
      */
-    public void saveAccount() throws Exception {
+    public void saveAccount() throws DataStoreError {
         try {
             datastore.saveAccountData(this);
-        } catch (Exception e) {
+        } catch (DataStoreError e) {
             throw e;
         }
     }

@@ -41,20 +41,21 @@ public class Transaction {
         this.time = new Date();
     }
 
-    public void processTransaction() throws Exception {
+    public void processTransaction() throws DataStoreError {
         try {
             this.calcFee();
             this.setTime();
             this.account.changeBalance(amount);
             this.account.addTransaction(this);
             this.account.saveAccount();
-        } catch (Exception e) {
+        } catch (DataStoreError e) {
             throw e;
         }
     }
 
     public void calcFee() {
         int fee;
+
         if (this.account.getBank() == Bank.HANA) {
             if (this.tcType == TransactionType.Deposit) {
                 fee = 0;
@@ -64,6 +65,7 @@ public class Transaction {
         } else {
             fee = 1000;
         }
+
         this.amount -= fee;
     }
 }
