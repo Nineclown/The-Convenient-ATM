@@ -1,6 +1,6 @@
 public enum BillType {
     Thousand(0), FiveThousand(1), TenThousand(2), FiftyThousand(3),
-    DollarOne(4), DollarTwo(5), DollarTen(6), DollarFifty(7), DollarHundred(8);
+    DollarOne(4), DollarTwo(5), DollarFive(6), DollarTen(7), DollarTwenty(8), DollarFifty(9), DollarHundred(10);
 
     private final int value;
 
@@ -13,7 +13,7 @@ public enum BillType {
     }
 
     public static int wonSize = 4;
-    public static int dollarSize = 5;
+    public static int dollarSize = 7;
 
     public static int count(BillType type, int billAmount) {
         switch (type) {
@@ -36,8 +36,12 @@ public enum BillType {
                 return billAmount;
             case DollarTwo:
                 return 2 * billAmount;
+            case DollarFive:
+                return 5 * billAmount;
             case DollarTen:
                 return 10 * billAmount;
+            case DollarTwenty:
+                return 20 * billAmount;
             case DollarFifty:
                 return 50 * billAmount;
             case DollarHundred:
