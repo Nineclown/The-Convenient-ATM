@@ -17,7 +17,57 @@ public class SystemTest {
     WebDriver browser;
 
     @Test
-    public void currencyTest() {
-        assertEquals(sys.getCurrency(), 1000, 150);
+    public void selectFunctionCreatesTransactionByType() {
+
+    }
+
+    @Test
+    public void enterAccountInfoLoadsAccountData() {
+
+    }
+
+    @Test
+    public void enterAccountInfoRaisesExceptionWhenAccountNumberIsInvalid() {
+
+    }
+
+    @Test
+    public void enterBillCorrectlyCountsBills() {
+
+    }
+
+    @Test
+    public void enterBillDoesNotDoAnythingIfArgumentIsEmpty() {
+
+    }
+
+    @Test
+    public void enterBillAsDolarUsesConvertedCashAmount() {
+
+    }
+
+    @Test
+    public void enterBillAsDollarCorrectlyCountsBills() {
+
+    }
+
+    @Test
+    public void enterBillAsDollarDoesNotDoAnythingIfArgumentIsEmpty() {
+
+    }
+
+    @Test
+    public void enterPasswordPassWhenPasswordIsValid() {
+
+    }
+
+    @Test
+    public void enterPasswordAccountInfoMustBeExist() {
+
+    }
+
+    @Test
+    public void enterPasswordRejectsAfterFiveTimesOfIncorrectness() {
+
     }
 }
