@@ -1,11 +1,12 @@
 package com.swad.cppatm.ui;
 
 import com.swad.cppatm.application.ATMSystem;
+import com.swad.cppatm.enums.FunctionType;
+import com.swad.cppatm.exceptions.NoneOfFunctionSelected;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
 
 public class AdminSelectFunction extends JFrame {
     private JFrame parent;
@@ -22,6 +23,11 @@ public class AdminSelectFunction extends JFrame {
         addAdminButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                try {
+                    system.selectFunction(FunctionType.AddAdmin);
+                } catch (NoneOfFunctionSelected exception) {
+                    return;
+                }
                 parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
                 parentFrame.invalidate();
                 parentFrame.validate();
@@ -30,6 +36,11 @@ public class AdminSelectFunction extends JFrame {
         removeAdminButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                try {
+                    system.selectFunction(FunctionType.RemoveAdmin);
+                } catch (NoneOfFunctionSelected exception) {
+                    return;
+                }
                 parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
                 parentFrame.invalidate();
                 parentFrame.validate();
@@ -38,6 +49,11 @@ public class AdminSelectFunction extends JFrame {
         queryATMBalanceButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                try {
+                    system.selectFunction(FunctionType.QueryATMBalance);
+                } catch (NoneOfFunctionSelected exception) {
+                    return;
+                }
                 parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
                 parentFrame.invalidate();
                 parentFrame.validate();
@@ -46,6 +62,11 @@ public class AdminSelectFunction extends JFrame {
         toggleStateButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                try {
+                    system.selectFunction(FunctionType.ToggleATMState);
+                } catch (NoneOfFunctionSelected exception) {
+                    return;
+                }
                 parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
                 parentFrame.invalidate();
                 parentFrame.validate();
@@ -54,6 +75,11 @@ public class AdminSelectFunction extends JFrame {
         changeATMBalanceButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                try {
+                    system.selectFunction(FunctionType.ChangeATMBalance);
+                } catch (NoneOfFunctionSelected exception) {
+                    return;
+                }
                 parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
                 parentFrame.invalidate();
                 parentFrame.validate();
@@ -62,6 +88,11 @@ public class AdminSelectFunction extends JFrame {
         changeLocaleButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                try {
+                    system.selectFunction(FunctionType.ChangeLocale);
+                } catch (NoneOfFunctionSelected exception) {
+                    return;
+                }
                 parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
                 parentFrame.invalidate();
                 parentFrame.validate();
