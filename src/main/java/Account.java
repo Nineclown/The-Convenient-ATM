@@ -5,17 +5,24 @@ public class Account {
 
     private Bank bank;
     private String accountNumber;
-    private int password = 0;
-    private int balance = 0;
-    private boolean state = true;
-    private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
-    private transient DataStore datastore = new DataStore();
+    private int password;
+    private int balance;
+    private boolean state;
+    private ArrayList<Transaction> transactions;
+    private transient DataStore datastore;
 
-//    안쓴대서 주석 처리 해놈
-//    public void Account(Bank bank,String accountNo)
-//    {
-//    }
-    
+    public void Account(Bank bank,String accountNo)
+    {
+        this.bank = bank;
+        this.accountNumber = accountNo;
+        this.password = 0;
+        this.balance = 0;
+        this.state = true;
+        this.transactions = new ArrayList<Transaction>();
+    }
+
+    // Getter
+
     public int getBalance()
     {
         return this.balance;
@@ -23,6 +30,11 @@ public class Account {
     public Bank getBank(){
         return this.bank;
     }
+    public int getPassword() { return this.password; }
+    public boolean isAccountEnabled() { return this.state; }
+
+    // Setter
+
     public String getAccountNo(){
         return this.accountNumber;
     }
@@ -42,14 +54,10 @@ public class Account {
 
     public void freezeAccount()
     {
-        if(this.state == false)
-        {
+        if ( !this.state ) {
             return;
         }
-        else
-        {
-            this.state = false;
-        }
+        this.state = false;
     }
 
     public Transaction[] getTransactions(Date startDateTime, Date endDateTime)
@@ -65,6 +73,7 @@ public class Account {
                 list[i] = transactions.get(i);
             }
         }
+
         return list;
     }
 
