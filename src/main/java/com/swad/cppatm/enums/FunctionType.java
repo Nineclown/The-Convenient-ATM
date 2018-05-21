@@ -17,4 +17,5 @@ public enum FunctionType {
     RemoveAdmin,
     QueryATMBalance,
     ToggleATMState,
+    ChangeATMBalance,
 }
