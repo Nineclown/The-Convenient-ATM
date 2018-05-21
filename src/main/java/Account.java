@@ -12,7 +12,7 @@ public class Account {
     private int balance;
     private boolean state;
     private ArrayList<Transaction> transactions;
-    private transient DataStore datastore;
+    private transient DataStore datastore = new DataStore();
 
     /**
      * Account constructor
@@ -136,6 +136,7 @@ public class Account {
     /**
      * Save account data to datastore
      */
+
     public void saveAccount()
     {
         datastore.saveAccountData(this);
