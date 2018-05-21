@@ -213,8 +213,14 @@ public class ATMSystem {
 
     }
 
-    public void enterPeriodToQuery(Date start, Date end) {
+    public void enterPeriodToQuery(Date start, Date end) throws AccountDoesNotExist {
+        Transaction [] transactions;
 
+        if ( this.account == null ) {
+            throw new AccountDoesNotExist();
+        }
+
+        transactions = this.account.getTransactions(start, end);
     }
 
     public void enterUserId(String userId) {
