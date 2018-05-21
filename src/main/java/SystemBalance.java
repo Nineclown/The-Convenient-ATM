@@ -13,10 +13,9 @@ public class SystemBalance  {
             for (int i = 0; i < current.length; i++) {
                 tempCurrent = current[i] + billAmount[i];
                 if (tempCurrent >= topLimit || tempCurrent <= bottomLimit) {
-                    // 오류
-                    throw new Exception ();
+                    throw new OverflowBillException ();
                 } else if (tempCurrent >= upAlarmLimit || tempCurrent <= downAlarmLimit) {
-                    //관리자에게 알람
+                    throw new AdminAlarmException();
                 } else {
                     current[i] = tempCurrent;
                 }
