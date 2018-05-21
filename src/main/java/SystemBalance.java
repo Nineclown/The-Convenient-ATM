@@ -6,24 +6,29 @@ public class SystemBalance  {
     private int upAlarmLimit;
     private int downAlarmLimit;
 
-    public void changeSystemBalance(int[] billAmount)
+    public SystemBalance(int topLimit, int upAlarmLimit, int downAlarmLimit, int bottomLimit){
+        this.topLimit = topLimit;
+        this.bottomLimit = bottomLimit;
+        this.upAlarmLimit = upAlarmLimit;
+        this.downAlarmLimit = downAlarmLimit;
+    }
+
+    public void changeSystemBalance(int[] billAmount) throws OverflowBillException, AdminAlarmException
     {
         int tempCurrent;
-        try {
-            for (int i = 0; i < current.length; i++) {
-                tempCurrent = current[i] + billAmount[i];
-                if (tempCurrent >= topLimit || tempCurrent <= bottomLimit) {
-                    throw new OverflowBillException ();
-                } else if (tempCurrent >= upAlarmLimit || tempCurrent <= downAlarmLimit) {
-                    throw new AdminAlarmException();
-                } else {
-                    current[i] = tempCurrent;
-                }
+
+        for (int i = 0; i < current.length; i++) {
+            tempCurrent = current[i] + billAmount[i];
+            if (tempCurrent >= topLimit || tempCurrent <= bottomLimit) {
+                throw new OverflowBillException ();
+            } else if (tempCurrent >= upAlarmLimit || tempCurrent <= downAlarmLimit) {
+                current[i] = tempCurrent;
+                throw new AdminAlarmException();
+            } else {
+                current[i] = tempCurrent;
             }
-        }catch(Exception e)
-        {
-            java.lang.System.out.println("ATM 지폐 보유량을 초과하였습니다");
         }
+
     }
     public void setATMBalance(int[] billAmount)
     {
