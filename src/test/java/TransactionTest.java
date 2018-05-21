@@ -33,7 +33,7 @@ public class TransactionTest {
 
     @Test
     public void processTranscationTest(){
-        Account account = new DataStore().loadAccountData(Bank.HANA, "123456789012345");
+        Account account = new DataStore().loadAccountData(Bank.HANA, "123456789012345t");
         Transaction transaction = new Transaction(TransactionType.Deposit);
         transaction.setAccount(account);
         transaction.setAmount(10000);
