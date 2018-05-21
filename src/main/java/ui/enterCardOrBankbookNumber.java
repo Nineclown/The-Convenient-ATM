@@ -3,14 +3,14 @@ package ui;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class CardOrBankbook extends JDialog {
+public class enterCardOrBankbookNumber extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
-    private JTextField textField1;
-    private JTextField textField2;
+    private JTextField cardNumberField;
+    private JTextField accountNumberField;
 
-    public CardOrBankbook() {
+    public enterCardOrBankbookNumber() {
         setContentPane(contentPane);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
@@ -54,7 +54,7 @@ public class CardOrBankbook extends JDialog {
     }
 
     public static void main(String[] args) {
-        CardOrBankbook dialog = new CardOrBankbook();
+        enterCardOrBankbookNumber dialog = new enterCardOrBankbookNumber();
         dialog.pack();
         dialog.setVisible(true);
         System.exit(0);
