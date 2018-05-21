@@ -1,21 +1,27 @@
-import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Managed;
-import net.thucydides.core.annotations.Steps;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@RunWith(SerenityRunner.class)
-public class AdminTest {
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
-    @Steps
-    Admin admin;
+class AdminTest {
+    public Admin admin;
 
-    @Managed(driver = "chrome")
-    WebDriver browser;
+    @BeforeAll
+    public void initAll() {
+        this.admin = new Admin(Integer.toString(1), "pw1", "010-1234-1234");
+    }
 
     @Test
-    public void shouldInterpretingBasedOn() {
+    public void checkAdminAccountReturnsTrueIfArgumentIsValid() {
+        boolean result = this.admin.checkAdminAccount(Integer.toString(1), "pw1");
+        assertEquals(result, true);
+    }
 
+    @Test
+    public void checkAdminAccountReturnsFalseIfArgumentIsInvalid() {
+        boolean result = this.admin.checkAdminAccount(Integer.toString(1), "pw2");
+        assertEquals(result, false);
+        result = this.admin.checkAdminAccount(Integer.toString(2), "pw1");
+        assertEquals(result, false);
     }
 }
