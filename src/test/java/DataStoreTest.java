@@ -19,7 +19,7 @@ public class DataStoreTest {
     WebDriver browser;
 
 
-    @Test (expected = DataStoreTest.class)
+    @Test (expected = DataStoreError.class)
     public void loadAccountDataShouldRaiseExceptionWhenAccountIsInvalid() throws DataStoreError{
         Account account = new DataStore().loadAccountData(Bank.HANA, "1234567890");
     }
@@ -28,7 +28,7 @@ public class DataStoreTest {
     public void saveAccountDataCreatesFile() throws DataStoreError {
         Account account = new Account(Bank.KOOKMIN, "1010101010101010");
         account.saveAccount();
-        
+
         File file = new File("data/" + account.getBank() + "/" + account.getAccountNo() + ".json");
         assertTrue(file.exists());
         file.delete();

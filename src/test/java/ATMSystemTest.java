@@ -48,4 +48,42 @@ public class ATMSystemTest {
         assertEquals(system.getAccount().getBank(), Bank.HANA);
         assertEquals(system.getAccount().getAccountNo(), "123456789012345");
     }
+
+    @Test
+    public void enterPasswordSuccess() {
+        try {
+            system.enterAccountInfo(Bank.HANA, "123456789012345");
+        } catch (AccountDoesNotExist e) {
+            fail("throw AccountDoesNotExist " + e.getMessage());
+        } catch (DataStoreError e) {
+            fail("throw DataStoreError " + e.getMessage());
+        }
+
+        try {
+            system.enterPassword(5555);
+        } catch (InvalidPasswordException e) {
+            fail("throw InvalidPasswordException " + e.getMessage());
+        } catch (AccountDoesNotExist e) {
+            fail("throw AccountDoesNotExist" + e.getMessage());
+        }
+
+        // PASS
+    }
+
+    @Test(expected = InvalidPasswordException.class)
+    public void enterPasswordFreezesAccountWhenInvalidInputIsRepeatForFiveTimes() throws InvalidPasswordException {
+        try {
+            system.enterAccountInfo(Bank.HANA, "123456789012345");
+        } catch (AccountDoesNotExist e) {
+            fail("throw AccountDoesNotExist" + e.getMessage());
+        } catch (DataStoreError e) {
+            fail("throw DataStoreError" + e.getMessage());
+        }
+
+        try {
+            system.enterPassword(0000);
+        } catch (AccountDoesNotExist e) {
+            fail("throw AccountDoesNotExist" + e.getMessage());
+        }
+    }
 }
