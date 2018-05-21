@@ -71,24 +71,26 @@ public class ATMSystem {
                 break;
             case SplitPay:
                 this.toTransaction = new Transaction(TransactionType.ReceiveTransfer);
+                this.splitToTransaction = new ArrayList<Transaction>();
                 break;
             case QueryBalance:
                 break;
             case QueryTransactionList:
                 break;
-            case AddAdmin:
+            case GetLotteryPrize:
                 break;
             case ReportLostCard:
                 break;
-            case GetLotteryPrize:
+            case ChangeLocale:
+                break;
+            // Admin only functions
+            case AddAdmin:
                 break;
             case RemoveAdmin:
                 break;
             case ToggleATMState:
                 break;
             case QueryATMBalance:
-                break;
-            case ChangeLocale:
                 break;
             default:
                 throw new NoneOfFunctionSelected();
@@ -221,8 +223,25 @@ public class ATMSystem {
         this.cashAmount = cashAmount;
     }
 
-    public void enterNumberOfUsers(int userNumber) {
+    public void enterNumberOfUsers(int userNumber) throws TooFewUser, TooManyUsers {
+        int amountPerUser;
+        Transaction transaction;
 
+        if ( userNumber == 0 ) {
+            throw new TooFewUser();
+        }
+
+        if ( userNumber > this.cashAmount ) {
+            throw new TooManyUsers();
+        }
+
+        amountPerUser = this.cashAmount / userNumber;
+
+        for ( int i = 0 ; i < userNumber ; i++ ) {
+            transaction = new Transaction(TransactionType.Withdraw);
+            transaction.setAmount(amountPerUser);
+            this.splitToTransaction.add(transaction);
+        }
     }
 
     public void enterPeriodToQuery(Date start, Date end) throws AccountDoesNotExist {
