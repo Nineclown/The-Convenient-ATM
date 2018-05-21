@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.Date;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 @RunWith(SerenityRunner.class)
 public class AccountTest {
@@ -33,7 +33,7 @@ public class AccountTest {
     {
         Account account = this.dataStore.loadAccountData(Bank.HANA,"123456789012345");
         account.changeBalance(5000);
-        assertEquals(account.getBalance(),10555);
+        assertEquals(account.getBalance(),1009200);
     }
 
     @Test
@@ -41,8 +41,8 @@ public class AccountTest {
     {
         Account account = this.dataStore.loadAccountData(Bank.HANA,"123456789012345");
         Transaction [] transactions = account.getTransactions(new Date(2018,5,19,12,0,0),new Date(2018,5,20,0,0,0));
-        assertEquals(transactions[1].getAmount(),1200);
-        assertEquals(transactions[2].getTime(),new Date(2018,5,19,15,16,27 ));
+        assertEquals(transactions[0].getAmount(),1200);
+        assertTrue(transactions[0].getTime().equals(new Date(2018,5,19,15,16,59)));
         assertEquals(transactions.length,4);
     }
 
