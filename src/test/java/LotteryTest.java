@@ -17,44 +17,29 @@ public class LotteryTest {
     WebDriver browser;
 
     @Test
-    public void prizeno() {
+    public void checkResultTest() {
         int[] num = {1, 2, 3, 4, 5, 7};
         Lottery lot = new Lottery(807, num);
         assertEquals(lot.checkResult(), 0);
-    }
 
-    @Test
-    public void prize5() {
-        int[] num = {6, 10, 18, 4, 5, 7};
-        Lottery lot = new Lottery(807, num);
+        int[] num1 = {6, 10, 18, 4, 5, 7};
+        lot = new Lottery(807, num1);
         assertEquals(lot.checkResult(), 5000);
-    }
 
-    @Test
-    public void prize4() {
-        int[] num = {6, 10, 18, 25, 5, 7};
-        Lottery lot = new Lottery(807, num);
+        int[] num2 = {6, 10, 18, 25, 5, 7};
+        lot = new Lottery(807, num2);
         assertEquals(lot.checkResult(), 50000);
-    }
 
-    @Test
-    public void prize3() {
-        int[] num = {6, 10, 18, 25, 34, 7};
-        Lottery lot = new Lottery(807, num);
+        int[] num3 = {6, 10, 18, 25, 34, 7};
+        lot = new Lottery(807, num3);
         assertEquals(lot.checkResult(), 500000);
-    }
 
-    @Test
-    public void prize2() {
-        int[] num = {6, 10, 18, 25, 34, 33};
-        Lottery lot = new Lottery(807, num);
+        int[] num4 = {6, 10, 18, 25, 34, 33};
+        lot = new Lottery(807, num4);
         assertEquals(lot.checkResult(), 5000000);
-    }
 
-    @Test
-    public void prize1() {
-        int[] num = {6, 10, 18, 25, 34, 35};
-        Lottery lot = new Lottery(807, num);
+        int[] num5 = {6, 10, 18, 25, 34, 35};
+        lot = new Lottery(807, num5);
         assertEquals(lot.checkResult(), 50000000);
     }
 }
