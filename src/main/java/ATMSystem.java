@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 public class ATMSystem {
     private int cashAmount;
     private int selectedCardNumber;
+    private int[] billAmount;
 
     private Account account;
 
@@ -42,6 +43,10 @@ public class ATMSystem {
 
     public Admin[] getAdmins() {
         return this.admins.stream().toArray(Admin[]::new);
+    }
+
+    public int[] getBillAmount() {
+        return this.billAmount;
     }
 
     public ATMSystem() {
@@ -186,46 +191,43 @@ public class ATMSystem {
 
     public void enterBillAmountToWithdraw(int cashAmount) {
         this.cashAmount = cashAmount;
-        calcBillAmount((this.cashAmount), "WON");
+        billAmount = calcBillAmount(this.cashAmount, "WON");
 
 
     }
 
     public void enterBillAmountToWithdrawAsDollar(int cashAmount) {
         this.cashAmount = cashAmount;
-        calcBillAmount(this.cashAmount, "Dollar");
+        billAmount = calcBillAmount(this.cashAmount, "Dollar");
 
     }
 
     public int[] calcBillAmount(int cashAmount, String cashType) {
 
-        int[] dollarBill;
-        int[] wonBill;
+        int[] bill= new int[] {0,0,0,0};
         int[] billType;
-        int length;
+        int length = bill.length;
 
         if (cashType.equals(("WON"))) {
-            wonBill = new int[2];
             billType = new int[]{50000, 10000};
             length = billType.length;
             for (int i = 0; i < length; i++) {
-                wonBill[length - (i + 1)] = cashAmount / wonBill[i];
-                cashAmount -= billType[i] * wonBill[length - (i + 1)];
+                bill[length - (i + 1)] = cashAmount / billType[i];
+                cashAmount -= billType[i] * bill[length - (i + 1)];
             }
         } else if (cashType.equals("Dollar")) {
-            dollarBill = new int[4];
             billType = new int[]{
                 100, 50, 20, 10
             };
             length = billType.length;
             for (int i = 0; i < length; i++) {
-                dollarBill[length - (i + 1)] = cashAmount / billType[i];
-                cashAmount -= billType[i] * dollarBill[length - (i + 1)];
+                bill[length - (i + 1)] = cashAmount / billType[i];
+                cashAmount -= billType[i] * bill[length - (i + 1)];
             }
         } else {
             return null;
         }
-        return billType;
+        return bill;
     }
 
     public double getCurrency() {

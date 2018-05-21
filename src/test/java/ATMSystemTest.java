@@ -28,4 +28,23 @@ public class ATMSystemTest {
     public void enterAccountInfoRaisesExceptionIfAccountDoesNotExistOnDataStore() throws AccountDoesNotExist {
         system.enterAccountInfo(Bank.WOORI, "DOESNOTEXIST");
     }
+
+    @Test
+    public void shouldCountBillCorrectlyWhenWithdraw() {
+        system.enterBillAmountToWithdraw(80000);
+        int [] billAmount = system.getBillAmount();
+        assertEquals(billAmount[0],3);
+        assertEquals(billAmount[1],1);
+    }
+
+    @Test
+    public void shouldCOuntBillCorrectlyWhenWithdrawAsDollars() {
+        system.enterBillAmountToWithdrawAsDollar(170);
+        int [] billAmount = system.getBillAmount();
+        assertEquals(billAmount[0],0);
+        assertEquals(billAmount[1],1);
+        assertEquals(billAmount[2],1);
+        assertEquals(billAmount[3],1);
+    }
+
 }
