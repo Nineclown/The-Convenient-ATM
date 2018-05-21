@@ -1,11 +1,10 @@
 package ui;
 
 import javax.swing.*;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class AdminSelectFunction extends JFrame {
+public class AdminSelectFunction {
 
     private JButton addAdminButton;
     private JButton changeATMBalanceButton;

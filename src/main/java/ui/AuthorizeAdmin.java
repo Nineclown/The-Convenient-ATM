@@ -4,12 +4,12 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class AuthorizeAdmin extends JFrame {
-    private JTextField adminIdField;
-    private JTextField adminPwField;
+public class AuthorizeAdmin {
+    private JPanel authorizeAdminPanel;
     private JButton confirmButton;
     private JButton cancelButton;
-    private JPanel authorizeAdminPanel;
+    private JTextField adminIdField;
+    private JTextField adminPwField;
 
     public AuthorizeAdmin() {
         confirmButton.addMouseListener(new MouseAdapter() {
@@ -24,9 +24,5 @@ public class AuthorizeAdmin extends JFrame {
                 super.mouseClicked(e);
             }
         });
-    }
-
-    public JPanel getPanel() {
-        return this.authorizeAdminPanel;
     }
 }
