@@ -108,12 +108,12 @@ public class ATMSystemTest {
     @Test
     public void calcBillAccountCorrectlyWorking() {
         int[] result = system.calcBillAmount(10000, "WON");
-        int[] expectedResult = {0 /* 1000 */, 0 /* 5000 */, 1 /* 10000 */, 0 /* 50000 */};
+        int[] expectedResult = {1 /* 10000 */, 0 /* 50000 */, 0 /* None */, 0 /* None */};
 
         assertArrayEquals(expectedResult, result);
 
-        result = system.calcBillAmount(125, "Dollar");
-        expectedResult = new int[]{0 /* 1 */, 0 /* 2 */, 1 /* 5 */, 0 /* 10 */, 1 /* 20 */, 0 /* 50 */, 1 /* 100 */};
+        result = system.calcBillAmount(130, "Dollar");
+        expectedResult = new int[]{1/* 10 */, 1 /* 20 */, 0 /* 50 */, 1/* 100 */};
 
         assertArrayEquals(expectedResult, result);
     }
