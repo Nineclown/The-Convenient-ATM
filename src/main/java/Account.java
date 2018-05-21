@@ -142,6 +142,10 @@ public class Account {
      * Save account data to DataStore
      */
     public void saveAccount() throws DataStoreError {
+        if(datastore == null){
+            datastore = new DataStore();
+        }
+        
         try {
             datastore.saveAccountData(this);
         } catch (DataStoreError e) {

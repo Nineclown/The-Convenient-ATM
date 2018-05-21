@@ -5,7 +5,7 @@ public class User {
     private String userId;
     private String userName;
     private ArrayList<String> cardList = new ArrayList<String>();
-    private transient DataStore ds = new DataStore();
+    private transient DataStore datastore = new DataStore();
 
     public String getUserId() {
         return userId;
@@ -33,8 +33,12 @@ public class User {
     }
 
     public void saveUser() throws DataStoreError {
+        if(datastore == null){
+            datastore = new DataStore();
+        }
+
         try {
-            ds.saveUserData(this);
+            datastore.saveUserData(this);
         } catch (DataStoreError e) {
             throw e;
         }
