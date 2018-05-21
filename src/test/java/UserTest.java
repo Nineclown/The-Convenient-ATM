@@ -23,6 +23,15 @@ public class UserTest {
         //No Korean.
         assertEquals(us.getUserName(), "DoHyeon");
         assertEquals(us.getUserId(), "9512221234567");
-        us.saveUser();
+    }
+
+    @Test
+    public void removeCardListTest() {
+        DataStore ds = new DataStore();
+        User us = ds.loadUserData("9512221234567");
+        us.removeCard("1234567890");
+        for(int i = 0 ; i < us.getCardList().length ; i++){
+            assertNotEquals("1234567890", us.getCardList()[i]);
+        }
     }
 }

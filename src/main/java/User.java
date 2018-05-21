@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Iterator;
 
 
 public class User {
@@ -26,8 +25,10 @@ public class User {
                 break;
             }
         }
+
+        this.saveUser();
     }
-    //DB에 저장하는 부분인가? 모르겠어서 놔둠
+    
     public String[] getCardList(){
         String[] cards = new String[cardList.size()];
         cards = cardList.toArray(cards);
