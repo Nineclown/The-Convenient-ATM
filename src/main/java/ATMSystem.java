@@ -15,10 +15,13 @@ public class ATMSystem {
     private Account account;
 
     private ArrayList<Admin> admins;
+    private Admin currentAdmin;
 
     private Transaction fromTransaction;
     private Transaction toTransaction;
     private ArrayList<Transaction> splitToTransaction;
+
+    private transient DataStore dataStore;
 
     public int getCashAmount() {
         return this.cashAmount;
@@ -30,6 +33,7 @@ public class ATMSystem {
         this.cashAmount = 0;
         this.selectedCardNumber = 0;
 
+        this.dataStore = new DataStore();
         this.admins = new ArrayList<Admin>();
     }
 
@@ -73,8 +77,20 @@ public class ATMSystem {
         }
     }
 
-    public void enterAccountInfo(Bank bank, String accountNo) {
+    public void enterAccountInfo(Bank bank, String accountNo) throws AccountDoesNotExist {
+        this.account = dataStore.loadAccountData(bank, accountNo);
 
+        if ( this.account == null ) {
+            throw new AccountDoesNotExist();
+        }
+
+        if ( this.fromTransaction != null ) {
+            this.fromTransaction.setAccount(account);
+        }
+
+        if ( this.toTransaction != null ) {
+            this.toTransaction.setAccount(account);
+        }
     }
 
     public void enterBill(int[] billAmount) throws InvalidBillException {
@@ -89,7 +105,13 @@ public class ATMSystem {
         total += BillType.count(BillType.TenThousand, billAmount[2]);
         total += BillType.count(BillType.FiftyThousand, billAmount[3]);
 
-        this.cashAmount += total;
+        if ( this.fromTransaction != null ) {
+            fromTransaction.setAmount(total);
+        }
+
+        if ( this.toTransaction != null ) {
+            this.toTransaction.setAmount(total);
+        }
     }
 
     public void enterBillAsDollar(int[] billAmount) throws InvalidBillException {
@@ -105,29 +127,56 @@ public class ATMSystem {
         totalDollar += BillType.count(BillType.DollarFifty, billAmount[3]);
         totalDollar += BillType.count(BillType.DollarHundred, billAmount[4]);
 
-        this.cashAmount += (int)(this.getCurrency() * totalDollar);
+        totalDollar += (int)(this.getCurrency() * totalDollar);
+
+        if ( this.fromTransaction != null ) {
+            this.fromTransaction.setAmount(totalDollar);
+            this.fromTransaction.processTransaction();
+        }
+
+        if ( this.toTransaction != null ) {
+            this.toTransaction.setAmount(totalDollar);
+            this.toTransaction.processTransaction();
+        }
     }
 
-    public void enterPassword(int password) {
+    public void enterPassword(int password) throws InvalidPasswordException, AccountDoesNotExist {
+        int retry = 0;
+        final int maxRetry = 5;
+
+        if ( this.account == null ) {
+            throw new AccountDoesNotExist();
+        }
+
+        for ( ; retry < maxRetry ; retry++ ) {
+            if ( this.account.checkAccountPassword(password) ) {
+                break;
+            }
+        }
+
+        if ( retry == maxRetry ) {
+            this.account.freezeAccount();
+            throw new InvalidPasswordException();
+        }
+    }
+
+    public void enterBillAmountToWithdraw(int cashAmount) throws InvalidBillException {
 
     }
 
-    public void enterBillAmountToWithdraw(int cashAmount) {
+    public void enterBillAmountToWithdrawAsDollar(int cashAmount) throws InvalidBillException {
 
     }
 
-    public void enterBillAmountToWithdrawAsDollar(int cashAmount) {
-
-    }
-
-    public int[] calcBillAmount(int cashAmount) {
+    public int[] calcBillAmount(int cashAmount) throws InvalidBillException {
         return null;
     }
 
     public double getCurrency() {
-        double currency = 0;
+        double currency = 1000; //default currency
 
         String url = "https://free.currencyconverterapi.com/api/v5/convert?q=USD_KRW&compact=ultra";
+
         try{
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -145,11 +194,11 @@ public class ATMSystem {
     }
 
     public void enterCashAmountToTransfer(int cashAmount) {
-
+        this.cashAmount = cashAmount;
     }
 
     public void enterTotalCashAmountToGet(int cashAmount) {
-
+        this.cashAmount = cashAmount;
     }
 
     public void enterNumberOfUsers(int userNumber) {
@@ -165,11 +214,11 @@ public class ATMSystem {
     }
 
     public void selectCard(String cardNumber) {
-
+        this.selectedCardNumber = Integer.parseInt(cardNumber);
     }
 
     public void requestStopCard(String cardNumber) {
-
+        this.selectedCardNumber = Integer.parseInt(cardNumber);
     }
 
     public void askRenewCard(boolean answer) {
@@ -192,8 +241,10 @@ public class ATMSystem {
 
     }
 
-    public void enterAdminInfo(String adminId, String adminPw) {
+    public void enterAdminInfo(String adminPw, String contact) {
+        Admin newAdmin = new Admin(this.createAdminId(), adminPw, contact);
 
+        this.admins.add(newAdmin);
     }
 
     public String createAdminId() {
