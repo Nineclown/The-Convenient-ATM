@@ -4,8 +4,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class EnterNumber extends JFrame {
-    private JPanel panel1;
-    private JTextField textField1;
+    private JPanel enterNumberPanel;
+    private JTextField numberField;
     private JButton a1Button;
     private JButton a2Button;
     private JButton a3Button;
