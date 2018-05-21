@@ -13,14 +13,14 @@ public class Admin {
             }
             else
             {
-                System.out.println("비밀번호가 틀립니다");
+                java.lang.System.out.println("비밀번호가 틀립니다");
                 return false;
             }
         }
         else
         {
-            System.out.println("일치하는 ID가 없습니다");
+            java.lang.System.out.println("일치하는 ID가 없습니다");
+            return false;
         }
-
     }
 }

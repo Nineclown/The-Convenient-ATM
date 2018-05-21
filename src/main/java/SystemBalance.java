@@ -1,4 +1,3 @@
-
 public class SystemBalance  {
     //index 0부터 10까지 차례대로, 한화 1000,5000,1000,10000원, 미화 1,2,5,10,20,50,100 달러
     private int[] current = new int[11];
@@ -24,7 +23,7 @@ public class SystemBalance  {
             }
         }catch(Exception e)
         {
-            System.out.println("ATM 지폐 보유량을 초과하였습니다");
+            java.lang.System.out.println("ATM 지폐 보유량을 초과하였습니다");
         }
     }
     public void setATMBalance(int[] billAmount)
