@@ -23,4 +23,9 @@ public class ATMSystemTest {
 
         system.enterBill(billAmount);
     }
+
+    @Test(expected = AccountDoesNotExist.class)
+    public void enterAccountInfoRaisesExceptionIfAccountDoesNotExistOnDataStore() throws AccountDoesNotExist {
+        system.enterAccountInfo(Bank.WOORI, "DOESNOTEXIST");
+    }
 }

@@ -114,7 +114,7 @@ public class ATMSystem {
         }
     }
 
-    public void enterBillAsDollar(int[] billAmount) throws InvalidBillException {
+    public void enterBillAsDollar(int[] billAmount) throws InvalidBillException, Exception {
         int totalDollar = 0;
 
         if ( billAmount.length != BillType.dollarSize ) {
