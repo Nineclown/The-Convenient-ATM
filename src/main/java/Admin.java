@@ -3,6 +3,12 @@ public class Admin {
     private String password;
     private String contact;
 
+    public Admin(String id, String password, String contact) {
+        this.id = id;
+        this.password = password;
+        this.contact = contact;
+    }
+
     public boolean checkAdminAccount(String adminID, String adminPW)
     {
         if(this.id.equals(adminID))
