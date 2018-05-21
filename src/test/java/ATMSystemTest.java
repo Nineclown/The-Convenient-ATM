@@ -128,7 +128,7 @@ public class ATMSystemTest {
     }
 
     @Test(expected = TooManyUsers.class)
-    public void enterNumberOfUsersUserNumberIslargerThanCashAmount() throws TooManyUsers {
+    public void enterNumberOfUsersUserNumberIsLargerThanCashAmount() throws TooManyUsers {
         system.setCashAmount(100000);
         try {
             system.enterNumberOfUsers(2000000);
@@ -159,5 +159,40 @@ public class ATMSystemTest {
         for ( int i = 0 ; i < transactions.length ; i++ ) {
             assertEquals(10, transactions[i].getAmount());
         }
+    }
+
+    @Test
+    public void enterLotteryMakesTransaction() {
+        int[] winningNumbers = {6, 10, 18, 25, 34, 35};
+        Lottery lottery = new Lottery(807, winningNumbers);
+
+        try {
+            system.enterLottery(lottery);
+        } catch (LotteryFailed e) {
+            fail("throw LotteryFailed" + e.getMessage());
+        }
+
+        assertEquals(50000000, system.getToTransaction().getAmount());
+    }
+
+    @Test(expected = LotteryFailed.class)
+    public void enterLotteryFailedWhenLose() throws LotteryFailed {
+        int[] loseNumbers = {1, 2, 3, 4, 5, 7};
+        Lottery lottery = new Lottery(807, loseNumbers);
+
+        system.enterLottery(lottery);
+    }
+
+    @Test
+    public void enterAdminInfoCorrectlyWorking() {
+        system.enterAdminInfo("1234", "010-1234-1234");
+
+        assertEquals("1234", system.getAdmins()[0].getPassword());
+        assertEquals("010-1234-1234", system.getAdmins()[0].getContact());
+    }
+
+    @Test
+    public void createAdminIdGeneratesZeroWhenAdminsIsEmpty() {
+        assertEquals("0", system.createAdminId());
     }
 }

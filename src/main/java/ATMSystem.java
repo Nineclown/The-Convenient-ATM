@@ -23,7 +23,6 @@ public class ATMSystem {
     private Transaction toTransaction;
     private ArrayList<Transaction> splitToTransaction;
 
-
     private transient DataStore dataStore;
 
     public int getCashAmount() {
@@ -40,6 +39,14 @@ public class ATMSystem {
 
     public Transaction[] getSplitToTransaction() {
         return this.splitToTransaction.stream().toArray(Transaction[]::new);
+    }
+
+    public Transaction getFromTransaction() {
+        return this.fromTransaction;
+    }
+
+    public Transaction getToTransaction() {
+        return this.toTransaction;
     }
 
     public void setCashAmount(int value) {
