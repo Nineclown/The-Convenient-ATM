@@ -31,6 +31,8 @@ public class ATMSystem {
     private Transaction toTransaction;
     private ArrayList<Transaction> splitToTransaction;
 
+    private SystemState state;
+
     private transient DataStore dataStore;
 
     public int getCashAmount() {
@@ -57,6 +59,10 @@ public class ATMSystem {
         return this.toTransaction;
     }
 
+    public SystemState getState() {
+        return this.state;
+    }
+
     public void setCashAmount(int value) {
         this.cashAmount = value;
     }
@@ -75,6 +81,7 @@ public class ATMSystem {
         this.dataStore = new DataStore();
         this.admins = new ArrayList<Admin>();
         this.user = new User();
+        this.state = new SystemState();
     }
 
     public void selectFunction(FunctionType function) throws NoneOfFunctionSelected {

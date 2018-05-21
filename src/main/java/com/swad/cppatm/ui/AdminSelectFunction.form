@@ -104,7 +104,7 @@
           <horizontalAlignment value="0"/>
           <horizontalTextPosition value="0"/>
           <opaque value="true"/>
-          <text value="Active"/>
+          <text value=""/>
         </properties>
       </component>
     </children>

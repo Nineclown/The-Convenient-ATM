@@ -7,6 +7,10 @@ public class SystemState {
     private boolean state = true;
     private Locale locale;
 
+    public boolean available() {
+        return this.state;
+    }
+
     public void changeSystemLocale(Locale locale) {
         this.locale = locale;
     }

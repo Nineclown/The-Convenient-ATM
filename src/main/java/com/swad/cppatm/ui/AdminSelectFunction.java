@@ -9,7 +9,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class AdminSelectFunction extends JFrame {
-    private JFrame parent;
     private JButton addAdminButton;
     private JButton changeATMBalanceButton;
     private JButton toggleStateButton;
@@ -20,6 +19,8 @@ public class AdminSelectFunction extends JFrame {
     private JLabel atmStateLabel;
 
     public AdminSelectFunction(final JFrame parentFrame, final ATMSystem system) {
+        atmStateLabel.setText(system.getState().available() ? "Active": "Frozen");
+
         addAdminButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
