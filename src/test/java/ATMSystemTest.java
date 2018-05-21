@@ -5,9 +5,7 @@ import org.junit.runner.RunWith;
 
 import java.text.MessageFormat;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 @RunWith(SerenityRunner.class)
 public class ATMSystemTest {
@@ -27,10 +25,11 @@ public class ATMSystemTest {
 
     @Test(expected = InvalidBillException.class)
     public void enterBillAsDollarRaisesExceptionIfLengthIsInvalid() throws InvalidBillException, DataStoreError {
-        int [] billAmount = { 1, 2 };
+        int[] billAmount = {1, 2};
 
         system.enterBillAsDollar(billAmount);
     }
+
     @Test(expected = AccountDoesNotExist.class)
     public void enterAccountInfoRaisesExceptionIfAccountDoesNotExistOnDataStore() throws AccountDoesNotExist, DataStoreError {
         system.enterAccountInfo(Bank.WOORI, "DOESNOTEXIST");
@@ -101,6 +100,64 @@ public class ATMSystemTest {
             system.enterPassword(0000);
         } catch (AccountDoesNotExist e) {
             fail("throw AccountDoesNotExist" + e.getMessage());
+        }
+
+        assertFalse(system.getAccount().isAccountEnabled());
+    }
+
+    @Test
+    public void calcBillAccountCorrectlyWorking() {
+        int[] result = system.calcBillAmount(10000, "WON");
+        int[] expectedResult = {0 /* 1000 */, 0 /* 5000 */, 1 /* 10000 */, 0 /* 50000 */};
+
+        assertArrayEquals(expectedResult, result);
+
+        result = system.calcBillAmount(125, "Dollar");
+        expectedResult = new int[]{0 /* 1 */, 0 /* 2 */, 1 /* 5 */, 0 /* 10 */, 1 /* 20 */, 0 /* 50 */, 1 /* 100 */};
+
+        assertArrayEquals(expectedResult, result);
+    }
+
+    @Test(expected = TooFewUser.class)
+    public void enterNumberOfUsersInputIsZero() throws TooFewUser {
+        try {
+            system.enterNumberOfUsers(0);
+        } catch (TooManyUsers e) {
+            fail("throw TooManyUsers" + e.getMessage());
+        }
+    }
+
+    @Test(expected = TooManyUsers.class)
+    public void enterNumberOfUsersUserNumberIslargerThanCashAmount() throws TooManyUsers {
+        system.setCashAmount(100000);
+        try {
+            system.enterNumberOfUsers(2000000);
+        } catch (TooFewUser e) {
+            fail("throw TooFewUser" + e.getMessage());
+        }
+    }
+
+    @Test
+    public void enterNumberOfUsersSuccessfullyDivideCashAmount() throws NoneOfFunctionSelected {
+        Transaction[] transactions;
+
+        system.selectFunction(FunctionType.SplitPay);
+        system.setCashAmount(50);
+
+        try {
+            system.enterNumberOfUsers(5);
+        } catch (TooFewUser e) {
+            fail("throw TooFewUser" + e.getMessage());
+        } catch (TooManyUsers e) {
+            fail("throw TooManyUsers" + e.getMessage());
+        }
+
+        transactions = system.getSplitToTransaction();
+
+        assertEquals(5, transactions.length);
+
+        for ( int i = 0 ; i < transactions.length ; i++ ) {
+            assertEquals(10, transactions[i].getAmount());
         }
     }
 }

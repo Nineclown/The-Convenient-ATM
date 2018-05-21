@@ -37,6 +37,10 @@ public class ATMSystem {
         return this.selectedCardNumber;
     }
 
+    public Transaction[] getSplitToTransaction() {
+        return this.splitToTransaction.stream().toArray(Transaction[]::new);
+    }
+
     public void setCashAmount(int value) {
         this.cashAmount = value;
     }
@@ -197,8 +201,6 @@ public class ATMSystem {
     public void enterBillAmountToWithdraw(int cashAmount) {
         this.cashAmount = cashAmount;
         billAmount = calcBillAmount(this.cashAmount, "WON");
-
-
     }
 
     public void enterBillAmountToWithdrawAsDollar(int cashAmount) {
