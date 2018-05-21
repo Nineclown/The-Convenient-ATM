@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class SelectFunction {
+public class SelectFunction extends JFrame {
     private JPanel selectFunctionPanel;
     private JButton depositButton;
     private JButton queryBalanceButton;
@@ -18,7 +18,7 @@ public class SelectFunction {
     private JButton getLotteryPrizeButton;
     private JButton changeLocaleButton;
 
-    public SelectFunction() {
+    public SelectFunction(final JFrame parentFrame) {
         depositButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -53,6 +53,9 @@ public class SelectFunction {
             @Override
             public void mousePressed(MouseEvent e) {
                 super.mousePressed(e);
+                parentFrame.setContentPane(new QueryList().getPanel());
+                parentFrame.invalidate();
+                parentFrame.validate();
             }
         });
         reportLostCardButton.addMouseListener(new MouseAdapter() {

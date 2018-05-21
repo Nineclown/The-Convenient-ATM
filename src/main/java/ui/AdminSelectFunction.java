@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class AdminSelectFunction {
-
+public class AdminSelectFunction extends JFrame {
+    private JFrame parent;
     private JButton addAdminButton;
     private JButton changeATMBalanceButton;
     private JButton toggleStateButton;
@@ -15,41 +15,59 @@ public class AdminSelectFunction {
     private JButton changeLocaleButton;
     private JLabel atmStateLabel;
 
-    public AdminSelectFunction() {
+    public AdminSelectFunction(final JFrame parentFrame) {
         addAdminButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+                System.out.println("parentFrame" + parentFrame);
+                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame).getPanel());
+                parentFrame.invalidate();
+                parentFrame.validate();
             }
         });
         removeAdminButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+                System.out.println("parentFrame" + parentFrame);
+                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame).getPanel());
+                parentFrame.invalidate();
+                parentFrame.validate();
             }
         });
         queryATMBalanceButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+                System.out.println("parentFrame" + parentFrame);
+                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame).getPanel());
+                parentFrame.invalidate();
+                parentFrame.validate();
             }
         });
         toggleStateButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+                System.out.println("parentFrame" + parentFrame);
+                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame).getPanel());
+                parentFrame.invalidate();
+                parentFrame.validate();
             }
         });
         changeATMBalanceButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+                System.out.println("parentFrame" + parentFrame);
+                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame).getPanel());
+                parentFrame.invalidate();
+                parentFrame.validate();
             }
         });
         changeLocaleButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+                System.out.println("parentFrame" + parentFrame);
+                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame).getPanel());
+                parentFrame.invalidate();
+                parentFrame.validate();
             }
         });
     }

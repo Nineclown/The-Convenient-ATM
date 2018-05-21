@@ -10,6 +10,7 @@ public class QueryList extends JFrame {
     private JList transactionList;
     private JButton prevButton;
     private JButton nextButton;
+    private JPanel queryListPanel;
 
     public QueryList() {
         prevButton.addMouseListener(new MouseAdapter() {
@@ -24,5 +25,9 @@ public class QueryList extends JFrame {
                 super.mouseClicked(e);
             }
         });
+    }
+
+    public JPanel getPanel() {
+        return this.queryListPanel;
     }
 }

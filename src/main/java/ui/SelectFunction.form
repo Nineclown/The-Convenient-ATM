@@ -16,7 +16,7 @@
           </grid>
         </constraints>
         <properties>
-          <font size="16"/>
+          <font name="Malgun Gothic" size="20"/>
           <text value="Foreign Withdraw"/>
         </properties>
       </component>
@@ -28,7 +28,7 @@
           </grid>
         </constraints>
         <properties>
-          <font size="16"/>
+          <font name="Malgun Gothic" size="20"/>
           <text value="Deposit"/>
         </properties>
       </component>
@@ -40,7 +40,7 @@
           </grid>
         </constraints>
         <properties>
-          <font size="16"/>
+          <font name="Malgun Gothic" size="20"/>
           <text value="Query Balance"/>
         </properties>
       </component>
@@ -52,7 +52,7 @@
           </grid>
         </constraints>
         <properties>
-          <font size="16"/>
+          <font name="Malgun Gothic" size="20"/>
           <text value="Query Transaction List"/>
         </properties>
       </component>
@@ -64,7 +64,7 @@
           </grid>
         </constraints>
         <properties>
-          <font size="16"/>
+          <font name="Malgun Gothic" size="20"/>
           <text value="Foreign Deposit"/>
         </properties>
       </component>
@@ -76,7 +76,7 @@
           </grid>
         </constraints>
         <properties>
-          <font size="16"/>
+          <font name="Malgun Gothic" size="20"/>
           <text value="Withdraw"/>
         </properties>
       </component>
@@ -88,7 +88,7 @@
           </grid>
         </constraints>
         <properties>
-          <font size="16"/>
+          <font name="Malgun Gothic" size="20"/>
           <text value="Report Lost Card"/>
         </properties>
       </component>
@@ -100,7 +100,7 @@
           </grid>
         </constraints>
         <properties>
-          <font size="16"/>
+          <font name="Malgun Gothic" size="20"/>
           <text value="Transfer"/>
         </properties>
       </component>
@@ -112,7 +112,7 @@
           </grid>
         </constraints>
         <properties>
-          <font size="16"/>
+          <font name="Malgun Gothic" size="20"/>
           <text value="Split Pay"/>
         </properties>
       </component>
@@ -124,7 +124,7 @@
           </grid>
         </constraints>
         <properties>
-          <font size="16"/>
+          <font name="Malgun Gothic" size="20"/>
           <text value="Get Lottery Prize"/>
         </properties>
       </component>
@@ -136,7 +136,7 @@
           </grid>
         </constraints>
         <properties>
-          <font size="16"/>
+          <font name="Malgun Gothic" size="20"/>
           <text value="Change Locale"/>
         </properties>
       </component>
@@ -145,7 +145,7 @@
           <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font size="24"/>
+          <font name="Malgun Gothic" size="20"/>
           <text value="T2"/>
         </properties>
       </component>
