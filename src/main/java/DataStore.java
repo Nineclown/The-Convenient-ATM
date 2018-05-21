@@ -2,10 +2,11 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.File;
-import java.io.PrintWriter;
-import java.io.FileWriter;
-import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.BufferedReader;
 import java.io.IOException;
 
 public class DataStore{
@@ -19,7 +20,6 @@ public class DataStore{
             acct = null;
         }
         return acct;
-
     }
 
     public void saveAccountData(Account account){
@@ -32,11 +32,10 @@ public class DataStore{
             if(!bankdir.exists()){
                 bankdir.mkdirs();
             }
-            FileWriter fileWriter = new FileWriter(new File(bankdir, account.getAccountNo()+".json"));
-            PrintWriter printWriter = new PrintWriter(fileWriter);
+            BufferedWriter output = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(bankdir, account.getAccountNo() + ".json")), "UTF8"));
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            printWriter.print(gson.toJson(account));
-            printWriter.close();
+            output.write(gson.toJson(account));
+            output.close();
         }catch(Exception e){
             e.printStackTrace();
         }
@@ -45,7 +44,32 @@ public class DataStore{
 
     public User loadUserData(String userID){
         User user=null;
-
+        Gson gson = new Gson();
+        try{
+            BufferedReader br = new BufferedReader(new FileReader("data/user/" + userID + ".json"));
+            user = gson.fromJson(br, User.class);
+        }catch(IOException e){
+            user = null;
+        }
         return user;
+    }
+
+    public void saveUserData(User user){
+        try{
+            File datadir = new File("data");
+            if(!datadir.exists()){
+                datadir.mkdirs();
+            }
+            File userdir = new File(datadir, "user");
+            if(!userdir.exists()){
+                userdir.mkdirs();
+            }
+            OutputStreamWriter output = new OutputStreamWriter(new FileOutputStream(new File(userdir, user.getUserId() + ".json")), "UTF-8");
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            gson.toJson(user, output);
+            output.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }

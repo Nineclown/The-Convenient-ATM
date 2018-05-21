@@ -7,9 +7,13 @@ public class User {
     private String userId;
     private String userName;
     private ArrayList<String> cardList = new ArrayList<String>();
+    private transient DataStore ds = new DataStore();
 
-    public void User(String userId){
-        ;
+    public String getUserId(){
+        return userId;
+    }
+    public String getUserName(){
+        return userName;
     }
 
     public void removeCard(String cardNumber)
@@ -28,6 +32,10 @@ public class User {
         String[] cards = new String[cardList.size()];
         cards = cardList.toArray(cards);
         return cards;
+    }
+
+    public void saveUser(){
+        ds.saveUserData(this);
     }
 
 }
