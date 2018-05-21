@@ -1,4 +1,4 @@
-group 'com.cppatm.swad.swvnv'
+group 'com.swad.cppatm'
 version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
