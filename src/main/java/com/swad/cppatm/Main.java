@@ -8,19 +8,15 @@ public class Main extends JFrame {
     public static void main(String [] args) {
         ATMSystem system = new ATMSystem();
 
-        // For Test
-        system.enterAdminInfo("1234", "010-1234-1234");
-        // Test Info end
-
         JFrame userFrame = new JFrame("C++, The Convenient ATM");
         userFrame.setContentPane(new SelectFunction(userFrame, system).getPanel());
-        userFrame.setLocation(0, 0);
+        userFrame.setLocation(100, 100);
         userFrame.pack();
         userFrame.setVisible(true);
 
         JFrame adminFrame = new JFrame("Admin Interface for C++ ATM");
-        adminFrame.setContentPane(new AdminSelectFunction(adminFrame, system).getPanel());
-        adminFrame.setLocation(800, 0);
+        adminFrame.setContentPane(new AuthorizeAdmin(adminFrame, system).getPanel());
+        adminFrame.setLocation(1000, 100);
         adminFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         adminFrame.pack();
         adminFrame.setVisible(true);
