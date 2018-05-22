@@ -51,6 +51,4 @@ public class SystemBalance {
     public int[] getATMBalance() {
         return this.current;
     }
-
-
 }

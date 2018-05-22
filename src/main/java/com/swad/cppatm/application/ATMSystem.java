@@ -286,15 +286,18 @@ public class ATMSystem {
     }
 
 
-    public void enterBillAmountToWithdraw(int cashAmount) {
+    public void enterBillAmountToWithdraw(int cashAmount) throws DataStoreError {
         this.cashAmount = cashAmount;
         billAmount = calcBillAmount(this.cashAmount, "WON");
+        this.toTransaction.setAmount(-cashAmount);
+        this.toTransaction.processTransaction();
     }
 
-    public void enterBillAmountToWithdrawAsDollar(int cashAmount) {
+    public void enterBillAmountToWithdrawAsDollar(int cashAmount) throws DataStoreError {
         this.cashAmount = cashAmount;
         billAmount = calcBillAmount(this.cashAmount, "Dollar");
-
+        this.toTransaction.setAmount(-(cashAmount * (int)this.getCurrency()));
+        this.toTransaction.processTransaction();
     }
 
     public int[] calcBillAmount(int cashAmount, String cashType) {

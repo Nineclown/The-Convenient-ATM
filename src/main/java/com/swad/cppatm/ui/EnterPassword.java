@@ -28,7 +28,7 @@ public class EnterPassword extends JFrame {
     public EnterPassword(final JFrame parentFrame, final ATMSystem system) {
         a1Button.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 String value = new String(passwordField.getPassword());
 
                 if ( value.length() >= 4 ) {
@@ -39,7 +39,7 @@ public class EnterPassword extends JFrame {
         });
         a2Button.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 String value = new String(passwordField.getPassword());
 
                 if ( value.length() >= 4 ) {
@@ -50,7 +50,7 @@ public class EnterPassword extends JFrame {
         });
         a3Button.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 String value = new String(passwordField.getPassword());
 
                 if ( value.length() >= 4 ) {
@@ -61,7 +61,7 @@ public class EnterPassword extends JFrame {
         });
         a4Button.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 String value = new String(passwordField.getPassword());
 
                 if ( value.length() >= 4 ) {
@@ -72,7 +72,7 @@ public class EnterPassword extends JFrame {
         });
         a5Button.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 String value = new String(passwordField.getPassword());
 
                 if ( value.length() >= 4 ) {
@@ -83,7 +83,7 @@ public class EnterPassword extends JFrame {
         });
         a6Button.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 String value = new String(passwordField.getPassword());
 
                 if ( value.length() >= 4 ) {
@@ -94,7 +94,7 @@ public class EnterPassword extends JFrame {
         });
         a7Button.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 String value = new String(passwordField.getPassword());
 
                 if ( value.length() >= 4 ) {
@@ -105,7 +105,7 @@ public class EnterPassword extends JFrame {
         });
         a8Button.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 String value = new String(passwordField.getPassword());
 
                 if ( value.length() >= 4 ) {
@@ -116,7 +116,7 @@ public class EnterPassword extends JFrame {
         });
         a9Button.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 String value = new String(passwordField.getPassword());
 
                 if ( value.length() >= 4 ) {
@@ -127,7 +127,7 @@ public class EnterPassword extends JFrame {
         });
         a0Button.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 String value = new String(passwordField.getPassword());
 
                 if ( value.length() >= 4 ) {
@@ -138,7 +138,7 @@ public class EnterPassword extends JFrame {
         });
         BSButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 String value = new String(passwordField.getPassword());
 
                 if ( value.length() == 0 ) {
@@ -150,7 +150,7 @@ public class EnterPassword extends JFrame {
         });
         clearButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 if ( passwordField.getPassword().length == 0 ) {
                     return;
                 }
@@ -177,10 +177,10 @@ public class EnterPassword extends JFrame {
 
                 switch(system.getFunction()) {
                     case Withdraw:
-                        parentFrame.setContentPane(new EnterBill(parentFrame, system).getPanel());
+                        parentFrame.setContentPane(new EnterNumber(parentFrame, system).getPanel());
                         break;
                     case ForeignWithdraw:
-                        parentFrame.setContentPane(new EnterBillAsDollar(parentFrame, system).getPanel());
+                        parentFrame.setContentPane(new EnterNumber(parentFrame, system).getPanel());
                         break;
                     case QueryTransactionList:
                         parentFrame.setContentPane(new QueryList(parentFrame, system).getPanel());

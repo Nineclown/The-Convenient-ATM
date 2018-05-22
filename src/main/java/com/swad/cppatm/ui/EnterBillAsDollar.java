@@ -163,7 +163,7 @@ public class EnterBillAsDollar {
                 };
 
                 switch (system.getFunction()) {
-                    case Deposit:
+                    case ForeignDeposit:
                         try {
                             system.enterBillAsDollar(values);
                         } catch (DataStoreError | InvalidBillException ex) {
