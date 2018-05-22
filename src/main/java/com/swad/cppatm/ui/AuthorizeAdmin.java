@@ -13,12 +13,11 @@ import java.awt.event.MouseEvent;
 public class AuthorizeAdmin extends JFrame {
     private JPanel authorizeAdminPanel;
     private JButton confirmButton;
-    private JButton cancelButton;
     private JTextField adminIdField;
     private JPasswordField adminPwField;
     private JLabel atmStateLabel;
 
-    public AuthorizeAdmin(final JFrame parentFrame, final ATMSystem system, FunctionType function) {
+    public AuthorizeAdmin(final JFrame parentFrame, final ATMSystem system) {
         atmStateLabel.setText(system.getState().available() ? "Active": "Frozen");
 
         confirmButton.addMouseListener(new MouseAdapter() {
@@ -35,59 +34,17 @@ public class AuthorizeAdmin extends JFrame {
                         "Invalid ID or Password.",
                         "Authentication Failed",
                         JOptionPane.ERROR_MESSAGE);
-
-                    parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
-                    parentFrame.invalidate();
-                    parentFrame.validate();
-
                     return;
                 }
 
-                try {
-                    system.selectFunction(function);
-                } catch (NoneOfFunctionSelected ex) {
+                if(system.getCurrentAdmin() != null){
                     parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
                     parentFrame.invalidate();
                     parentFrame.validate();
                 }
 
-                switch (function) {
-                    case AddAdmin:
-                        panel = new EnterNumber(parentFrame, system).getPanel();
-                        break;
-                    case RemoveAdmin:
-                        JOptionPane.showMessageDialog(parentFrame, "Admin deleted", "Info", JOptionPane.INFORMATION_MESSAGE);
-                        panel = new AdminSelectFunction(parentFrame, system).getPanel();
-                        break;
-                    case QueryATMBalance:
-                        panel = new QueryBalance(parentFrame, system).getPanel();
-                        break;
-                    case ChangeATMBalance:
-                        panel = new EnterBill(parentFrame, system).getPanel();
-                        break;
-                    case ChangeLocale:
-                        panel = new ChangeLocale(parentFrame, system).getPanel();
-                        break;
-                    default:
-                        panel = new AdminSelectFunction(parentFrame, system).getPanel();
-                        JOptionPane.showMessageDialog(parentFrame,
-                            "Not Implemented",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE);
-                }
 
-                parentFrame.setContentPane(panel);
-                parentFrame.invalidate();
-                parentFrame.validate();
-            }
-        });
-        cancelButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
-                parentFrame.invalidate();
-                parentFrame.validate();
+
             }
         });
     }

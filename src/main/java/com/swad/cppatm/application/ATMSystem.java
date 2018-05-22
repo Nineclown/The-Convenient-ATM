@@ -86,7 +86,7 @@ public class ATMSystem {
         this.cashAmount = 0;
         this.selectedCardNumber = 0;
         this.dataStore = new DataStore();
-        this.admins = new ArrayList<Admin>();
+        this.admins = dataStore.loadAdminData();
         this.user = new User();
         this.state = new SystemState();
     }

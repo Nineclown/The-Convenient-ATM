@@ -24,49 +24,37 @@ public class AdminSelectFunction extends JFrame {
         addAdminButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system, FunctionType.AddAdmin).getPanel());
-                parentFrame.invalidate();
-                parentFrame.validate();
+
             }
         });
         removeAdminButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system, FunctionType.RemoveAdmin).getPanel());
-                parentFrame.invalidate();
-                parentFrame.validate();
+
             }
         });
         queryATMBalanceButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system, FunctionType.QueryATMBalance).getPanel());
-                parentFrame.invalidate();
-                parentFrame.validate();
+
             }
         });
         toggleStateButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system, FunctionType.ToggleATMState).getPanel());
-                parentFrame.invalidate();
-                parentFrame.validate();
+
             }
         });
         changeATMBalanceButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system, FunctionType.ChangeATMBalance).getPanel());
-                parentFrame.invalidate();
-                parentFrame.validate();
+
             }
         });
         changeLocaleButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system, FunctionType.ChangeLocale).getPanel());
-                parentFrame.invalidate();
-                parentFrame.validate();
+
             }
         });
     }
