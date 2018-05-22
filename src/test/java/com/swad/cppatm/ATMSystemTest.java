@@ -62,7 +62,7 @@ public class ATMSystemTest {
 
         try {
             system.enterBillAmountToWithdraw(80000);
-        } catch (DataStoreError e) {
+        } catch (DataStoreError | NegativeBalanceError e) {
             fail(e.getClass().getSimpleName());
         }
         int[] billAmount = system.getBillAmount();
@@ -87,7 +87,7 @@ public class ATMSystemTest {
 
         try {
             system.enterBillAmountToWithdrawAsDollar(170);
-        } catch (DataStoreError e) {
+        } catch (DataStoreError | NegativeBalanceError e) {
             fail(e.getClass().getSimpleName());
         }
         int[] billAmount = system.getBillAmount();

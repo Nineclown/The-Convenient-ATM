@@ -5,6 +5,7 @@ import com.swad.cppatm.application.DataStore;
 import com.swad.cppatm.application.Transaction;
 import com.swad.cppatm.enums.Bank;
 import com.swad.cppatm.enums.TransactionType;
+import com.swad.cppatm.exceptions.NegativeBalanceError;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Managed;
 import org.junit.Before;
@@ -39,7 +40,11 @@ public class AccountTest {
     public void shouldGetCorrectBalance()
     {
         Account account = this.dataStore.loadAccountData(Bank.HANA,"123456789012345t");
-        account.changeBalance(5000);
+        try {
+            account.changeBalance(5000);
+        }catch(NegativeBalanceError ex){
+
+        }
         assertEquals(account.getBalance(),1009200);
     }
 
