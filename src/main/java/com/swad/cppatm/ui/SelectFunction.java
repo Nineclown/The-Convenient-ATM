@@ -181,7 +181,7 @@ public class SelectFunction extends JFrame {
                         JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                parentFrame.setContentPane(new ChangeLocale(parentFrame, system).getPanel());
+                parentFrame.setContentPane(new EnterLottery(parentFrame, system).getPanel());
                 parentFrame.pack();
                 parentFrame.invalidate();
                 parentFrame.validate();
