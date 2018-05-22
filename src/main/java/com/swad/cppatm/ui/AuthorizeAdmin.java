@@ -42,6 +42,12 @@ public class AuthorizeAdmin extends JFrame {
                 }
 
                 switch (system.getFunction()) {
+                    case AddAdmin:
+                        panel = new EnterNumber(parentFrame, system).getPanel();
+                        break;
+                    case RemoveAdmin:
+                        panel = new AdminSelectFunction(parentFrame, system).getPanel();
+                        break;
                     case QueryATMBalance:
                         panel = new QueryBalance(parentFrame, system).getPanel();
                         break;
@@ -53,6 +59,10 @@ public class AuthorizeAdmin extends JFrame {
                         break;
                     default:
                         panel = new AdminSelectFunction(parentFrame, system).getPanel();
+                        JOptionPane.showMessageDialog(parentFrame,
+                            "Not Implemented",
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
                 }
 
                 parentFrame.setContentPane(panel);

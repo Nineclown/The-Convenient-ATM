@@ -8,6 +8,10 @@ public class Main extends JFrame {
     public static void main(String [] args) {
         ATMSystem system = new ATMSystem();
 
+        // For Test
+        system.enterAdminInfo("1234", "010-1234-1234");
+        // Test Info end
+
         JFrame userFrame = new JFrame("C++, The Convenient ATM");
         userFrame.setContentPane(new SelectFunction(userFrame, system).getPanel());
         userFrame.setLocation(0, 0);
