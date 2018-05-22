@@ -447,8 +447,9 @@ public class ATMSystem {
 
     public String createAdminId() {
         if (this.admins.size() == 0) {
-            return "0";
+            return "1";
         }
+
         return MessageFormat.format("{0}",
             Integer.parseInt(this.admins.get(this.admins.size() - 1).getId())+1);
     }
