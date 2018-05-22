@@ -10,6 +10,7 @@ public class Main extends JFrame {
 
         JFrame userFrame = new JFrame("C++, The Convenient ATM");
         userFrame.setContentPane(new SelectFunction(userFrame, system).getPanel());
+        userFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         userFrame.setLocation(100, 100);
         userFrame.pack();
         userFrame.setVisible(true);
