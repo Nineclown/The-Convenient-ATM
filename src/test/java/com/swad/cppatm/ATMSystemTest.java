@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import javax.naming.NameNotFoundException;
 import java.text.MessageFormat;
 
 import static org.junit.Assert.*;
@@ -46,27 +47,63 @@ public class ATMSystemTest {
 
     @Test
     public void shouldCountBillCorrectlyWhenWithdraw() {
-        system.enterBillAmountToWithdraw(80000);
-        int [] billAmount = system.getBillAmount();
-        assertEquals(billAmount[0],3);
-        assertEquals(billAmount[1],1);
+        try {
+            system.selectFunction(FunctionType.Withdraw);
+        } catch (NoneOfFunctionSelected e) {
+
+        }
+
+        try {
+            system.enterAccountInfo(Bank.HANA, "123456789012345");
+            system.enterAccountInfo(Bank.HANA, "123456789012345");
+        } catch (Exception e) {
+
+        }
+
+        try {
+            system.enterBillAmountToWithdraw(80000);
+        } catch (DataStoreError e) {
+            fail(e.getClass().getSimpleName());
+        }
+        int[] billAmount = system.getBillAmount();
+        assertEquals(billAmount[0], 3);
+        assertEquals(billAmount[1], 1);
     }
 
     @Test
-    public void shouldCOuntBillCorrectlyWhenWithdrawAsDollars() {
-        system.enterBillAmountToWithdrawAsDollar(170);
-        int [] billAmount = system.getBillAmount();
-        assertEquals(billAmount[0],0);
-        assertEquals(billAmount[1],1);
-        assertEquals(billAmount[2],1);
-        assertEquals(billAmount[3],1);
-    }
+    public void shouldCountBillCorrectlyWhenWithdrawAsDollars() {
+        try {
+            system.selectFunction(FunctionType.ForeignWithdraw);
+        } catch (NoneOfFunctionSelected e) {
 
-    public void enterAccountInfoChangesProperty() throws DataStoreError {
+        }
+
         try {
             system.enterAccountInfo(Bank.HANA, "123456789012345");
-        } catch (AccountDoesNotExist e) {
-            fail("throw AccountDoesNotExist" + e.getMessage());
+            system.enterAccountInfo(Bank.HANA, "123456789012345");
+        } catch (Exception e) {
+
+        }
+
+        try {
+            system.enterBillAmountToWithdrawAsDollar(170);
+        } catch (DataStoreError e) {
+            fail(e.getClass().getSimpleName());
+        }
+        int[] billAmount = system.getBillAmount();
+
+        assertEquals(billAmount[0], 0);
+        assertEquals(billAmount[1], 1);
+        assertEquals(billAmount[2], 1);
+        assertEquals(billAmount[3], 1);
+    }
+
+    @Test
+    public void enterAccountInfoChangesProperty() {
+        try {
+            system.enterAccountInfo(Bank.HANA, "123456789012345");
+        } catch (AccountDoesNotExist | DataStoreError e) {
+            fail(e.getClass().getSimpleName());
         }
 
         assertNotNull(system.getAccount());
@@ -165,7 +202,7 @@ public class ATMSystemTest {
 
         assertEquals(5, transactions.length);
 
-        for ( int i = 0 ; i < transactions.length ; i++ ) {
+        for (int i = 0; i < transactions.length; i++) {
             assertEquals(10, transactions[i].getAmount());
         }
     }
@@ -196,18 +233,20 @@ public class ATMSystemTest {
     public void enterAdminInfoCorrectlyWorking() {
         try {
             system.enterAdminInfo("1234", "01012341234");
-        }catch(DataStoreError er){
+        } catch (DataStoreError er) {
 
         }
-        Admin [] admins = system.getAdmins();
-        assertEquals("1234", admins[admins.length-1].getPassword());
-        assertEquals("01012341234", admins[admins.length-1].getContact());
+        Admin[] admins = system.getAdmins();
+
+        assertEquals("1234", admins[admins.length - 1].getPassword());
+        assertEquals("01012341234", admins[admins.length - 1].getContact());
+
         try {
             system.authorizeAdmin(admins[admins.length - 1].getId(), "1234");
             system.selectFunction(FunctionType.RemoveAdmin);
-        }catch(InvalidAdminException ex){
+        } catch (InvalidAdminException ex) {
             fail("DeleteFailed");
-        }catch (NoneOfFunctionSelected ex){
+        } catch (NoneOfFunctionSelected ex) {
 
         }
     }
