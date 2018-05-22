@@ -1,7 +1,10 @@
 package com.swad.cppatm.ui;
 
 import com.swad.cppatm.application.ATMSystem;
+import com.swad.cppatm.application.DataStore;
 import com.swad.cppatm.enums.FunctionType;
+import com.swad.cppatm.exceptions.DataStoreError;
+import com.swad.cppatm.exceptions.InvalidBillException;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -40,7 +43,7 @@ public class EnterBill {
             public void mousePressed(MouseEvent e) {
                 int value = Integer.parseInt(thousandField.getText());
 
-                if ( value == 0 ) {
+                if (value == 0) {
                     return;
                 }
 
@@ -59,7 +62,7 @@ public class EnterBill {
             public void mousePressed(MouseEvent e) {
                 int value = Integer.parseInt(fiveThousandField.getText());
 
-                if ( value == 0 ) {
+                if (value == 0) {
                     return;
                 }
 
@@ -78,7 +81,7 @@ public class EnterBill {
             public void mousePressed(MouseEvent e) {
                 int value = Integer.parseInt(tenThousandField.getText());
 
-                if ( value == 0 ) {
+                if (value == 0) {
                     return;
                 }
 
@@ -97,7 +100,7 @@ public class EnterBill {
             public void mousePressed(MouseEvent e) {
                 int value = Integer.parseInt(fiftyThousandField.getText());
 
-                if ( value == 0 ) {
+                if (value == 0) {
                     return;
                 }
 
@@ -107,13 +110,51 @@ public class EnterBill {
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+                int[] values = {
+                    Integer.parseInt(thousandField.getText()),
+                    Integer.parseInt(fiveThousandField.getText()),
+                    Integer.parseInt(tenThousandField.getText()),
+                    Integer.parseInt(fiftyThousandField.getText()),
+                };
+
+                switch (system.getFunction()) {
+                    case Deposit:
+                        try {
+                            system.enterBill(values);
+                        } catch (DataStoreError | InvalidBillException ex) {
+                            parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
+                            parentFrame.pack();
+                            parentFrame.invalidate();
+                            parentFrame.validate();
+                            return;
+                        }
+                        parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
+                        parentFrame.pack();
+                        parentFrame.invalidate();
+                        parentFrame.validate();
+                        break;
+                    case ChangeATMBalance:
+                        try {
+                            system.enterATMBalance(values);
+                        } catch (InvalidBillException ex){
+                            parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
+                            parentFrame.pack();
+                            parentFrame.invalidate();
+                            parentFrame.validate();
+                            return;
+                        }
+                        parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
+                        parentFrame.pack();
+                        parentFrame.invalidate();
+                        parentFrame.validate();
+                        break;
+                }
             }
         });
         discardButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if ( system.getFunction() == FunctionType.ChangeATMBalance) {
+                if (system.getFunction() == FunctionType.ChangeATMBalance) {
                     parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
 
                 } else {

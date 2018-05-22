@@ -1,6 +1,8 @@
 package com.swad.cppatm.ui;
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.FunctionType;
+import com.swad.cppatm.exceptions.AccountDoesNotExist;
+import com.swad.cppatm.exceptions.InvalidPasswordException;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -158,7 +160,41 @@ public class EnterPassword extends JFrame {
         });
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
+                if ( passwordField.getPassword().length != 4 ) {
+                    JOptionPane.showMessageDialog(parentFrame, "Password is invalid", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                try {
+                    system.enterPassword(Integer.parseInt(new String(passwordField.getPassword())));
+                } catch (AccountDoesNotExist ex) {
+                    return;
+                } catch (InvalidPasswordException ex) {
+                    JOptionPane.showMessageDialog(parentFrame, "Password is invalid", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                switch(system.getFunction()) {
+                    case Withdraw:
+                        parentFrame.setContentPane(new EnterBill(parentFrame, system).getPanel());
+                        break;
+                    case ForeignWithdraw:
+                        parentFrame.setContentPane(new EnterBillAsDollar(parentFrame, system).getPanel());
+                        break;
+                    case QueryTransactionList:
+                        parentFrame.setContentPane(new QueryList(parentFrame, system).getPanel());
+                        break;
+                    case QueryBalance:
+                        parentFrame.setContentPane(new QueryBalance(parentFrame, system).getPanel());
+                        break;
+                    default:
+                        parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
+                }
+
+                parentFrame.pack();
+                parentFrame.invalidate();
+                parentFrame.validate();
             }
         });
     }
