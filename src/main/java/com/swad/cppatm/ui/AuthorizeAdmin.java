@@ -7,6 +7,8 @@ import com.swad.cppatm.exceptions.NoneOfFunctionSelected;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -17,29 +19,43 @@ public class AuthorizeAdmin extends JFrame {
     private JPasswordField adminPwField;
     private JLabel atmStateLabel;
 
+    public void next(JFrame parentFrame, ATMSystem system) {
+        String id = adminIdField.getText();
+        String password = new String(adminPwField.getPassword());
+
+        try {
+            system.authorizeAdmin(id, password);
+        } catch (InvalidAdminException exception) {
+            JOptionPane.showMessageDialog(parentFrame,
+                "Invalid ID or Password.",
+                "Authentication Failed",
+                JOptionPane.ERROR_MESSAGE);
+
+            return;
+        }
+
+        parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
+        parentFrame.invalidate();
+        parentFrame.validate();
+    }
+
     public AuthorizeAdmin(final JFrame parentFrame, final ATMSystem system) {
         atmStateLabel.setText(system.getState().available() ? "Active": "Frozen");
 
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                String id = adminIdField.getText();
-                String password = new String(adminPwField.getPassword());
-
-                try {
-                    system.authorizeAdmin(id, password);
-                } catch (InvalidAdminException exception) {
-                    JOptionPane.showMessageDialog(parentFrame,
-                        "Invalid ID or Password.",
-                        "Authentication Failed",
-                        JOptionPane.ERROR_MESSAGE);
-
-                    return;
+            public void mousePressed(MouseEvent e) {
+                next(parentFrame, system);
+            }
+        });
+        adminPwField.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                switch (e.getKeyCode())
+                {
+                    case KeyEvent.VK_ENTER :
+                        next(parentFrame, system);
                 }
-
-                parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
-                parentFrame.invalidate();
-                parentFrame.validate();
             }
         });
     }
