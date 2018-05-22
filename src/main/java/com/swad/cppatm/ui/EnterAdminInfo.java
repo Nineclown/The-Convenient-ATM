@@ -3,40 +3,29 @@ package com.swad.cppatm.ui;
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.exceptions.InvalidAdminException;
-import com.swad.cppatm.exceptions.NoneOfFunctionSelected;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class AuthorizeAdmin extends JFrame {
-    private JPanel authorizeAdminPanel;
+public class EnterAdminInfo extends JFrame {
+    private JPanel enterAdminInfoPanel;
     private JButton confirmButton;
-    private JTextField adminIdField;
+    private JButton cancelButton;
     private JPasswordField adminPwField;
-    private JLabel atmStateLabel;
+    private JTextField adminContactField;
 
-    public AuthorizeAdmin(final JFrame parentFrame, final ATMSystem system) {
-        atmStateLabel.setText(system.getState().available() ? "Active": "Frozen");
-
+    public EnterAdminInfo(final JFrame parentFrame, final ATMSystem system) {
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                String id = adminIdField.getText();
                 String password = new String(adminPwField.getPassword());
-                Container panel;
+                String contact = adminContactField.getText();
 
-                try {
-                    system.authorizeAdmin(id, password);
-                } catch (InvalidAdminException exception) {
-                    JOptionPane.showMessageDialog(parentFrame,
-                        "Invalid ID or Password.",
-                        "Authentication Failed",
-                        JOptionPane.ERROR_MESSAGE);
+                system.enterAdminInfo(password, contact);
 
-                    return;
-                }
+                JOptionPane.showMessageDialog(parentFrame, "Admin added", "Info", JOptionPane.INFORMATION_MESSAGE);
 
                 parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
                 parentFrame.invalidate();
@@ -55,6 +44,6 @@ public class AuthorizeAdmin extends JFrame {
     }
 
     public JPanel getPanel() {
-        return this.authorizeAdminPanel;
+        return this.enterAdminInfoPanel;
     }
 }

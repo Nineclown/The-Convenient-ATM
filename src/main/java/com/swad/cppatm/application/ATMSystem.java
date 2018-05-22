@@ -140,6 +140,7 @@ public class ATMSystem {
 
                 break;
             case ToggleATMState:
+                this.state.toggleSystem();
                 break;
             case QueryATMBalance:
                 break;

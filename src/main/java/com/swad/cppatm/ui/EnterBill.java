@@ -106,9 +106,11 @@ public class EnterBill {
         discardButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
-                parentFrame.invalidate();
-                parentFrame.validate();
+                if ( system.getCurrentAdmin() != null ) {
+                    parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
+                    parentFrame.invalidate();
+                    parentFrame.validate();
+                }
             }
         });
     }
