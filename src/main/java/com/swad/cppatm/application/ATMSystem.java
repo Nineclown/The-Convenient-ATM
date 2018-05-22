@@ -249,22 +249,19 @@ public class ATMSystem {
             throw new InvalidBillException();
         }
 
-        totalDollar += BillType.count(BillType.DollarOne, billAmount[0]);
-        totalDollar += BillType.count(BillType.DollarTwo, billAmount[1]);
-        totalDollar += BillType.count(BillType.DollarTen, billAmount[2]);
-        totalDollar += BillType.count(BillType.DollarFifty, billAmount[3]);
-        totalDollar += BillType.count(BillType.DollarHundred, billAmount[4]);
+        totalDollar += BillType.dollarCount(BillType.DollarOne, billAmount[0]);
+        totalDollar += BillType.dollarCount(BillType.DollarTwo, billAmount[1]);
+        totalDollar += BillType.dollarCount(BillType.DollarFive, billAmount[2]);
+        totalDollar += BillType.dollarCount(BillType.DollarTen, billAmount[3]);
+        totalDollar += BillType.dollarCount(BillType.DollarTwenty, billAmount[4]);
+        totalDollar += BillType.dollarCount(BillType.DollarFifty, billAmount[5]);
+        totalDollar += BillType.dollarCount(BillType.DollarHundred, billAmount[6]);
 
         this.cashAmount += (int) (this.getCurrency() * totalDollar);
-        totalDollar += (int) (this.getCurrency() * totalDollar);
-
-        if (this.fromTransaction != null) {
-            this.fromTransaction.setAmount(totalDollar);
-            this.fromTransaction.processTransaction();
-        }
+        System.out.print(this.fromTransaction);
 
         if (this.toTransaction != null) {
-            this.toTransaction.setAmount(totalDollar);
+            this.toTransaction.setAmount(this.cashAmount);
             this.toTransaction.processTransaction();
         }
     }
