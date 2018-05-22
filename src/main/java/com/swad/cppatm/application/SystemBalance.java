@@ -11,6 +11,13 @@ public class SystemBalance {
     private int upAlarmLimit;
     private int downAlarmLimit;
 
+    public SystemBalance() {
+        this.topLimit = 10000;
+        this.bottomLimit = 10;
+        this.upAlarmLimit = 9999;
+        this.downAlarmLimit = 11;
+    }
+
     public SystemBalance(int topLimit, int upAlarmLimit, int downAlarmLimit, int bottomLimit) {
         this.topLimit = topLimit;
         this.bottomLimit = bottomLimit;

@@ -59,7 +59,7 @@ public class AdminSelectFunction extends JFrame {
                 } catch (NoneOfFunctionSelected ex) {
                     return;
                 }
-                parentFrame.setContentPane(new QueryBalance(parentFrame, system).getPanel());
+                parentFrame.setContentPane(new QueryATMBalance(zparentFrame, system).getPanel());
                 parentFrame.invalidate();
                 parentFrame.validate();
             }

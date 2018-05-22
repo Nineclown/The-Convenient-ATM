@@ -29,6 +29,7 @@ public class ATMSystem {
     private ArrayList<Transaction> splitToTransaction;
 
     private SystemState state;
+    private SystemBalance balance;
 
     private FunctionType function;
 
@@ -66,6 +67,10 @@ public class ATMSystem {
         return this.state;
     }
 
+    public SystemBalance getBalance() {
+        return this.balance;
+    }
+
     public void setCashAmount(int value) {
         this.cashAmount = value;
     }
@@ -89,6 +94,7 @@ public class ATMSystem {
         this.admins = dataStore.loadAdminData();
         this.user = new User();
         this.state = new SystemState();
+        this.balance = new SystemBalance();
     }
 
     public void selectFunction(FunctionType function) throws NoneOfFunctionSelected {
