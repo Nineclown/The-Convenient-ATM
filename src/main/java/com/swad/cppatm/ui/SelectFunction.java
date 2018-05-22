@@ -2,6 +2,7 @@ package com.swad.cppatm.ui;
 
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.FunctionType;
+import com.swad.cppatm.enums.Locale;
 import com.swad.cppatm.exceptions.NoneOfFunctionSelected;
 
 import javax.swing.*;
@@ -22,7 +23,16 @@ public class SelectFunction extends JFrame {
     private JButton getLotteryPrizeButton;
     private JButton changeLocaleButton;
 
+    public String setLocalizedString(ATMSystem system, String ko, String en) {
+        if ( system.getState().getLocale() == Locale.en_US ) {
+            return en;
+        } else {
+            return ko;
+        }
+    }
+
     public SelectFunction(final JFrame parentFrame, final ATMSystem system) {
+        depositButton.setText(setLocalizedString(system, "입금", "Deposit"));
         depositButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -42,6 +52,7 @@ public class SelectFunction extends JFrame {
                 parentFrame.validate();
             }
         });
+        foreignDepositButton.setText(setLocalizedString(system, "외화 입금", "Foreign Deposit"));
         foreignDepositButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -61,6 +72,7 @@ public class SelectFunction extends JFrame {
                 parentFrame.validate();
             }
         });
+        withdrawButton.setText(setLocalizedString(system, "출금", "Withdraw"));
         withdrawButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -80,6 +92,7 @@ public class SelectFunction extends JFrame {
                 parentFrame.validate();
             }
         });
+        queryBalanceButton.setText(setLocalizedString(system, "입금", "Deposit"));
         queryBalanceButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -99,6 +112,7 @@ public class SelectFunction extends JFrame {
                 parentFrame.validate();
             }
         });
+        foreignWithdrawButton.setText(setLocalizedString(system, "외화 출금", "Foreign Withdraw"));
         foreignWithdrawButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -119,6 +133,7 @@ public class SelectFunction extends JFrame {
                 parentFrame.validate();
             }
         });
+        queryTransactionListButton.setText(setLocalizedString(system, "거래내역 조회", "Query Transaction List"));
         queryTransactionListButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -138,6 +153,7 @@ public class SelectFunction extends JFrame {
                 parentFrame.validate();
             }
         });
+        reportLostCardButton.setText(setLocalizedString(system, "카드 분실신고", "Report Lost Card"));
         reportLostCardButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -152,6 +168,7 @@ public class SelectFunction extends JFrame {
                 }
             }
         });
+        getLotteryPrizeButton.setText(setLocalizedString(system, "복권 당첨금 수령", "Get Lottery Prize"));
         getLotteryPrizeButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -164,8 +181,13 @@ public class SelectFunction extends JFrame {
                         JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+                parentFrame.setContentPane(new ChangeLocale(parentFrame, system).getPanel());
+                parentFrame.pack();
+                parentFrame.invalidate();
+                parentFrame.validate();
             }
         });
+        changeLocaleButton.setText(setLocalizedString(system, "언어 변경", "Change Locale"));
         changeLocaleButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -178,8 +200,14 @@ public class SelectFunction extends JFrame {
                         JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+
+                parentFrame.setContentPane(new ChangeLocale(parentFrame, system).getPanel());
+                parentFrame.pack();
+                parentFrame.invalidate();
+                parentFrame.validate();
             }
         });
+        transferButton.setText(setLocalizedString(system, "송금", "Transfer"));
         transferButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -199,6 +227,7 @@ public class SelectFunction extends JFrame {
                 parentFrame.validate();
             }
         });
+        splitPayButton.setText(setLocalizedString(system, "분할결제", "Split Pay"));
         splitPayButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
