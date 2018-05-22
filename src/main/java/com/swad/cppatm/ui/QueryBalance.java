@@ -13,6 +13,9 @@ public class QueryBalance {
     private JPanel queryBalancePanel;
 
     public QueryBalance(final JFrame parentFrame, final ATMSystem system) {
+        accountNumberField.setText(system.getAccount().getAccountNo());
+        accountBalanceField.setText(Integer.toString(system.getAccount().getBalance()));
+        
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
