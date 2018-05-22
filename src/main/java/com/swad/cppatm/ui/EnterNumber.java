@@ -25,8 +25,12 @@ public class EnterNumber extends JFrame {
     private JButton clearButton;
     private JButton confirmButton;
     private JLabel titleLabel;
+    private JLabel currencyLabel;
 
     public EnterNumber(final JFrame parentFrame, final ATMSystem system) {
+        if ( system.getFunction() == FunctionType.ForeignWithdraw ) {
+            currencyLabel.setText("달러");
+        }
         if ( system.getFunction() == FunctionType.SplitPay ) {
             titleLabel.setText("총 받아야 할 금액을 입력하여 주십시오.");
         }
