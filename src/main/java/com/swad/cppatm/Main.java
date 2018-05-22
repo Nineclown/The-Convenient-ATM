@@ -9,7 +9,7 @@ public class Main extends JFrame {
         ATMSystem system = new ATMSystem();
 
         JFrame userFrame = new JFrame("C++, The Convenient ATM");
-        userFrame.setContentPane(new SelectFunction(userFrame).getPanel());
+        userFrame.setContentPane(new SelectFunction(userFrame, system).getPanel());
         userFrame.setLocation(0, 0);
         userFrame.pack();
         userFrame.setVisible(true);

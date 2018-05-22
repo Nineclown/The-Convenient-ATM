@@ -1,5 +1,7 @@
 package com.swad.cppatm.ui;
 
+import com.swad.cppatm.application.ATMSystem;
+
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -18,7 +20,7 @@ public class SelectFunction extends JFrame {
     private JButton getLotteryPrizeButton;
     private JButton changeLocaleButton;
 
-    public SelectFunction(final JFrame parentFrame) {
+    public SelectFunction(final JFrame parentFrame, final ATMSystem system) {
         depositButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {

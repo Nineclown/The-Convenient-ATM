@@ -1,9 +1,6 @@
 package com.swad.cppatm.application;
 
-import com.swad.cppatm.enums.Bank;
-import com.swad.cppatm.enums.BillType;
-import com.swad.cppatm.enums.FunctionType;
-import com.swad.cppatm.enums.TransactionType;
+import com.swad.cppatm.enums.*;
 import com.swad.cppatm.exceptions.*;
 
 import java.text.MessageFormat;
@@ -33,6 +30,8 @@ public class ATMSystem {
 
     private SystemState state;
 
+    private FunctionType function;
+
     private transient DataStore dataStore;
 
     public int getCashAmount() {
@@ -59,6 +58,10 @@ public class ATMSystem {
         return this.toTransaction;
     }
 
+    public FunctionType getFunction() {
+        return this.function;
+    }
+
     public SystemState getState() {
         return this.state;
     }
@@ -69,6 +72,10 @@ public class ATMSystem {
 
     public Admin[] getAdmins() {
         return this.admins.stream().toArray(Admin[]::new);
+    }
+
+    public Admin getCurrentAdmin() {
+        return this.currentAdmin;
     }
 
     public int[] getBillAmount() {
@@ -85,6 +92,7 @@ public class ATMSystem {
     }
 
     public void selectFunction(FunctionType function) throws NoneOfFunctionSelected {
+        this.function = function;
         switch (function) {
             case Deposit:
                 this.toTransaction = new Transaction(TransactionType.Deposit);
@@ -124,6 +132,8 @@ public class ATMSystem {
             case ToggleATMState:
                 break;
             case QueryATMBalance:
+                break;
+            case ChangeATMBalance:
                 break;
             default:
                 throw new NoneOfFunctionSelected();
@@ -349,6 +359,9 @@ public class ATMSystem {
         }
     }
 
+    public void changeLocale(Locale locale) {
+        this.state.changeSystemLocale(locale);
+    }
 
     public void enterLottery(Lottery lottery) throws LotteryFailed {
         int result = lottery.checkResult();
@@ -359,6 +372,17 @@ public class ATMSystem {
 
         this.toTransaction = new Transaction(TransactionType.Deposit);
         this.toTransaction.setAmount(result);
+    }
+
+    public void authorizeAdmin(String adminId, String adminPw) throws InvalidAdminException {
+        for ( int i = 0 ; i < this.admins.size() ; i++ ) {
+           if (this.admins.get(i).checkAdminAccount(adminId, adminPw)) {
+               this.currentAdmin = this.admins.get(i);
+               return;
+           }
+        }
+
+        throw new InvalidAdminException();
     }
 
     public void enterAdminInfo(String adminPw, String contact) {
