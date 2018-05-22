@@ -1,12 +1,10 @@
 package com.swad.cppatm.ui;
 
 import com.swad.cppatm.application.ATMSystem;
-import com.swad.cppatm.enums.FunctionType;
+import com.swad.cppatm.enums.Locale;
 import com.swad.cppatm.exceptions.InvalidAdminException;
-import com.swad.cppatm.exceptions.NoneOfFunctionSelected;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -18,6 +16,16 @@ public class AuthorizeAdmin extends JFrame {
     private JTextField adminIdField;
     private JPasswordField adminPwField;
     private JLabel atmStateLabel;
+    private JLabel adminIdLabel;
+    private JLabel adminPwLabel;
+
+    public String setLocalizedString(ATMSystem system, String ko, String en) {
+        if ( system.getState().getLocale() == Locale.en_US ) {
+            return en;
+        } else {
+            return ko;
+        }
+    }
 
     public void next(JFrame parentFrame, ATMSystem system) {
         String id = adminIdField.getText();
@@ -42,6 +50,10 @@ public class AuthorizeAdmin extends JFrame {
     public AuthorizeAdmin(final JFrame parentFrame, final ATMSystem system) {
         atmStateLabel.setText(system.getState().available() ? "Active": "Frozen");
 
+        adminIdLabel.setText(setLocalizedString(system, "아이디", "ID"));
+        adminPwLabel.setText(setLocalizedString(system, "비밀번호", "Password"));
+
+        confirmButton.setText(setLocalizedString(system, "확인", "Go"));
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
