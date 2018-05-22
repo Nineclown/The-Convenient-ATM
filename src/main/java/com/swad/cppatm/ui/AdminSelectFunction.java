@@ -24,12 +24,7 @@ public class AdminSelectFunction extends JFrame {
         addAdminButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                try {
-                    system.selectFunction(FunctionType.AddAdmin);
-                } catch (NoneOfFunctionSelected exception) {
-                    return;
-                }
-                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
+                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system, FunctionType.AddAdmin).getPanel());
                 parentFrame.invalidate();
                 parentFrame.validate();
             }
@@ -37,12 +32,7 @@ public class AdminSelectFunction extends JFrame {
         removeAdminButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                try {
-                    system.selectFunction(FunctionType.RemoveAdmin);
-                } catch (NoneOfFunctionSelected exception) {
-                    return;
-                }
-                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
+                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system, FunctionType.RemoveAdmin).getPanel());
                 parentFrame.invalidate();
                 parentFrame.validate();
             }
@@ -50,12 +40,7 @@ public class AdminSelectFunction extends JFrame {
         queryATMBalanceButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                try {
-                    system.selectFunction(FunctionType.QueryATMBalance);
-                } catch (NoneOfFunctionSelected exception) {
-                    return;
-                }
-                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
+                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system, FunctionType.QueryATMBalance).getPanel());
                 parentFrame.invalidate();
                 parentFrame.validate();
             }
@@ -63,12 +48,7 @@ public class AdminSelectFunction extends JFrame {
         toggleStateButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                try {
-                    system.selectFunction(FunctionType.ToggleATMState);
-                } catch (NoneOfFunctionSelected exception) {
-                    return;
-                }
-                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
+                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system, FunctionType.ToggleATMState).getPanel());
                 parentFrame.invalidate();
                 parentFrame.validate();
             }
@@ -76,12 +56,7 @@ public class AdminSelectFunction extends JFrame {
         changeATMBalanceButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                try {
-                    system.selectFunction(FunctionType.ChangeATMBalance);
-                } catch (NoneOfFunctionSelected exception) {
-                    return;
-                }
-                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
+                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system, FunctionType.ChangeATMBalance).getPanel());
                 parentFrame.invalidate();
                 parentFrame.validate();
             }
@@ -89,12 +64,7 @@ public class AdminSelectFunction extends JFrame {
         changeLocaleButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                try {
-                    system.selectFunction(FunctionType.ChangeLocale);
-                } catch (NoneOfFunctionSelected exception) {
-                    return;
-                }
-                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
+                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system, FunctionType.ChangeLocale).getPanel());
                 parentFrame.invalidate();
                 parentFrame.validate();
             }

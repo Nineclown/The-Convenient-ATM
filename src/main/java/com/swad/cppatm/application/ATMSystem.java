@@ -128,6 +128,16 @@ public class ATMSystem {
             case AddAdmin:
                 break;
             case RemoveAdmin:
+                if ( this.currentAdmin == null ) {
+                    throw new NoneOfFunctionSelected();
+                }
+
+                if ( this.admins.size() <= 1 ) {
+                    throw new NoneOfFunctionSelected();
+                }
+
+                this.admins.remove(this.currentAdmin);
+
                 break;
             case ToggleATMState:
                 break;
