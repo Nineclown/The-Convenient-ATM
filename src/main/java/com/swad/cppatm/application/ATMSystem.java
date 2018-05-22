@@ -34,8 +34,6 @@ public class ATMSystem {
 
     private FunctionType function;
 
-    private transient DataStore dataStore;
-
     public int getCashAmount() {
         return this.cashAmount;
     }
@@ -91,7 +89,7 @@ public class ATMSystem {
     public ATMSystem() {
         this.cashAmount = 0;
         this.selectedCardNumber = 0;
-        this.dataStore = new DataStore();
+        DataStore dataStore = new DataStore();
         this.admins = dataStore.loadAdminData();
         this.user = new User();
         this.state = new SystemState();
@@ -178,6 +176,7 @@ public class ATMSystem {
 
                 this.admins.remove(this.currentAdmin);
                 try {
+                    DataStore dataStore = new DataStore();
                     dataStore.saveAdminData(admins);
                 }catch(DataStoreError er){
 
@@ -196,6 +195,7 @@ public class ATMSystem {
     }
 
     public void enterAccountInfo(Bank bank, String accountNo) throws AccountDoesNotExist, DataStoreError {
+        DataStore dataStore = new DataStore();
         this.account = dataStore.loadAccountData(bank, accountNo);
 
         if (this.account == null) {
@@ -386,6 +386,7 @@ public class ATMSystem {
     }
 
     public void enterUserId(String userId) {
+        DataStore dataStore = new DataStore();
         this.user = dataStore.loadUserData(userId);
     }
 
@@ -444,6 +445,7 @@ public class ATMSystem {
         Admin newAdmin = new Admin(this.createAdminId(), adminPw, contact);
         this.admins.add(newAdmin);
         try{
+            DataStore dataStore = new DataStore();
             dataStore.saveAdminData(admins);
         }catch(DataStoreError e){
             throw e;
