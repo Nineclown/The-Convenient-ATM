@@ -2,6 +2,7 @@ package com.swad.cppatm.ui;
 
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.Bank;
+import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.exceptions.AccountDoesNotExist;
 import com.swad.cppatm.exceptions.DataStoreError;
 
@@ -19,6 +20,7 @@ public class RequestCardOrBankbook {
     private JRadioButton buttonHana;
     private JRadioButton buttonKookmin;
     private JRadioButton buttonWoori;
+    private JLabel titieLabel;
     private ButtonGroup bankgroup;
 
     public void next(JFrame parentFrame, ATMSystem system) {
@@ -58,12 +60,21 @@ public class RequestCardOrBankbook {
             case ForeignDeposit:
                 parentFrame.setContentPane(new EnterBillAsDollar(parentFrame, system).getPanel());
                 break;
+            case SplitPay:
+                parentFrame.setContentPane(new EnterNumber(parentFrame, system).getPanel());
+                break;
             case Withdraw:
             case ForeignWithdraw:
-            case Transfer:
             case QueryBalance:
             case QueryTransactionList:
                 parentFrame.setContentPane(new EnterPassword(parentFrame, system).getPanel());
+                break;
+            case Transfer:
+                if ( system.getToTransaction().getAccount() != null ) {
+                    parentFrame.setContentPane(new EnterNumber(parentFrame, system).getPanel());
+                } else {
+                    parentFrame.setContentPane(new EnterPassword(parentFrame, system).getPanel());
+                }
                 break;
             default:
                 parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
@@ -76,6 +87,9 @@ public class RequestCardOrBankbook {
     }
 
     public RequestCardOrBankbook(final JFrame parentFrame, final ATMSystem system) {
+        if ( system.getFunction() == FunctionType.Transfer && system.getFromTransaction().getAccount() != null ) {
+            this.titieLabel.setText("상대방의 계좌 번호를 입력하여 주십시오.");
+        }
         bankgroup = new ButtonGroup();
         bankgroup.add(buttonHana);
         bankgroup.add(buttonKookmin);

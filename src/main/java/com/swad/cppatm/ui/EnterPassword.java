@@ -188,6 +188,9 @@ public class EnterPassword extends JFrame {
                     case QueryBalance:
                         parentFrame.setContentPane(new QueryBalance(parentFrame, system).getPanel());
                         break;
+                    case Transfer:
+                        parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
+                        break;
                     default:
                         parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
                 }

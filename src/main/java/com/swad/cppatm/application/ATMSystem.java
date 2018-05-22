@@ -201,11 +201,15 @@ public class ATMSystem {
             throw new AccountDoesNotExist();
         }
 
+        if (this.function == FunctionType.Transfer && this.fromTransaction.getAccount() != null) {
+            this.toTransaction.setAccount(account);
+        }
+
         if (this.fromTransaction != null) {
             this.fromTransaction.setAccount(account);
         }
 
-        if (this.toTransaction != null) {
+        if (this.fromTransaction == null && this.toTransaction != null) {
             this.toTransaction.setAccount(account);
 
             if (this.toTransaction.getAmount() > 0) {
@@ -289,14 +293,14 @@ public class ATMSystem {
     public void enterBillAmountToWithdraw(int cashAmount) throws DataStoreError {
         this.cashAmount = cashAmount;
         billAmount = calcBillAmount(this.cashAmount, "WON");
-        this.toTransaction.setAmount(-cashAmount);
+        this.toTransaction.setAmount(-(cashAmount*10000));
         this.toTransaction.processTransaction();
     }
 
     public void enterBillAmountToWithdrawAsDollar(int cashAmount) throws DataStoreError {
         this.cashAmount = cashAmount;
         billAmount = calcBillAmount(this.cashAmount, "Dollar");
-        this.toTransaction.setAmount(-(cashAmount * (int)this.getCurrency()));
+        this.toTransaction.setAmount(-(cashAmount * (int) this.getCurrency()));
         this.toTransaction.processTransaction();
     }
 
@@ -348,8 +352,12 @@ public class ATMSystem {
         return currency;
     }
 
-    public void enterCashAmountToTransfer(int cashAmount) {
+    public void enterCashAmountToTransfer(int cashAmount) throws DataStoreError {
         this.cashAmount = cashAmount;
+        this.fromTransaction.setAmount(-cashAmount);
+        this.toTransaction.setAmount(cashAmount);
+        this.fromTransaction.processTransaction();
+        this.toTransaction.processTransaction();
     }
 
     public void enterTotalCashAmountToGet(int cashAmount) {

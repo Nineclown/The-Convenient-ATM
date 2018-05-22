@@ -1,6 +1,7 @@
 package com.swad.cppatm.ui;
 
 import com.swad.cppatm.application.ATMSystem;
+import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.exceptions.DataStoreError;
 
 import javax.swing.*;
@@ -23,8 +24,17 @@ public class EnterNumber extends JFrame {
     private JButton a0Button;
     private JButton clearButton;
     private JButton confirmButton;
+    private JLabel titleLabel;
 
     public EnterNumber(final JFrame parentFrame, final ATMSystem system) {
+        if ( system.getFunction() == FunctionType.SplitPay ) {
+            titleLabel.setText("총 받아야 할 금액을 입력하여 주십시오.");
+        }
+
+        if ( system.getFunction() == FunctionType.Transfer ) {
+            titleLabel.setText("보내실 금액을 입력하여 주십시오.");
+        }
+
         a1Button.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -138,6 +148,23 @@ public class EnterNumber extends JFrame {
                         }
 
                         parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
+                        break;
+                    case Transfer:
+                        try {
+                            system.enterCashAmountToTransfer(cashAmount);
+                        } catch (DataStoreError ex) {
+                            JOptionPane.showMessageDialog(parentFrame, ex.getClass().getSimpleName(), "Error", JOptionPane.ERROR_MESSAGE);
+                            parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
+                            parentFrame.pack();
+                            parentFrame.invalidate();
+                            parentFrame.validate();
+                            return;
+                        }
+
+                        parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
+                        break;
+                    case SplitPay:
+
                         break;
                     default:
                         parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
