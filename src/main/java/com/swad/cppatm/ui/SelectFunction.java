@@ -92,7 +92,7 @@ public class SelectFunction extends JFrame {
                 parentFrame.validate();
             }
         });
-        queryBalanceButton.setText(setLocalizedString(system, "입금", "Deposit"));
+        queryBalanceButton.setText(setLocalizedString(system, "잔액 조회", "Query Balance"));
         queryBalanceButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
