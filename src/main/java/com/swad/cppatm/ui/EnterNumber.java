@@ -3,6 +3,7 @@ package com.swad.cppatm.ui;
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.exceptions.DataStoreError;
+import com.swad.cppatm.exceptions.NegativeBalanceError;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -128,7 +129,7 @@ public class EnterNumber extends JFrame {
                     case Withdraw:
                         try {
                             system.enterBillAmountToWithdraw(cashAmount);
-                        } catch (DataStoreError ex) {
+                        } catch (DataStoreError | NegativeBalanceError ex) {
                             JOptionPane.showMessageDialog(parentFrame, ex.getClass().getSimpleName(), "Error", JOptionPane.ERROR_MESSAGE);
                             parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
                             parentFrame.pack();
@@ -142,7 +143,7 @@ public class EnterNumber extends JFrame {
                     case ForeignWithdraw:
                         try {
                             system.enterBillAmountToWithdrawAsDollar(cashAmount);
-                        } catch (DataStoreError ex) {
+                        } catch (DataStoreError | NegativeBalanceError ex) {
                             JOptionPane.showMessageDialog(parentFrame, ex.getClass().getSimpleName(), "Error", JOptionPane.ERROR_MESSAGE);
                             parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
                             parentFrame.pack();
@@ -156,7 +157,7 @@ public class EnterNumber extends JFrame {
                     case Transfer:
                         try {
                             system.enterCashAmountToTransfer(cashAmount);
-                        } catch (DataStoreError ex) {
+                        } catch (DataStoreError | NegativeBalanceError ex) {
                             JOptionPane.showMessageDialog(parentFrame, ex.getClass().getSimpleName(), "Error", JOptionPane.ERROR_MESSAGE);
                             parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
                             parentFrame.pack();
