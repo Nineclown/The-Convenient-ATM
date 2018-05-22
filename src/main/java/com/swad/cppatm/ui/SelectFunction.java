@@ -132,7 +132,7 @@ public class SelectFunction extends JFrame {
                     return;
                 }
 
-                parentFrame.setContentPane(new EnterPassword(parentFrame, system).getPanel());
+                parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
                 parentFrame.pack();
                 parentFrame.invalidate();
                 parentFrame.validate();

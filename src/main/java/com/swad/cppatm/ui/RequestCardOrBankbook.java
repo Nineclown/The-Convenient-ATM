@@ -62,6 +62,8 @@ public class RequestCardOrBankbook {
             case Withdraw:
             case ForeignWithdraw:
             case Transfer:
+            case QueryBalance:
+            case QueryTransactionList:
                 parentFrame.setContentPane(new EnterPassword(parentFrame, system).getPanel());
                 break;
             default:

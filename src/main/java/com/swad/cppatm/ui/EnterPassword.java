@@ -27,102 +27,123 @@ public class EnterPassword extends JFrame {
         a1Button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if ( passwordField.getPassword().length >= 4 ) {
+                String value = new String(passwordField.getPassword());
+
+                if ( value.length() >= 4 ) {
                     return;
                 }
-                passwordField.setText(passwordField.getPassword() + "1");
+                passwordField.setText(value + "1");
             }
         });
         a2Button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if ( passwordField.getPassword().length >= 4 ) {
+                String value = new String(passwordField.getPassword());
+
+                if ( value.length() >= 4 ) {
                     return;
                 }
-                passwordField.setText(passwordField.getPassword() + "2");
+                passwordField.setText(value + "2");
             }
         });
         a3Button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if ( passwordField.getPassword().length >= 4 ) {
+                String value = new String(passwordField.getPassword());
+
+                if ( value.length() >= 4 ) {
                     return;
                 }
-                passwordField.setText(passwordField.getPassword() + "3");
+                passwordField.setText(value + "3");
             }
         });
         a4Button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if ( passwordField.getPassword().length >= 4 ) {
+                String value = new String(passwordField.getPassword());
+
+                if ( value.length() >= 4 ) {
                     return;
                 }
-                passwordField.setText(passwordField.getPassword() + "4");
+                passwordField.setText(value + "4");
             }
         });
         a5Button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if ( passwordField.getPassword().length >= 4 ) {
+                String value = new String(passwordField.getPassword());
+
+                if ( value.length() >= 4 ) {
                     return;
                 }
-                passwordField.setText(passwordField.getPassword() + "5");
+                passwordField.setText(value + "5");
             }
         });
         a6Button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if ( passwordField.getPassword().length >= 4 ) {
+                String value = new String(passwordField.getPassword());
+
+                if ( value.length() >= 4 ) {
                     return;
                 }
-                passwordField.setText(passwordField.getPassword() + "6");
+                passwordField.setText(value + "6");
             }
         });
         a7Button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if ( passwordField.getPassword().length >= 4 ) {
+                String value = new String(passwordField.getPassword());
+
+                if ( value.length() >= 4 ) {
                     return;
                 }
-                passwordField.setText(passwordField.getPassword() + "7");
+                passwordField.setText(value + "7");
             }
         });
         a8Button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if ( passwordField.getPassword().length >= 4 ) {
+                String value = new String(passwordField.getPassword());
+
+                if ( value.length() >= 4 ) {
                     return;
                 }
-                passwordField.setText(passwordField.getPassword() + "8");
+                passwordField.setText(value + "8");
             }
         });
         a9Button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if ( passwordField.getPassword().length >= 4 ) {
+                String value = new String(passwordField.getPassword());
+
+                if ( value.length() >= 4 ) {
                     return;
                 }
-                passwordField.setText(passwordField.getPassword() + "9");
+                passwordField.setText(value + "9");
             }
         });
         a0Button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if ( passwordField.getPassword().length >= 4 ) {
+                String value = new String(passwordField.getPassword());
+
+                if ( value.length() >= 4 ) {
                     return;
                 }
-
-                passwordField.setText(passwordField.getPassword() + "0");
+                passwordField.setText(value + "0");
             }
         });
         BSButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if ( passwordField.getPassword().length == 0 ) {
+                String value = new String(passwordField.getPassword());
+
+                if ( value.length() == 0 ) {
                     return;
                 }
 
-                passwordField.setText(new String(passwordField.getPassword()).substring(0, passwordField.getPassword().length - 1));
+                passwordField.setText(value.substring(0, value.length() - 1));
             }
         });
         clearButton.addMouseListener(new MouseAdapter() {
