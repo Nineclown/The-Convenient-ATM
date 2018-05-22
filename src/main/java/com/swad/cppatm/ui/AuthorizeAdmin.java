@@ -43,15 +43,6 @@ public class AuthorizeAdmin extends JFrame {
                 parentFrame.validate();
             }
         });
-        cancelButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
-                parentFrame.invalidate();
-                parentFrame.validate();
-            }
-        });
     }
 
     public JPanel getPanel() {
