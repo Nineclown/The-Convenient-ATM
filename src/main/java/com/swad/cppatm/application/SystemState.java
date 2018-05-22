@@ -11,10 +11,6 @@ public class SystemState {
         return this.state;
     }
 
-    public Locale getLocale() {
-        return this.locale;
-    }
-
     public void changeSystemLocale(Locale locale) {
         this.locale = locale;
     }
