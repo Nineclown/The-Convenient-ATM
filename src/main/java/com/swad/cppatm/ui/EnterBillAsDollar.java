@@ -8,6 +8,7 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.util.Arrays;
 
 public class EnterBillAsDollar {
     private JPanel enterBillPanel;
@@ -179,8 +180,9 @@ public class EnterBillAsDollar {
                         break;
                     case ChangeATMBalance:
                         try {
-                            system.enterATMBalance(ArrayUtils.addAll(new int[]{0,0,0,0}, values));
-                        } catch (InvalidBillException ex){
+                            system.enterATMBalance(ArrayUtils.addAll(new int[]{0,0,0,0,}, values));
+                        } catch (Exception ex){
+                            JOptionPane.showMessageDialog(parentFrame, ex.getClass().getSimpleName(), "Error", JOptionPane.ERROR_MESSAGE);
                             parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
                             parentFrame.pack();
                             parentFrame.invalidate();

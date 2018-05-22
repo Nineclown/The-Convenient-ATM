@@ -137,7 +137,8 @@ public class EnterBill {
                     case ChangeATMBalance:
                         try {
                             system.enterATMBalance(ArrayUtils.addAll(values, new int[]{0,0,0,0,0,0,0,}));
-                        } catch (InvalidBillException ex){
+                        } catch (Exception ex){
+                            JOptionPane.showMessageDialog(parentFrame, ex.getClass().getSimpleName(), "Error", JOptionPane.ERROR_MESSAGE);
                             parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
                             parentFrame.pack();
                             parentFrame.invalidate();

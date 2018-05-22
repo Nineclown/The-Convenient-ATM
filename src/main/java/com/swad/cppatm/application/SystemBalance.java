@@ -5,16 +5,16 @@ import com.swad.cppatm.exceptions.OverflowBillException;
 
 public class SystemBalance {
     //index 0부터 10까지 차례대로, 한화 1000,5000,1000,10000원, 미화 1,2,5,10,20,50,100 달러
-    private int[] current = new int[11];
+    private int[] current = {100,100,100,100,100,100,100,100,100,100,100};
     private int topLimit;
     private int bottomLimit;
     private int upAlarmLimit;
     private int downAlarmLimit;
 
     public SystemBalance() {
-        this.topLimit = 10000;
+        this.topLimit = 1000000;
         this.bottomLimit = 10;
-        this.upAlarmLimit = 9999;
+        this.upAlarmLimit = 999999;
         this.downAlarmLimit = 11;
     }
 
@@ -28,8 +28,8 @@ public class SystemBalance {
     public void changeSystemBalance(int[] billAmount) throws OverflowBillException, AdminAlarmException {
         int tempCurrent;
 
-        for (int i = 0; i < current.length; i++) {
-            tempCurrent = current[i] + billAmount[i];
+        for (int i = 0; i < this.current.length; i++) {
+            tempCurrent = this.current[i] + billAmount[i];
             if (tempCurrent >= topLimit || tempCurrent <= bottomLimit) {
                 throw new OverflowBillException();
             } else if (tempCurrent >= upAlarmLimit || tempCurrent <= downAlarmLimit) {

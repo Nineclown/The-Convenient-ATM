@@ -3,7 +3,6 @@ package com.swad.cppatm.application;
 import com.swad.cppatm.enums.*;
 import com.swad.cppatm.exceptions.*;
 
-import javax.xml.crypto.Data;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -461,24 +460,11 @@ public class ATMSystem {
             Integer.parseInt(this.admins.get(this.admins.size() - 1).getId()) + 1);
     }
 
-    public int enterATMBalance(int[] billAmount) throws InvalidBillException {
-        int balance = 0;
-        double currency = this.getCurrency();
-
+    public void enterATMBalance(int[] billAmount) throws InvalidBillException, OverflowBillException, AdminAlarmException {
         if (billAmount.length != (BillType.wonSize + BillType.dollarSize)) {
             throw new InvalidBillException();
         }
 
-        balance += BillType.count(BillType.Thousand, billAmount[0]);
-        balance += BillType.count(BillType.FiveThousand, billAmount[1]);
-        balance += BillType.count(BillType.TenThousand, billAmount[2]);
-        balance += BillType.count(BillType.FiftyThousand, billAmount[3]);
-        balance += BillType.dollarCount(BillType.DollarOne, billAmount[4]);
-        balance += BillType.dollarCount(BillType.DollarTwo, billAmount[5]);
-        balance += BillType.dollarCount(BillType.DollarTen, billAmount[6]);
-        balance += BillType.dollarCount(BillType.DollarFifty, billAmount[7]);
-        balance += BillType.dollarCount(BillType.DollarHundred, billAmount[8]);
-
-        return balance;
+        this.balance.changeSystemBalance(billAmount);
     }
 }

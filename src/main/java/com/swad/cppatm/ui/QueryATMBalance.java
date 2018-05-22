@@ -22,6 +22,11 @@ public class QueryATMBalance {
     private JLabel dollarHundred;
 
     public QueryATMBalance(final JFrame parentFrame, final ATMSystem system) {
+
+        for ( int i = 0 ; i < system.getBalance().getATMBalance().length ; i++ ) {
+            System.out.println(system.getBalance().getATMBalance()[i]);
+        }
+
         thousand.setText(Integer.toString(system.getBalance().getATMBalance()[0]));
         fiveThousand.setText(Integer.toString(system.getBalance().getATMBalance()[1]));
         tenThousand.setText(Integer.toString(system.getBalance().getATMBalance()[2]));
@@ -36,7 +41,7 @@ public class QueryATMBalance {
 
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
                 parentFrame.invalidate();
                 parentFrame.validate();
