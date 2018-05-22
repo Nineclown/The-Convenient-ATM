@@ -3,6 +3,7 @@ package com.swad.cppatm;
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.application.Lottery;
 import com.swad.cppatm.application.Transaction;
+import com.swad.cppatm.application.Admin;
 import com.swad.cppatm.enums.Bank;
 import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.exceptions.*;
@@ -194,16 +195,20 @@ public class ATMSystemTest {
     @Test
     public void enterAdminInfoCorrectlyWorking() {
         try {
-            system.enterAdminInfo("1234", "010-1234-1234");
+            system.enterAdminInfo("1234", "01012341234");
         }catch(DataStoreError er){
 
         }
-        assertEquals("1234", system.getAdmins()[0].getPassword());
-        assertEquals("010-1234-1234", system.getAdmins()[0].getContact());
-    }
+        Admin [] admins = system.getAdmins();
+        assertEquals("1234", admins[admins.length-1].getPassword());
+        assertEquals("01012341234", admins[admins.length-1].getContact());
+        try {
+            system.authorizeAdmin(admins[admins.length - 1].getId(), "1234");
+            system.selectFunction(FunctionType.RemoveAdmin);
+        }catch(InvalidAdminException ex){
+            fail("DeleteFailed");
+        }catch (NoneOfFunctionSelected ex){
 
-    @Test
-    public void createAdminIdGeneratesZeroWhenAdminsIsEmpty() {
-        assertEquals("0", system.createAdminId());
+        }
     }
 }

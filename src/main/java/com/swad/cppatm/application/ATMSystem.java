@@ -3,6 +3,7 @@ package com.swad.cppatm.application;
 import com.swad.cppatm.enums.*;
 import com.swad.cppatm.exceptions.*;
 
+import javax.xml.crypto.Data;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -176,7 +177,11 @@ public class ATMSystem {
                 }
 
                 this.admins.remove(this.currentAdmin);
+                try {
+                    dataStore.saveAdminData(admins);
+                }catch(DataStoreError er){
 
+                }
                 break;
             case ToggleATMState:
                 this.state.toggleSystem();
