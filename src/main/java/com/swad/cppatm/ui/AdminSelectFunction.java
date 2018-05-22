@@ -42,7 +42,10 @@ public class AdminSelectFunction extends JFrame {
         toggleStateButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-
+                system.getState().toggleSystem();
+                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
+                parentFrame.invalidate();
+                parentFrame.validate();
             }
         });
         changeATMBalanceButton.addMouseListener(new MouseAdapter() {
