@@ -15,11 +15,11 @@ public class QueryBalance {
     public QueryBalance(final JFrame parentFrame, final ATMSystem system) {
         accountNumberField.setText(system.getAccount().getAccountNo());
         accountBalanceField.setText(Integer.toString(system.getAccount().getBalance()));
-        
+
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
+                parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
                 parentFrame.invalidate();
                 parentFrame.validate();
             }
