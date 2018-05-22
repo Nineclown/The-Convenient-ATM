@@ -25,7 +25,6 @@ public class AuthorizeAdmin extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 String id = adminIdField.getText();
                 String password = new String(adminPwField.getPassword());
-                Container panel;
 
                 try {
                     system.authorizeAdmin(id, password);

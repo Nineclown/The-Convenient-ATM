@@ -101,34 +101,67 @@ public class ATMSystem {
         this.function = function;
         switch (function) {
             case Deposit:
+                if(!state.available()){
+                    throw new NoneOfFunctionSelected();
+                }
                 this.toTransaction = new Transaction(TransactionType.Deposit);
                 break;
             case Withdraw:
+                if(!state.available()){
+                    throw new NoneOfFunctionSelected();
+                }
                 this.toTransaction = new Transaction(TransactionType.Withdraw);
                 break;
             case ForeignDeposit:
+                if(!state.available()){
+                    throw new NoneOfFunctionSelected();
+                }
                 this.toTransaction = new Transaction(TransactionType.ForeignDeposit);
                 break;
             case ForeignWithdraw:
+                if(!state.available()){
+                    throw new NoneOfFunctionSelected();
+                }
                 this.toTransaction = new Transaction(TransactionType.ForeignWithdraw);
                 break;
             case Transfer:
+                if(!state.available()){
+                    throw new NoneOfFunctionSelected();
+                }
                 this.fromTransaction = new Transaction(TransactionType.SendTransfer);
                 this.toTransaction = new Transaction(TransactionType.ReceiveTransfer);
                 break;
             case SplitPay:
+                if(!state.available()){
+                    throw new NoneOfFunctionSelected();
+                }
                 this.toTransaction = new Transaction(TransactionType.ReceiveTransfer);
                 this.splitToTransaction = new ArrayList<Transaction>();
                 break;
             case QueryBalance:
+                if(!state.available()){
+                    throw new NoneOfFunctionSelected();
+                }
                 break;
             case QueryTransactionList:
+                if(!state.available()){
+                    throw new NoneOfFunctionSelected();
+                }
                 break;
             case GetLotteryPrize:
+                if(!state.available()){
+                    throw new NoneOfFunctionSelected();
+                }
                 break;
             case ReportLostCard:
+                if(!state.available()){
+                    throw new NoneOfFunctionSelected();
+                }
                 break;
             case ChangeLocale:
+                if(!state.available()){
+                    throw new NoneOfFunctionSelected();
+                }
                 break;
             // Admin only functions
             case AddAdmin:
