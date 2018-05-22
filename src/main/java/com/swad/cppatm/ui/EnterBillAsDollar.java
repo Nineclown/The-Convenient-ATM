@@ -2,6 +2,9 @@ package com.swad.cppatm.ui;
 
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.FunctionType;
+import com.swad.cppatm.exceptions.DataStoreError;
+import com.swad.cppatm.exceptions.InvalidBillException;
+import org.apache.commons.lang3.ArrayUtils;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -148,7 +151,48 @@ public class EnterBillAsDollar {
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+                int[] values = {
+                    Integer.parseInt(dollarOneField.getText()),
+                    Integer.parseInt(dollarTwoField.getText()),
+                    Integer.parseInt(dollarFiveField.getText()),
+                    Integer.parseInt(dollarTenField.getText()),
+                    Integer.parseInt(dollarTwentyField.getText()),
+                    Integer.parseInt(dollarFiftyField.getText()),
+                    Integer.parseInt(dollarHundredField.getText()),
+                };
+
+                switch (system.getFunction()) {
+                    case Deposit:
+                        try {
+                            system.enterBillAsDollar(values);
+                        } catch (DataStoreError | InvalidBillException ex) {
+                            parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
+                            parentFrame.pack();
+                            parentFrame.invalidate();
+                            parentFrame.validate();
+                            return;
+                        }
+                        parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
+                        parentFrame.pack();
+                        parentFrame.invalidate();
+                        parentFrame.validate();
+                        break;
+                    case ChangeATMBalance:
+                        try {
+                            system.enterATMBalance(ArrayUtils.addAll(new int[]{0,0,0,0}, values));
+                        } catch (InvalidBillException ex){
+                            parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
+                            parentFrame.pack();
+                            parentFrame.invalidate();
+                            parentFrame.validate();
+                            return;
+                        }
+                        parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
+                        parentFrame.pack();
+                        parentFrame.invalidate();
+                        parentFrame.validate();
+                        break;
+                }
             }
         });
         discardButton.addMouseListener(new MouseAdapter() {

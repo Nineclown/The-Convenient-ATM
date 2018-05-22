@@ -5,6 +5,7 @@ import com.swad.cppatm.application.DataStore;
 import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.exceptions.DataStoreError;
 import com.swad.cppatm.exceptions.InvalidBillException;
+import org.apache.commons.lang3.ArrayUtils;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -135,7 +136,7 @@ public class EnterBill {
                         break;
                     case ChangeATMBalance:
                         try {
-                            system.enterATMBalance(values);
+                            system.enterATMBalance(ArrayUtils.addAll(values, new int[]{0,0,0,0,0,0,0,}));
                         } catch (InvalidBillException ex){
                             parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
                             parentFrame.pack();
@@ -143,7 +144,7 @@ public class EnterBill {
                             parentFrame.validate();
                             return;
                         }
-                        parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
+                        parentFrame.setContentPane(new EnterBillAsDollar(parentFrame, system).getPanel());
                         parentFrame.pack();
                         parentFrame.invalidate();
                         parentFrame.validate();
