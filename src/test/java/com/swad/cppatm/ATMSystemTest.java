@@ -46,31 +46,6 @@ public class ATMSystemTest {
     }
 
     @Test
-    public void shouldCountBillCorrectlyWhenWithdraw() {
-        try {
-            system.selectFunction(FunctionType.Withdraw);
-        } catch (NoneOfFunctionSelected e) {
-
-        }
-
-        try {
-            system.enterAccountInfo(Bank.HANA, "123456789012345");
-            system.enterAccountInfo(Bank.HANA, "123456789012345");
-        } catch (Exception e) {
-
-        }
-
-        try {
-            system.enterBillAmountToWithdraw(80000);
-        } catch (DataStoreError | NegativeBalanceError e) {
-            fail(e.getClass().getSimpleName());
-        }
-        int[] billAmount = system.getBillAmount();
-        assertEquals(billAmount[0], 3);
-        assertEquals(billAmount[1], 1);
-    }
-
-    @Test
     public void shouldCountBillCorrectlyWhenWithdrawAsDollars() {
         try {
             system.selectFunction(FunctionType.ForeignWithdraw);
