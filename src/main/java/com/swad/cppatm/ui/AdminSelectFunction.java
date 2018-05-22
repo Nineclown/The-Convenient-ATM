@@ -2,6 +2,7 @@ package com.swad.cppatm.ui;
 
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.FunctionType;
+import com.swad.cppatm.enums.Locale;
 import com.swad.cppatm.exceptions.NoneOfFunctionSelected;
 
 import javax.swing.*;
@@ -18,9 +19,18 @@ public class AdminSelectFunction extends JFrame {
     private JButton changeLocaleButton;
     private JLabel atmStateLabel;
 
+    public String setLocalizedString(ATMSystem system, String ko, String en) {
+        if ( system.getState().getLocale() == Locale.en_US ) {
+            return en;
+        } else {
+            return ko;
+        }
+    }
+
     public AdminSelectFunction(final JFrame parentFrame, final ATMSystem system) {
         atmStateLabel.setText(system.getState().available() ? "Active" : "Frozen");
 
+        addAdminButton.setText(setLocalizedString(system, "관리자 추가", "Add Admin"));
         addAdminButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -35,6 +45,8 @@ public class AdminSelectFunction extends JFrame {
                 parentFrame.validate();
             }
         });
+
+        removeAdminButton.setText(setLocalizedString(system, "관리자 삭제", "Remove Admin"));
         removeAdminButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -51,6 +63,8 @@ public class AdminSelectFunction extends JFrame {
                 parentFrame.validate();
             }
         });
+
+        queryATMBalanceButton.setText(setLocalizedString(system, "ATM 잔고 조회", "Query ATM Balance"));
         queryATMBalanceButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -64,6 +78,8 @@ public class AdminSelectFunction extends JFrame {
                 parentFrame.validate();
             }
         });
+
+        toggleStateButton.setText(setLocalizedString(system, "ATM 상태 변경", "Toggle State"));
         toggleStateButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -84,6 +100,8 @@ public class AdminSelectFunction extends JFrame {
                 parentFrame.validate();
             }
         });
+
+        changeATMBalanceButton.setText(setLocalizedString(system, "ATM 잔고 변경", "Change ATM Balance"));
         changeATMBalanceButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -98,6 +116,8 @@ public class AdminSelectFunction extends JFrame {
                 parentFrame.validate();
             }
         });
+
+        changeLocaleButton.setText(setLocalizedString(system, "언어 변경", "Change Locale"));
         changeLocaleButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {

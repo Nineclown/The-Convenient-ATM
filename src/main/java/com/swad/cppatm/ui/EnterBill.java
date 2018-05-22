@@ -3,6 +3,7 @@ package com.swad.cppatm.ui;
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.application.DataStore;
 import com.swad.cppatm.enums.FunctionType;
+import com.swad.cppatm.enums.Locale;
 import com.swad.cppatm.exceptions.DataStoreError;
 import com.swad.cppatm.exceptions.InvalidBillException;
 import org.apache.commons.lang3.ArrayUtils;
@@ -26,12 +27,28 @@ public class EnterBill {
     private JButton fiftyThousandDecrease;
     private JButton discardButton;
     private JButton confirmButton;
+    private JLabel thousandLabel;
+    private JLabel fiveThousandLabel;
+    private JLabel tenThousandLabel;
+    private JLabel fiftyThousandLabel;
+    private JLabel titleLabel;
+
+    public String setLocalizedString(ATMSystem system, String ko, String en) {
+        if ( system.getState().getLocale() == Locale.en_US ) {
+            return en;
+        } else {
+            return ko;
+        }
+    }
 
     public EnterBill(final JFrame parentFrame, final ATMSystem system) {
+        titleLabel.setText(setLocalizedString(system, "지폐를 입력하여 주십시오.", "Please Insert bills."));
         thousandField.setText("0");
         fiveThousandField.setText("0");
         tenThousandField.setText("0");
         fiftyThousandField.setText("0");
+
+        thousandIncrease.setText(setLocalizedString(system, "증가", "Increase"));
         thousandIncrease.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -39,6 +56,7 @@ public class EnterBill {
                 thousandField.setText(Integer.toString(value + 1));
             }
         });
+        thousandDecrease.setText(setLocalizedString(system, "감소", "Decrease"));
         thousandDecrease.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -51,6 +69,7 @@ public class EnterBill {
                 thousandField.setText(Integer.toString(value - 1));
             }
         });
+        fiveThousandIncrease.setText(setLocalizedString(system, "증가", "Increase"));
         fiveThousandIncrease.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -58,6 +77,7 @@ public class EnterBill {
                 fiveThousandField.setText(Integer.toString(value + 1));
             }
         });
+        fiveThousandDecrease.setText(setLocalizedString(system, "감소", "Decrease"));
         fiveThousandDecrease.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -70,6 +90,7 @@ public class EnterBill {
                 fiveThousandField.setText(Integer.toString(value - 1));
             }
         });
+        tenThousandIncrease.setText(setLocalizedString(system, "증가", "Increase"));
         tenThousandIncrease.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -77,6 +98,7 @@ public class EnterBill {
                 tenThousandField.setText(Integer.toString(value + 1));
             }
         });
+        tenThousandDecrease.setText(setLocalizedString(system, "감소", "Decrease"));
         tenThousandDecrease.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -89,6 +111,7 @@ public class EnterBill {
                 tenThousandField.setText(Integer.toString(value - 1));
             }
         });
+        fiftyThousandIncrease.setText(setLocalizedString(system, "증가", "Increase"));
         fiftyThousandIncrease.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -96,6 +119,7 @@ public class EnterBill {
                 fiftyThousandField.setText(Integer.toString(value + 1));
             }
         });
+        fiftyThousandDecrease.setText(setLocalizedString(system, "감소", "Decrease"));
         fiftyThousandDecrease.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -108,6 +132,7 @@ public class EnterBill {
                 fiftyThousandField.setText(Integer.toString(value - 1));
             }
         });
+        confirmButton.setText(setLocalizedString(system, "입력", "Insert"));
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -153,6 +178,7 @@ public class EnterBill {
                 }
             }
         });
+        discardButton.setText(setLocalizedString(system, "취소", "Discard"));
         discardButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {

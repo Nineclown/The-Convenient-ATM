@@ -15,7 +15,7 @@ public class ChangeLocale {
     public ChangeLocale(final JFrame parentFrame, final ATMSystem system) {
         koreanButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 system.changeLocale(Locale.ko_KR);
 
                 if (system.getCurrentAdmin() == null) {
@@ -30,7 +30,7 @@ public class ChangeLocale {
         });
         englishButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 system.changeLocale(Locale.en_US);
                 if (system.getCurrentAdmin() == null) {
                     parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
