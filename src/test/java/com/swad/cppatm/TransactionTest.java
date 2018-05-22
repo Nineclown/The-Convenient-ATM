@@ -39,7 +39,7 @@ public class TransactionTest {
     }
 
     @Test
-    public void processTranscationTest(){
+    public void processTransactionTest(){
         Account account = new DataStore().loadAccountData(Bank.HANA, "123456789012345t");
         Transaction transaction = new Transaction(TransactionType.Deposit);
         transaction.setAccount(account);
@@ -53,5 +53,23 @@ public class TransactionTest {
         assertEquals(account.getTransactions(new Date(118,4,20,0,0,0),new Date(118,4,21,23,0,0)).length,5);
         assertEquals(account.getBalance(),1014200);
         assertEquals(transaction.getTime().after(new Date(118,4,20,0,0,0)),true);
+    }
+
+    @Test
+    public void processTransactionBalanceMustBePositive(){
+        Account account = new DataStore().loadAccountData(Bank.HANA, "123456789012345");
+        Transaction transaction = new Transaction(TransactionType.Withdraw);
+
+        transaction.setAccount(account);
+        transaction.setAmount(-99999999);
+        try {
+            transaction.processTransaction();
+        } catch (Exception e){
+            fail(e.getClass().getSimpleName());
+        }
+
+        if ( account.getBalance() < 0 ) {
+            fail("Balance must not be negative!");
+        }
     }
 }

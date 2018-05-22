@@ -214,7 +214,10 @@ public class ATMSystem {
 
             if (this.toTransaction.getAmount() > 0) {
                 // Get Lottery Prize
-                this.toTransaction.processTransaction();
+                try {
+                    this.toTransaction.processTransaction();
+                } catch (NegativeBalanceError e) {
+                }
             }
         }
     }
@@ -233,12 +236,18 @@ public class ATMSystem {
 
         if (this.fromTransaction != null) {
             this.fromTransaction.setAmount(total);
-            this.fromTransaction.processTransaction();
+            try {
+                this.fromTransaction.processTransaction();
+            } catch (NegativeBalanceError e) {
+            }
         }
 
         if (this.toTransaction != null) {
             this.toTransaction.setAmount(total);
-            this.toTransaction.processTransaction();
+            try {
+                this.toTransaction.processTransaction();
+            } catch (NegativeBalanceError e) {
+            }
         }
     }
 
@@ -262,7 +271,10 @@ public class ATMSystem {
 
         if (this.toTransaction != null) {
             this.toTransaction.setAmount(this.cashAmount);
-            this.toTransaction.processTransaction();
+            try {
+                this.toTransaction.processTransaction();
+            } catch (NegativeBalanceError e) {
+            }
         }
     }
 
@@ -287,14 +299,14 @@ public class ATMSystem {
     }
 
 
-    public void enterBillAmountToWithdraw(int cashAmount) throws DataStoreError {
+    public void enterBillAmountToWithdraw(int cashAmount) throws DataStoreError, NegativeBalanceError {
         this.cashAmount = cashAmount;
         billAmount = calcBillAmount(this.cashAmount, "WON");
-        this.toTransaction.setAmount(-(cashAmount*10000));
+        this.toTransaction.setAmount(-(cashAmount * 10000));
         this.toTransaction.processTransaction();
     }
 
-    public void enterBillAmountToWithdrawAsDollar(int cashAmount) throws DataStoreError {
+    public void enterBillAmountToWithdrawAsDollar(int cashAmount) throws DataStoreError, NegativeBalanceError {
         this.cashAmount = cashAmount;
         billAmount = calcBillAmount(this.cashAmount, "Dollar");
         this.toTransaction.setAmount(-(cashAmount * (int) this.getCurrency()));
@@ -349,7 +361,7 @@ public class ATMSystem {
         return currency;
     }
 
-    public void enterCashAmountToTransfer(int cashAmount) throws DataStoreError {
+    public void enterCashAmountToTransfer(int cashAmount) throws DataStoreError, NegativeBalanceError {
         this.cashAmount = cashAmount;
         this.fromTransaction.setAmount(-cashAmount);
         this.toTransaction.setAmount(cashAmount);
@@ -409,16 +421,12 @@ public class ATMSystem {
     public void askRenewCard(boolean answer) throws DataStoreError {
         if (answer) {
             this.user.saveUser();
-        } else {
-            return;
         }
     }
 
     public void requestRenewCard(boolean answer) {
         if (answer) {
             // 재발급 신청이 완료되었다는 메시지 띄워주기
-        } else {
-            return;
         }
     }
 
@@ -449,14 +457,11 @@ public class ATMSystem {
     }
 
     public void enterAdminInfo(String adminPw, String contact) throws DataStoreError {
+        DataStore dataStore = new DataStore();
         Admin newAdmin = new Admin(this.createAdminId(), adminPw, contact);
-        this.admins.add(newAdmin);
-        try {
-            DataStore dataStore = new DataStore();
-            dataStore.saveAdminData(admins);
-        } catch (DataStoreError e) {
-            throw e;
-        }
+
+        admins.add(newAdmin);
+        dataStore.saveAdminData(admins);
     }
 
     public String createAdminId() {
