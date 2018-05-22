@@ -10,7 +10,7 @@
     </properties>
     <border type="none"/>
     <children>
-      <component id="65b" class="javax.swing.JLabel">
+      <component id="65b" class="javax.swing.JLabel" binding="titleLabel">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -44,14 +44,14 @@
           <text value="증가"/>
         </properties>
       </component>
-      <component id="b1fe2" class="javax.swing.JLabel">
+      <component id="b1fe2" class="javax.swing.JLabel" binding="thousandLabel">
         <constraints>
           <grid row="1" column="0" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font size="20"/>
           <foreground color="-16777216"/>
-          <text value="1000원권"/>
+          <text value="\ 1000"/>
         </properties>
       </component>
       <component id="18edb" class="javax.swing.JButton" binding="fiveThousandDecrease">
@@ -78,24 +78,24 @@
           <foreground color="-16777216"/>
         </properties>
       </component>
-      <component id="e7ef5" class="javax.swing.JLabel">
+      <component id="e7ef5" class="javax.swing.JLabel" binding="fiveThousandLabel">
         <constraints>
           <grid row="3" column="0" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font size="20"/>
           <foreground color="-16777216"/>
-          <text value="5000원권"/>
+          <text value="\ 5000"/>
         </properties>
       </component>
-      <component id="f1049" class="javax.swing.JLabel">
+      <component id="f1049" class="javax.swing.JLabel" binding="tenThousandLabel">
         <constraints>
           <grid row="5" column="0" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font size="20"/>
           <foreground color="-16777216"/>
-          <text value="10000원권"/>
+          <text value="\ 10000"/>
         </properties>
       </component>
       <component id="f8724" class="javax.swing.JButton" binding="tenThousandIncrease">
@@ -122,14 +122,14 @@
           <foreground color="-16777216"/>
         </properties>
       </component>
-      <component id="10e42" class="javax.swing.JLabel">
+      <component id="10e42" class="javax.swing.JLabel" binding="fiftyThousandLabel">
         <constraints>
           <grid row="7" column="0" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font size="20"/>
           <foreground color="-16777216"/>
-          <text value="50000원권"/>
+          <text value="\ 50000"/>
         </properties>
       </component>
       <component id="2e087" class="javax.swing.JButton" binding="fiftyThousandIncrease">
@@ -206,46 +206,6 @@
           <font size="20"/>
           <foreground color="-1"/>
           <text value="감소"/>
-        </properties>
-      </component>
-      <component id="ab7e0" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="1" column="2" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font size="20"/>
-          <foreground color="-16777216"/>
-          <text value="장"/>
-        </properties>
-      </component>
-      <component id="de718" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="3" column="2" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font size="20"/>
-          <foreground color="-16777216"/>
-          <text value="장"/>
-        </properties>
-      </component>
-      <component id="f129d" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="5" column="2" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font size="20"/>
-          <foreground color="-16777216"/>
-          <text value="장"/>
-        </properties>
-      </component>
-      <component id="7be12" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="7" column="2" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font size="20"/>
-          <foreground color="-16777216"/>
-          <text value="장"/>
         </properties>
       </component>
       <splitpane id="9c400">
