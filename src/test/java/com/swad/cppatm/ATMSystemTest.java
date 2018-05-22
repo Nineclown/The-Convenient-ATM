@@ -193,8 +193,11 @@ public class ATMSystemTest {
 
     @Test
     public void enterAdminInfoCorrectlyWorking() {
-        system.enterAdminInfo("1234", "010-1234-1234");
+        try {
+            system.enterAdminInfo("1234", "010-1234-1234");
+        }catch(DataStoreError er){
 
+        }
         assertEquals("1234", system.getAdmins()[0].getPassword());
         assertEquals("010-1234-1234", system.getAdmins()[0].getContact());
     }

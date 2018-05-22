@@ -2,6 +2,7 @@ package com.swad.cppatm.ui;
 
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.FunctionType;
+import com.swad.cppatm.exceptions.DataStoreError;
 import com.swad.cppatm.exceptions.InvalidAdminException;
 
 import javax.swing.*;
@@ -23,8 +24,11 @@ public class EnterAdminInfo extends JFrame {
                 String password = new String(adminPwField.getPassword());
                 String contact = adminContactField.getText();
 
-                system.enterAdminInfo(password, contact);
-
+                try {
+                    system.enterAdminInfo(password, contact);
+                }catch(DataStoreError er){
+                    JOptionPane.showMessageDialog(parentFrame, "Failed to add Admin", "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 JOptionPane.showMessageDialog(parentFrame, "Admin added", "Info", JOptionPane.INFORMATION_MESSAGE);
 
                 parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());

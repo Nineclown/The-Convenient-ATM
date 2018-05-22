@@ -396,10 +396,14 @@ public class ATMSystem {
         throw new InvalidAdminException();
     }
 
-    public void enterAdminInfo(String adminPw, String contact) {
+    public void enterAdminInfo(String adminPw, String contact) throws DataStoreError {
         Admin newAdmin = new Admin(this.createAdminId(), adminPw, contact);
-
         this.admins.add(newAdmin);
+        try{
+            dataStore.saveAdminData(admins);
+        }catch(DataStoreError e){
+            throw e;
+        }
     }
 
     public String createAdminId() {
@@ -407,7 +411,7 @@ public class ATMSystem {
             return "0";
         }
         return MessageFormat.format("{0}",
-            Integer.parseInt(this.admins.get(this.admins.size() - 1).getId() + 1));
+            Integer.parseInt(this.admins.get(this.admins.size() - 1).getId())+1);
     }
 
     public int enterATMBalance(int[] billAmount) throws InvalidBillException {
