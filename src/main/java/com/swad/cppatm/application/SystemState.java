@@ -18,4 +18,6 @@ public class SystemState {
     public void toggleSystem() {
         this.state = !state;
     }
+
+    public Locale getLocale(){return this.locale;}
 }
