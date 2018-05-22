@@ -1,7 +1,9 @@
 package com.swad.cppatm.ui;
 
 import com.swad.cppatm.application.ATMSystem;
+import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.exceptions.InvalidAdminException;
+import com.swad.cppatm.exceptions.NoneOfFunctionSelected;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +18,7 @@ public class AuthorizeAdmin extends JFrame {
     private JPasswordField adminPwField;
     private JLabel atmStateLabel;
 
-    public AuthorizeAdmin(final JFrame parentFrame, final ATMSystem system) {
+    public AuthorizeAdmin(final JFrame parentFrame, final ATMSystem system, FunctionType function) {
         atmStateLabel.setText(system.getState().available() ? "Active": "Frozen");
 
         confirmButton.addMouseListener(new MouseAdapter() {
@@ -41,11 +43,20 @@ public class AuthorizeAdmin extends JFrame {
                     return;
                 }
 
-                switch (system.getFunction()) {
+                try {
+                    system.selectFunction(function);
+                } catch (NoneOfFunctionSelected ex) {
+                    parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
+                    parentFrame.invalidate();
+                    parentFrame.validate();
+                }
+
+                switch (function) {
                     case AddAdmin:
                         panel = new EnterNumber(parentFrame, system).getPanel();
                         break;
                     case RemoveAdmin:
+                        JOptionPane.showMessageDialog(parentFrame, "Admin deleted", "Info", JOptionPane.INFORMATION_MESSAGE);
                         panel = new AdminSelectFunction(parentFrame, system).getPanel();
                         break;
                     case QueryATMBalance:
