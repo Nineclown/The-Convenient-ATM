@@ -2,6 +2,7 @@ package com.swad.cppatm.application;
 
 import com.swad.cppatm.enums.Bank;
 import com.swad.cppatm.exceptions.DataStoreError;
+import com.swad.cppatm.exceptions.NegativeBalanceError;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -88,7 +89,11 @@ public class Account {
      *
      * @param cashAmount amount of cash
      */
-    public void changeBalance(int cashAmount) {
+    public void changeBalance(int cashAmount) throws NegativeBalanceError {
+        if ( (balance + cashAmount) < 0 ) {
+            throw new NegativeBalanceError();
+        }
+
         this.balance += cashAmount;
     }
 

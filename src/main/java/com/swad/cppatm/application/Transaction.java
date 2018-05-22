@@ -3,6 +3,7 @@ package com.swad.cppatm.application;
 import com.swad.cppatm.enums.Bank;
 import com.swad.cppatm.enums.TransactionType;
 import com.swad.cppatm.exceptions.DataStoreError;
+import com.swad.cppatm.exceptions.NegativeBalanceError;
 
 import java.util.Date;
 
@@ -47,16 +48,12 @@ public class Transaction {
         this.time = new Date();
     }
 
-    public void processTransaction() throws DataStoreError {
-        try {
-            this.calcFee();
-            this.setTime();
-            this.account.changeBalance(amount);
-            this.account.addTransaction(this);
-            this.account.saveAccount();
-        } catch (DataStoreError e) {
-            throw e;
-        }
+    public void processTransaction() throws DataStoreError, NegativeBalanceError {
+        this.calcFee();
+        this.setTime();
+        this.account.changeBalance(amount);
+        this.account.addTransaction(this);
+        this.account.saveAccount();
     }
 
     public void calcFee() {

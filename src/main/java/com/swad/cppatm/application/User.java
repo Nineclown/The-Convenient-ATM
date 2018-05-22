@@ -9,7 +9,7 @@ public class User {
     private String userId;
     private String userName;
     private ArrayList<String> cardList = new ArrayList<String>();
-    private transient DataStore datastore = new DataStore();
+    private transient DataStore dataStore = new DataStore();
 
     public String getUserId() {
         return userId;
@@ -37,14 +37,11 @@ public class User {
     }
 
     public void saveUser() throws DataStoreError {
-        if (datastore == null) {
-            datastore = new DataStore();
+        if (dataStore == null) {
+            dataStore = new DataStore();
         }
-        try {
-            datastore.saveUserData(this);
-        } catch (DataStoreError e) {
-            throw e;
-        }
+
+        dataStore.saveUserData(this);
     }
 
 }
