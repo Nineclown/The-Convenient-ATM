@@ -64,7 +64,7 @@ public class AdminSelectFunction extends JFrame {
             }
         });
 
-        queryATMBalanceButton.setText(setLocalizedString(system, "ATM 잔고 조회", "Query ATM Balance"));
+        queryATMBalanceButton.setText(setLocalizedString(system, "지폐 보유량 조회", "Query ATM Balance"));
         queryATMBalanceButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -79,7 +79,7 @@ public class AdminSelectFunction extends JFrame {
             }
         });
 
-        toggleStateButton.setText(setLocalizedString(system, "ATM 상태 변경", "Toggle State"));
+        toggleStateButton.setText(setLocalizedString(system, "상태 변경", "Toggle State"));
         toggleStateButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -101,7 +101,7 @@ public class AdminSelectFunction extends JFrame {
             }
         });
 
-        changeATMBalanceButton.setText(setLocalizedString(system, "ATM 잔고 변경", "Change ATM Balance"));
+        changeATMBalanceButton.setText(setLocalizedString(system, "지폐 보유량 변경", "Change ATM Balance"));
         changeATMBalanceButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
