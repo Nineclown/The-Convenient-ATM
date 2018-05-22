@@ -37,6 +37,7 @@ public class SelectFunction extends JFrame {
                 }
 
                 parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
+                parentFrame.pack();
                 parentFrame.invalidate();
                 parentFrame.validate();
             }
@@ -55,6 +56,7 @@ public class SelectFunction extends JFrame {
                 }
 
                 parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
+                parentFrame.pack();
                 parentFrame.invalidate();
                 parentFrame.validate();
             }
@@ -73,6 +75,7 @@ public class SelectFunction extends JFrame {
                 }
 
                 parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
+                parentFrame.pack();
                 parentFrame.invalidate();
                 parentFrame.validate();
             }
@@ -91,6 +94,7 @@ public class SelectFunction extends JFrame {
                 }
 
                 parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
+                parentFrame.pack();
                 parentFrame.invalidate();
                 parentFrame.validate();
             }
@@ -110,6 +114,7 @@ public class SelectFunction extends JFrame {
                 }
 
                 parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
+                parentFrame.pack();
                 parentFrame.invalidate();
                 parentFrame.validate();
             }
@@ -127,7 +132,8 @@ public class SelectFunction extends JFrame {
                     return;
                 }
 
-                parentFrame.setContentPane(new QueryList(parentFrame, system).getPanel());
+                parentFrame.setContentPane(new EnterPassword(parentFrame, system).getPanel());
+                parentFrame.pack();
                 parentFrame.invalidate();
                 parentFrame.validate();
             }
@@ -188,6 +194,7 @@ public class SelectFunction extends JFrame {
                 }
 
                 parentFrame.setContentPane(new EnterNumber(parentFrame, system).getPanel());
+                parentFrame.pack();
                 parentFrame.invalidate();
                 parentFrame.validate();
             }
@@ -206,6 +213,7 @@ public class SelectFunction extends JFrame {
                 }
 
                 parentFrame.setContentPane(new EnterNumber(parentFrame, system).getPanel());
+                parentFrame.pack();
                 parentFrame.invalidate();
                 parentFrame.validate();
             }

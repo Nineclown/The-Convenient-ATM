@@ -100,65 +100,65 @@ public class ATMSystem {
         this.function = function;
         switch (function) {
             case Deposit:
-                if(!state.available()){
+                if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 this.toTransaction = new Transaction(TransactionType.Deposit);
                 break;
             case Withdraw:
-                if(!state.available()){
+                if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 this.toTransaction = new Transaction(TransactionType.Withdraw);
                 break;
             case ForeignDeposit:
-                if(!state.available()){
+                if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 this.toTransaction = new Transaction(TransactionType.ForeignDeposit);
                 break;
             case ForeignWithdraw:
-                if(!state.available()){
+                if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 this.toTransaction = new Transaction(TransactionType.ForeignWithdraw);
                 break;
             case Transfer:
-                if(!state.available()){
+                if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 this.fromTransaction = new Transaction(TransactionType.SendTransfer);
                 this.toTransaction = new Transaction(TransactionType.ReceiveTransfer);
                 break;
             case SplitPay:
-                if(!state.available()){
+                if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 this.toTransaction = new Transaction(TransactionType.ReceiveTransfer);
                 this.splitToTransaction = new ArrayList<Transaction>();
                 break;
             case QueryBalance:
-                if(!state.available()){
+                if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 break;
             case QueryTransactionList:
-                if(!state.available()){
+                if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 break;
             case GetLotteryPrize:
-                if(!state.available()){
+                if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 break;
             case ReportLostCard:
-                if(!state.available()){
+                if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 break;
             case ChangeLocale:
-                if(!state.available()){
+                if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 break;
@@ -166,11 +166,11 @@ public class ATMSystem {
             case AddAdmin:
                 break;
             case RemoveAdmin:
-                if ( this.currentAdmin == null ) {
+                if (this.currentAdmin == null) {
                     throw new NoneOfFunctionSelected();
                 }
 
-                if ( this.admins.size() <= 1 ) {
+                if (this.admins.size() <= 1) {
                     throw new NoneOfFunctionSelected();
                 }
 
@@ -178,7 +178,7 @@ public class ATMSystem {
                 try {
                     DataStore dataStore = new DataStore();
                     dataStore.saveAdminData(admins);
-                }catch(DataStoreError er){
+                } catch (DataStoreError er) {
 
                 }
                 break;
@@ -431,11 +431,11 @@ public class ATMSystem {
     }
 
     public void authorizeAdmin(String adminId, String adminPw) throws InvalidAdminException {
-        for ( int i = 0 ; i < this.admins.size() ; i++ ) {
-           if (this.admins.get(i).checkAdminAccount(adminId, adminPw)) {
-               this.currentAdmin = this.admins.get(i);
-               return;
-           }
+        for (int i = 0; i < this.admins.size(); i++) {
+            if (this.admins.get(i).checkAdminAccount(adminId, adminPw)) {
+                this.currentAdmin = this.admins.get(i);
+                return;
+            }
         }
 
         throw new InvalidAdminException();
@@ -444,10 +444,10 @@ public class ATMSystem {
     public void enterAdminInfo(String adminPw, String contact) throws DataStoreError {
         Admin newAdmin = new Admin(this.createAdminId(), adminPw, contact);
         this.admins.add(newAdmin);
-        try{
+        try {
             DataStore dataStore = new DataStore();
             dataStore.saveAdminData(admins);
-        }catch(DataStoreError e){
+        } catch (DataStoreError e) {
             throw e;
         }
     }
@@ -458,7 +458,7 @@ public class ATMSystem {
         }
 
         return MessageFormat.format("{0}",
-            Integer.parseInt(this.admins.get(this.admins.size() - 1).getId())+1);
+            Integer.parseInt(this.admins.get(this.admins.size() - 1).getId()) + 1);
     }
 
     public int enterATMBalance(int[] billAmount) throws InvalidBillException {
