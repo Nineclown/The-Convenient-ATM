@@ -1,5 +1,7 @@
 package com.swad.cppatm.ui;
 
+import com.swad.cppatm.application.ATMSystem;
+
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -12,7 +14,7 @@ public class QueryList extends JFrame {
     private JButton nextButton;
     private JPanel queryListPanel;
 
-    public QueryList() {
+    public QueryList(final JFrame parentFrame, final ATMSystem system) {
         prevButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

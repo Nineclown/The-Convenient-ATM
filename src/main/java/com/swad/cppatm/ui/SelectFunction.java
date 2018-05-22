@@ -1,6 +1,8 @@
 package com.swad.cppatm.ui;
 
 import com.swad.cppatm.application.ATMSystem;
+import com.swad.cppatm.enums.FunctionType;
+import com.swad.cppatm.exceptions.NoneOfFunctionSelected;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -24,38 +26,84 @@ public class SelectFunction extends JFrame {
         depositButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+                try {
+                    system.selectFunction(FunctionType.Deposit);
+                } catch (NoneOfFunctionSelected exception) {
+                    return;
+                }
+
+                parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
+                parentFrame.invalidate();
+                parentFrame.validate();
             }
         });
         foreignDepositButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+                try {
+                    system.selectFunction(FunctionType.ForeignDeposit);
+                } catch (NoneOfFunctionSelected ex) {
+                    return;
+                }
+
+                parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
+                parentFrame.invalidate();
+                parentFrame.validate();
             }
         });
         withdrawButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+                try {
+                    system.selectFunction(FunctionType.Withdraw);
+                } catch (NoneOfFunctionSelected ex) {
+                    return;
+                }
+
+                parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
+                parentFrame.invalidate();
+                parentFrame.validate();
             }
         });
         queryBalanceButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+                try {
+                    system.selectFunction(FunctionType.QueryBalance);
+                } catch (NoneOfFunctionSelected ex) {
+                    return;
+                }
+
+                parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
+                parentFrame.invalidate();
+                parentFrame.validate();
             }
         });
         foreignWithdrawButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+                try {
+                    system.selectFunction(FunctionType.ForeignWithdraw);
+
+                } catch (NoneOfFunctionSelected ex) {
+                    return;
+                }
+
+                parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
+                parentFrame.invalidate();
+                parentFrame.validate();
             }
         });
         queryTransactionListButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
-                parentFrame.setContentPane(new QueryList().getPanel());
+                try {
+                    system.selectFunction(FunctionType.QueryTransactionList);
+                } catch (NoneOfFunctionSelected ex) {
+                    return;
+                }
+
+                parentFrame.setContentPane(new QueryList(parentFrame, system).getPanel());
                 parentFrame.invalidate();
                 parentFrame.validate();
             }
@@ -63,31 +111,59 @@ public class SelectFunction extends JFrame {
         reportLostCardButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+                try {
+                    system.selectFunction(FunctionType.ReportLostCard);
+                } catch (NoneOfFunctionSelected ex) {
+                    return;
+                }
             }
         });
         getLotteryPrizeButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+                try {
+                    system.selectFunction(FunctionType.GetLotteryPrize);
+                } catch (NoneOfFunctionSelected ex) {
+                    return;
+                }
             }
         });
         changeLocaleButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+                try {
+                    system.selectFunction(FunctionType.ChangeLocale);
+                } catch (NoneOfFunctionSelected ex) {
+                    return;
+                }
             }
         });
         transferButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+                try {
+                    system.selectFunction(FunctionType.Transfer);
+                } catch (NoneOfFunctionSelected ex) {
+                    return;
+                }
+
+                parentFrame.setContentPane(new EnterNumber(parentFrame, system).getPanel());
+                parentFrame.invalidate();
+                parentFrame.validate();
             }
         });
         splitPayButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
+                try {
+                    system.selectFunction(FunctionType.SplitPay);
+                } catch (NoneOfFunctionSelected ex) {
+                    return;
+                }
+
+                parentFrame.setContentPane(new EnterNumber(parentFrame, system).getPanel());
+                parentFrame.invalidate();
+                parentFrame.validate();
             }
         });
     }
