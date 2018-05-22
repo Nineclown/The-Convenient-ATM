@@ -128,7 +128,7 @@ public class EnterNumber extends JFrame {
                 switch (system.getFunction()) {
                     case Withdraw:
                         try {
-                            system.enterBillAmountToWithdraw(cashAmount);
+                            system.enterBillAmountToWithdraw(cashAmount * 10000);
                         } catch (DataStoreError | NegativeBalanceError ex) {
                             JOptionPane.showMessageDialog(parentFrame, ex.getClass().getSimpleName(), "Error", JOptionPane.ERROR_MESSAGE);
                             parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());

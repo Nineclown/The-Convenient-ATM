@@ -302,7 +302,7 @@ public class ATMSystem {
     public void enterBillAmountToWithdraw(int cashAmount) throws DataStoreError, NegativeBalanceError {
         this.cashAmount = cashAmount;
         billAmount = calcBillAmount(this.cashAmount, "WON");
-        this.toTransaction.setAmount(-(cashAmount * 10000));
+        this.toTransaction.setAmount(-cashAmount);
         this.toTransaction.processTransaction();
     }
 

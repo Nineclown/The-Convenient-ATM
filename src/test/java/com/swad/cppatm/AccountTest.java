@@ -31,48 +31,45 @@ public class AccountTest {
 
     @Test
     public void shouldGetCorrectAccount() {
-        Account account = this.dataStore.loadAccountData(Bank.HANA,"123456789012345t");
-        assertEquals(account.getBalance(),1004200);
-        assertEquals(account.getPassword(),5555);
+        Account account = this.dataStore.loadAccountData(Bank.HANA, "123456789012345t");
+        assertEquals(account.getBalance(), 1004200);
+        assertEquals(account.getPassword(), 5555);
     }
 
     @Test
-    public void shouldGetCorrectBalance()
-    {
-        Account account = this.dataStore.loadAccountData(Bank.HANA,"123456789012345t");
+    public void shouldGetCorrectBalance() {
+        Account account = this.dataStore.loadAccountData(Bank.HANA, "123456789012345t");
         try {
             account.changeBalance(5000);
-        }catch(NegativeBalanceError ex){
-
+        } catch (NegativeBalanceError e) {
+            fail(e.getClass().getSimpleName());
         }
-        assertEquals(account.getBalance(),1009200);
+        assertEquals(account.getBalance(), 1009200);
     }
 
     @Test
-    public void shouldGetCorrectTransactions()
-    {
-        Account account = this.dataStore.loadAccountData(Bank.HANA,"123456789012345t");
-        Transaction[] transactions = account.getTransactions(new Date(118,4,19,12,0,0),new Date(118,4,20,0,0,0));
-        assertEquals(transactions[1].getAmount(),1200);
-        assertEquals(transactions[2].getTime(),new Date(118,4,16,15,16,27 ));
-        assertEquals(transactions.length,4);
+    public void shouldGetCorrectTransactions() {
+        Account account = this.dataStore.loadAccountData(Bank.HANA, "123456789012345t");
+        Transaction[] transactions = account.getTransactions(new Date(118, 4, 19, 12, 0, 0), new Date(118, 4, 20, 0, 0, 0));
+        assertEquals(transactions[1].getAmount(), 1200);
+        assertEquals(transactions[2].getTime(), new Date(118, 4, 16, 15, 16, 27));
+        assertEquals(transactions.length, 4);
     }
 
     @Test
-    public void shouldAddTransactionCorrectly()
-    {
+    public void shouldAddTransactionCorrectly() {
         Transaction transaction = new Transaction(TransactionType.Deposit);
         transaction.setAccount(new Account(Bank.KOOKMIN, "15151515141414"));
         transaction.setAmount(5100);
         transaction.setTime();
-        Account acc = this.dataStore.loadAccountData(Bank.HANA,"123456789012345t");
+        Account acc = this.dataStore.loadAccountData(Bank.HANA, "123456789012345t");
         acc.addTransaction(transaction);
-        Transaction [] transactions = acc.getTransactions(new Date(118,4,19,12,0,0),new Date(118,4,30,0,0,0));
-        assertEquals(transactions[4].getAmount(),5100);
+        Transaction[] transactions = acc.getTransactions(new Date(118, 4, 19, 12, 0, 0), new Date(118, 4, 30, 0, 0, 0));
+        assertEquals(transactions[4].getAmount(), 5100);
     }
 
     @Test
-    public void checkPasswordTest(){
+    public void checkPasswordTest() {
         Account account = new DataStore().loadAccountData(Bank.HANA, "123456789012345t");
         assertTrue(!account.checkAccountPassword(1234));
         assertTrue(account.checkAccountPassword(5555));

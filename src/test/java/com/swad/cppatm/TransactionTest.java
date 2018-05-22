@@ -5,6 +5,8 @@ import com.swad.cppatm.application.DataStore;
 import com.swad.cppatm.application.Transaction;
 import com.swad.cppatm.enums.Bank;
 import com.swad.cppatm.enums.TransactionType;
+import com.swad.cppatm.exceptions.DataStoreError;
+import com.swad.cppatm.exceptions.NegativeBalanceError;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Managed;
 import org.junit.Before;
@@ -29,7 +31,7 @@ public class TransactionTest {
     WebDriver browser;
 
     @Test
-    public void calcFeeTest (){
+    public void calcFeeTest() {
         Account account = new DataStore().loadAccountData(Bank.WOORI, "110412644105");
         Transaction transaction = new Transaction(TransactionType.Deposit);
         transaction.setAccount(account);
@@ -39,7 +41,7 @@ public class TransactionTest {
     }
 
     @Test
-    public void processTransactionTest(){
+    public void processTransactionTest() {
         Account account = new DataStore().loadAccountData(Bank.HANA, "123456789012345t");
         Transaction transaction = new Transaction(TransactionType.Deposit);
         transaction.setAccount(account);
@@ -50,9 +52,22 @@ public class TransactionTest {
             fail("throw Exception");
         }
 
-        assertEquals(account.getTransactions(new Date(118,4,20,0,0,0),new Date(118,4,21,23,0,0)).length,5);
-        assertEquals(account.getBalance(),1014200);
-        assertEquals(transaction.getTime().after(new Date(118,4,20,0,0,0)),true);
+        assertEquals(account.getTransactions(new Date(118, 4, 20, 0, 0, 0), new Date(118, 4, 21, 23, 0, 0)).length, 5);
+        assertEquals(account.getBalance(), 1014200);
+        assertEquals(transaction.getTime().after(new Date(118, 4, 20, 0, 0, 0)), true);
     }
 
+    @Test(expected = NegativeBalanceError.class)
+    public void processTransactionBalanceMustBePositive() throws NegativeBalanceError {
+        Account account = new DataStore().loadAccountData(Bank.HANA, "123456789012345");
+        Transaction transaction = new Transaction(TransactionType.Withdraw);
+
+        transaction.setAccount(account);
+        transaction.setAmount(-99999999);
+        try {
+            transaction.processTransaction();
+        } catch (DataStoreError ex) {
+            fail(ex.getClass().getSimpleName());
+        }
+    }
 }
