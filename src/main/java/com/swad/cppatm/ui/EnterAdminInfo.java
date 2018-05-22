@@ -1,6 +1,7 @@
 package com.swad.cppatm.ui;
 
 import com.swad.cppatm.application.ATMSystem;
+import com.swad.cppatm.application.Admin;
 import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.exceptions.DataStoreError;
 import com.swad.cppatm.exceptions.InvalidAdminException;
@@ -29,7 +30,8 @@ public class EnterAdminInfo extends JFrame {
                 }catch(DataStoreError er){
                     JOptionPane.showMessageDialog(parentFrame, "Failed to add Admin", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-                JOptionPane.showMessageDialog(parentFrame, "Admin added", "Info", JOptionPane.INFORMATION_MESSAGE);
+                Admin newAdmin = system.getAdmins()[system.getAdmins().length-1];
+                JOptionPane.showMessageDialog(parentFrame, "Admin added\nYour AdminId : " + newAdmin.getId(), "Info", JOptionPane.INFORMATION_MESSAGE);
 
                 parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
                 parentFrame.invalidate();
