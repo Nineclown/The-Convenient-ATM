@@ -58,6 +58,9 @@ public class Transaction {
 
     public void calcFee() {
         int fee;
+        if(this.tcType == TransactionType.ReceiveTransfer){
+            return;
+        }
 
         if (this.account.getBank() == Bank.HANA) {
             if (this.tcType == TransactionType.Deposit) {

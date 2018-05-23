@@ -201,24 +201,39 @@ public class ATMSystem {
             throw new AccountDoesNotExist();
         }
 
-        if (this.function == FunctionType.Transfer && this.fromTransaction.getAccount() != null) {
-            this.toTransaction.setAccount(account);
-        }
-
-        if (this.fromTransaction != null) {
-            this.fromTransaction.setAccount(account);
-        }
-
-        if (this.fromTransaction == null && this.toTransaction != null) {
-            this.toTransaction.setAccount(account);
-
-            if (this.toTransaction.getAmount() > 0) {
-                // Get Lottery Prize
+        switch (this.function){
+            case Deposit:
+            case ForeignDeposit:
+            case Withdraw:
+            case ForeignWithdraw:
+                this.toTransaction.setAccount(this.account);
+                break;
+            case GetLotteryPrize:
+                this.toTransaction.setAccount(this.account);
                 try {
                     this.toTransaction.processTransaction();
-                } catch (NegativeBalanceError e) {
+                }catch (NegativeBalanceError e){
+
                 }
-            }
+                break;
+            case Transfer:
+                //Transfer enter Account from.
+                if(this.fromTransaction.getAccount() == null){
+                    this.fromTransaction.setAccount(this.account);
+                }else{
+                    this.toTransaction.setAccount(this.account);
+                }
+                break;
+            case SplitPay:
+                if(this.toTransaction.getAccount() == null){
+                    this.toTransaction.setAccount(this.account);
+                }else{
+                    this.fromTransaction.setAccount(this.account);
+                }
+                break;
+            case QueryBalance:
+            case QueryTransactionList:
+                break;
         }
     }
 
@@ -235,15 +250,6 @@ public class ATMSystem {
         total += BillType.count(BillType.FiveThousand, billAmount[1]);
         total += BillType.count(BillType.TenThousand, billAmount[2]);
         total += BillType.count(BillType.FiftyThousand, billAmount[3]);
-
-        //Dose Enter Bills use fromTransaction?
-        if (this.fromTransaction != null) {
-            this.fromTransaction.setAmount(total);
-            try {
-                this.fromTransaction.processTransaction();
-            } catch (NegativeBalanceError e) {
-            }
-        }
 
         //Dose Enter Bill Could not use toTransaction?
         if (this.toTransaction != null) {
@@ -362,7 +368,7 @@ public class ATMSystem {
             length = billType.length;
             for (int i = 0; i < length; i++) {
                 int bill = cashAmount / billType[i];
-                bills[10 - (i + 1)] = bill;
+                bills[10 - i] = bill;
                 cashAmount -= billType[i] * bill;
             }
         } else {
