@@ -235,16 +235,14 @@ public class ATMSystemTest {
     @Test
     public void shouldGetCardListCorrectly() {
         this.system.enterUserId("123456789012356");
-        String[] string = new String[2];
+        String[] string;
         string = this.system.getCardList();
         assertTrue(string[0].equals("123456789012345678"));
     }
 
-    // TODO: Not Ignore and make it success
     @Test
-    @Ignore
     public void enterPeriodToQueryDoesGetTransactions() throws NoneOfFunctionSelected {
-        int[] billAmount = {1,1,1,1};
+        int[] billAmount = {1,1,1,1,0,0,0,0,0,0,0};
         system.selectFunction(FunctionType.Deposit);
 
         try {
