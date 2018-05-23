@@ -4,6 +4,7 @@ import com.swad.cppatm.application.DataStore;
 import com.swad.cppatm.application.User;
 import com.swad.cppatm.exceptions.DataStoreError;
 import net.serenitybdd.junit.runners.SerenityRunner;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -11,19 +12,23 @@ import static org.junit.Assert.*;
 
 @RunWith(SerenityRunner.class)
 public class UserTest {
+    private DataStore dataStore;
+
+    @Before
+    public void init() {
+        dataStore = new DataStore();
+    }
     @Test
     public void loadUserTest() {
-        DataStore ds = new DataStore();
-        User us = ds.loadUserData("9512221234567");
+        User us = dataStore.loadUserData("9512221234567");
         //No Korean.
         assertEquals(us.getUserName(), "DoHyeon");
         assertEquals(us.getUserId(), "9512221234567");
     }
 
     @Test
-    public void removeCardListTest() {
-        DataStore ds = new DataStore();
-        User us = ds.loadUserData("9512221234567");
+    public void removeCardRemoveCardFromList() {
+        User us = dataStore.loadUserData("9512221234567");
 
         try {
             us.removeCard("1234567890");
