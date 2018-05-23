@@ -261,20 +261,22 @@ public class ATMSystem {
         }
     }
 
-    public void enterBillAsDollar(int[] billAmount) throws InvalidBillException, DataStoreError {
+    public void enterBillAsDollar(int[] billAmount) throws InvalidBillException, DataStoreError, OverflowBillException {
         int totalDollar = 0;
 
-        if (billAmount.length != BillType.dollarSize) {
+        if (billAmount.length != 11) {
             throw new InvalidBillException();
+        }else if((billAmount[0] != 0) || (billAmount[1] != 0) || (billAmount[2] != 0) && (billAmount[3] != 0)){
+            throw  new InvalidBillException();
         }
 
-        totalDollar += BillType.dollarCount(BillType.DollarOne, billAmount[0]);
-        totalDollar += BillType.dollarCount(BillType.DollarTwo, billAmount[1]);
-        totalDollar += BillType.dollarCount(BillType.DollarFive, billAmount[2]);
-        totalDollar += BillType.dollarCount(BillType.DollarTen, billAmount[3]);
-        totalDollar += BillType.dollarCount(BillType.DollarTwenty, billAmount[4]);
-        totalDollar += BillType.dollarCount(BillType.DollarFifty, billAmount[5]);
-        totalDollar += BillType.dollarCount(BillType.DollarHundred, billAmount[6]);
+        totalDollar += BillType.dollarCount(BillType.DollarOne, billAmount[4]);
+        totalDollar += BillType.dollarCount(BillType.DollarTwo, billAmount[5]);
+        totalDollar += BillType.dollarCount(BillType.DollarFive, billAmount[6]);
+        totalDollar += BillType.dollarCount(BillType.DollarTen, billAmount[7]);
+        totalDollar += BillType.dollarCount(BillType.DollarTwenty, billAmount[8]);
+        totalDollar += BillType.dollarCount(BillType.DollarFifty, billAmount[9]);
+        totalDollar += BillType.dollarCount(BillType.DollarHundred, billAmount[10]);
 
         this.cashAmount = (int) (this.getCurrency() * totalDollar);
         System.out.print(this.fromTransaction);
@@ -286,6 +288,12 @@ public class ATMSystem {
             } catch (NegativeBalanceError e) {
             }
         }
+        try {
+            balance.changeSystemBalance(billAmount);
+        }catch(AdminAlarmException e){
+            //Alarm to Admin
+        }
+
     }
 
     public void enterPassword(int password) throws InvalidPasswordException, AccountDoesNotExist {
