@@ -20,8 +20,9 @@ public class ATMSystemTest {
     public ATMSystem system;
 
     @Before
-    public void initATMSystem() {
+    public void initATMSystem() throws Exception {
         this.system = new ATMSystem();
+        this.system.selectFunction(FunctionType.Deposit);
     }
 
     @Test(expected = InvalidBillException.class)
@@ -39,7 +40,7 @@ public class ATMSystemTest {
     }
 
     @Test(expected = AccountDoesNotExist.class)
-    public void enterAccountInfoRaisesExceptionIfAccountDoesNotExistOnDataStore() throws AccountDoesNotExist, DataStoreError {
+    public void enterAccountInfoRaisesExceptionIfAccountDoesNotExistOnDataStore() throws AccountDoesNotExist, DataStoreError, NoneOfFunctionSelected {
         system.enterAccountInfo(Bank.WOORI, "DOESNOTEXIST");
     }
 
@@ -53,22 +54,22 @@ public class ATMSystemTest {
 
         try {
             system.enterAccountInfo(Bank.HANA, "123456789012345");
-            system.enterAccountInfo(Bank.HANA, "123456789012345");
         } catch (Exception e) {
 
         }
 
         try {
             system.enterBillAmountToWithdrawAsDollar(170);
-        } catch (DataStoreError | NegativeBalanceError | OverflowBillException e ) {
+        } catch (DataStoreError | NegativeBalanceError | OverflowBillException e) {
             fail(e.getClass().getSimpleName());
         }
         int[] billAmount = {0,0,0,0};
 
-        assertEquals(billAmount[0], 0);
-        assertEquals(billAmount[1], 1);
-        assertEquals(billAmount[2], 1);
-        assertEquals(billAmount[3], 1);
+        int[] expectedResult = {0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1,};
+
+        System.out.println(billAmount);
+
+        assertArrayEquals(expectedResult, billAmount);
     }
 
     @Test
@@ -77,6 +78,8 @@ public class ATMSystemTest {
             system.enterAccountInfo(Bank.HANA, "123456789012345");
         } catch (AccountDoesNotExist | DataStoreError e) {
             fail(e.getClass().getSimpleName());
+        } catch (NoneOfFunctionSelected e) {
+
         }
 
         assertNotNull(system.getAccount());
@@ -92,6 +95,8 @@ public class ATMSystemTest {
             fail("throw AccountDoesNotExist " + e.getMessage());
         } catch (DataStoreError e) {
             fail("throw DataStoreError " + e.getMessage());
+        } catch (NoneOfFunctionSelected e) {
+
         }
 
         try {
@@ -115,6 +120,8 @@ public class ATMSystemTest {
             fail("throw AccountDoesNotExist" + e.getMessage());
         } catch (DataStoreError e) {
             fail("throw DataStoreError" + e.getMessage());
+        } catch (NoneOfFunctionSelected e) {
+
         }
 
         try {
@@ -130,13 +137,13 @@ public class ATMSystemTest {
 
     @Test
     public void calcBillAccountCorrectlyWorking() {
-        int[] result = system.calcBillAmount(10000, "WON");
-        int[] expectedResult = {1 /* 10000 */, 0 /* 50000 */, 0 /* None */, 0 /* None */};
+        int[] result = system.calcBillAmount(100000, "WON");
+        int[] expectedResult = {0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, };
 
         assertArrayEquals(expectedResult, result);
 
         result = system.calcBillAmount(130, "Dollar");
-        expectedResult = new int[]{1/* 10 */, 1 /* 20 */, 0 /* 50 */, 1/* 100 */};
+        expectedResult = new int[]{0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1};
 
         assertArrayEquals(expectedResult, result);
     }

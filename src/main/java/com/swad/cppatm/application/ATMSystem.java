@@ -188,7 +188,7 @@ public class ATMSystem {
         }
     }
 
-    public void enterAccountInfo(Bank bank, String accountNo) throws AccountDoesNotExist, DataStoreError {
+    public void enterAccountInfo(Bank bank, String accountNo) throws AccountDoesNotExist, DataStoreError, NoneOfFunctionSelected {
         DataStore dataStore = new DataStore();
         this.account = dataStore.loadAccountData(bank, accountNo);
 
@@ -196,7 +196,11 @@ public class ATMSystem {
             throw new AccountDoesNotExist();
         }
 
-        switch (this.function){
+        if (this.function == null) {
+            throw new NoneOfFunctionSelected();
+        }
+
+        switch (this.function) {
             case Deposit:
             case ForeignDeposit:
             case Withdraw:
@@ -207,22 +211,22 @@ public class ATMSystem {
                 this.toTransaction.setAccount(this.account);
                 try {
                     this.toTransaction.processTransaction();
-                }catch (NegativeBalanceError e){
+                } catch (NegativeBalanceError e) {
 
                 }
                 break;
             case Transfer:
                 //Transfer enter Account from.
-                if(this.fromTransaction.getAccount() == null){
+                if (this.fromTransaction.getAccount() == null) {
                     this.fromTransaction.setAccount(this.account);
-                }else{
+                } else {
                     this.toTransaction.setAccount(this.account);
                 }
                 break;
             case SplitPay:
-                if(this.toTransaction.getAccount() == null){
+                if (this.toTransaction.getAccount() == null) {
                     this.toTransaction.setAccount(this.account);
-                }else{
+                } else {
                     this.fromTransaction.setAccount(this.account);
                 }
                 break;
@@ -237,7 +241,7 @@ public class ATMSystem {
 
         if (billAmount.length != 11) {
             throw new InvalidBillException();
-        }else if((billAmount[4] != 0) || (billAmount[5] != 0) || (billAmount[6] != 0) && (billAmount[7] != 0) || (billAmount[8] != 0) || (billAmount[9] != 0) || (billAmount[10] != 0)){
+        } else if ((billAmount[4] != 0) || (billAmount[5] != 0) || (billAmount[6] != 0) && (billAmount[7] != 0) || (billAmount[8] != 0) || (billAmount[9] != 0) || (billAmount[10] != 0)) {
             throw new InvalidBillException();
         }
 
@@ -257,7 +261,7 @@ public class ATMSystem {
         }
         try {
             balance.changeSystemBalance(billAmount);
-        }catch(AdminAlarmException e){
+        } catch (AdminAlarmException e) {
             //Alarm to Admin;
         }
     }
@@ -267,8 +271,8 @@ public class ATMSystem {
 
         if (billAmount.length != 11) {
             throw new InvalidBillException();
-        }else if((billAmount[0] != 0) || (billAmount[1] != 0) || (billAmount[2] != 0) && (billAmount[3] != 0)){
-            throw  new InvalidBillException();
+        } else if ((billAmount[0] != 0) || (billAmount[1] != 0) || (billAmount[2] != 0) && (billAmount[3] != 0)) {
+            throw new InvalidBillException();
         }
 
         totalDollar += BillType.dollarCount(BillType.DollarOne, billAmount[4]);
@@ -291,7 +295,7 @@ public class ATMSystem {
         }
         try {
             balance.changeSystemBalance(billAmount);
-        }catch(AdminAlarmException e){
+        } catch (AdminAlarmException e) {
             //Alarm to Admin
         }
 
@@ -349,19 +353,19 @@ public class ATMSystem {
         this.toTransaction.processTransaction();
         try {
             balance.changeSystemBalance(billAmount);
-        }catch(AdminAlarmException e){
+        } catch (AdminAlarmException e) {
             //Alarm to admin;
         }
     }
 
-    public void enterBillAmountToWithdrawAsDollar(int cashAmount) throws DataStoreError, NegativeBalanceError , OverflowBillException {
+    public void enterBillAmountToWithdrawAsDollar(int cashAmount) throws DataStoreError, NegativeBalanceError, OverflowBillException {
         this.cashAmount = -cashAmount;
         int  [] billAmount = calcBillAmount(this.cashAmount, "Dollar");
         this.toTransaction.setAmount((cashAmount * (int) this.getCurrency()));
         this.toTransaction.processTransaction();
         try {
             balance.changeSystemBalance(billAmount);
-        }catch(AdminAlarmException e){
+        } catch (AdminAlarmException e) {
             //Alarm to admin;
         }
     }
@@ -521,7 +525,7 @@ public class ATMSystem {
             Integer.parseInt(this.admins.get(this.admins.size() - 1).getId()) + 1);
     }
 
-    public void enterATMBalance(int[] billAmount) throws InvalidBillException, OverflowBillException{
+    public void enterATMBalance(int[] billAmount) throws InvalidBillException, OverflowBillException {
         if (billAmount.length != (BillType.wonSize + BillType.dollarSize)) {
             throw new InvalidBillException();
         }

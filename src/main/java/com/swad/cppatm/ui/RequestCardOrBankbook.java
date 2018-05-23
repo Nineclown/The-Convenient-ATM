@@ -5,6 +5,7 @@ import com.swad.cppatm.enums.Bank;
 import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.exceptions.AccountDoesNotExist;
 import com.swad.cppatm.exceptions.DataStoreError;
+import com.swad.cppatm.exceptions.NoneOfFunctionSelected;
 
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
@@ -45,6 +46,7 @@ public class RequestCardOrBankbook {
 
         try {
             system.enterAccountInfo(bank, accountNo);
+        } catch (NoneOfFunctionSelected ex) {
         } catch (DataStoreError ex) {
             JOptionPane.showMessageDialog(parentFrame, "Load Error", "Error", JOptionPane.ERROR_MESSAGE);
             return;
