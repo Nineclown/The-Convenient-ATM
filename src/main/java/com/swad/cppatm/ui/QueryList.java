@@ -10,7 +10,6 @@ import java.awt.event.MouseEvent;
 public class QueryList extends JFrame {
     private JTextField accountBalanceField;
     private JTextField accountNumberField;
-    private JButton prevButton;
     private JButton confirmButton;
     private JPanel queryListPanel;
 
@@ -31,12 +30,6 @@ public class QueryList extends JFrame {
 
         JLabel transactionLabel;
 
-        prevButton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-            }
-        });
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {

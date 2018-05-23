@@ -266,7 +266,7 @@ public class ATMSystem {
         totalDollar += BillType.dollarCount(BillType.DollarFifty, billAmount[5]);
         totalDollar += BillType.dollarCount(BillType.DollarHundred, billAmount[6]);
 
-        this.cashAmount += (int) (this.getCurrency() * totalDollar);
+        this.cashAmount = (int) (this.getCurrency() * totalDollar);
         System.out.print(this.fromTransaction);
 
         if (this.toTransaction != null) {
