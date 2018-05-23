@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 
 import javax.naming.NameNotFoundException;
 import java.text.MessageFormat;
+import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
@@ -45,7 +46,7 @@ public class ATMSystemTest {
     }
 
     @Test
-    public void shouldCountBillCorrectlyWhenWithdrawAsDollars() {
+    public void enterBillAmountToWithdrawAsDollarCorrectlyWorking() {
         try {
             system.selectFunction(FunctionType.ForeignWithdraw);
         } catch (NoneOfFunctionSelected e) {
@@ -58,18 +59,21 @@ public class ATMSystemTest {
 
         }
 
+        int []initialAmount = {1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000};
+
         try {
-            system.enterBillAmountToWithdrawAsDollar(170);
+            system.getBalance().setATMBalance(initialAmount);
+        } catch (OverflowBillException ex) {
+
+        }
+
+        try {
+            system.enterBillAmountToWithdrawAsDollar(200);
         } catch (DataStoreError | NegativeBalanceError | OverflowBillException e) {
             fail(e.getClass().getSimpleName());
         }
-        int[] billAmount = {0,0,0,0};
 
-        int[] expectedResult = {0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1,};
-
-        System.out.println(billAmount);
-
-        assertArrayEquals(expectedResult, billAmount);
+        assertEquals(998, system.getBalance().getATMBalance()[10]);
     }
 
     @Test
