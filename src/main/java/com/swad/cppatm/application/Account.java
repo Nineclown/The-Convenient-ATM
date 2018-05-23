@@ -85,6 +85,10 @@ public class Account {
 
     // Setter
 
+    public void setPassword(int password) {
+        this.password = password;
+    }
+
     /**
      * Change balance
      *

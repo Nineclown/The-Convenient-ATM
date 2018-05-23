@@ -9,6 +9,7 @@ import com.swad.cppatm.exceptions.DataStoreError;
 import com.swad.cppatm.exceptions.NegativeBalanceError;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Managed;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,11 +21,13 @@ import static org.junit.Assert.*;
 
 @RunWith(SerenityRunner.class)
 public class AccountTest {
-    public DataStore dataStore;
+    private DataStore dataStore;
+    private Account account;
 
     @Before
     public void initDataStore() {
         this.dataStore = new DataStore();
+        this.account = new Account(Bank.HANA, "123456789012345");
     }
 
     @Managed(driver = "chrome")
@@ -89,24 +92,29 @@ public class AccountTest {
     @Test
     public void shouldChangeBalanceCorrectly() throws NegativeBalanceError
     {
-        Account account = new DataStore().loadAccountData(Bank.HANA,"123456789012345");
-        int balance = account.getBalance();
-        account.changeBalance(1000);
-        assertEquals(account.getBalance(),balance+1000);
-        account.changeBalance(-1000000);
-        assertEquals(account.getBalance(),balance-999000);
+        assertEquals(account.getBalance(),0);
+        account.changeBalance(10000000);
+        assertEquals(account.getBalance(),10000000);
+        account.changeBalance(-5000000);
+        assertEquals(account.getBalance(),5000000);
     }
 
     @Test
     public void shouldSaveAccountCorrectly() throws NegativeBalanceError, DataStoreError
     {
-        DataStore datastore = new DataStore();
-        Account account = new DataStore().loadAccountData(Bank.HANA,"123456789012345");
-        int balance = account.getBalance();
-        account.changeBalance(1000);
+        account.changeBalance(10000000);
         account.saveAccount();
-        Account account2 = datastore.loadAccountData(Bank.HANA,"123456789012345");
-        assertEquals(account2.getBalance(),balance+1000);
+        Account account2 = dataStore.loadAccountData(Bank.HANA,"123456789012345");
+        assertEquals(account2.getBalance(),10000000);
     }
 
+    @After
+    public void restoreFile() {
+        try {
+            account.setPassword(5555);
+            dataStore.saveAccountData(account);
+        } catch (DataStoreError ex) {
+
+        }
+    }
 }
