@@ -196,7 +196,7 @@ public class EnterPassword extends JFrame {
                         parentFrame.setContentPane(new EnterNumber(parentFrame, system).getPanel());
                         break;
                     case QueryTransactionList:
-                        parentFrame.setContentPane(new QueryList(parentFrame, system).getPanel());
+                        parentFrame.setContentPane(new EnterDate(parentFrame, system).getPanel());
                         break;
                     case QueryBalance:
                         parentFrame.setContentPane(new QueryBalance(parentFrame, system).getPanel());
