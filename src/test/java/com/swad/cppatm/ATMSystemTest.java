@@ -6,11 +6,9 @@ import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.exceptions.*;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.Arrays;
 import java.util.Date;
 
 import static org.junit.Assert.*;

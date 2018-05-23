@@ -30,9 +30,6 @@ public class AccountTest {
         this.account = new Account(Bank.HANA, "123456789012345");
     }
 
-    @Managed(driver = "chrome")
-    WebDriver browser;
-
     @Test
     public void shouldGetCorrectAccount() {
         Account account = this.dataStore.loadAccountData(Bank.HANA, "123456789012345t");
@@ -78,43 +75,37 @@ public class AccountTest {
         assertTrue(!account.checkAccountPassword(1234));
         assertTrue(account.checkAccountPassword(5555));
     }
+
     @Test
-    public void shouldFreezeAccountState()
-    {
-        Account account = new DataStore().loadAccountData(Bank.HANA,"123456789012345");
-        assertEquals(account.getState(),true);
+    public void shouldFreezeAccountState() {
+        Account account = new DataStore().loadAccountData(Bank.HANA, "123456789012345");
+        assertTrue(account.getState());
         account.freezeAccount();
-        assertEquals(account.getState(),false);
+        assertFalse(account.getState());
         account.freezeAccount();
-        assertEquals(account.getState(),false);
+        assertFalse(account.getState());
     }
 
     @Test
-    public void shouldChangeBalanceCorrectly() throws NegativeBalanceError
-    {
-        assertEquals(account.getBalance(),0);
+    public void shouldChangeBalanceCorrectly() throws NegativeBalanceError {
+        assertEquals(account.getBalance(), 0);
         account.changeBalance(10000000);
-        assertEquals(account.getBalance(),10000000);
+        assertEquals(account.getBalance(), 10000000);
         account.changeBalance(-5000000);
-        assertEquals(account.getBalance(),5000000);
+        assertEquals(account.getBalance(), 5000000);
     }
 
     @Test
-    public void shouldSaveAccountCorrectly() throws NegativeBalanceError, DataStoreError
-    {
+    public void shouldSaveAccountCorrectly() throws NegativeBalanceError, DataStoreError {
         account.changeBalance(10000000);
         account.saveAccount();
-        Account account2 = dataStore.loadAccountData(Bank.HANA,"123456789012345");
-        assertEquals(account2.getBalance(),10000000);
+        Account account2 = dataStore.loadAccountData(Bank.HANA, "123456789012345");
+        assertEquals(account2.getBalance(), 10000000);
     }
 
     @After
-    public void restoreFile() {
-        try {
-            account.setPassword(5555);
-            dataStore.saveAccountData(account);
-        } catch (DataStoreError ex) {
-
-        }
+    public void restoreFile() throws DataStoreError {
+        account.setPassword(5555);
+        dataStore.saveAccountData(account);
     }
 }

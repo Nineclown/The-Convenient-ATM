@@ -6,11 +6,9 @@ import com.swad.cppatm.application.User;
 import com.swad.cppatm.enums.Bank;
 import com.swad.cppatm.exceptions.DataStoreError;
 import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Managed;
-import net.thucydides.core.annotations.Steps;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
 
 import java.io.File;
 
@@ -19,16 +17,17 @@ import static org.junit.Assert.*;
 @RunWith(SerenityRunner.class)
 public class DataStoreTest {
 
-    @Steps
-    DataStore datastore;
+    public DataStore dataStore;
 
-    @Managed(driver = "chrome")
-    WebDriver browser;
+    @Before
+    public void init() {
+        dataStore = new DataStore();
+    }
 
 
     @Test
-    public void loadAccountDataShouldRaiseExceptionWhenAccountIsInvalid(){
-        Account account = new DataStore().loadAccountData(Bank.HANA, "1234567890");
+    public void loadAccountDataShouldRaiseExceptionWhenAccountIsInvalid() {
+        Account account = dataStore.loadAccountData(Bank.HANA, "1234567890");
         assertNull(account);
     }
 
@@ -43,10 +42,8 @@ public class DataStoreTest {
     }
 
     @Test
-    public void loadUserDataShouldRaiseExceptionWhenAccountIsInvalid(){
+    public void loadUserDataShouldRaiseExceptionWhenAccountIsInvalid() {
         User user = new DataStore().loadUserData("1234567890");
         assertNull(user);
     }
-
-
 }

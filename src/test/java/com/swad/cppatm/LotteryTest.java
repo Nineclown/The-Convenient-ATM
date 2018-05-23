@@ -2,20 +2,14 @@ package com.swad.cppatm;
 
 import com.swad.cppatm.application.Lottery;
 import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Managed;
-import net.thucydides.core.annotations.Steps;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
 
 import static org.junit.Assert.assertEquals;
 
 @RunWith(SerenityRunner.class)
 public class LotteryTest {
-
-    @Managed(driver = "chrome")
-    WebDriver browser;
-
+    
     @Test
     public void checkResultTest() {
         int[] num = {1, 2, 3, 4, 5, 7};
