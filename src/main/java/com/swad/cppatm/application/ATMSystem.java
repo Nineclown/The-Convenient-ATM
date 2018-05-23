@@ -460,9 +460,13 @@ public class ATMSystem {
         transactionList = new ArrayList<Transaction>(Arrays.asList(account.getTransactions(start, end)));
     }
 
-    public void enterUserId(String userId) {
+    public void enterUserId(String userId) throws UserDoestNotExist {
         DataStore dataStore = new DataStore();
         this.user = dataStore.loadUserData(userId);
+        if(this.user == null)
+        {
+            throw new UserDoestNotExist();
+        }
         this.cardList = this.user.getCardList();
     }
 

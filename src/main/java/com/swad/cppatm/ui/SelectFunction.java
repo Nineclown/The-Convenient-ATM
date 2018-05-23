@@ -166,6 +166,10 @@ public class SelectFunction extends JFrame {
                         JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+                parentFrame.setContentPane(new EnterUserID(parentFrame, system).getPanel());
+                parentFrame.pack();
+                parentFrame.invalidate();
+                parentFrame.validate();
             }
         });
         getLotteryPrizeButton.setText(setLocalizedString(system, "복권 당첨금 수령", "Get Lottery Prize"));
