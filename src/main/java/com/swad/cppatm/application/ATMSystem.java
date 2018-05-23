@@ -5,6 +5,7 @@ import com.swad.cppatm.exceptions.*;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import java.net.URL;
@@ -26,6 +27,7 @@ public class ATMSystem {
     private String[] cardList;
     private Transaction fromTransaction;
     private Transaction toTransaction;
+    private ArrayList<Transaction> transactionList;
 
     private SystemState state;
     private SystemBalance balance;
@@ -54,6 +56,10 @@ public class ATMSystem {
 
     public Transaction getToTransaction() {
         return this.toTransaction;
+    }
+
+    public Transaction[] getTransactionList() {
+        return this.transactionList.stream().toArray(Transaction[]::new);
     }
 
     public FunctionType getFunction() {
@@ -447,13 +453,11 @@ public class ATMSystem {
     }
 
     public void enterPeriodToQuery(Date start, Date end) throws AccountDoesNotExist {
-        Transaction[] transactions;
-
-        if (this.account == null) {
+        if (account == null) {
             throw new AccountDoesNotExist();
         }
 
-        transactions = this.account.getTransactions(start, end);
+        transactionList = new ArrayList<Transaction>(Arrays.asList(account.getTransactions(start, end)));
     }
 
     public void enterUserId(String userId) {
