@@ -167,7 +167,7 @@ public class EnterPassword extends JFrame {
                 }
 
                 if ( !system.getAccount().isAccountEnabled() ) {
-                    JOptionPane.showMessageDialog(parentFrame, "Password is invalid", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(parentFrame, "Account is frozen", "Error", JOptionPane.ERROR_MESSAGE);
                     parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
                     parentFrame.pack();
                     parentFrame.invalidate();

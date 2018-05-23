@@ -53,6 +53,15 @@ public class RequestCardOrBankbook {
             return;
         }
 
+        if ( !system.getAccount().isAccountEnabled() ) {
+            JOptionPane.showMessageDialog(parentFrame, "Account is frozen", "Error", JOptionPane.ERROR_MESSAGE);
+            parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
+            parentFrame.pack();
+            parentFrame.invalidate();
+            parentFrame.validate();
+            return;
+        }
+
         switch(system.getFunction()) {
             case Deposit:
                 parentFrame.setContentPane(new EnterBill(parentFrame, system).getPanel());
