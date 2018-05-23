@@ -28,7 +28,7 @@ public class ATMSystemTest {
     }
 
     @Test(expected = InvalidBillException.class)
-    public void enterBillRaisesExceptionIfLengthIsInvalid() throws InvalidBillException, DataStoreError {
+    public void enterBillRaisesExceptionIfLengthIsInvalid() throws InvalidBillException, DataStoreError, OverflowBillException {
         int[] billAmount = {1, 2};
 
         system.enterBill(billAmount);

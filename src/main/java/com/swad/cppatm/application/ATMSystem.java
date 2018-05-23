@@ -222,10 +222,12 @@ public class ATMSystem {
         }
     }
 
-    public void enterBill(int[] billAmount) throws InvalidBillException, DataStoreError {
+    public void enterBill(int[] billAmount) throws InvalidBillException, DataStoreError, OverflowBillException {
         int total = 0;
 
-        if (billAmount.length != BillType.wonSize) {
+        if (billAmount.length != 11) {
+            throw new InvalidBillException();
+        }else if((billAmount[4] == 0) && (billAmount[5] == 0) && (billAmount[6] == 0) && (billAmount[7] == 0) && (billAmount[8] == 0) && (billAmount[9] == 0) && (billAmount[10] == 0)){
             throw new InvalidBillException();
         }
 
@@ -234,6 +236,7 @@ public class ATMSystem {
         total += BillType.count(BillType.TenThousand, billAmount[2]);
         total += BillType.count(BillType.FiftyThousand, billAmount[3]);
 
+        //Dose Enter Bills use fromTransaction?
         if (this.fromTransaction != null) {
             this.fromTransaction.setAmount(total);
             try {
@@ -242,12 +245,19 @@ public class ATMSystem {
             }
         }
 
+        //Dose Enter Bill Could not use toTransaction?
         if (this.toTransaction != null) {
             this.toTransaction.setAmount(total);
             try {
                 this.toTransaction.processTransaction();
             } catch (NegativeBalanceError e) {
+
             }
+        }
+        try {
+            balance.changeSystemBalance(billAmount);
+        }catch(AdminAlarmException e){
+            //Alarm to Admin;
         }
     }
 
@@ -473,11 +483,11 @@ public class ATMSystem {
             Integer.parseInt(this.admins.get(this.admins.size() - 1).getId()) + 1);
     }
 
-    public void enterATMBalance(int[] billAmount) throws InvalidBillException, OverflowBillException, AdminAlarmException {
+    public void enterATMBalance(int[] billAmount) throws InvalidBillException, OverflowBillException{
         if (billAmount.length != (BillType.wonSize + BillType.dollarSize)) {
             throw new InvalidBillException();
         }
 
-        this.balance.changeSystemBalance(billAmount);
+        this.balance.setATMBalance(billAmount);
     }
 }

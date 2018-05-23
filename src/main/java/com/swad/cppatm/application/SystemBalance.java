@@ -42,9 +42,12 @@ public class SystemBalance {
 
     }
 
-    public void setATMBalance(int[] billAmount) {
+    public void setATMBalance(int[] billAmount) throws  OverflowBillException{
         for (int i = 0; i < current.length; i++) {
             current[i] = billAmount[i];
+            if(current[i] >  topLimit || current[i] < bottomLimit){
+                throw new OverflowBillException();
+            }
         }
     }
 

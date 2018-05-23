@@ -111,7 +111,7 @@ public class AdminSelectFunction extends JFrame {
                     return;
                 }
 
-                parentFrame.setContentPane(new EnterBill(parentFrame, system).getPanel());
+                parentFrame.setContentPane(new EnterATMBalance(parentFrame, system).getPanel());
                 parentFrame.invalidate();
                 parentFrame.validate();
             }
