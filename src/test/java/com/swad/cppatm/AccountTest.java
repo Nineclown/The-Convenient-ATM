@@ -90,11 +90,11 @@ public class AccountTest {
     public void shouldChangeBalanceCorrectly() throws NegativeBalanceError
     {
         Account account = new DataStore().loadAccountData(Bank.HANA,"123456789012345");
-        assertEquals(account.getBalance(),1014200);
+        int balance = account.getBalance();
         account.changeBalance(1000);
-        assertEquals(account.getBalance(),1015200);
+        assertEquals(account.getBalance(),balance+1000);
         account.changeBalance(-1000000);
-        assertEquals(account.getBalance(),15200);
+        assertEquals(account.getBalance(),balance-999000);
     }
 
     @Test
@@ -102,10 +102,11 @@ public class AccountTest {
     {
         DataStore datastore = new DataStore();
         Account account = new DataStore().loadAccountData(Bank.HANA,"123456789012345");
+        int balance = account.getBalance();
         account.changeBalance(1000);
         account.saveAccount();
         Account account2 = datastore.loadAccountData(Bank.HANA,"123456789012345");
-        assertEquals(account2.getBalance(),1015200);
+        assertEquals(account2.getBalance(),balance+1000);
     }
 
 }
