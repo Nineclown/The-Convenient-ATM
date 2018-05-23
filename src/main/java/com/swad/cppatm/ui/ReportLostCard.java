@@ -23,6 +23,7 @@ public class ReportLostCard extends JFrame {
     private JButton cancelButton;
     private JButton confirmButton;
 
+
     public ReportLostCard(final JFrame parentFrame, final ATMSystem system) {
         cardFields = new JTextField[4];
         checkBox = new JCheckBox[4];
@@ -62,6 +63,7 @@ public class ReportLostCard extends JFrame {
             }
         });
     }
+
 
     public JPanel getPanel() {
         return this.reportLostCardPanel;
