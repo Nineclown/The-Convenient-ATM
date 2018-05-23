@@ -16,7 +16,7 @@ import java.io.InputStreamReader;
 public class ATMSystem {
     private int cashAmount;
     private int numberUser;
-    private int selectedCardNumber;
+    private String selectedCardNumber;
 
     private Account account;
 
@@ -44,7 +44,7 @@ public class ATMSystem {
         return this.account;
     }
 
-    public int getSelectedCardNumber() {
+    public String getSelectedCardNumber() {
         return this.selectedCardNumber;
     }
 
@@ -82,7 +82,7 @@ public class ATMSystem {
 
     public ATMSystem() {
         this.cashAmount = 0;
-        this.selectedCardNumber = 0;
+        this.selectedCardNumber = "";
         DataStore dataStore = new DataStore();
         this.admins = dataStore.loadAdminData();
         this.user = new User();
@@ -462,24 +462,22 @@ public class ATMSystem {
     }
 
     public void selectCard(String cardNumber) {
-        this.selectedCardNumber = Integer.parseInt(cardNumber);
+        this.selectedCardNumber = cardNumber;
+        this.requestStopCard(cardNumber);
     }
 
     public void requestStopCard(String cardNumber) {
-        this.selectedCardNumber = Integer.parseInt(cardNumber);
         //카드를 중지했다는 메세지가 뜨게 함
     }
 
     public void askRenewCard(boolean answer) throws DataStoreError {
         if (answer) {
-            this.user.saveUser();
+            requestRenewCard(selectedCardNumber);
         }
     }
 
-    public void requestRenewCard(boolean answer) {
-        if (answer) {
-            // 재발급 신청이 완료되었다는 메시지 띄워주기
-        }
+    public void requestRenewCard(String cardNumber) {
+        // 재발급 신청이 완료되었다는 메시지 띄워주기
     }
 
     public void changeLocale(Locale locale) {
