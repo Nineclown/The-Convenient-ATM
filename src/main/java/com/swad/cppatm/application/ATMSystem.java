@@ -23,7 +23,7 @@ public class ATMSystem {
     private ArrayList<Admin> admins;
     private Admin currentAdmin;
     private User user;
-
+    private String[] cardList;
     private Transaction fromTransaction;
     private Transaction toTransaction;
 
@@ -36,7 +36,7 @@ public class ATMSystem {
         return this.cashAmount;
     }
 
-    public int getNumberUser(){
+    public int getNumberUser() {
         return this.numberUser;
     }
 
@@ -321,21 +321,21 @@ public class ATMSystem {
             throw new InvalidPasswordException();
         }
 
-        if(this.function == FunctionType.SplitPay){
+        if (this.function == FunctionType.SplitPay) {
             numberUser--;
             try {
                 this.fromTransaction.processTransaction();
                 this.toTransaction.addAmount(cashAmount);
-            }catch(NegativeBalanceError e){
+            } catch (NegativeBalanceError e) {
                 throw e;
             }
-            if(numberUser > 0){
+            if (numberUser > 0) {
                 this.fromTransaction = new Transaction(TransactionType.SendTransfer);
                 this.fromTransaction.setAmount(-cashAmount);
-            }else{
+            } else {
                 try {
                     Thread.sleep(100);
-                }catch(Exception e){
+                } catch (Exception e) {
 
                 }
                 this.toTransaction.processTransaction();
@@ -360,7 +360,7 @@ public class ATMSystem {
 
     public void enterBillAmountToWithdrawAsDollar(int cashAmount) throws DataStoreError, NegativeBalanceError, OverflowBillException {
         this.cashAmount = -cashAmount;
-        int  [] billAmount = calcBillAmount(this.cashAmount, "Dollar");
+        int[] billAmount = calcBillAmount(this.cashAmount, "Dollar");
         this.toTransaction.setAmount((cashAmount * (int) this.getCurrency()));
         this.toTransaction.processTransaction();
         try {
@@ -459,6 +459,11 @@ public class ATMSystem {
     public void enterUserId(String userId) {
         DataStore dataStore = new DataStore();
         this.user = dataStore.loadUserData(userId);
+    }
+
+    public void getCardList() {
+        this.cardList = new String[this.user.getCardList().length];
+        this.cardList = this.user.getCardList();
     }
 
     public void selectCard(String cardNumber) {
