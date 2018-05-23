@@ -67,8 +67,6 @@ public class ATMSystemTest {
 
         int[] expectedResult = {0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1,};
 
-        System.out.println(billAmount);
-
         assertArrayEquals(expectedResult, billAmount);
     }
 
@@ -227,5 +225,14 @@ public class ATMSystemTest {
         } catch (NoneOfFunctionSelected ex) {
 
         }
+    }
+
+    @Test
+    public void shouldGetCardListCorrectly() {
+        this.system.enterUserId("123456789012356");
+        String[] string = new String[2];
+        string = this.system.getCardList();
+       assertEquals(string[0].equals("123456789012345678"), true);
+        assertEquals(string[0].equals("1234567890125678"), false);
     }
 }

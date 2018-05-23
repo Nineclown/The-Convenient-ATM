@@ -461,9 +461,10 @@ public class ATMSystem {
         this.user = dataStore.loadUserData(userId);
     }
 
-    public void getCardList() {
+    public String[] getCardList() {
         this.cardList = new String[this.user.getCardList().length];
         this.cardList = this.user.getCardList();
+        return this.cardList;
     }
 
     public void selectCard(String cardNumber) {
