@@ -12,7 +12,6 @@ import org.junit.runner.RunWith;
 
 import javax.naming.NameNotFoundException;
 import java.text.MessageFormat;
-import java.util.Arrays;
 
 import static org.junit.Assert.*;
 
@@ -46,7 +45,7 @@ public class ATMSystemTest {
     }
 
     @Test
-    public void enterBillAmountToWithdrawAsDollarCorrectlyWorking() {
+    public void shouldCountBillCorrectlyWhenWithdrawAsDollars() {
         try {
             system.selectFunction(FunctionType.ForeignWithdraw);
         } catch (NoneOfFunctionSelected e) {
@@ -59,21 +58,16 @@ public class ATMSystemTest {
 
         }
 
-        int []initialAmount = {1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000};
-
         try {
-            system.getBalance().setATMBalance(initialAmount);
-        } catch (OverflowBillException ex) {
-
-        }
-
-        try {
-            system.enterBillAmountToWithdrawAsDollar(200);
+            system.enterBillAmountToWithdrawAsDollar(170);
         } catch (DataStoreError | NegativeBalanceError | OverflowBillException e) {
             fail(e.getClass().getSimpleName());
         }
+        int[] billAmount = {0,0,0,0};
 
-        assertEquals(998, system.getBalance().getATMBalance()[10]);
+        int[] expectedResult = {0, 0, 0, 0, 0, 0, 0, 0, -1, -1, -1,};
+
+        assertArrayEquals(expectedResult, billAmount);
     }
 
     @Test
@@ -231,5 +225,14 @@ public class ATMSystemTest {
         } catch (NoneOfFunctionSelected ex) {
 
         }
+    }
+
+    @Test
+    public void shouldGetCardListCorrectly() {
+        this.system.enterUserId("123456789012356");
+        String[] string = new String[2];
+        string = this.system.getCardList();
+       assertEquals(string[0].equals("123456789012345678"), true);
+        assertEquals(string[0].equals("1234567890125678"), false);
     }
 }
