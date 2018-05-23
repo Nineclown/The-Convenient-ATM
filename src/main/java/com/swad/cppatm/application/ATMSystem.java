@@ -317,32 +317,43 @@ public class ATMSystem {
     }
 
 
-    public void enterBillAmountToWithdraw(int cashAmount) throws DataStoreError, NegativeBalanceError {
-        this.cashAmount = cashAmount;
-        billAmount = calcBillAmount(this.cashAmount, "WON");
-        this.toTransaction.setAmount(-cashAmount);
+    public void enterBillAmountToWithdraw(int cashAmount) throws DataStoreError, NegativeBalanceError, OverflowBillException {
+        this.cashAmount = -cashAmount;
+        int[] billAmount = calcBillAmount(this.cashAmount, "WON");
+        this.toTransaction.setAmount(cashAmount);
         this.toTransaction.processTransaction();
+        try {
+            balance.changeSystemBalance(billAmount);
+        }catch(AdminAlarmException e){
+            //Alarm to admin;
+        }
     }
 
-    public void enterBillAmountToWithdrawAsDollar(int cashAmount) throws DataStoreError, NegativeBalanceError {
-        this.cashAmount = cashAmount;
+    public void enterBillAmountToWithdrawAsDollar(int cashAmount) throws DataStoreError, NegativeBalanceError , OverflowBillException {
+        this.cashAmount = -cashAmount;
         billAmount = calcBillAmount(this.cashAmount, "Dollar");
-        this.toTransaction.setAmount(-(cashAmount * (int) this.getCurrency()));
+        this.toTransaction.setAmount((cashAmount * (int) this.getCurrency()));
         this.toTransaction.processTransaction();
+        try {
+            balance.changeSystemBalance(billAmount);
+        }catch(AdminAlarmException e){
+            //Alarm to admin;
+        }
     }
 
     public int[] calcBillAmount(int cashAmount, String cashType) {
 
-        int[] bill = new int[]{0, 0, 0, 0};
+        int[] bills = new int[11];
         int[] billType;
-        int length = bill.length;
+        int length;
 
         if (cashType.equals(("WON"))) {
             billType = new int[]{50000, 10000};
             length = billType.length;
             for (int i = 0; i < length; i++) {
-                bill[length - (i + 1)] = cashAmount / billType[i];
-                cashAmount -= billType[i] * bill[length - (i + 1)];
+                int bill = cashAmount / billType[i];
+                bills[3 - i] = bill;
+                cashAmount -= billType[i] * bill;
             }
         } else if (cashType.equals("Dollar")) {
             billType = new int[]{
@@ -350,13 +361,14 @@ public class ATMSystem {
             };
             length = billType.length;
             for (int i = 0; i < length; i++) {
-                bill[length - (i + 1)] = cashAmount / billType[i];
-                cashAmount -= billType[i] * bill[length - (i + 1)];
+                int bill = cashAmount / billType[i];
+                bills[10 - (i + 1)] = bill;
+                cashAmount -= billType[i] * bill;
             }
         } else {
             return null;
         }
-        return bill;
+        return bills;
     }
 
     public double getCurrency() {

@@ -4,6 +4,7 @@ import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.exceptions.DataStoreError;
 import com.swad.cppatm.exceptions.NegativeBalanceError;
+import com.swad.cppatm.exceptions.OverflowBillException;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -136,6 +137,8 @@ public class EnterNumber extends JFrame {
                             parentFrame.invalidate();
                             parentFrame.validate();
                             return;
+                        } catch (OverflowBillException ex2){
+                            //Alarm.
                         }
 
                         parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
@@ -150,6 +153,8 @@ public class EnterNumber extends JFrame {
                             parentFrame.invalidate();
                             parentFrame.validate();
                             return;
+                        }catch (OverflowBillException ex2){
+                            //Alarm.
                         }
 
                         parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());

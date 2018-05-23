@@ -63,7 +63,7 @@ public class ATMSystemTest {
 
         try {
             system.enterBillAmountToWithdrawAsDollar(170);
-        } catch (DataStoreError | NegativeBalanceError e) {
+        } catch (DataStoreError | NegativeBalanceError | OverflowBillException e ) {
             fail(e.getClass().getSimpleName());
         }
         int[] billAmount = system.getBillAmount();
