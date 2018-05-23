@@ -167,27 +167,23 @@ public class ATMSystemTest {
         }
     }
 
-//    @Test
-//    public void enterNumberOfUsersSuccessfullyDivideCashAmount() throws NoneOfFunctionSelected {
-//        Transaction[] transactions;
-//
-//        system.selectFunction(FunctionType.SplitPay);
-//        system.setCashAmount(50);
-//
-//        try {
-//            system.enterNumberOfUsers(5);
-//        } catch (TooFewUser e) {
-//            fail("throw TooFewUser" + e.getMessage());
-//        } catch (TooManyUsers e) {
-//            fail("throw TooManyUsers" + e.getMessage());
-//        }
-//
-//        assertEquals(5, transactions.length);
-//
-//        for (int i = 0; i < transactions.length; i++) {
-//            assertEquals(10, transactions[i].getAmount());
-//        }
-//    }
+    @Test
+    public void enterNumberOfUsersSuccessfullyDivideCashAmount() throws NoneOfFunctionSelected {
+        system.selectFunction(FunctionType.SplitPay);
+        system.setCashAmount(50);
+
+        try {
+            system.enterNumberOfUsers(5);
+        } catch (TooFewUser e) {
+            fail("throw TooFewUser" + e.getMessage());
+        } catch (TooManyUsers e) {
+            fail("throw TooManyUsers" + e.getMessage());
+        }
+
+        assertEquals(system.getCashAmount(), 50/5);
+
+
+    }
 
     @Test
     public void enterLotteryMakesTransaction() {
