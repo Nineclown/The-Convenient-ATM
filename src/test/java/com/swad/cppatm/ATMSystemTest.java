@@ -5,13 +5,13 @@ import com.swad.cppatm.enums.Bank;
 import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.exceptions.*;
 import net.serenitybdd.junit.runners.SerenityRunner;
-import org.assertj.core.condition.Negative;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import javax.naming.NameNotFoundException;
-import java.text.MessageFormat;
+import java.util.Arrays;
+import java.util.Date;
 
 import static org.junit.Assert.*;
 
@@ -232,7 +232,36 @@ public class ATMSystemTest {
         this.system.enterUserId("123456789012356");
         String[] string = new String[2];
         string = this.system.getCardList();
-       assertEquals(string[0].equals("123456789012345678"), true);
-        assertEquals(string[0].equals("1234567890125678"), false);
+        assertTrue(string[0].equals("123456789012345678"));
+    }
+
+    // TODO: Not Ignore and make it success
+    @Test
+    @Ignore
+    public void enterPeriodToQueryDoesGetTransactions() throws NoneOfFunctionSelected {
+        int[] billAmount = {1,1,1,1};
+        system.selectFunction(FunctionType.Deposit);
+
+        try {
+            system.enterAccountInfo(Bank.HANA, "123456789012345");
+            system.enterBill(billAmount);
+        } catch (AccountDoesNotExist |
+            DataStoreError |
+            OverflowBillException |
+            InvalidBillException ex) {
+
+        }
+
+        system.selectFunction(FunctionType.QueryTransactionList);
+
+        try {
+            system.enterAccountInfo(Bank.HANA, "123456789012345");
+            system.enterPeriodToQuery(new Date(2016,5,1),
+                new Date(2018,5,30));
+        } catch (AccountDoesNotExist | DataStoreError ex) {
+
+        }
+
+        assertTrue(system.getTransactionList().length > 0);
     }
 }
