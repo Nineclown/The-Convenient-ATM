@@ -64,6 +64,7 @@ public class RequestCardOrBankbook {
             return;
         }
 
+
         switch(system.getFunction()) {
             case Deposit:
                 parentFrame.setContentPane(new EnterBill(parentFrame, system).getPanel());
@@ -92,7 +93,9 @@ public class RequestCardOrBankbook {
                     parentFrame.setContentPane(new EnterPassword(parentFrame, system).getPanel());
                 }
                 break;
-
+            case GetLotteryPrize:
+                parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
+                break;
             default:
                 parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
                 JOptionPane.showMessageDialog(parentFrame, "unknown error", "Error", JOptionPane.ERROR_MESSAGE);

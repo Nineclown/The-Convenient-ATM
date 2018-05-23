@@ -74,6 +74,11 @@ public class EnterLottery {
                     parentFrame.validate();
                     return;
                 }
+                JOptionPane.showMessageDialog(parentFrame,
+                    setLocalizedString(system, "당첨금 : ", "You lose.") + system.getToTransaction().getAmount(),
+                    "Info",
+                    JOptionPane.INFORMATION_MESSAGE);
+
 
                 parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
                 parentFrame.pack();
@@ -81,6 +86,7 @@ public class EnterLottery {
                 parentFrame.validate();
             }
         });
+
         cancelButton.setText(setLocalizedString(system, "취소", "Cancel"));
         cancelButton.addMouseListener(new MouseAdapter() {
             @Override
