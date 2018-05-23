@@ -70,7 +70,12 @@ public class RequestCardOrBankbook {
                 parentFrame.setContentPane(new EnterBillAsDollar(parentFrame, system).getPanel());
                 break;
             case SplitPay:
-                parentFrame.setContentPane(new EnterNumber(parentFrame, system).getPanel());
+                if( system.getFromTransaction().getAccount() != null){
+                    parentFrame.setContentPane(new EnterPassword(parentFrame, system).getPanel());
+                }else{
+                    parentFrame.setContentPane(new EnterNumber(parentFrame, system).getPanel());
+                }
+
                 break;
             case Withdraw:
             case ForeignWithdraw:
@@ -85,6 +90,7 @@ public class RequestCardOrBankbook {
                     parentFrame.setContentPane(new EnterPassword(parentFrame, system).getPanel());
                 }
                 break;
+
             default:
                 parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
                 JOptionPane.showMessageDialog(parentFrame, "unknown error", "Error", JOptionPane.ERROR_MESSAGE);

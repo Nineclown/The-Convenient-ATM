@@ -15,8 +15,8 @@ import java.io.InputStreamReader;
 
 public class ATMSystem {
     private int cashAmount;
+    private int numberUser;
     private int selectedCardNumber;
-    private int[] billAmount;
 
     private Account account;
 
@@ -26,7 +26,6 @@ public class ATMSystem {
 
     private Transaction fromTransaction;
     private Transaction toTransaction;
-    private ArrayList<Transaction> splitToTransaction;
 
     private SystemState state;
     private SystemBalance balance;
@@ -37,16 +36,16 @@ public class ATMSystem {
         return this.cashAmount;
     }
 
+    public int getNumberUser(){
+        return this.numberUser;
+    }
+
     public Account getAccount() {
         return this.account;
     }
 
     public int getSelectedCardNumber() {
         return this.selectedCardNumber;
-    }
-
-    public Transaction[] getSplitToTransaction() {
-        return this.splitToTransaction.stream().toArray(Transaction[]::new);
     }
 
     public Transaction getFromTransaction() {
@@ -79,10 +78,6 @@ public class ATMSystem {
 
     public Admin getCurrentAdmin() {
         return this.currentAdmin;
-    }
-
-    public int[] getBillAmount() {
-        return this.billAmount;
     }
 
     public ATMSystem() {
@@ -133,8 +128,8 @@ public class ATMSystem {
                 if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
+                this.fromTransaction = new Transaction(TransactionType.SendTransfer);
                 this.toTransaction = new Transaction(TransactionType.ReceiveTransfer);
-                this.splitToTransaction = new ArrayList<Transaction>();
                 break;
             case QueryBalance:
                 if (!state.available()) {
@@ -302,13 +297,14 @@ public class ATMSystem {
 
     }
 
-    public void enterPassword(int password) throws InvalidPasswordException, AccountDoesNotExist {
+    public void enterPassword(int password) throws InvalidPasswordException, AccountDoesNotExist, DataStoreError, NegativeBalanceError {
         int retry = 0;
         final int maxRetry = 5;
 
         if (this.account == null) {
             throw new AccountDoesNotExist();
         }
+
 
         for (; retry < maxRetry; retry++) {
             if (this.account.checkAccountPassword(password)) {
@@ -319,6 +315,29 @@ public class ATMSystem {
         if (retry == maxRetry) {
             this.account.freezeAccount();
             throw new InvalidPasswordException();
+        }
+
+        if(this.function == FunctionType.SplitPay){
+            numberUser--;
+            try {
+                this.fromTransaction.processTransaction();
+                this.toTransaction.addAmount(cashAmount);
+            }catch(NegativeBalanceError e){
+                throw e;
+            }
+            if(numberUser > 0){
+                this.fromTransaction = new Transaction(TransactionType.SendTransfer);
+                this.fromTransaction.setAmount(-cashAmount);
+            }else{
+                try {
+                    Thread.sleep(100);
+                }catch(Exception e){
+
+                }
+                this.toTransaction.processTransaction();
+            }
+
+
         }
     }
 
@@ -337,7 +356,7 @@ public class ATMSystem {
 
     public void enterBillAmountToWithdrawAsDollar(int cashAmount) throws DataStoreError, NegativeBalanceError , OverflowBillException {
         this.cashAmount = -cashAmount;
-        billAmount = calcBillAmount(this.cashAmount, "Dollar");
+        int  [] billAmount = calcBillAmount(this.cashAmount, "Dollar");
         this.toTransaction.setAmount((cashAmount * (int) this.getCurrency()));
         this.toTransaction.processTransaction();
         try {
@@ -363,7 +382,7 @@ public class ATMSystem {
             }
         } else if (cashType.equals("Dollar")) {
             billType = new int[]{
-                100, 50, 20, 10
+                100, 50, 20, 10, 5, 2, 1
             };
             length = billType.length;
             for (int i = 0; i < length; i++) {
@@ -410,9 +429,6 @@ public class ATMSystem {
     }
 
     public void enterNumberOfUsers(int userNumber) throws TooFewUser, TooManyUsers {
-        int amountPerUser;
-        Transaction transaction;
-
         if (userNumber == 0) {
             throw new TooFewUser();
         }
@@ -420,14 +436,10 @@ public class ATMSystem {
         if (userNumber > this.cashAmount) {
             throw new TooManyUsers();
         }
-
-        amountPerUser = this.cashAmount / userNumber;
-
-        for (int i = 0; i < userNumber; i++) {
-            transaction = new Transaction(TransactionType.Withdraw);
-            transaction.setAmount(amountPerUser);
-            this.splitToTransaction.add(transaction);
-        }
+        this.numberUser = userNumber;
+        this.cashAmount = this.cashAmount / userNumber;
+        this.fromTransaction = new Transaction(TransactionType.SendTransfer);
+        fromTransaction.setAmount(-this.cashAmount);
     }
 
     public void enterPeriodToQuery(Date start, Date end) throws AccountDoesNotExist {

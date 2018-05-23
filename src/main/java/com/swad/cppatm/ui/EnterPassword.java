@@ -1,8 +1,12 @@
 package com.swad.cppatm.ui;
+import com.sun.org.apache.xpath.internal.operations.Neg;
 import com.swad.cppatm.application.ATMSystem;
+import com.swad.cppatm.application.DataStore;
 import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.exceptions.AccountDoesNotExist;
+import com.swad.cppatm.exceptions.DataStoreError;
 import com.swad.cppatm.exceptions.InvalidPasswordException;
+import com.swad.cppatm.exceptions.NegativeBalanceError;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -177,11 +181,14 @@ public class EnterPassword extends JFrame {
 
                 try {
                     system.enterPassword(Integer.parseInt(new String(passwordField.getPassword())));
-                } catch (AccountDoesNotExist ex) {
+                } catch (AccountDoesNotExist | DataStoreError ex) {
+                    JOptionPane.showMessageDialog(parentFrame, "???", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 } catch (InvalidPasswordException ex) {
                     JOptionPane.showMessageDialog(parentFrame, "Password is invalid", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
+                } catch (NegativeBalanceError ex){
+                    JOptionPane.showMessageDialog(parentFrame, "잔액이 부족합니다.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
 
                 switch(system.getFunction()) {
@@ -199,6 +206,13 @@ public class EnterPassword extends JFrame {
                         break;
                     case Transfer:
                         parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
+                        break;
+                    case SplitPay:
+                        if(system.getNumberUser() > 0){
+                            parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
+                        }else{
+                            parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
+                        }
                         break;
                     default:
                         parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());

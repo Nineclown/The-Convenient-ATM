@@ -2,9 +2,7 @@ package com.swad.cppatm.ui;
 
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.FunctionType;
-import com.swad.cppatm.exceptions.DataStoreError;
-import com.swad.cppatm.exceptions.NegativeBalanceError;
-import com.swad.cppatm.exceptions.OverflowBillException;
+import com.swad.cppatm.exceptions.*;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -28,6 +26,7 @@ public class EnterNumber extends JFrame {
     private JButton confirmButton;
     private JLabel titleLabel;
     private JLabel currencyLabel;
+    private boolean splitPayFlag = false;
 
     public EnterNumber(final JFrame parentFrame, final ATMSystem system) {
         if ( system.getFunction() == FunctionType.ForeignWithdraw ) {
@@ -124,12 +123,12 @@ public class EnterNumber extends JFrame {
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                int cashAmount = Integer.parseInt(numberField.getText());
+                int insertNumber = Integer.parseInt(numberField.getText());
 
                 switch (system.getFunction()) {
                     case Withdraw:
                         try {
-                            system.enterBillAmountToWithdraw(cashAmount * 10000);
+                            system.enterBillAmountToWithdraw(insertNumber * 10000);
                         } catch (DataStoreError | NegativeBalanceError ex) {
                             JOptionPane.showMessageDialog(parentFrame, ex.getClass().getSimpleName(), "Error", JOptionPane.ERROR_MESSAGE);
                             parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
@@ -145,7 +144,7 @@ public class EnterNumber extends JFrame {
                         break;
                     case ForeignWithdraw:
                         try {
-                            system.enterBillAmountToWithdrawAsDollar(cashAmount);
+                            system.enterBillAmountToWithdrawAsDollar(insertNumber);
                         } catch (DataStoreError | NegativeBalanceError ex) {
                             JOptionPane.showMessageDialog(parentFrame, ex.getClass().getSimpleName(), "Error", JOptionPane.ERROR_MESSAGE);
                             parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
@@ -161,7 +160,7 @@ public class EnterNumber extends JFrame {
                         break;
                     case Transfer:
                         try {
-                            system.enterCashAmountToTransfer(cashAmount*10000);
+                            system.enterCashAmountToTransfer(insertNumber*10000);
                         } catch (DataStoreError | NegativeBalanceError ex) {
                             JOptionPane.showMessageDialog(parentFrame, ex.getClass().getSimpleName(), "Error", JOptionPane.ERROR_MESSAGE);
                             parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
@@ -174,7 +173,24 @@ public class EnterNumber extends JFrame {
                         parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
                         break;
                     case SplitPay:
-
+                        if(splitPayFlag){
+                            try {
+                                system.enterNumberOfUsers(insertNumber);
+                                parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
+                                parentFrame.pack();
+                                parentFrame.invalidate();
+                                parentFrame.validate();
+                            }catch(TooManyUsers ex1){
+                                JOptionPane.showMessageDialog(parentFrame, "금액에 비해 사람 수가 너무 많습니다.", "Error", JOptionPane.ERROR_MESSAGE);
+                            }catch(TooFewUser ex2){
+                                JOptionPane.showMessageDialog(parentFrame, "사람 수가 너무 적습니다.", "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                        }else{
+                            system.enterTotalCashAmountToGet(insertNumber * 10000);
+                            titleLabel.setText("총 이체 할 인원 수를 입력하여 주십시오.");
+                            currencyLabel.setText("명");
+                            splitPayFlag = true;
+                        }
                         break;
                     default:
                         parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
