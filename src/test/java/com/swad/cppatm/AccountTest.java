@@ -5,6 +5,7 @@ import com.swad.cppatm.application.DataStore;
 import com.swad.cppatm.application.Transaction;
 import com.swad.cppatm.enums.Bank;
 import com.swad.cppatm.enums.TransactionType;
+import com.swad.cppatm.exceptions.DataStoreError;
 import com.swad.cppatm.exceptions.NegativeBalanceError;
 import net.serenitybdd.junit.runners.SerenityRunner;
 import net.thucydides.core.annotations.Managed;
@@ -62,9 +63,9 @@ public class AccountTest {
         transaction.setAccount(new Account(Bank.KOOKMIN, "15151515141414"));
         transaction.setAmount(5100);
         transaction.setTime();
-        Account acc = this.dataStore.loadAccountData(Bank.HANA, "123456789012345t");
-        acc.addTransaction(transaction);
-        Transaction[] transactions = acc.getTransactions(new Date(118, 4, 19, 12, 0, 0), new Date(118, 4, 30, 0, 0, 0));
+        Account account = this.dataStore.loadAccountData(Bank.HANA, "123456789012345t");
+        account.addTransaction(transaction);
+        Transaction[] transactions = account.getTransactions(new Date(118, 4, 19, 12, 0, 0), new Date(118, 4, 30, 0, 0, 0));
         assertEquals(transactions[4].getAmount(), 5100);
     }
 
@@ -74,4 +75,37 @@ public class AccountTest {
         assertTrue(!account.checkAccountPassword(1234));
         assertTrue(account.checkAccountPassword(5555));
     }
+    @Test
+    public void shouldFreezeAccountState()
+    {
+        Account account = new DataStore().loadAccountData(Bank.HANA,"123456789012345");
+        assertEquals(account.getState(),true);
+        account.freezeAccount();
+        assertEquals(account.getState(),false);
+        account.freezeAccount();
+        assertEquals(account.getState(),false);
+    }
+
+    @Test
+    public void shouldChangeBalanceCorrectly() throws NegativeBalanceError
+    {
+        Account account = new DataStore().loadAccountData(Bank.HANA,"123456789012345");
+        assertEquals(account.getBalance(),1014200);
+        account.changeBalance(1000);
+        assertEquals(account.getBalance(),1015200);
+        account.changeBalance(-1000000);
+        assertEquals(account.getBalance(),15200);
+    }
+
+    @Test
+    public void shouldSaveAccountCorrectly() throws NegativeBalanceError, DataStoreError
+    {
+        DataStore datastore = new DataStore();
+        Account account = new DataStore().loadAccountData(Bank.HANA,"123456789012345");
+        account.changeBalance(1000);
+        account.saveAccount();
+        Account account2 = datastore.loadAccountData(Bank.HANA,"123456789012345");
+        assertEquals(account2.getBalance(),1015200);
+    }
+
 }

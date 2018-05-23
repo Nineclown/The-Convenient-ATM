@@ -42,6 +42,7 @@ public class Account {
      *
      * @return Account's balance
      */
+    public boolean getState(){return this.state;}
     public int getBalance() {
         return this.balance;
     }
