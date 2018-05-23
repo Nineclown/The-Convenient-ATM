@@ -18,10 +18,10 @@ public class ChangeLocale {
             public void mousePressed(MouseEvent e) {
                 system.changeLocale(Locale.ko_KR);
 
-                if (system.getCurrentAdmin() == null) {
-                    parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
-                } else {
+                if (parentFrame.getTitle().equals("Admin Interface for C++ ATM")) {
                     parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
+                } else {
+                    parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
                 }
 
                 parentFrame.invalidate();
@@ -32,10 +32,11 @@ public class ChangeLocale {
             @Override
             public void mousePressed(MouseEvent e) {
                 system.changeLocale(Locale.en_US);
-                if (system.getCurrentAdmin() == null) {
-                    parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
-                } else {
+
+                if (parentFrame.getTitle().equals("Admin Interface for C++ ATM")) {
                     parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
+                } else {
+                    parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
                 }
 
                 parentFrame.invalidate();
