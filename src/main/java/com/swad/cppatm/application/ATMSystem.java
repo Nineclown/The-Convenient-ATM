@@ -227,7 +227,7 @@ public class ATMSystem {
 
         if (billAmount.length != 11) {
             throw new InvalidBillException();
-        }else if((billAmount[4] == 0) && (billAmount[5] == 0) && (billAmount[6] == 0) && (billAmount[7] == 0) && (billAmount[8] == 0) && (billAmount[9] == 0) && (billAmount[10] == 0)){
+        }else if((billAmount[4] != 0) || (billAmount[5] != 0) || (billAmount[6] != 0) && (billAmount[7] != 0) || (billAmount[8] != 0) || (billAmount[9] != 0) || (billAmount[10] != 0)){
             throw new InvalidBillException();
         }
 
