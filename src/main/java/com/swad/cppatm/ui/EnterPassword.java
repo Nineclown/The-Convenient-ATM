@@ -166,6 +166,15 @@ public class EnterPassword extends JFrame {
                     return;
                 }
 
+                if ( !system.getAccount().isAccountEnabled() ) {
+                    JOptionPane.showMessageDialog(parentFrame, "Password is invalid", "Error", JOptionPane.ERROR_MESSAGE);
+                    parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
+                    parentFrame.pack();
+                    parentFrame.invalidate();
+                    parentFrame.validate();
+                    return;
+                }
+
                 try {
                     system.enterPassword(Integer.parseInt(new String(passwordField.getPassword())));
                 } catch (AccountDoesNotExist ex) {
