@@ -459,12 +459,7 @@ public class ATMSystem {
     public void enterUserId(String userId) {
         DataStore dataStore = new DataStore();
         this.user = dataStore.loadUserData(userId);
-    }
-
-    public String[] getCardList() {
-        this.cardList = new String[this.user.getCardList().length];
         this.cardList = this.user.getCardList();
-        return this.cardList;
     }
 
     public void selectCard(String cardNumber) {
@@ -535,5 +530,10 @@ public class ATMSystem {
         }
 
         this.balance.setATMBalance(billAmount);
+    }
+
+    public String[] getCardList()
+    {
+        return this.cardList;
     }
 }
