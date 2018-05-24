@@ -46,8 +46,13 @@ public class EnterDate {
                 end = new Date(
                     Integer.parseInt(endDateField.getText().substring(0, 4)) - 1900,
                     Integer.parseInt(endDateField.getText().substring(4, 6))-1,
-                    Integer.parseInt(endDateField.getText().substring(6, 8))
+                    Integer.parseInt(endDateField.getText().substring(6, 8))+1
                 );
+
+                if(start.compareTo(end) >= 0){
+                    JOptionPane.showMessageDialog(parentFrame, "시작일이 끝나는 날보다 큽니다.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
                 try {
                     system.enterPeriodToQuery(start, end);

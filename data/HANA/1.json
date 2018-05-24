@@ -1,0 +1,115 @@
+{
+  "bank": "HANA",
+  "accountNumber": "1",
+  "password": 5555,
+  "balance": 48474500,
+  "state": true,
+  "transactions": [
+    {
+      "amount": 100,
+      "time": "Apr 29, 2018 12:48:36 PM"
+    },
+    {
+      "amount": 1200,
+      "time": "May 2, 2018 12:49:46 PM"
+    },
+    {
+      "amount": 1300,
+      "time": "May 16, 2018 3:16:27 PM"
+    },
+    {
+      "amount": 1400,
+      "time": "May 19, 2018 3:16:59 PM"
+    },
+    {
+      "tcType": "Deposit",
+      "amount": 10000,
+      "time": "May 24, 2018 12:11:03 PM"
+    },
+    {
+      "tcType": "Deposit",
+      "amount": 50000000,
+      "time": "May 24, 2018 12:52:16 PM"
+    },
+    {
+      "tcType": "Withdraw",
+      "amount": 9500,
+      "time": "May 24, 2018 4:08:54 PM"
+    },
+    {
+      "tcType": "Withdraw",
+      "amount": 9500,
+      "time": "May 24, 2018 4:09:16 PM"
+    },
+    {
+      "tcType": "Withdraw",
+      "amount": -10500,
+      "time": "May 24, 2018 4:10:06 PM"
+    },
+    {
+      "tcType": "Deposit",
+      "amount": 50000000,
+      "time": "May 24, 2018 4:13:29 PM"
+    },
+    {
+      "tcType": "Withdraw",
+      "amount": -1000500,
+      "time": "May 24, 2018 4:13:50 PM"
+    },
+    {
+      "tcType": "Withdraw",
+      "amount": -10500,
+      "time": "May 24, 2018 4:14:03 PM"
+    },
+    {
+      "tcType": "Withdraw",
+      "amount": -70500,
+      "time": "May 24, 2018 4:17:09 PM"
+    },
+    {
+      "tcType": "Withdraw",
+      "amount": -70500,
+      "time": "May 24, 2018 4:19:26 PM"
+    },
+    {
+      "tcType": "Withdraw",
+      "amount": -70500,
+      "time": "May 24, 2018 4:23:24 PM"
+    },
+    {
+      "tcType": "Withdraw",
+      "amount": -70500,
+      "time": "May 24, 2018 4:28:19 PM"
+    },
+    {
+      "tcType": "Withdraw",
+      "amount": -70500,
+      "time": "May 24, 2018 4:30:07 PM"
+    },
+    {
+      "tcType": "Withdraw",
+      "amount": -80500,
+      "time": "May 24, 2018 4:32:59 PM"
+    },
+    {
+      "tcType": "Withdraw",
+      "amount": -80500,
+      "time": "May 24, 2018 4:36:15 PM"
+    },
+    {
+      "tcType": "Deposit",
+      "amount": 150000,
+      "time": "May 24, 2018 4:40:27 PM"
+    },
+    {
+      "tcType": "Withdraw",
+      "amount": -80500,
+      "time": "May 24, 2018 4:41:57 PM"
+    },
+    {
+      "tcType": "Withdraw",
+      "amount": -80500,
+      "time": "May 24, 2018 4:42:36 PM"
+    }
+  ]
+}
