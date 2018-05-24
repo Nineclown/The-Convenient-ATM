@@ -34,7 +34,8 @@ public class SystemBalance {
             this.current[i] += billAmount[i];
             if(min > current[i]){
                 min = current[i];
-            }else if(max < current[i]){
+            }
+            if(max < current[i]){
                 max = current[i];
             }
         }

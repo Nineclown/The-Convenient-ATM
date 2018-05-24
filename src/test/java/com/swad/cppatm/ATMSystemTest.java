@@ -56,7 +56,7 @@ public class ATMSystemTest {
 
         }
 
-        int []initialAmount = {1000,1000,1000,1000,1000,1000,1000,1000,1000,1000,1000};
+        int []initialAmount = {500,500,500,500,500,500,500,500,500,500,500};
 
         try {
             system.getBalance().setATMBalance(initialAmount);
@@ -65,12 +65,12 @@ public class ATMSystemTest {
         }
 
         try {
-            system.enterBillAmountToWithdrawAsDollar(200);
+            system.enterBillAmountToWithdrawAsDollar(-200);
         } catch (DataStoreError | NegativeBalanceError | OverflowBillException e) {
             fail(e.getClass().getSimpleName());
         }
 
-        assertEquals(998, system.getBalance().getATMBalance()[10]);
+        assertEquals(500-2, system.getBalance().getATMBalance()[10]);
     }
 
     @Test
