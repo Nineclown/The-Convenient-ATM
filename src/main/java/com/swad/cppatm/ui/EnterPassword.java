@@ -226,11 +226,7 @@ public class EnterPassword extends JFrame {
                         parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
                         break;
                     case SplitPay:
-                        if(system.getNumberUser() > 0){
-                            parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
-                        }else{
-                            parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
-                        }
+                        parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
                         break;
                     default:
                         parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());

@@ -1,6 +1,7 @@
 package com.swad.cppatm.ui;
 
 import com.swad.cppatm.application.ATMSystem;
+import com.swad.cppatm.enums.FunctionType;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -19,7 +20,15 @@ public class PrintResult {
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
+                if(system.getFunction() == FunctionType.SplitPay) {
+                    if (system.getNumberUser() > 0) {
+                        parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
+                    } else {
+                        parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
+                    }
+                } else {
+                    parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
+                }
                 parentFrame.pack();
                 parentFrame.invalidate();
                 parentFrame.validate();
