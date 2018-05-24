@@ -70,7 +70,6 @@ public class TransactionTest {
     @After
     public void restoreFile() throws DataStoreError {
         Account account = dataStore.loadAccountData(Bank.HANA, "123456789012345t");
-        account.setPassword(5555);
         dataStore.saveAccountData(account);
     }
 }

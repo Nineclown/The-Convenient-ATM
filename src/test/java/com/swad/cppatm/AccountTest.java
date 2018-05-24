@@ -23,12 +23,10 @@ import static org.junit.Assert.*;
 @RunWith(SerenityRunner.class)
 public class AccountTest {
     private DataStore dataStore;
-    private Account account;
 
     @Before
     public void initDataStore() {
         this.dataStore = new DataStore();
-        this.account = new Account(Bank.HANA, "123456789012345");
     }
 
     @Test
@@ -52,7 +50,7 @@ public class AccountTest {
     @Test
     public void shouldGetCorrectTransactions() {
         Account account = this.dataStore.loadAccountData(Bank.HANA, "123456789012345t");
-        ArrayList<Transaction> transactions = account.getTransactions(new Date(118, 4, 19, 12, 0, 0), new Date(118, 4, 20, 0, 0, 0));
+        ArrayList<Transaction> transactions = account.getTransactions(new Date(118, 4, 19, 00, 0, 0), new Date(118, 4, 20, 0, 0, 0));
         assertEquals(transactions.get(0).getAmount(), 1400);
         assertEquals(transactions.get(0).getTime(), new Date(118, 4, 19, 15, 16, 59));
         assertEquals(transactions.size(), 1);
@@ -61,12 +59,17 @@ public class AccountTest {
     @Test
     public void shouldAddTransactionCorrectly() {
         Account account = new Account(Bank.KOOKMIN, "15151515141414");
+        Date today = new Date();
+        Date startToday = new Date(today.getYear(), today.getMonth(), today.getDate());
+        Date endToday = new Date(today.getYear(), today.getMonth(), today.getDate()+1);
+
         Transaction transaction = new Transaction(TransactionType.Deposit);
         transaction.setAccount(account);
         transaction.setAmount(5100);
         transaction.setTime();
         account.addTransaction(transaction);
-        ArrayList<Transaction> transactions = account.getTransactions(new Date(118, 4, 19, 12, 0, 0), new Date(118, 4, 30, 0, 0, 0));
+
+        ArrayList<Transaction> transactions = account.getTransactions(startToday, endToday);
         assertEquals(transactions.get(0).getAmount(), 5100);
     }
 
@@ -79,7 +82,7 @@ public class AccountTest {
 
     @Test
     public void shouldFreezeAccountState() {
-        Account account = new DataStore().loadAccountData(Bank.HANA, "123456789012345");
+        Account account = new DataStore().loadAccountData(Bank.HANA, "123456789012345t");
         assertTrue(account.getState());
         account.freezeAccount();
         assertFalse(account.getState());
@@ -89,25 +92,26 @@ public class AccountTest {
 
     @Test
     public void shouldChangeBalanceCorrectly() throws NegativeBalanceError {
-        assertEquals(account.getBalance(), 0);
+        Account account = new DataStore().loadAccountData(Bank.HANA, "123456789012345t");
+        assertEquals(account.getBalance(), 1004200);
         account.changeBalance(10000000);
-        assertEquals(account.getBalance(), 10000000);
+        assertEquals(account.getBalance(), 10000000+1004200);
         account.changeBalance(-5000000);
-        assertEquals(account.getBalance(), 5000000);
+        assertEquals(account.getBalance(), 10000000+1004200-5000000);
     }
 
     @Test
     public void shouldSaveAccountCorrectly() throws NegativeBalanceError, DataStoreError {
+        Account account = new DataStore().loadAccountData(Bank.HANA, "123456789012345t");
         account.changeBalance(10000000);
         account.saveAccount();
         Account account2 = dataStore.loadAccountData(Bank.HANA, "123456789012345");
-        assertEquals(account2.getBalance(), 10000000);
+        assertEquals(account2.getBalance(), 10000000+1004200);
     }
 
     @After
     public void restoreFile() throws DataStoreError {
-        account = dataStore.loadAccountData(Bank.HANA, "123456789012345t");
-        account.setPassword(5555);
+        Account account = dataStore.loadAccountData(Bank.HANA, "123456789012345t");
         dataStore.saveAccountData(account);
     }
 }

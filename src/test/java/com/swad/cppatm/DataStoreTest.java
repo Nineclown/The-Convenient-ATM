@@ -26,7 +26,7 @@ public class DataStoreTest {
 
 
     @Test
-    public void loadAccountDataShouldRaiseExceptionWhenAccountIsInvalid() {
+    public void loadAccountDataReturnNullWhenAccountIsInvalid() {
         Account account = dataStore.loadAccountData(Bank.HANA, "1234567890");
         assertNull(account);
     }
@@ -42,7 +42,7 @@ public class DataStoreTest {
     }
 
     @Test
-    public void loadUserDataShouldRaiseExceptionWhenAccountIsInvalid() {
+    public void loadUserDataReturnNullWhenUserIsInvalid() {
         User user = new DataStore().loadUserData("1234567890");
         assertNull(user);
     }

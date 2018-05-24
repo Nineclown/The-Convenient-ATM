@@ -20,7 +20,7 @@ public class UserTest {
     }
     @Test
     public void loadUserTest() {
-        User us = dataStore.loadUserData("9512221234567");
+        User us = dataStore.loadUserData("9512221234567t");
         //No Korean.
         assertEquals(us.getUserName(), "DoHyeon");
         assertEquals(us.getUserId(), "9512221234567");
@@ -28,7 +28,8 @@ public class UserTest {
 
     @Test
     public void removeCardRemoveCardFromList() {
-        User us = dataStore.loadUserData("9512221234567");
+        User us = dataStore.loadUserData("9512221234567t");
+            assertEquals(us.getCardList().length, 2);
 
         try {
             us.removeCard("1234567890");

@@ -5,6 +5,7 @@ import com.swad.cppatm.enums.Bank;
 import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.exceptions.*;
 import net.serenitybdd.junit.runners.SerenityRunner;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,12 +22,11 @@ public class ATMSystemTest {
     public void initATMSystem() throws Exception {
         this.system = new ATMSystem();
         this.system.selectFunction(FunctionType.Deposit);
-    }
+}
 
     @Test(expected = InvalidBillException.class)
     public void enterBillRaisesExceptionIfLengthIsInvalid() throws InvalidBillException, DataStoreError, OverflowBillException {
         int[] billAmount = {1, 2};
-
         system.enterBill(billAmount);
     }
 
@@ -101,7 +101,7 @@ public class ATMSystemTest {
         } catch (NoneOfFunctionSelected e) {
 
         } catch (FrozenAccountException e) {
-
+            fail("throw FrozenAccountError" + e.getMessage());
         }
 
         try {
@@ -119,10 +119,10 @@ public class ATMSystemTest {
         // PASS
     }
 
-    @Test(expected = InvalidPasswordException.class)
-    public void enterPasswordFreezesAccountWhenInvalidInputIsRepeatForFiveTimes() throws InvalidPasswordException {
+    @Test(expected = FrozenAccountException.class)
+    public void enterPasswordFreezesAccountWhenInvalidInputIsRepeatForFiveTimes() throws FrozenAccountException {
         try {
-            system.enterAccountInfo(Bank.HANA, "123456789012345");
+            system.enterAccountInfo(Bank.HANA, "123456789012345t");
         } catch (AccountDoesNotExist e) {
             fail("throw AccountDoesNotExist" + e.getMessage());
         } catch (DataStoreError e) {
@@ -133,17 +133,18 @@ public class ATMSystemTest {
 
         }
 
-        try {
-            system.enterPassword(0000);
-        } catch (AccountDoesNotExist e) {
-            fail("throw AccountDoesNotExist" + e.getMessage());
-        } catch(DataStoreError | NegativeBalanceError e){
+        while(true){
+            System.out.println("Input Password");
+            try {
+                system.enterPassword(0000);
+            } catch (AccountDoesNotExist e) {
+                fail("throw AccountDoesNotExist" + e.getMessage());
+            } catch (DataStoreError | NegativeBalanceError e) {
+                fail("throw Error");
+            } catch (InvalidPasswordException e){
 
-        } catch (FrozenAccountException e) {
-            fail("Account is Frozen");
+            }
         }
-
-        assertFalse(system.getAccount().isAccountEnabled());
     }
 
     @Test
@@ -161,37 +162,21 @@ public class ATMSystemTest {
 
     @Test(expected = TooFewUser.class)
     public void enterNumberOfUsersInputIsZero() throws TooFewUser {
-        try {
-            system.enterNumberOfUsers(0);
-        } catch (TooManyUsers e) {
-            fail("throw TooManyUsers" + e.getMessage());
-        }
-    }
-
-    @Test(expected = TooManyUsers.class)
-    public void enterNumberOfUsersUserNumberIsLargerThanCashAmount() throws TooManyUsers {
-        system.setCashAmount(100000);
-        try {
-            system.enterNumberOfUsers(2000000);
-        } catch (TooFewUser e) {
-            fail("throw TooFewUser" + e.getMessage());
-        }
+        system.enterNumberOfUsers(0);
     }
 
     @Test
     public void enterNumberOfUsersSuccessfullyDivideCashAmount() throws NoneOfFunctionSelected {
         system.selectFunction(FunctionType.SplitPay);
-        system.setCashAmount(50);
+        system.setCashAmount(1000);
 
         try {
             system.enterNumberOfUsers(5);
         } catch (TooFewUser e) {
             fail("throw TooFewUser" + e.getMessage());
-        } catch (TooManyUsers e) {
-            fail("throw TooManyUsers" + e.getMessage());
         }
 
-        assertEquals(system.getCashAmount(), 50/5);
+        assertEquals(system.getCashAmount(), 1000/5);
 
 
     }
@@ -250,19 +235,6 @@ public class ATMSystemTest {
 
     @Test
     public void enterPeriodToQueryDoesGetTransactions() throws NoneOfFunctionSelected {
-        int[] billAmount = {1,1,1,1,0,0,0,0,0,0,0};
-        system.selectFunction(FunctionType.Deposit);
-
-        try {
-            system.enterAccountInfo(Bank.HANA, "123456789012345");
-            system.enterBill(billAmount);
-        } catch (AccountDoesNotExist |
-            DataStoreError |
-            OverflowBillException |
-            InvalidBillException |
-            FrozenAccountException ex) {
-        }
-
         system.selectFunction(FunctionType.QueryTransactionList);
 
         try {
@@ -274,7 +246,12 @@ public class ATMSystemTest {
         } catch (FrozenAccountException e) {
 
         }
-
         assertTrue(system.getTransactionList().length > 0);
+    }
+
+    @After
+    public void restoreFile() throws DataStoreError {
+        Account account = new DataStore().loadAccountData(Bank.HANA, "123456789012345t");
+        account.saveAccount();
     }
 }
