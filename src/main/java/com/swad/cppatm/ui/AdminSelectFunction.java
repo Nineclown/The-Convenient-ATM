@@ -125,7 +125,6 @@ public class AdminSelectFunction extends JFrame {
                 try {
                     system.selectFunction(FunctionType.ChangeLocale);
                 } catch (NoneOfFunctionSelected ex) {
-                    return;
                 }
 
                 parentFrame.setContentPane(new ChangeLocale(parentFrame, system).getPanel());
