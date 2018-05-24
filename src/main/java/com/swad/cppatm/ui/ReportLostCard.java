@@ -43,21 +43,22 @@ public class ReportLostCard extends JFrame {
         int length = card.length;
 
         for (int i = 0; i < length; i++) {
-            if (card[i] != null) {
-                cardFields[i].setText(card[0].toString());
+            if (!card[i].equals("")) {
+                cardFields[i].setText(card[i].toString());
             }
         }
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 for (int i = 0; i < checkBox.length; i++) {
-                    if (checkBox[i].isSelected() && card[i] != null) {
+                    if (!cardFields[i].getText().equals("")  && checkBox[i].isSelected()) {
                         try {
                             JOptionPane.showMessageDialog(parentFrame, card[i].toString()+ " 카드를 중지처리하였습니다", "Info", JOptionPane.INFORMATION_MESSAGE);
                             system.removeCard(card[i]);
                         } catch (DataStoreError ex) {
                         }
                         ;
+                        //JOptionPane.showMessageDialog(parentFrame, card[i].toString()+ " 카드에 대하여 재발급하시겠습니까?", "Info", JOptionPane.INFORMATION_MESSAGE);
                     }
                 }
 
