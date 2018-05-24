@@ -16,7 +16,7 @@ import java.io.InputStreamReader;
 
 public class ATMSystem {
     private int cashAmount;
-    private int numberUser;
+    private int numberOfUser;
     private String selectedCardNumber;
 
     private Account account;
@@ -24,7 +24,6 @@ public class ATMSystem {
     private ArrayList<Admin> admins;
     private Admin currentAdmin;
     private User user;
-    private String[] cardList;
     private Transaction fromTransaction;
     private Transaction toTransaction;
     private ArrayList<Transaction> transactionList;
@@ -39,7 +38,7 @@ public class ATMSystem {
     }
 
     public int getNumberUser() {
-        return this.numberUser;
+        return this.numberOfUser;
     }
 
     public Account getAccount() {
@@ -84,6 +83,10 @@ public class ATMSystem {
 
     public Admin getCurrentAdmin() {
         return this.currentAdmin;
+    }
+
+    public User getUser(){
+        return this.user;
     }
 
     public ATMSystem() {
@@ -328,14 +331,14 @@ public class ATMSystem {
         }
 
         if (this.function == FunctionType.SplitPay) {
-            numberUser--;
+            numberOfUser--;
             try {
                 this.fromTransaction.processTransaction();
                 this.toTransaction.addAmount(cashAmount);
             } catch (NegativeBalanceError e) {
                 throw e;
             }
-            if (numberUser > 0) {
+            if (numberOfUser > 0) {
                 this.fromTransaction = new Transaction(TransactionType.SendTransfer);
                 this.fromTransaction.setAmount(-cashAmount);
             } else {
@@ -446,7 +449,7 @@ public class ATMSystem {
         if (userNumber > this.cashAmount) {
             throw new TooManyUsers();
         }
-        this.numberUser = userNumber;
+        this.numberOfUser = userNumber;
         this.cashAmount = this.cashAmount / userNumber;
         this.fromTransaction = new Transaction(TransactionType.SendTransfer);
         fromTransaction.setAmount(-this.cashAmount);
@@ -468,7 +471,6 @@ public class ATMSystem {
         {
             throw new UserDoestNotExist();
         }
-        this.cardList = this.user.getCardList();
     }
 
     public void selectCard(String cardNumber) {
@@ -545,10 +547,5 @@ public class ATMSystem {
         }
 
         this.balance.setATMBalance(billAmount);
-    }
-
-    public String[] getCardList()
-    {
-        return this.cardList;
     }
 }

@@ -234,7 +234,7 @@ public class ATMSystemTest {
     public void shouldGetCardListCorrectly() throws UserDoestNotExist {
         this.system.enterUserId("123456789012356");
         String[] string;
-        string = this.system.getCardList();
+        string = this.system.getUser().getCardList();
         assertTrue(string[0].equals("123456789012345678"));
     }
 

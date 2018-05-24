@@ -39,7 +39,7 @@ public class ReportLostCard extends JFrame {
         checkBox[2] = reportLostCheckBox3;
         checkBox[3] = reportLostCheckBox4;
 
-        String[] card = system.getCardList();
+        String[] card = system.getUser().getCardList();
         int length = card.length;
 
         for (int i = 0; i < length; i++) {
