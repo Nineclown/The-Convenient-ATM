@@ -5,7 +5,7 @@ import com.swad.cppatm.exceptions.OverflowBillException;
 
 public class SystemBalance {
     //index 0부터 10까지 차례대로, 한화 1000,5000,1000,10000원, 미화 1,2,5,10,20,50,100 달러
-    private int[] current = {1,1,1,1,1,1,1,1,1,1,1};
+    private int[] current = {500,500,500,500,500,500,500,500,500,500,500};
     private int topLimit;
     private int bottomLimit;
     private int upAlarmLimit;

@@ -368,6 +368,10 @@ public class ATMSystem {
         this.toTransaction.processTransaction();
         try {
             balance.changeSystemBalance(billAmount);
+            for(int i = 0 ; i < billAmount.length ; i++){
+                System.out.print(-billAmount[i] + "/");
+            }
+            System.out.println();
         } catch (AdminAlarmException e) {
             System.out.println("Alter to admin");
             //Alarm to admin;
@@ -384,6 +388,10 @@ public class ATMSystem {
         this.toTransaction.processTransaction();
         try {
             balance.changeSystemBalance(billAmount);
+            for(int i = 0 ; i < billAmount.length ; i++){
+                System.out.print(billAmount[i] + "/");
+            }
+            System.out.println();
         } catch (AdminAlarmException e) {
             //Alarm to admin;
         } catch (OverflowBillException e) {
