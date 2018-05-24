@@ -459,14 +459,11 @@ public class ATMSystem {
         this.cashAmount = cashAmount;
     }
 
-    public void enterNumberOfUsers(int userNumber) throws TooFewUser, TooManyUsers {
+    public void enterNumberOfUsers(int userNumber) throws TooFewUser {
         if (userNumber == 0) {
             throw new TooFewUser();
         }
 
-        if (userNumber > this.cashAmount) {
-            throw new TooManyUsers();
-        }
         this.numberOfUser = userNumber;
         this.cashAmount = this.cashAmount / userNumber;
         this.fromTransaction = new Transaction(TransactionType.SendTransfer);

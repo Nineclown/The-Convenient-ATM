@@ -191,9 +191,7 @@ public class EnterNumber extends JFrame {
                                 parentFrame.pack();
                                 parentFrame.invalidate();
                                 parentFrame.validate();
-                            }catch(TooManyUsers ex1){
-                                JOptionPane.showMessageDialog(parentFrame, "금액에 비해 사람 수가 너무 많습니다.", "Error", JOptionPane.ERROR_MESSAGE);
-                            }catch(TooFewUser ex2){
+                            }catch(TooFewUser ex1){
                                 JOptionPane.showMessageDialog(parentFrame, "사람 수가 너무 적습니다.", "Error", JOptionPane.ERROR_MESSAGE);
                             }
                         }else{
