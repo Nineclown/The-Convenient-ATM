@@ -17,17 +17,19 @@ import java.io.InputStreamReader;
 public class ATMSystem {
     private int cashAmount;
     private int numberOfUser;
-    private int retry = 0;
+    private int retry;
     private String selectedCardNumber;
 
     private Account account;
 
-    private ArrayList<Admin> admins;
-    private Admin currentAdmin;
-    private User user;
     private Transaction fromTransaction;
     private Transaction toTransaction;
     private ArrayList<Transaction> transactionList;
+
+    private ArrayList<Admin> admins;
+    private Admin currentAdmin;
+
+    private User user;
 
     private SystemState state;
     private SystemBalance balance;
