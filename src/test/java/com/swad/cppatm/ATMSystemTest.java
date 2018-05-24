@@ -257,8 +257,8 @@ public class ATMSystemTest {
 
         try {
             system.enterAccountInfo(Bank.HANA, "123456789012345");
-            system.enterPeriodToQuery(new Date(2016,5,1),
-                new Date(2018,5,30));
+            system.enterPeriodToQuery(new Date(2016-1900,5-1,1),
+                new Date(2018-1900,5-1,30));
         } catch (AccountDoesNotExist | DataStoreError ex) {
 
         }

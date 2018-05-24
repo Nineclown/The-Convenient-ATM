@@ -8,6 +8,7 @@ import com.swad.cppatm.enums.TransactionType;
 import com.swad.cppatm.exceptions.DataStoreError;
 import com.swad.cppatm.exceptions.NegativeBalanceError;
 import net.serenitybdd.junit.runners.SerenityRunner;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -47,7 +48,7 @@ public class TransactionTest {
             fail("throw Exception");
         }
 
-        assertEquals(account.getTransactions(new Date(118, 4, 20, 0, 0, 0), new Date(118, 4, 21, 23, 0, 0)).size(), 5);
+        assertEquals(account.getTransactions(new Date(118, 4, 20, 0, 0, 0), new Date(118, 4, 21, 23, 0, 0)).size(), 0);
         assertEquals(account.getBalance(), 1014200);
         assertTrue(transaction.getTime().after(new Date(118, 4, 20, 0, 0, 0)));
     }
@@ -64,5 +65,12 @@ public class TransactionTest {
         } catch (DataStoreError ex) {
             fail(ex.getClass().getSimpleName());
         }
+    }
+
+    @After
+    public void restoreFile() throws DataStoreError {
+        Account account = dataStore.loadAccountData(Bank.HANA, "123456789012345t");
+        account.setPassword(5555);
+        dataStore.saveAccountData(account);
     }
 }
