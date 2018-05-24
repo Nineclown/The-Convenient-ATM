@@ -149,7 +149,7 @@ public class EnterNumber extends JFrame {
                         break;
                     case ForeignWithdraw:
                         try {
-                            system.enterBillAmountToWithdrawAsDollar(insertNumber);
+                            system.enterBillAmountToWithdrawAsDollar(-insertNumber);
                         } catch (DataStoreError | NegativeBalanceError ex) {
                             JOptionPane.showMessageDialog(parentFrame, ex.getClass().getSimpleName(), "Error", JOptionPane.ERROR_MESSAGE);
                             parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
