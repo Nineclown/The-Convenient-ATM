@@ -59,6 +59,25 @@ public class EnterLottery {
                     return;
                 }
 
+                for(int i = 0 ; i < values.length ; i++){
+                    if(values[i] < 0 || values[i] > 45){
+                        JOptionPane.showMessageDialog(parentFrame,
+                            setLocalizedString(system, "올바르지 않은 번호입니다.", "Incorrect number."),
+                            "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    for(int j = i ; j < values.length ; j++){
+                        if(values[i] == values[j]){
+                            JOptionPane.showMessageDialog(parentFrame,
+                                setLocalizedString(system, "올바르지 않은 번호입니다.", "Incorrect number."),
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                    }
+                }
+
                 Lottery lottery = new Lottery(week, values);
 
                 try {
