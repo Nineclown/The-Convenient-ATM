@@ -466,7 +466,6 @@ public class ATMSystem {
         }
 
         transactionList = account.getTransactions(start, end);
-        System.out.println(transactionList.size());
     }
 
     public void enterUserId(String userId) throws UserDoestNotExist {

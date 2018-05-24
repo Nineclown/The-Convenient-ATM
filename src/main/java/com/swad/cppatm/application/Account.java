@@ -148,7 +148,6 @@ public class Account {
         ArrayList<Transaction> list = new ArrayList<Transaction>();
 
         for(Transaction t : transactions){
-            System.out.println(start  + "/" + t.getTime() + "/" + end + "-" + (t.getTime().compareTo(start) > 0) + "&&" + (t.getTime().compareTo(end) < 0));
             if(t.getTime().compareTo(start) > 0 && t.getTime().compareTo(end) < 0){
                 list.add(t);
             }
