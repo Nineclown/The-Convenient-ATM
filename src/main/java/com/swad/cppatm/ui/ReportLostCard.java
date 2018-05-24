@@ -1,6 +1,7 @@
 package com.swad.cppatm.ui;
 
 import com.swad.cppatm.application.ATMSystem;
+import com.swad.cppatm.application.DataStore;
 import com.swad.cppatm.exceptions.DataStoreError;
 import com.swad.cppatm.exceptions.UserDoestNotExist;
 
@@ -23,11 +24,14 @@ public class ReportLostCard extends JFrame {
     private JPanel reportLostCardPanel;
     private JButton cancelButton;
     private JButton confirmButton;
+    private ButtonGroup buttongroup;
 
 
     public ReportLostCard(final JFrame parentFrame, final ATMSystem system) {
         cardFields = new JTextField[4];
         checkBox = new JCheckBox[4];
+        buttongroup = new ButtonGroup();
+
 
         cardFields[0] = cardNumberField1;
         cardFields[1] = cardNumberField2;
@@ -39,6 +43,9 @@ public class ReportLostCard extends JFrame {
         checkBox[2] = reportLostCheckBox3;
         checkBox[3] = reportLostCheckBox4;
 
+        for (int i = 0; i < checkBox.length; i++) {
+            buttongroup.add(checkBox[i]);
+        }
         String[] card = system.getCardList();
         int length = card.length;
 
@@ -51,16 +58,33 @@ public class ReportLostCard extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 for (int i = 0; i < checkBox.length; i++) {
-                    if (!cardFields[i].getText().equals("")  && checkBox[i].isSelected()) {
+                    if (!cardFields[i].getText().equals("") && checkBox[i].isSelected()) {
                         try {
-                            JOptionPane.showMessageDialog(parentFrame, card[i].toString()+ " 카드를 중지처리하였습니다", "Info", JOptionPane.INFORMATION_MESSAGE);
+                            system.selectCard(card[i]);
+                            JOptionPane.showMessageDialog(parentFrame, card[i].toString() + " 카드를 중지처리하였습니다", "Info", JOptionPane.INFORMATION_MESSAGE);
                             system.removeCard(card[i]);
+                            system.saveUser();
                         } catch (DataStoreError ex) {
                         }
                         ;
-                        //JOptionPane.showMessageDialog(parentFrame, card[i].toString()+ " 카드에 대하여 재발급하시겠습니까?", "Info", JOptionPane.INFORMATION_MESSAGE);
+                        int answer = JOptionPane.showConfirmDialog(parentFrame.getContentPane(), "재발급을 신청하시겠습니까?", "카드 재발급", JOptionPane.YES_NO_OPTION);
+                        switch (answer) {
+                            case JOptionPane.YES_OPTION:
+                                try {
+                                    system.askRenewCard(true);
+                                } catch (DataStoreError ex) {
+                                }
+                                ;
+                                JOptionPane.showMessageDialog(parentFrame, card[i].toString() + " 카드를 재발급 처리하였습니다", "Info", JOptionPane.INFORMATION_MESSAGE);
+                            case JOptionPane.NO_OPTION:
+                                parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
+                                parentFrame.invalidate();
+                                parentFrame.validate();
+                                break;
+                        }
                     }
                 }
+
 
             }
         });
