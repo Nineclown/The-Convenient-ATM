@@ -61,5 +61,4 @@ public class EnterUserID {
     public JPanel getPanel() {
         return this.enterUserIDPanel;
     }
-
 }
