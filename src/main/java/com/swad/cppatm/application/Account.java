@@ -130,26 +130,28 @@ public class Account {
             return;
         }
         this.state = false;
+        try {
+            this.saveAccount();
+        }catch(DataStoreError e){
+
+        }
     }
 
     /**
      * Get account's transaction history
      *
-     * @param startDateTime Start date
-     * @param endDateTime   End date
+     * @param start Start date
+     * @param end   End date
      * @return Transaction history
      */
-    public Transaction[] getTransactions(Date startDateTime, Date endDateTime) {
-        // 최근거래 50개까지만 출력
-        Transaction[] list = new Transaction[transactions.size()];
+    public ArrayList<Transaction> getTransactions(Date start, Date end) {
+        ArrayList<Transaction> list = new ArrayList<Transaction>();
 
-        for (int i = 0; i < transactions.size(); i++) {
-            if (transactions.get(i).getTime().compareTo(startDateTime) > 0 ||
-                transactions.get(i).getTime().compareTo(endDateTime) < 0) {
-                list[i] = transactions.get(i);
+        for(Transaction t : transactions){
+            if(t.getTime().compareTo(start) > 0 && t.getTime().compareTo(end) < 0){
+                list.add(t);
             }
         }
-
         return list;
     }
 

@@ -1,9 +1,6 @@
 package com.swad.cppatm.ui;
 import com.swad.cppatm.application.ATMSystem;
-import com.swad.cppatm.exceptions.AccountDoesNotExist;
-import com.swad.cppatm.exceptions.DataStoreError;
-import com.swad.cppatm.exceptions.InvalidPasswordException;
-import com.swad.cppatm.exceptions.NegativeBalanceError;
+import com.swad.cppatm.exceptions.*;
 
 import javax.swing.*;
 import java.awt.event.MouseAdapter;
@@ -186,6 +183,14 @@ public class EnterPassword extends JFrame {
                     return;
                 } catch (NegativeBalanceError ex){
                     JOptionPane.showMessageDialog(parentFrame, "잔액이 부족합니다.", "Error", JOptionPane.ERROR_MESSAGE);
+                } catch (FrozenAccountException ex) {
+                    JOptionPane.showMessageDialog(parentFrame, "계좌가 정지되었습니다.", "Error", JOptionPane.ERROR_MESSAGE);
+
+                    parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
+                    parentFrame.pack();
+                    parentFrame.invalidate();
+                    parentFrame.validate();
+                    return;
                 }
 
                 switch(system.getFunction()) {

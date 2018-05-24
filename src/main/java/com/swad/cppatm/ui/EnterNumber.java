@@ -39,7 +39,6 @@ public class EnterNumber extends JFrame {
         if ( system.getFunction() == FunctionType.Transfer ) {
             titleLabel.setText("보내실 금액을 입력하여 주십시오.");
         }
-
         a1Button.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -189,6 +188,7 @@ public class EnterNumber extends JFrame {
                             system.enterTotalCashAmountToGet(insertNumber * 10000);
                             titleLabel.setText("총 이체 할 인원 수를 입력하여 주십시오.");
                             currencyLabel.setText("명");
+                            numberField.setText("");
                             splitPayFlag = true;
                         }
                         break;

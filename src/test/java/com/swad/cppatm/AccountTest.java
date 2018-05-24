@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import static org.junit.Assert.*;
@@ -51,22 +52,22 @@ public class AccountTest {
     @Test
     public void shouldGetCorrectTransactions() {
         Account account = this.dataStore.loadAccountData(Bank.HANA, "123456789012345t");
-        Transaction[] transactions = account.getTransactions(new Date(118, 4, 19, 12, 0, 0), new Date(118, 4, 20, 0, 0, 0));
-        assertEquals(transactions[1].getAmount(), 1200);
-        assertEquals(transactions[2].getTime(), new Date(118, 4, 16, 15, 16, 27));
-        assertEquals(transactions.length, 4);
+        ArrayList<Transaction> transactions = account.getTransactions(new Date(118, 4, 19, 12, 0, 0), new Date(118, 4, 20, 0, 0, 0));
+        assertEquals(transactions.get(0).getAmount(), 1400);
+        assertEquals(transactions.get(0).getTime(), new Date(118, 4, 19, 15, 16, 59));
+        assertEquals(transactions.size(), 1);
     }
 
     @Test
     public void shouldAddTransactionCorrectly() {
+        Account account = new Account(Bank.KOOKMIN, "15151515141414");
         Transaction transaction = new Transaction(TransactionType.Deposit);
-        transaction.setAccount(new Account(Bank.KOOKMIN, "15151515141414"));
+        transaction.setAccount(account);
         transaction.setAmount(5100);
         transaction.setTime();
-        Account account = this.dataStore.loadAccountData(Bank.HANA, "123456789012345t");
         account.addTransaction(transaction);
-        Transaction[] transactions = account.getTransactions(new Date(118, 4, 19, 12, 0, 0), new Date(118, 4, 30, 0, 0, 0));
-        assertEquals(transactions[4].getAmount(), 5100);
+        ArrayList<Transaction> transactions = account.getTransactions(new Date(118, 4, 19, 12, 0, 0), new Date(118, 4, 30, 0, 0, 0));
+        assertEquals(transactions.get(0).getAmount(), 5100);
     }
 
     @Test
@@ -105,6 +106,7 @@ public class AccountTest {
 
     @After
     public void restoreFile() throws DataStoreError {
+        account = dataStore.loadAccountData(Bank.HANA, "123456789012345t");
         account.setPassword(5555);
         dataStore.saveAccountData(account);
     }

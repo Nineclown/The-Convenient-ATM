@@ -46,7 +46,7 @@ public class ReportLostCard extends JFrame {
         for (int i = 0; i < checkBox.length; i++) {
             buttongroup.add(checkBox[i]);
         }
-        String[] card = system.getCardList();
+        String[] card = system.getUser().getCardList();
         int length = card.length;
 
         for (int i = 0; i < length; i++) {

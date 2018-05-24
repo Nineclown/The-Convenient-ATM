@@ -3,8 +3,10 @@ package com.swad.cppatm.ui;
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.Bank;
 import com.swad.cppatm.enums.FunctionType;
+import com.swad.cppatm.enums.Locale;
 import com.swad.cppatm.exceptions.AccountDoesNotExist;
 import com.swad.cppatm.exceptions.DataStoreError;
+import com.swad.cppatm.exceptions.FrozenAccountException;
 import com.swad.cppatm.exceptions.NoneOfFunctionSelected;
 
 import javax.swing.*;
@@ -21,11 +23,19 @@ public class RequestCardOrBankbook {
     private JRadioButton buttonHana;
     private JRadioButton buttonKookmin;
     private JRadioButton buttonWoori;
-    private JLabel titieLabel;
+    private JLabel titleLabel;
+    private JLabel bankLabel;
+    private JLabel numberLabel;
     private ButtonGroup bankgroup;
+
+
+    public String setLocalizedString(ATMSystem system, String ko, String en) {
+        return system.getState().getLocale() == Locale.en_US ? en : ko;
+    }
 
     public void next(JFrame parentFrame, ATMSystem system) {
         Bank bank;
+
         if (buttonHana.isSelected()) {
             bank = Bank.HANA;
         } else if (buttonWoori.isSelected()) {
@@ -53,16 +63,11 @@ public class RequestCardOrBankbook {
         } catch (AccountDoesNotExist ex) {
             JOptionPane.showMessageDialog(parentFrame, "Can't Find Account", "Error", JOptionPane.ERROR_MESSAGE);
             return;
-        }
-
-        if ( !system.getAccount().isAccountEnabled() ) {
+        } catch (FrozenAccountException ex) {
             JOptionPane.showMessageDialog(parentFrame, "Account is frozen", "Error", JOptionPane.ERROR_MESSAGE);
-            parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
-            parentFrame.pack();
-            parentFrame.invalidate();
-            parentFrame.validate();
             return;
         }
+
 
 
         switch(system.getFunction()) {
@@ -107,20 +112,31 @@ public class RequestCardOrBankbook {
     }
 
     public RequestCardOrBankbook(final JFrame parentFrame, final ATMSystem system) {
+        titleLabel.setText(setLocalizedString(system, "카드 또는 통장을 넣어주십시오.", "Please insert card or bankbook."));
+        bankLabel.setText(setLocalizedString(system, "은행", "Bank"));
+        numberLabel.setText(setLocalizedString(system, "통장번호", "Account Number"));
+
+        buttonHana.setText(setLocalizedString(system, "하나은행", "Hana Bank"));
+        buttonWoori.setText(setLocalizedString(system, "우리은행", "Woori Bank"));
+        buttonKookmin.setText(setLocalizedString(system, "국민은행", "Kookmin Bank"));
+
         if ( system.getFunction() == FunctionType.Transfer && system.getFromTransaction().getAccount() != null ) {
-            this.titieLabel.setText("상대방의 계좌 번호를 입력하여 주십시오.");
+            this.titleLabel.setText(setLocalizedString(system, "상대방의 계좌 번호를 입력하여 주십시오.", "Please enter account number."));
         }
+
         bankgroup = new ButtonGroup();
         bankgroup.add(buttonHana);
         bankgroup.add(buttonKookmin);
         bankgroup.add(buttonWoori);
 
+        confirmButton.setText(setLocalizedString(system, "확인", "Confirm"));
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 next(parentFrame, system);
             }
         });
+        cancelButton.setText(setLocalizedString(system, "취소", "Cancel"));
         cancelButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {

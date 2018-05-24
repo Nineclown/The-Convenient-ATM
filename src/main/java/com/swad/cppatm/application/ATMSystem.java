@@ -16,18 +16,20 @@ import java.io.InputStreamReader;
 
 public class ATMSystem {
     private int cashAmount;
-    private int numberUser;
+    private int numberOfUser;
+    private int retry;
     private String selectedCardNumber;
 
     private Account account;
 
-    private ArrayList<Admin> admins;
-    private Admin currentAdmin;
-    private User user;
-    private String[] cardList;
     private Transaction fromTransaction;
     private Transaction toTransaction;
     private ArrayList<Transaction> transactionList;
+
+    private ArrayList<Admin> admins;
+    private Admin currentAdmin;
+
+    private User user;
 
     private SystemState state;
     private SystemBalance balance;
@@ -39,7 +41,7 @@ public class ATMSystem {
     }
 
     public int getNumberUser() {
-        return this.numberUser;
+        return this.numberOfUser;
     }
 
     public Account getAccount() {
@@ -84,6 +86,10 @@ public class ATMSystem {
 
     public Admin getCurrentAdmin() {
         return this.currentAdmin;
+    }
+
+    public User getUser(){
+        return this.user;
     }
 
     public ATMSystem() {
@@ -194,12 +200,17 @@ public class ATMSystem {
         }
     }
 
-    public void enterAccountInfo(Bank bank, String accountNo) throws AccountDoesNotExist, DataStoreError, NoneOfFunctionSelected {
+    public void enterAccountInfo(Bank bank, String accountNo) throws AccountDoesNotExist, DataStoreError, FrozenAccountException, NoneOfFunctionSelected {
         DataStore dataStore = new DataStore();
         this.account = dataStore.loadAccountData(bank, accountNo);
+        retry = 0;
 
         if (this.account == null) {
             throw new AccountDoesNotExist();
+        }
+
+        if (!this.account.isAccountEnabled()){
+            throw new FrozenAccountException();
         }
 
         if (this.function == null) {
@@ -307,35 +318,34 @@ public class ATMSystem {
 
     }
 
-    public void enterPassword(int password) throws InvalidPasswordException, AccountDoesNotExist, DataStoreError, NegativeBalanceError {
-        int retry = 0;
+    public void enterPassword(int password) throws InvalidPasswordException, AccountDoesNotExist, DataStoreError, NegativeBalanceError, FrozenAccountException {
         final int maxRetry = 5;
 
         if (this.account == null) {
             throw new AccountDoesNotExist();
         }
 
-
-        for (; retry < maxRetry; retry++) {
-            if (this.account.checkAccountPassword(password)) {
-                break;
+        if (!this.account.checkAccountPassword(password)) {
+            retry++;
+            if (retry >= maxRetry) {
+                this.account.freezeAccount();
+                throw new FrozenAccountException();
             }
-        }
-
-        if (retry == maxRetry) {
-            this.account.freezeAccount();
             throw new InvalidPasswordException();
         }
 
+
+
+        //Split Pat Process Transaction After enter Password.
         if (this.function == FunctionType.SplitPay) {
-            numberUser--;
+            numberOfUser--;
             try {
                 this.fromTransaction.processTransaction();
                 this.toTransaction.addAmount(cashAmount);
             } catch (NegativeBalanceError e) {
                 throw e;
             }
-            if (numberUser > 0) {
+            if (numberOfUser > 0) {
                 this.fromTransaction = new Transaction(TransactionType.SendTransfer);
                 this.fromTransaction.setAmount(-cashAmount);
             } else {
@@ -346,8 +356,6 @@ public class ATMSystem {
                 }
                 this.toTransaction.processTransaction();
             }
-
-
         }
     }
 
@@ -446,7 +454,7 @@ public class ATMSystem {
         if (userNumber > this.cashAmount) {
             throw new TooManyUsers();
         }
-        this.numberUser = userNumber;
+        this.numberOfUser = userNumber;
         this.cashAmount = this.cashAmount / userNumber;
         this.fromTransaction = new Transaction(TransactionType.SendTransfer);
         fromTransaction.setAmount(-this.cashAmount);
@@ -457,7 +465,7 @@ public class ATMSystem {
             throw new AccountDoesNotExist();
         }
 
-        transactionList = new ArrayList<Transaction>(Arrays.asList(account.getTransactions(start, end)));
+        transactionList = account.getTransactions(start, end);
     }
 
     public void enterUserId(String userId) throws UserDoestNotExist {
@@ -467,7 +475,6 @@ public class ATMSystem {
         {
             throw new UserDoestNotExist();
         }
-        this.cardList = this.user.getCardList();
     }
 
     public void selectCard(String cardNumber) {
@@ -548,10 +555,5 @@ public class ATMSystem {
         }
 
         this.balance.setATMBalance(billAmount);
-    }
-
-    public String[] getCardList()
-    {
-        return this.cardList;
     }
 }
