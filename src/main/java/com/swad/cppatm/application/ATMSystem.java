@@ -348,18 +348,15 @@ public class ATMSystem {
                 this.toTransaction.addAmount(cashAmount);
             } catch (NegativeBalanceError e) {
                 throw e;
-            }
-            if (numberOfUser > 0) {
-                this.fromTransaction = new Transaction(TransactionType.SendTransfer);
-                this.fromTransaction.setAmount(-cashAmount);
-            } else {
-                try {
-                    Thread.sleep(100);
-                } catch (Exception e) {
-
+            }finally {
+                if (numberOfUser > 0) {
+                    this.fromTransaction = new Transaction(TransactionType.SendTransfer);
+                    this.fromTransaction.setAmount(-cashAmount);
+                } else {
+                    this.toTransaction.processTransaction();
                 }
-                this.toTransaction.processTransaction();
             }
+
         }
     }
 
