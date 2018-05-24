@@ -38,16 +38,20 @@ public class EnterDate {
                 }
 
                 start = new Date(
-                    Integer.parseInt(startDateField.getText().substring(0, 4)),
-                    Integer.parseInt(startDateField.getText().substring(4, 6)),
+                    Integer.parseInt(startDateField.getText().substring(0, 4)) - 1900,
+                    Integer.parseInt(startDateField.getText().substring(4, 6))-1,
                     Integer.parseInt(startDateField.getText().substring(6, 8))
                 );
 
+                System.out.println(start);
+
                 end = new Date(
-                    Integer.parseInt(endDateField.getText().substring(0, 4)),
-                    Integer.parseInt(endDateField.getText().substring(4, 6)),
+                    Integer.parseInt(endDateField.getText().substring(0, 4)) - 1900,
+                    Integer.parseInt(endDateField.getText().substring(4, 6))-1,
                     Integer.parseInt(endDateField.getText().substring(6, 8))
                 );
+
+                System.out.println(end);
 
                 try {
                     system.enterPeriodToQuery(start, end);

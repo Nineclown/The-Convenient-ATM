@@ -457,7 +457,8 @@ public class ATMSystem {
             throw new AccountDoesNotExist();
         }
 
-        transactionList = new ArrayList<Transaction>(Arrays.asList(account.getTransactions(start, end)));
+        transactionList = account.getTransactions(start, end);
+        System.out.println(transactionList.size());
     }
 
     public void enterUserId(String userId) throws UserDoestNotExist {

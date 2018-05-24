@@ -47,7 +47,7 @@ public class TransactionTest {
             fail("throw Exception");
         }
 
-        assertEquals(account.getTransactions(new Date(118, 4, 20, 0, 0, 0), new Date(118, 4, 21, 23, 0, 0)).length, 5);
+        assertEquals(account.getTransactions(new Date(118, 4, 20, 0, 0, 0), new Date(118, 4, 21, 23, 0, 0)).size(), 5);
         assertEquals(account.getBalance(), 1014200);
         assertTrue(transaction.getTime().after(new Date(118, 4, 20, 0, 0, 0)));
     }
