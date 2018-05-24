@@ -42,7 +42,7 @@ public class EnterAdminInfo extends JFrame {
         Admin newAdmin = system.getAdmins()[system.getAdmins().length-1];
         JOptionPane.showMessageDialog(parentFrame, "Admin added\nYour AdminId : " + newAdmin.getId(), "Info", JOptionPane.INFORMATION_MESSAGE);
 
-        parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
+        parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
         parentFrame.invalidate();
         parentFrame.validate();
     }
@@ -61,7 +61,7 @@ public class EnterAdminInfo extends JFrame {
         cancelButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
+                parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
                 parentFrame.invalidate();
                 parentFrame.validate();
             }
