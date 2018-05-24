@@ -51,6 +51,10 @@ public class EnterBill {
                 values[2] = Integer.parseInt(tenThousandField.getText());
                 values[3] = Integer.parseInt(fiftyThousandField.getText());
 
+                if(values[0] +  values[1] + values[2] + values[3] > 100){
+                    JOptionPane.showMessageDialog(parentFrame, "지폐의 수가 너무 많습니다, 일부만 다시 넣어주세요", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
 
                 switch (system.getFunction()) {
                     case Deposit:

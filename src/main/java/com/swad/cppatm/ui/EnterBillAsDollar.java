@@ -44,6 +44,11 @@ public class EnterBillAsDollar {
                 values[9] = Integer.parseInt(dollarFiftyField.getText());
                 values[10] = Integer.parseInt(dollarHundredField.getText());
 
+                if(values[4] +  values[5] + values[6] + values[7] +  values[8] + values[9] + values[10] > 100){
+                    JOptionPane.showMessageDialog(parentFrame, "지폐의 수가 너무 많습니다, 일부만 다시 넣어주세요", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
                 try {
                     system.enterBillAsDollar(values);
                     } catch (DataStoreError | InvalidBillException ex) {

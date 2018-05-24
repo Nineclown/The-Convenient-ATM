@@ -340,8 +340,6 @@ public class ATMSystem {
             throw new InvalidPasswordException();
         }
 
-
-
         //Split Pat Process Transaction After enter Password.
         if (this.function == FunctionType.SplitPay) {
             numberOfUser--;

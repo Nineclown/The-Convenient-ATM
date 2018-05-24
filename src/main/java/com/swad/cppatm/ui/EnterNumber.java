@@ -126,6 +126,11 @@ public class EnterNumber extends JFrame {
 
                 switch (system.getFunction()) {
                     case Withdraw:
+                        if(insertNumber > 100){
+                            JOptionPane.showMessageDialog(parentFrame, "출금하려는 금액이 너무 큽니다. 다시 입력해주세요.", "Error", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+
                         try {
                             system.enterBillAmountToWithdraw(-insertNumber * 10000);
                         } catch (DataStoreError | NegativeBalanceError ex) {
@@ -148,6 +153,10 @@ public class EnterNumber extends JFrame {
                         parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
                         break;
                     case ForeignWithdraw:
+                        if(insertNumber > 5000){
+                            JOptionPane.showMessageDialog(parentFrame, "출금하려는 금액이 너무 큽니다. 다시 입력해주세요.", "Error", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
                         try {
                             system.enterBillAmountToWithdrawAsDollar(-insertNumber);
                         } catch (DataStoreError | NegativeBalanceError ex) {
