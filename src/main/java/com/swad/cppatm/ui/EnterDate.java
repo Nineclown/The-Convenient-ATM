@@ -37,17 +37,23 @@ public class EnterDate {
                     return;
                 }
 
-                start = new Date(
-                    Integer.parseInt(startDateField.getText().substring(0, 4)) - 1900,
-                    Integer.parseInt(startDateField.getText().substring(4, 6))-1,
-                    Integer.parseInt(startDateField.getText().substring(6, 8))
-                );
+                int startyear, startmonth, startdate;
+                int endyear, endmonth, enddate;
 
-                end = new Date(
-                    Integer.parseInt(endDateField.getText().substring(0, 4)) - 1900,
-                    Integer.parseInt(endDateField.getText().substring(4, 6))-1,
-                    Integer.parseInt(endDateField.getText().substring(6, 8))+1
-                );
+                startyear = Integer.parseInt(startDateField.getText().substring(0, 4));
+                startmonth = Integer.parseInt(startDateField.getText().substring(4, 6));
+                startdate = Integer.parseInt(startDateField.getText().substring(6, 8));
+                endyear = Integer.parseInt(endDateField.getText().substring(0, 4));
+                endmonth = Integer.parseInt(endDateField.getText().substring(4, 6));
+                enddate = Integer.parseInt(endDateField.getText().substring(6, 8));
+
+                if(startmonth > 12 || endmonth > 12 || startdate >31 || enddate>31 || startyear <1900 || endyear < 1900){
+                    JOptionPane.showMessageDialog(parentFrame, "Invalid date format", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                start = new Date(startyear-1900, startmonth-1, startdate);
+                end = new Date(endyear-1900, endmonth-1, enddate);
 
                 if(start.compareTo(end) >= 0){
                     JOptionPane.showMessageDialog(parentFrame, "시작일이 끝나는 날보다 큽니다.", "Error", JOptionPane.ERROR_MESSAGE);
