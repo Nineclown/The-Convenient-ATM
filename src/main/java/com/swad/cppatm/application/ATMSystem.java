@@ -280,6 +280,9 @@ public class ATMSystem {
             balance.changeSystemBalance(billAmount);
         } catch (AdminAlarmException e) {
             //Alarm to Admin;
+        } catch (OverflowBillException e) {
+            state.toggleSystem();
+            throw e;
         }
     }
 
@@ -314,6 +317,9 @@ public class ATMSystem {
             balance.changeSystemBalance(billAmount);
         } catch (AdminAlarmException e) {
             //Alarm to Admin
+        } catch (OverflowBillException e) {
+            state.toggleSystem();
+            throw e;
         }
 
     }
@@ -361,19 +367,23 @@ public class ATMSystem {
 
 
     public void enterBillAmountToWithdraw(int cashAmount) throws DataStoreError, NegativeBalanceError, OverflowBillException {
-        this.cashAmount = -cashAmount;
+        this.cashAmount = cashAmount;
         int[] billAmount = calcBillAmount(this.cashAmount, "WON");
         this.toTransaction.setAmount(cashAmount);
         this.toTransaction.processTransaction();
         try {
             balance.changeSystemBalance(billAmount);
         } catch (AdminAlarmException e) {
+            System.out.println("Alter to admin");
             //Alarm to admin;
+        } catch (OverflowBillException e) {
+            state.toggleSystem();
+            throw e;
         }
     }
 
     public void enterBillAmountToWithdrawAsDollar(int cashAmount) throws DataStoreError, NegativeBalanceError, OverflowBillException {
-        this.cashAmount = -cashAmount;
+        this.cashAmount = cashAmount;
         int[] billAmount = calcBillAmount(this.cashAmount, "Dollar");
         this.toTransaction.setAmount((cashAmount * (int) this.getCurrency()));
         this.toTransaction.processTransaction();
@@ -381,6 +391,9 @@ public class ATMSystem {
             balance.changeSystemBalance(billAmount);
         } catch (AdminAlarmException e) {
             //Alarm to admin;
+        } catch (OverflowBillException e) {
+            state.toggleSystem();
+            throw e;
         }
     }
 

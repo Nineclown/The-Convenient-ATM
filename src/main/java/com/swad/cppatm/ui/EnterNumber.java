@@ -127,7 +127,7 @@ public class EnterNumber extends JFrame {
                 switch (system.getFunction()) {
                     case Withdraw:
                         try {
-                            system.enterBillAmountToWithdraw(insertNumber * 10000);
+                            system.enterBillAmountToWithdraw(-insertNumber * 10000);
                         } catch (DataStoreError | NegativeBalanceError ex) {
                             JOptionPane.showMessageDialog(parentFrame, ex.getClass().getSimpleName(), "Error", JOptionPane.ERROR_MESSAGE);
                             parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
@@ -135,8 +135,14 @@ public class EnterNumber extends JFrame {
                             parentFrame.invalidate();
                             parentFrame.validate();
                             return;
-                        } catch (OverflowBillException ex2){
-                            //Alarm.
+                        } catch (OverflowBillException ex){
+                            JOptionPane.showMessageDialog(parentFrame, "해당 거래를 진행할 수 없습니다. 관리자에게 연락해주세요.", "Error", JOptionPane.ERROR_MESSAGE);
+
+                            parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
+                            parentFrame.pack();
+                            parentFrame.invalidate();
+                            parentFrame.validate();
+                            return;
                         }
 
                         parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
@@ -151,8 +157,14 @@ public class EnterNumber extends JFrame {
                             parentFrame.invalidate();
                             parentFrame.validate();
                             return;
-                        }catch (OverflowBillException ex2){
-                            //Alarm.
+                        }catch (OverflowBillException ex){
+                            JOptionPane.showMessageDialog(parentFrame, "해당 거래를 진행할 수 없습니다. 관리자에게 연락해주세요.", "Error", JOptionPane.ERROR_MESSAGE);
+
+                            parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
+                            parentFrame.pack();
+                            parentFrame.invalidate();
+                            parentFrame.validate();
+                            return;
                         }
 
                         parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());

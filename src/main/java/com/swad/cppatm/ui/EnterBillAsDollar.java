@@ -53,7 +53,13 @@ public class EnterBillAsDollar {
                     parentFrame.validate();
                     return;
                 }catch (OverflowBillException e2){
-                    //
+                    JOptionPane.showMessageDialog(parentFrame, "해당 거래를 진행할 수 없습니다. 관리자에게 연락해주세요.", "Error", JOptionPane.ERROR_MESSAGE);
+
+                    parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
+                    parentFrame.pack();
+                    parentFrame.invalidate();
+                    parentFrame.validate();
+                    return;
                 }
 
                 parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
