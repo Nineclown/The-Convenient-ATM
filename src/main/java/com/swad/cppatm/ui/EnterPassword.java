@@ -1,5 +1,6 @@
 package com.swad.cppatm.ui;
 import com.swad.cppatm.application.ATMSystem;
+import com.swad.cppatm.enums.Locale;
 import com.swad.cppatm.exceptions.*;
 
 import javax.swing.*;
@@ -22,8 +23,14 @@ public class EnterPassword extends JFrame {
     private JButton a0Button;
     private JButton clearButton;
     private JButton confirmButton;
+    private JLabel titleLabel;
+
+    private String setLocalizedString(ATMSystem system, String ko, String en) {
+        return system.getState().getLocale() == Locale.en_US ? en : ko;
+    }
 
     public EnterPassword(final JFrame parentFrame, final ATMSystem system) {
+        titleLabel.setText(setLocalizedString(system, "비밀번호를 입력하여 주십시오.", "Please enter password."));
         a1Button.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -134,6 +141,7 @@ public class EnterPassword extends JFrame {
                 passwordField.setText(value + "0");
             }
         });
+        BSButton.setText(setLocalizedString(system, "정정", "BS"));
         BSButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -146,6 +154,7 @@ public class EnterPassword extends JFrame {
                 passwordField.setText(value.substring(0, value.length() - 1));
             }
         });
+        clearButton.setText(setLocalizedString(system, "비우기", "Clear"));
         clearButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -156,6 +165,7 @@ public class EnterPassword extends JFrame {
                 passwordField.setText("");
             }
         });
+        confirmButton.setText(setLocalizedString(system, "확인", "Confirm"));
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {

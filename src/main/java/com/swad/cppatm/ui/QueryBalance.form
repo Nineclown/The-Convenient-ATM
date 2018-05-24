@@ -13,7 +13,7 @@
     </properties>
     <border type="none"/>
     <children>
-      <component id="93a30" class="javax.swing.JLabel">
+      <component id="93a30" class="javax.swing.JLabel" binding="titleLabel">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -23,7 +23,7 @@
           <text value="잔액을 확인하여 주십시오."/>
         </properties>
       </component>
-      <component id="cb2f" class="javax.swing.JLabel">
+      <component id="cb2f" class="javax.swing.JLabel" binding="accountLabel">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -68,7 +68,7 @@
           <text value="확인"/>
         </properties>
       </component>
-      <component id="32a01" class="javax.swing.JLabel">
+      <component id="32a01" class="javax.swing.JLabel" binding="balanceLabel">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -78,7 +78,7 @@
           <text value="잔액"/>
         </properties>
       </component>
-      <component id="6361a" class="javax.swing.JLabel">
+      <component id="6361a" class="javax.swing.JLabel" binding="currencyLabel">
         <constraints>
           <grid row="3" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>

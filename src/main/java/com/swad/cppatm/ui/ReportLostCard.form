@@ -1,94 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.swad.cppatm.ui.ReportLostCard">
-  <grid id="27dc6" binding="reportLostCardPanel" layout-manager="GridLayoutManager" row-count="17" column-count="7" same-size-horizontally="false" same-size-vertically="true" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="reportLostCardPanel" layout-manager="GridLayoutManager" row-count="15" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="800" height="629"/>
+      <xy x="20" y="20" width="800" height="600"/>
     </constraints>
     <properties>
+      <background color="-1"/>
       <minimumSize width="800" height="600"/>
       <preferredSize width="800" height="600"/>
     </properties>
     <border type="none"/>
     <children>
-      <component id="30527" class="javax.swing.JLabel">
+      <component id="30527" class="javax.swing.JLabel" binding="titleLabel">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="7" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font size="20"/>
+          <foreground color="-16777216"/>
           <text value="분실처리를 할 카드를 선택하여 주십시오"/>
         </properties>
       </component>
-      <grid id="2265e" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="true" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="0" left="0" bottom="0" right="0"/>
+      <component id="3a900" class="javax.swing.JLabel" binding="cardNumberLabel4">
         <constraints>
-          <grid row="9" column="0" row-span="8" col-span="7" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties/>
-        <border type="none"/>
-        <children>
-          <component id="98808" class="javax.swing.JButton" binding="confirmButton">
-            <constraints>
-              <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="1" use-parent-layout="false">
-                <preferred-size width="-1" height="40"/>
-                <maximum-size width="-1" height="40"/>
-              </grid>
-            </constraints>
-            <properties>
-              <text value="확인"/>
-            </properties>
-          </component>
-          <component id="74dae" class="javax.swing.JButton" binding="cancelButton">
-            <constraints>
-              <grid row="0" column="1" row-span="2" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="1" use-parent-layout="false">
-                <preferred-size width="-1" height="40"/>
-                <maximum-size width="-1" height="40"/>
-              </grid>
-            </constraints>
-            <properties>
-              <text value="취소"/>
-            </properties>
-          </component>
-        </children>
-      </grid>
-      <component id="3a900" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="7" column="0" row-span="2" col-span="2" vsize-policy="1" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="-1" height="10"/>
-          </grid>
+          <grid row="7" column="0" row-span="2" col-span="2" vsize-policy="1" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font size="20"/>
+          <foreground color="-16777216"/>
           <text value="카드번호"/>
         </properties>
       </component>
-      <component id="8611a" class="javax.swing.JLabel">
+      <component id="8611a" class="javax.swing.JLabel" binding="cardNumberLabel3">
         <constraints>
-          <grid row="5" column="0" row-span="2" col-span="2" vsize-policy="1" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="-1" height="10"/>
-          </grid>
+          <grid row="5" column="0" row-span="2" col-span="2" vsize-policy="1" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font size="20"/>
+          <foreground color="-16777216"/>
           <text value="카드번호"/>
         </properties>
       </component>
-      <component id="ba514" class="javax.swing.JLabel" binding="카드번호">
+      <component id="ba514" class="javax.swing.JLabel" binding="cardNumberLabel1">
         <constraints>
-          <grid row="1" column="0" row-span="2" col-span="2" vsize-policy="1" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="-1" height="10"/>
-          </grid>
+          <grid row="1" column="0" row-span="2" col-span="2" vsize-policy="1" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font size="20"/>
+          <foreground color="-16777216"/>
           <text value="카드번호"/>
         </properties>
       </component>
-      <component id="c6354" class="javax.swing.JLabel">
+      <component id="c6354" class="javax.swing.JLabel" binding="cardNumberLabel2">
         <constraints>
-          <grid row="3" column="0" row-span="2" col-span="2" vsize-policy="1" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="-1" height="10"/>
-          </grid>
+          <grid row="3" column="0" row-span="2" col-span="2" vsize-policy="1" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font size="20"/>
+          <foreground color="-16777216"/>
           <text value="카드번호"/>
         </properties>
       </component>
@@ -98,7 +68,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font size="20"/>
+        </properties>
       </component>
       <component id="59130" class="javax.swing.JTextField" binding="cardNumberField3">
         <constraints>
@@ -106,7 +78,9 @@
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font size="20"/>
+        </properties>
       </component>
       <component id="c7136" class="javax.swing.JTextField" binding="cardNumberField2">
         <constraints>
@@ -115,6 +89,7 @@
           </grid>
         </constraints>
         <properties>
+          <font size="20"/>
           <text value=""/>
         </properties>
       </component>
@@ -125,6 +100,7 @@
           </grid>
         </constraints>
         <properties>
+          <font size="20"/>
           <text value=""/>
         </properties>
       </component>
@@ -133,6 +109,10 @@
           <grid row="7" column="6" row-span="2" col-span="1" vsize-policy="1" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <background color="-1"/>
+          <enabled value="true"/>
+          <font size="20"/>
+          <foreground color="-16777216"/>
           <text value="분실"/>
         </properties>
       </component>
@@ -141,6 +121,10 @@
           <grid row="5" column="6" row-span="2" col-span="1" vsize-policy="1" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <background color="-1"/>
+          <enabled value="true"/>
+          <font size="20"/>
+          <foreground color="-16777216"/>
           <text value="분실"/>
         </properties>
       </component>
@@ -149,6 +133,10 @@
           <grid row="3" column="6" row-span="2" col-span="1" vsize-policy="1" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <background color="-1"/>
+          <enabled value="true"/>
+          <font size="20"/>
+          <foreground color="-16777216"/>
           <text value="분실"/>
         </properties>
       </component>
@@ -157,11 +145,53 @@
           <grid row="1" column="6" row-span="2" col-span="1" vsize-policy="1" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <background color="-1"/>
+          <enabled value="true"/>
+          <font size="20"/>
+          <foreground color="-16777216"/>
           <horizontalAlignment value="10"/>
           <text value="분실"/>
           <verticalAlignment value="0"/>
         </properties>
       </component>
+      <grid id="d087b" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="9" column="0" row-span="1" col-span="7" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-1"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="39f44" class="javax.swing.JButton" binding="confirmButton">
+            <constraints>
+              <grid row="0" column="0" row-span="2" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="-1" height="60"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-10592674"/>
+              <font size="20"/>
+              <foreground color="-1"/>
+              <text value="확인"/>
+            </properties>
+          </component>
+          <component id="f3e20" class="javax.swing.JButton" binding="cancelButton">
+            <constraints>
+              <grid row="0" column="1" row-span="2" col-span="1" vsize-policy="6" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="-1" height="60"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-10592674"/>
+              <font size="20"/>
+              <foreground color="-1"/>
+              <text value="취소"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
     </children>
   </grid>
 </form>
