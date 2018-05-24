@@ -67,7 +67,7 @@ public class EnterLottery {
                             JOptionPane.ERROR_MESSAGE);
                         return;
                     }
-                    for(int j = i ; j < values.length ; j++){
+                    for(int j = i+1 ; j < values.length ; j++){
                         if(values[i] == values[j]){
                             JOptionPane.showMessageDialog(parentFrame,
                                 setLocalizedString(system, "올바르지 않은 번호입니다.", "Incorrect number."),
