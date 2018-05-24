@@ -61,7 +61,7 @@ public class EnterAdminInfo extends JFrame {
         cancelButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
+                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
                 parentFrame.invalidate();
                 parentFrame.validate();
             }
