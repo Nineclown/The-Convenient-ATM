@@ -15,6 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.WebDriver;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import static org.junit.Assert.*;
@@ -51,10 +52,10 @@ public class AccountTest {
     @Test
     public void shouldGetCorrectTransactions() {
         Account account = this.dataStore.loadAccountData(Bank.HANA, "123456789012345t");
-        Transaction[] transactions = account.getTransactions(new Date(118, 4, 19, 12, 0, 0), new Date(118, 4, 20, 0, 0, 0));
-        assertEquals(transactions[1].getAmount(), 1200);
-        assertEquals(transactions[2].getTime(), new Date(118, 4, 16, 15, 16, 27));
-        assertEquals(transactions.length, 4);
+        ArrayList<Transaction> transactions = account.getTransactions(new Date(118, 4, 19, 12, 0, 0), new Date(118, 4, 20, 0, 0, 0));
+        assertEquals(transactions.get(1).getAmount(), 1200);
+        assertEquals(transactions.get(2).getTime(), new Date(118, 4, 16, 15, 16, 27));
+        assertEquals(transactions.size(), 4);
     }
 
     @Test
@@ -65,8 +66,8 @@ public class AccountTest {
         transaction.setTime();
         Account account = this.dataStore.loadAccountData(Bank.HANA, "123456789012345t");
         account.addTransaction(transaction);
-        Transaction[] transactions = account.getTransactions(new Date(118, 4, 19, 12, 0, 0), new Date(118, 4, 30, 0, 0, 0));
-        assertEquals(transactions[4].getAmount(), 5100);
+        ArrayList<Transaction> transactions = account.getTransactions(new Date(118, 4, 19, 12, 0, 0), new Date(118, 4, 30, 0, 0, 0));
+        assertEquals(transactions.get(4).getAmount(), 5100);
     }
 
     @Test
