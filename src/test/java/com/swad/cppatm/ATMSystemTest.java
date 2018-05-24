@@ -38,7 +38,8 @@ public class ATMSystemTest {
     }
 
     @Test(expected = AccountDoesNotExist.class)
-    public void enterAccountInfoRaisesExceptionIfAccountDoesNotExistOnDataStore() throws AccountDoesNotExist, FrozenAccountException, DataStoreError, NoneOfFunctionSelected {
+    public void enterAccountInfoRaisesExceptionIfAccountDoesNotExistOnDataStore()
+        throws AccountDoesNotExist, FrozenAccountException, DataStoreError, NoneOfFunctionSelected {
         system.enterAccountInfo(Bank.WOORI, "DOESNOTEXIST");
     }
 
