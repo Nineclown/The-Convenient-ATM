@@ -53,6 +53,7 @@ public class AdminSelectFunction extends JFrame {
                 try {
                     system.selectFunction(FunctionType.RemoveAdmin);
                 } catch (NoneOfFunctionSelected ex) {
+                    JOptionPane.showMessageDialog(parentFrame, "관리자를 삭제 할 수 없습니다.", "Info", JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
 
