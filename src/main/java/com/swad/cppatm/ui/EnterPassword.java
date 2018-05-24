@@ -1,5 +1,6 @@
 package com.swad.cppatm.ui;
 import com.swad.cppatm.application.ATMSystem;
+import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.enums.Locale;
 import com.swad.cppatm.exceptions.*;
 
@@ -24,12 +25,17 @@ public class EnterPassword extends JFrame {
     private JButton clearButton;
     private JButton confirmButton;
     private JLabel titleLabel;
+    private JLabel amountLabel;
 
     private String setLocalizedString(ATMSystem system, String ko, String en) {
         return system.getState().getLocale() == Locale.en_US ? en : ko;
     }
 
     public EnterPassword(final JFrame parentFrame, final ATMSystem system) {
+        if(system.getFunction() == FunctionType.SplitPay){
+            amountLabel.setText("이체 금액 : " + system.getCashAmount());
+        }
+
         titleLabel.setText(setLocalizedString(system, "비밀번호를 입력하여 주십시오.", "Please enter password."));
         a1Button.addMouseListener(new MouseAdapter() {
             @Override
