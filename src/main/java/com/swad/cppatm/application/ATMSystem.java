@@ -479,6 +479,12 @@ public class ATMSystem {
         //카드를 중지했다는 메세지가 뜨게 함
     }
 
+    public void removeCard(String cardNumber) throws DataStoreError
+    {
+        this.user.removeCard(cardNumber);
+        this.user.saveUser();
+    }
+
     public void askRenewCard(boolean answer) throws DataStoreError {
         if (answer) {
             requestRenewCard(selectedCardNumber);

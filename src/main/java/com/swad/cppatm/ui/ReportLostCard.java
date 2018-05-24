@@ -1,6 +1,7 @@
 package com.swad.cppatm.ui;
 
 import com.swad.cppatm.application.ATMSystem;
+import com.swad.cppatm.exceptions.DataStoreError;
 import com.swad.cppatm.exceptions.UserDoestNotExist;
 
 import javax.swing.*;
@@ -49,6 +50,16 @@ public class ReportLostCard extends JFrame {
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
+                for (int i = 0; i < checkBox.length; i++) {
+                    if (checkBox[i].isSelected() && card[i] != null) {
+                        try {
+                            JOptionPane.showMessageDialog(parentFrame, card[i].toString()+ " 카드를 중지처리하였습니다", "Info", JOptionPane.INFORMATION_MESSAGE);
+                            system.removeCard(card[i]);
+                        } catch (DataStoreError ex) {
+                        }
+                        ;
+                    }
+                }
 
             }
         });
