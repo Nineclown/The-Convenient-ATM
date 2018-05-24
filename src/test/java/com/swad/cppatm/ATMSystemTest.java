@@ -38,7 +38,7 @@ public class ATMSystemTest {
     }
 
     @Test(expected = AccountDoesNotExist.class)
-    public void enterAccountInfoRaisesExceptionIfAccountDoesNotExistOnDataStore() throws AccountDoesNotExist, DataStoreError, NoneOfFunctionSelected {
+    public void enterAccountInfoRaisesExceptionIfAccountDoesNotExistOnDataStore() throws AccountDoesNotExist, FrozenAccountException, DataStoreError, NoneOfFunctionSelected {
         system.enterAccountInfo(Bank.WOORI, "DOESNOTEXIST");
     }
 
@@ -81,6 +81,8 @@ public class ATMSystemTest {
             fail(e.getClass().getSimpleName());
         } catch (NoneOfFunctionSelected e) {
 
+        } catch (FrozenAccountException e) {
+
         }
 
         assertNotNull(system.getAccount());
@@ -98,6 +100,8 @@ public class ATMSystemTest {
             fail("throw DataStoreError " + e.getMessage());
         } catch (NoneOfFunctionSelected e) {
 
+        } catch (FrozenAccountException e) {
+
         }
 
         try {
@@ -108,6 +112,8 @@ public class ATMSystemTest {
             fail("throw AccountDoesNotExist" + e.getMessage());
         } catch(DataStoreError | NegativeBalanceError e){
 
+        } catch (FrozenAccountException e) {
+            fail("Account is Frozen");
         }
 
         // PASS
@@ -123,6 +129,8 @@ public class ATMSystemTest {
             fail("throw DataStoreError" + e.getMessage());
         } catch (NoneOfFunctionSelected e) {
 
+        } catch (FrozenAccountException e) {
+
         }
 
         try {
@@ -131,6 +139,8 @@ public class ATMSystemTest {
             fail("throw AccountDoesNotExist" + e.getMessage());
         } catch(DataStoreError | NegativeBalanceError e){
 
+        } catch (FrozenAccountException e) {
+            fail("Account is Frozen");
         }
 
         assertFalse(system.getAccount().isAccountEnabled());
@@ -249,8 +259,8 @@ public class ATMSystemTest {
         } catch (AccountDoesNotExist |
             DataStoreError |
             OverflowBillException |
-            InvalidBillException ex) {
-
+            InvalidBillException |
+            FrozenAccountException ex) {
         }
 
         system.selectFunction(FunctionType.QueryTransactionList);
@@ -260,6 +270,8 @@ public class ATMSystemTest {
             system.enterPeriodToQuery(new Date(2016-1900,5-1,1),
                 new Date(2018-1900,5-1,30));
         } catch (AccountDoesNotExist | DataStoreError ex) {
+
+        } catch (FrozenAccountException e) {
 
         }
 

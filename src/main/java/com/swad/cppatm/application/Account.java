@@ -130,6 +130,11 @@ public class Account {
             return;
         }
         this.state = false;
+        try {
+            this.saveAccount();
+        }catch(DataStoreError e){
+
+        }
     }
 
     /**

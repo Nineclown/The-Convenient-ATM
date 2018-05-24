@@ -17,6 +17,7 @@ import java.io.InputStreamReader;
 public class ATMSystem {
     private int cashAmount;
     private int numberOfUser;
+    private int retry = 0;
     private String selectedCardNumber;
 
     private Account account;
@@ -197,12 +198,17 @@ public class ATMSystem {
         }
     }
 
-    public void enterAccountInfo(Bank bank, String accountNo) throws AccountDoesNotExist, DataStoreError, NoneOfFunctionSelected {
+    public void enterAccountInfo(Bank bank, String accountNo) throws AccountDoesNotExist, DataStoreError, FrozenAccountException, NoneOfFunctionSelected {
         DataStore dataStore = new DataStore();
         this.account = dataStore.loadAccountData(bank, accountNo);
+        retry = 0;
 
         if (this.account == null) {
             throw new AccountDoesNotExist();
+        }
+
+        if (!this.account.isAccountEnabled()){
+            throw new FrozenAccountException();
         }
 
         if (this.function == null) {
@@ -310,26 +316,25 @@ public class ATMSystem {
 
     }
 
-    public void enterPassword(int password) throws InvalidPasswordException, AccountDoesNotExist, DataStoreError, NegativeBalanceError {
-        int retry = 0;
+    public void enterPassword(int password) throws InvalidPasswordException, AccountDoesNotExist, DataStoreError, NegativeBalanceError, FrozenAccountException {
         final int maxRetry = 5;
 
         if (this.account == null) {
             throw new AccountDoesNotExist();
         }
 
-
-        for (; retry < maxRetry; retry++) {
-            if (this.account.checkAccountPassword(password)) {
-                break;
+        if (!this.account.checkAccountPassword(password)) {
+            retry++;
+            if (retry >= maxRetry) {
+                this.account.freezeAccount();
+                throw new FrozenAccountException();
             }
-        }
-
-        if (retry == maxRetry) {
-            this.account.freezeAccount();
             throw new InvalidPasswordException();
         }
 
+
+
+        //Split Pat Process Transaction After enter Password.
         if (this.function == FunctionType.SplitPay) {
             numberOfUser--;
             try {
@@ -349,8 +354,6 @@ public class ATMSystem {
                 }
                 this.toTransaction.processTransaction();
             }
-
-
         }
     }
 
