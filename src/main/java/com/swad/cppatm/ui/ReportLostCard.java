@@ -32,10 +32,9 @@ public class ReportLostCard extends JFrame {
     private JLabel cardNumberLabel3;
     private JLabel cardNumberLabel4;
 
-    public String setLocalizedString(ATMSystem system, String ko, String en) {
+    private String setLocalizedString(ATMSystem system, String ko, String en) {
         return system.getState().getLocale() == Locale.en_US ? en : ko;
     }
-
 
     public ReportLostCard(final JFrame parentFrame, final ATMSystem system) {
         cardFields = new JTextField[4];
@@ -74,6 +73,8 @@ public class ReportLostCard extends JFrame {
                 cardFields[i].setText(card[i].toString());
             }
         }
+
+        confirmButton.setText(setLocalizedString(system, "확인", "Confirm"));
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -108,12 +109,14 @@ public class ReportLostCard extends JFrame {
 
             }
         });
+        cancelButton.setText(setLocalizedString(system, "취소", "Cancel"));
         cancelButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 JOptionPane.showMessageDialog(parentFrame, "Transaction is cancelled.", "Info", JOptionPane.INFORMATION_MESSAGE);
 
                 parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
+                parentFrame.pack();
                 parentFrame.invalidate();
                 parentFrame.validate();
             }
