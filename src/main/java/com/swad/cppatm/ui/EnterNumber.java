@@ -195,6 +195,9 @@ public class EnterNumber extends JFrame {
                     case SplitPay:
                         if(splitPayFlag){
                             try {
+                                if(insertNumber > 10){
+                                    JOptionPane.showMessageDialog(parentFrame, "사람 수가 너무 많습니다.", "Error", JOptionPane.ERROR_MESSAGE);
+                                }
                                 system.enterNumberOfUsers(insertNumber);
                                 parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
                                 parentFrame.pack();
