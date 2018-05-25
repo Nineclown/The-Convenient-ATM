@@ -24,11 +24,9 @@ buildscript {
 }
 jar {
     manifest{
-        attributes 'Main-class' : 'Main'
+        attributes 'Main-Class' : 'Main'
     }
-    from {
-        configurations.compile.collect {it.isDirectory()? it: ziptree(it)}
-    }
+
     archiveName "1.0-SNAPSHOT.jar"
 
 }
