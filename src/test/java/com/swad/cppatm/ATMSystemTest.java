@@ -149,7 +149,7 @@ public class ATMSystemTest {
     }
 
     @Test
-    public void calcBillAccountCorrectlyWorking() {
+    public void calcBillAmountCorrectlyWorking() {
         int[] result = system.calcBillAmount(100000, "WON");
         int[] expectedResult = {0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, };
 
