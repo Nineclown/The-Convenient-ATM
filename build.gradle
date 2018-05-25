@@ -24,7 +24,8 @@ buildscript {
 }
 jar {
     manifest{
-        attributes 'Main-Class' : 'Main'
+        attributes 'Main-Class' : 'com.swad.cppatm.Main',
+                   'Class-Path': configurations.runtime.files.collect { "lib/$it.name" }.join(' ')
     }
 
     archiveName "1.0-SNAPSHOT.jar"
