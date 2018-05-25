@@ -11,7 +11,7 @@ install: true
 #    token:
 #      secure: 20cccee07ce13984260fc360c226cdc1ad1b0ed5
 script:
-  - "./gradlew clean check build jar"
+  - "./gradlew clean check build"
 cache: "$HOME/.m2/repository $HOME/.gradle .gradle"
 before_deploy:
      - git config --local user.name "nineclown"
