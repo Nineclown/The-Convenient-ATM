@@ -1,6 +1,5 @@
 group 'com.swad.cppatm'
 version '1.0-SNAPSHOT'
-mainClassName = "com.swad.cppatm.Main"
 
 apply plugin: 'java'
 apply plugin: 'idea'
@@ -25,7 +24,7 @@ buildscript {
 }
 jar {
     manifest{
-        attributes 'Main-class' : 'com.swad.cppatm.Main', 'Version' : 1.0-SNAPSHOT
+        attributes 'Main-class' : 'com.swad.cppatm.Main', 'Version' : 1.0
     }
     archiveName "1.0-SNAPSHOT.jar"
 }
