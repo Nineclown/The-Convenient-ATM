@@ -88,7 +88,7 @@ public class ATMSystem {
         return this.currentAdmin;
     }
 
-    public User getUser(){
+    public User getUser() {
         return this.user;
     }
 
@@ -209,7 +209,7 @@ public class ATMSystem {
             throw new AccountDoesNotExist();
         }
 
-        if (!this.account.isAccountEnabled()){
+        if (!this.account.isAccountEnabled()) {
             throw new FrozenAccountException();
         }
 
@@ -267,23 +267,30 @@ public class ATMSystem {
         total += BillType.count(BillType.TenThousand, billAmount[2]);
         total += BillType.count(BillType.FiftyThousand, billAmount[3]);
 
-        //Dose Enter Bill Could not use toTransaction?
-        if (this.toTransaction != null) {
-            this.toTransaction.setAmount(total);
-            try {
-                this.toTransaction.processTransaction();
-            } catch (NegativeBalanceError e) {
 
-            }
-        }
+        this.toTransaction.setAmount(total);
+
         try {
             balance.changeSystemBalance(billAmount);
         } catch (AdminAlarmException e) {
+            System.out.println("Alter to admin");
             //Alarm to Admin;
         } catch (OverflowBillException e) {
+            System.out.print("Export Bills : ");
+            for (int i = 0; i < billAmount.length; i++) {
+                System.out.print(-billAmount[i] + "/");
+            }
+            System.out.println();
             state.toggleSystem();
             throw e;
         }
+
+        try {
+            this.toTransaction.processTransaction();
+        } catch (NegativeBalanceError e) {
+            //Insert Money Could not reach NegativeBalanceError.
+        }
+
     }
 
     public void enterBillAsDollar(int[] billAmount) throws InvalidBillException, DataStoreError, OverflowBillException {
@@ -306,22 +313,29 @@ public class ATMSystem {
         this.cashAmount = (int) (this.getCurrency() * totalDollar);
         System.out.print(this.fromTransaction);
 
-        if (this.toTransaction != null) {
-            this.toTransaction.setAmount(this.cashAmount);
-            try {
-                this.toTransaction.processTransaction();
-            } catch (NegativeBalanceError e) {
-            }
-        }
+
+        this.toTransaction.setAmount(this.cashAmount);
+
         try {
             balance.changeSystemBalance(billAmount);
         } catch (AdminAlarmException e) {
+            System.out.println("Alter to admin");
             //Alarm to Admin
         } catch (OverflowBillException e) {
+            System.out.print("Export Bills : ");
+            for (int i = 0; i < billAmount.length; i++) {
+                System.out.print(-billAmount[i] + "/");
+            }
+            System.out.println();
             state.toggleSystem();
             throw e;
         }
 
+        try {
+            this.toTransaction.processTransaction();
+        } catch (NegativeBalanceError e) {
+            //Insert Money Could not reach NegativeBalanceError.
+        }
     }
 
     public void enterPassword(int password) throws InvalidPasswordException, AccountDoesNotExist, DataStoreError, NegativeBalanceError, FrozenAccountException {
@@ -348,7 +362,7 @@ public class ATMSystem {
                 this.toTransaction.addAmount(cashAmount);
             } catch (NegativeBalanceError e) {
                 throw e;
-            }finally {
+            } finally {
                 if (numberOfUser > 0) {
                     this.fromTransaction = new Transaction(TransactionType.SendTransfer);
                     this.fromTransaction.setAmount(-cashAmount);
@@ -365,13 +379,8 @@ public class ATMSystem {
         this.cashAmount = cashAmount;
         int[] billAmount = calcBillAmount(this.cashAmount, "WON");
         this.toTransaction.setAmount(cashAmount);
-        this.toTransaction.processTransaction();
         try {
             balance.changeSystemBalance(billAmount);
-            for(int i = 0 ; i < billAmount.length ; i++){
-                System.out.print(-billAmount[i] + "/");
-            }
-            System.out.println();
         } catch (AdminAlarmException e) {
             System.out.println("Alter to admin");
             //Alarm to admin;
@@ -379,25 +388,64 @@ public class ATMSystem {
             state.toggleSystem();
             throw e;
         }
+
+        try {
+            this.toTransaction.processTransaction();
+        } catch (NegativeBalanceError e) {
+            for (int i = 0; i < billAmount.length; i++) {
+                billAmount[i] = -billAmount[i];
+            }
+            try {
+                balance.changeSystemBalance(billAmount);
+            } catch (AdminAlarmException | OverflowBillException e1) {
+                //Cancel Transaction, Ignore Exception.
+            }
+
+            throw e;
+        }
+
+        System.out.print("Export Bills : ");
+        for (int i = 0; i < billAmount.length; i++) {
+            System.out.print(-billAmount[i] + "/");
+        }
+        System.out.println();
     }
 
     public void enterBillAmountToWithdrawAsDollar(int cashAmount) throws DataStoreError, NegativeBalanceError, OverflowBillException {
         this.cashAmount = cashAmount;
         int[] billAmount = calcBillAmount(this.cashAmount, "Dollar");
         this.toTransaction.setAmount((cashAmount * (int) this.getCurrency()));
-        this.toTransaction.processTransaction();
+
         try {
             balance.changeSystemBalance(billAmount);
-            for(int i = 0 ; i < billAmount.length ; i++){
-                System.out.print(billAmount[i] + "/");
-            }
-            System.out.println();
         } catch (AdminAlarmException e) {
+            System.out.println("Alter to admin");
             //Alarm to admin;
         } catch (OverflowBillException e) {
             state.toggleSystem();
             throw e;
         }
+
+        try {
+            this.toTransaction.processTransaction();
+        } catch (NegativeBalanceError e) {
+            for (int i = 0; i < billAmount.length; i++) {
+                billAmount[i] = -billAmount[i];
+            }
+            try {
+                balance.changeSystemBalance(billAmount);
+            } catch (AdminAlarmException | OverflowBillException e1) {
+                //Cancel Transaction, Ignore Exception.
+            }
+
+            throw e;
+        }
+
+        System.out.print("Export Bills : ");
+        for (int i = 0; i < billAmount.length; i++) {
+            System.out.print(-billAmount[i] + "/");
+        }
+        System.out.println();
     }
 
     public int[] calcBillAmount(int cashAmount, String cashType) {
@@ -484,8 +532,7 @@ public class ATMSystem {
     public void enterUserId(String userId) throws UserDoestNotExist {
         DataStore dataStore = new DataStore();
         this.user = dataStore.loadUserData(userId);
-        if(this.user == null)
-        {
+        if (this.user == null) {
             throw new UserDoestNotExist();
         }
     }
@@ -496,16 +543,14 @@ public class ATMSystem {
     }
 
     public void requestStopCard(String cardNumber) {
-        System.out.println(cardNumber +"카드를 중지처리하였습니다");
+        System.out.println(cardNumber + "카드를 중지처리하였습니다");
     }
 
-    public void removeCard(String cardNumber)throws DataStoreError
-    {
+    public void removeCard(String cardNumber) throws DataStoreError {
         this.user.removeCard(cardNumber);
     }
 
-    public void saveUser() throws DataStoreError
-    {
+    public void saveUser() throws DataStoreError {
         this.user.saveUser();
     }
 
@@ -516,7 +561,7 @@ public class ATMSystem {
     }
 
     public void requestRenewCard(String cardNumber) {
-        System.out.println(cardNumber +"카드를 재발급하였습니다");
+        System.out.println(cardNumber + "카드를 재발급하였습니다");
     }
 
     public void changeLocale(Locale locale) {

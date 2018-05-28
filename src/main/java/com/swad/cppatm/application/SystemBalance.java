@@ -44,30 +44,11 @@ public class SystemBalance {
             System.arraycopy(temp, 0, current, 0, temp.length);
         }
 
-        for (int value : billAmount) {
+        for (int value : current) {
             if (value < downAlarmLimit || value > upAlarmLimit) {
                 throw new AdminAlarmException();
             }
         }
-
-
-        for (int i = 0; i < this.current.length; i++) {
-            this.current[i] += billAmount[i];
-            if (min > current[i]) {
-                min = current[i];
-            }
-            if (max < current[i]) {
-                max = current[i];
-            }
-        }
-
-        if (min < bottomLimit || max > topLimit) {
-            throw new OverflowBillException();
-        } else if (min < downAlarmLimit || max > upAlarmLimit) {
-            throw new AdminAlarmException();
-        }
-
-
     }
 
     public void setATMBalance(int[] billAmount) throws OverflowBillException {
