@@ -1,5 +1,8 @@
 package com.swad.cppatm.ui;
 
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.uiDesigner.core.Spacer;
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.enums.Locale;
@@ -274,7 +277,7 @@ public class SelectFunction extends JFrame {
      */
     private void $$$setupUI$$$() {
         selectFunctionPanel = new JPanel();
-        selectFunctionPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(6, 3, new Insets(30, 30, 30, 30), 10, 10));
+        selectFunctionPanel.setLayout(new GridLayoutManager(6, 3, new Insets(30, 30, 30, 30), 10, 10));
         selectFunctionPanel.setBackground(new Color(-1));
         selectFunctionPanel.setForeground(new Color(-1));
         selectFunctionPanel.setMinimumSize(new Dimension(800, 600));
@@ -289,7 +292,7 @@ public class SelectFunction extends JFrame {
         foreignWithdrawButton.setForeground(new Color(-1));
         foreignWithdrawButton.setHideActionText(true);
         foreignWithdrawButton.setText("Foreign Withdraw");
-        selectFunctionPanel.add(foreignWithdrawButton, new com.intellij.uiDesigner.core.GridConstraints(3, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
+        selectFunctionPanel.add(foreignWithdrawButton, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
         depositButton = new JButton();
         depositButton.setBackground(new Color(-10592674));
         depositButton.setBorderPainted(true);
@@ -300,7 +303,7 @@ public class SelectFunction extends JFrame {
         depositButton.setForeground(new Color(-1));
         depositButton.setHideActionText(true);
         depositButton.setText("Deposit");
-        selectFunctionPanel.add(depositButton, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
+        selectFunctionPanel.add(depositButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
         queryBalanceButton = new JButton();
         queryBalanceButton.setBackground(new Color(-10592674));
         queryBalanceButton.setBorderPainted(true);
@@ -311,7 +314,7 @@ public class SelectFunction extends JFrame {
         queryBalanceButton.setForeground(new Color(-1));
         queryBalanceButton.setHideActionText(true);
         queryBalanceButton.setText("Query Balance");
-        selectFunctionPanel.add(queryBalanceButton, new com.intellij.uiDesigner.core.GridConstraints(2, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
+        selectFunctionPanel.add(queryBalanceButton, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
         queryTransactionListButton = new JButton();
         queryTransactionListButton.setBackground(new Color(-10592674));
         queryTransactionListButton.setBorderPainted(true);
@@ -322,7 +325,7 @@ public class SelectFunction extends JFrame {
         queryTransactionListButton.setForeground(new Color(-1));
         queryTransactionListButton.setHideActionText(true);
         queryTransactionListButton.setText("Query Transaction List");
-        selectFunctionPanel.add(queryTransactionListButton, new com.intellij.uiDesigner.core.GridConstraints(1, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
+        selectFunctionPanel.add(queryTransactionListButton, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
         foreignDepositButton = new JButton();
         foreignDepositButton.setBackground(new Color(-10592674));
         foreignDepositButton.setBorderPainted(true);
@@ -333,7 +336,7 @@ public class SelectFunction extends JFrame {
         foreignDepositButton.setForeground(new Color(-1));
         foreignDepositButton.setHideActionText(true);
         foreignDepositButton.setText("Foreign Deposit");
-        selectFunctionPanel.add(foreignDepositButton, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
+        selectFunctionPanel.add(foreignDepositButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
         withdrawButton = new JButton();
         withdrawButton.setBackground(new Color(-10592674));
         withdrawButton.setBorderPainted(true);
@@ -344,7 +347,7 @@ public class SelectFunction extends JFrame {
         withdrawButton.setForeground(new Color(-1));
         withdrawButton.setHideActionText(true);
         withdrawButton.setText("Withdraw");
-        selectFunctionPanel.add(withdrawButton, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
+        selectFunctionPanel.add(withdrawButton, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
         reportLostCardButton = new JButton();
         reportLostCardButton.setBackground(new Color(-10592674));
         reportLostCardButton.setBorderPainted(true);
@@ -355,7 +358,7 @@ public class SelectFunction extends JFrame {
         reportLostCardButton.setForeground(new Color(-1));
         reportLostCardButton.setHideActionText(true);
         reportLostCardButton.setText("Report Lost Card");
-        selectFunctionPanel.add(reportLostCardButton, new com.intellij.uiDesigner.core.GridConstraints(3, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
+        selectFunctionPanel.add(reportLostCardButton, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
         transferButton = new JButton();
         transferButton.setBackground(new Color(-10592674));
         transferButton.setBorderPainted(true);
@@ -366,7 +369,7 @@ public class SelectFunction extends JFrame {
         transferButton.setForeground(new Color(-1));
         transferButton.setHideActionText(true);
         transferButton.setText("Transfer");
-        selectFunctionPanel.add(transferButton, new com.intellij.uiDesigner.core.GridConstraints(4, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
+        selectFunctionPanel.add(transferButton, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
         splitPayButton = new JButton();
         splitPayButton.setBackground(new Color(-10592674));
         splitPayButton.setBorderPainted(true);
@@ -377,7 +380,7 @@ public class SelectFunction extends JFrame {
         splitPayButton.setForeground(new Color(-1));
         splitPayButton.setHideActionText(true);
         splitPayButton.setText("Split Pay");
-        selectFunctionPanel.add(splitPayButton, new com.intellij.uiDesigner.core.GridConstraints(5, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
+        selectFunctionPanel.add(splitPayButton, new GridConstraints(5, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
         getLotteryPrizeButton = new JButton();
         getLotteryPrizeButton.setBackground(new Color(-10592674));
         getLotteryPrizeButton.setBorderPainted(true);
@@ -388,7 +391,7 @@ public class SelectFunction extends JFrame {
         getLotteryPrizeButton.setForeground(new Color(-1));
         getLotteryPrizeButton.setHideActionText(true);
         getLotteryPrizeButton.setText("Get Lottery Prize");
-        selectFunctionPanel.add(getLotteryPrizeButton, new com.intellij.uiDesigner.core.GridConstraints(4, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
+        selectFunctionPanel.add(getLotteryPrizeButton, new GridConstraints(4, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
         changeLocaleButton = new JButton();
         changeLocaleButton.setBackground(new Color(-10592674));
         changeLocaleButton.setBorderPainted(true);
@@ -399,7 +402,7 @@ public class SelectFunction extends JFrame {
         changeLocaleButton.setForeground(new Color(-1));
         changeLocaleButton.setHideActionText(true);
         changeLocaleButton.setText("Change Locale");
-        selectFunctionPanel.add(changeLocaleButton, new com.intellij.uiDesigner.core.GridConstraints(5, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
+        selectFunctionPanel.add(changeLocaleButton, new GridConstraints(5, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, new Dimension(100, -1), new Dimension(150, -1), null, 0, false));
         final JLabel label1 = new JLabel();
         label1.setAutoscrolls(false);
         label1.setBackground(new Color(-15024996));
@@ -411,9 +414,9 @@ public class SelectFunction extends JFrame {
         label1.setHorizontalTextPosition(0);
         label1.setOpaque(true);
         label1.setText("T2");
-        selectFunctionPanel.add(label1, new com.intellij.uiDesigner.core.GridConstraints(0, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final com.intellij.uiDesigner.core.Spacer spacer1 = new com.intellij.uiDesigner.core.Spacer();
-        selectFunctionPanel.add(spacer1, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 6, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(100, -1), new Dimension(200, -1), new Dimension(300, -1), 1, false));
+        selectFunctionPanel.add(label1, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final Spacer spacer1 = new Spacer();
+        selectFunctionPanel.add(spacer1, new GridConstraints(0, 1, 6, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, new Dimension(100, -1), new Dimension(200, -1), new Dimension(300, -1), 1, false));
     }
 
     /**

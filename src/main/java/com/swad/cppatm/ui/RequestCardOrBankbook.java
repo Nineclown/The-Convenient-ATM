@@ -1,5 +1,7 @@
 package com.swad.cppatm.ui;
 
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.Bank;
 import com.swad.cppatm.enums.FunctionType;
@@ -178,7 +180,7 @@ public class RequestCardOrBankbook {
      */
     private void $$$setupUI$$$() {
         requestCardOrBankbookPanel = new JPanel();
-        requestCardOrBankbookPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(5, 5, new Insets(30, 30, 30, 30), -1, -1));
+        requestCardOrBankbookPanel.setLayout(new GridLayoutManager(5, 5, new Insets(30, 30, 30, 30), -1, -1));
         requestCardOrBankbookPanel.setBackground(new Color(-1));
         requestCardOrBankbookPanel.setForeground(new Color(-11645362));
         requestCardOrBankbookPanel.setMinimumSize(new Dimension(800, 600));
@@ -188,60 +190,60 @@ public class RequestCardOrBankbook {
         if (titleLabelFont != null) titleLabel.setFont(titleLabelFont);
         titleLabel.setForeground(new Color(-16777216));
         titleLabel.setText("카드 또는 통장을 넣어주십시오.");
-        requestCardOrBankbookPanel.add(titleLabel, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 5, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        requestCardOrBankbookPanel.add(titleLabel, new GridConstraints(0, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         bankLabel = new JLabel();
         Font bankLabelFont = this.$$$getFont$$$(null, -1, 20, bankLabel.getFont());
         if (bankLabelFont != null) bankLabel.setFont(bankLabelFont);
         bankLabel.setForeground(new Color(-16777216));
         bankLabel.setText("은행");
-        requestCardOrBankbookPanel.add(bankLabel, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        requestCardOrBankbookPanel.add(bankLabel, new GridConstraints(1, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         numberLabel = new JLabel();
         Font numberLabelFont = this.$$$getFont$$$(null, -1, 20, numberLabel.getFont());
         if (numberLabelFont != null) numberLabel.setFont(numberLabelFont);
         numberLabel.setForeground(new Color(-16777216));
         numberLabel.setText("통장번호");
-        requestCardOrBankbookPanel.add(numberLabel, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 2, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        requestCardOrBankbookPanel.add(numberLabel, new GridConstraints(2, 0, 2, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JPanel panel1 = new JPanel();
-        panel1.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), 30, 30));
+        panel1.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), 30, 30));
         panel1.setBackground(new Color(-1));
         panel1.setForeground(new Color(-1));
-        requestCardOrBankbookPanel.add(panel1, new com.intellij.uiDesigner.core.GridConstraints(4, 0, 1, 5, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        requestCardOrBankbookPanel.add(panel1, new GridConstraints(4, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         confirmButton = new JButton();
         confirmButton.setBackground(new Color(-10592674));
         Font confirmButtonFont = this.$$$getFont$$$(null, -1, 20, confirmButton.getFont());
         if (confirmButtonFont != null) confirmButton.setFont(confirmButtonFont);
         confirmButton.setForeground(new Color(-1));
         confirmButton.setText("Confirm");
-        panel1.add(confirmButton, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 60), null, 0, false));
+        panel1.add(confirmButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 60), null, 0, false));
         cancelButton = new JButton();
         cancelButton.setBackground(new Color(-10592674));
         Font cancelButtonFont = this.$$$getFont$$$(null, -1, 20, cancelButton.getFont());
         if (cancelButtonFont != null) cancelButton.setFont(cancelButtonFont);
         cancelButton.setForeground(new Color(-1));
         cancelButton.setText("Cancel");
-        panel1.add(cancelButton, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 60), null, 0, false));
+        panel1.add(cancelButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(-1, 60), null, 0, false));
         buttonHana = new JRadioButton();
         buttonHana.setBackground(new Color(-1));
         Font buttonHanaFont = this.$$$getFont$$$(null, -1, 20, buttonHana.getFont());
         if (buttonHanaFont != null) buttonHana.setFont(buttonHanaFont);
         buttonHana.setText("하나은행");
-        requestCardOrBankbookPanel.add(buttonHana, new com.intellij.uiDesigner.core.GridConstraints(1, 2, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        requestCardOrBankbookPanel.add(buttonHana, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         buttonKookmin = new JRadioButton();
         buttonKookmin.setBackground(new Color(-1));
         Font buttonKookminFont = this.$$$getFont$$$(null, -1, 20, buttonKookmin.getFont());
         if (buttonKookminFont != null) buttonKookmin.setFont(buttonKookminFont);
         buttonKookmin.setText("국민은행");
-        requestCardOrBankbookPanel.add(buttonKookmin, new com.intellij.uiDesigner.core.GridConstraints(1, 3, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        requestCardOrBankbookPanel.add(buttonKookmin, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         bankbookNumberField = new JTextField();
         Font bankbookNumberFieldFont = this.$$$getFont$$$(null, -1, 24, bankbookNumberField.getFont());
         if (bankbookNumberFieldFont != null) bankbookNumberField.setFont(bankbookNumberFieldFont);
-        requestCardOrBankbookPanel.add(bankbookNumberField, new com.intellij.uiDesigner.core.GridConstraints(2, 2, 2, 3, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, -1), null, 0, false));
+        requestCardOrBankbookPanel.add(bankbookNumberField, new GridConstraints(2, 2, 2, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, -1), null, 0, false));
         buttonWoori = new JRadioButton();
         buttonWoori.setBackground(new Color(-1));
         Font buttonWooriFont = this.$$$getFont$$$(null, -1, 20, buttonWoori.getFont());
         if (buttonWooriFont != null) buttonWoori.setFont(buttonWooriFont);
         buttonWoori.setText("우리은행");
-        requestCardOrBankbookPanel.add(buttonWoori, new com.intellij.uiDesigner.core.GridConstraints(1, 4, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        requestCardOrBankbookPanel.add(buttonWoori, new GridConstraints(1, 4, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
     }
 
     /**

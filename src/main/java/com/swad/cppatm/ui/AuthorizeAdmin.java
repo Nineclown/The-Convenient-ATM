@@ -1,5 +1,7 @@
 package com.swad.cppatm.ui;
 
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.Locale;
 import com.swad.cppatm.exceptions.InvalidAdminException;
@@ -92,26 +94,26 @@ public class AuthorizeAdmin extends JFrame {
      */
     private void $$$setupUI$$$() {
         authorizeAdminPanel = new JPanel();
-        authorizeAdminPanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(4, 2, new Insets(30, 30, 30, 30), -1, -1));
+        authorizeAdminPanel.setLayout(new GridLayoutManager(4, 2, new Insets(30, 30, 30, 30), -1, -1));
         authorizeAdminPanel.setBackground(new Color(-1));
         authorizeAdminPanel.setMinimumSize(new Dimension(800, 600));
         authorizeAdminPanel.setPreferredSize(new Dimension(800, 600));
         adminPwField = new JPasswordField();
         Font adminPwFieldFont = this.$$$getFont$$$("Malgun Gothic", -1, 48, adminPwField.getFont());
         if (adminPwFieldFont != null) adminPwField.setFont(adminPwFieldFont);
-        authorizeAdminPanel.add(adminPwField, new com.intellij.uiDesigner.core.GridConstraints(2, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(450, -1), null, 0, false));
+        authorizeAdminPanel.add(adminPwField, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(450, -1), null, 0, false));
         adminIdLabel = new JLabel();
         Font adminIdLabelFont = this.$$$getFont$$$("Malgun Gothic", -1, 20, adminIdLabel.getFont());
         if (adminIdLabelFont != null) adminIdLabel.setFont(adminIdLabelFont);
         adminIdLabel.setForeground(new Color(-16777216));
         adminIdLabel.setText("아이디");
-        authorizeAdminPanel.add(adminIdLabel, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        authorizeAdminPanel.add(adminIdLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         adminPwLabel = new JLabel();
         Font adminPwLabelFont = this.$$$getFont$$$("Malgun Gothic", -1, 20, adminPwLabel.getFont());
         if (adminPwLabelFont != null) adminPwLabel.setFont(adminPwLabelFont);
         adminPwLabel.setForeground(new Color(-16777216));
         adminPwLabel.setText("비밀번호");
-        authorizeAdminPanel.add(adminPwLabel, new com.intellij.uiDesigner.core.GridConstraints(2, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        authorizeAdminPanel.add(adminPwLabel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         atmStateLabel = new JLabel();
         atmStateLabel.setBackground(new Color(-15024996));
         Font atmStateLabelFont = this.$$$getFont$$$(null, -1, 24, atmStateLabel.getFont());
@@ -121,18 +123,18 @@ public class AuthorizeAdmin extends JFrame {
         atmStateLabel.setHorizontalTextPosition(0);
         atmStateLabel.setOpaque(true);
         atmStateLabel.setText("Active");
-        authorizeAdminPanel.add(atmStateLabel, new com.intellij.uiDesigner.core.GridConstraints(0, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_EAST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, 1, 1, null, new Dimension(100, -1), null, 0, false));
+        authorizeAdminPanel.add(atmStateLabel, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, 1, 1, null, new Dimension(100, -1), null, 0, false));
         confirmButton = new JButton();
         confirmButton.setBackground(new Color(-10592674));
         Font confirmButtonFont = this.$$$getFont$$$("Malgun Gothic", -1, 20, confirmButton.getFont());
         if (confirmButtonFont != null) confirmButton.setFont(confirmButtonFont);
         confirmButton.setForeground(new Color(-1));
         confirmButton.setText("확인");
-        authorizeAdminPanel.add(confirmButton, new com.intellij.uiDesigner.core.GridConstraints(3, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_EAST, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, 1, 1, null, new Dimension(120, 60), null, 0, false));
+        authorizeAdminPanel.add(confirmButton, new GridConstraints(3, 1, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, 1, 1, null, new Dimension(120, 60), null, 0, false));
         adminIdField = new JTextField();
         Font adminIdFieldFont = this.$$$getFont$$$("Malgun Gothic", -1, 48, adminIdField.getFont());
         if (adminIdFieldFont != null) adminIdField.setFont(adminIdFieldFont);
-        authorizeAdminPanel.add(adminIdField, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_WEST, com.intellij.uiDesigner.core.GridConstraints.FILL_HORIZONTAL, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_WANT_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(450, -1), null, 0, false));
+        authorizeAdminPanel.add(adminIdField, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(450, -1), null, 0, false));
     }
 
     /**

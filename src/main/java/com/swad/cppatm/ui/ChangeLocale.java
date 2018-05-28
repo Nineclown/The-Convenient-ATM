@@ -1,5 +1,7 @@
 package com.swad.cppatm.ui;
 
+import com.intellij.uiDesigner.core.GridConstraints;
+import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.Locale;
 
@@ -66,7 +68,7 @@ public class ChangeLocale {
      */
     private void $$$setupUI$$$() {
         changeLocalePanel = new JPanel();
-        changeLocalePanel.setLayout(new com.intellij.uiDesigner.core.GridLayoutManager(2, 2, new Insets(50, 50, 70, 30), 100, 30, true, false));
+        changeLocalePanel.setLayout(new GridLayoutManager(2, 2, new Insets(50, 50, 70, 30), 100, 30, true, false));
         changeLocalePanel.setBackground(new Color(-1));
         changeLocalePanel.setMinimumSize(new Dimension(800, 600));
         changeLocalePanel.setPreferredSize(new Dimension(800, 600));
@@ -77,7 +79,7 @@ public class ChangeLocale {
         label1.setForeground(new Color(-11645362));
         label1.setOpaque(false);
         label1.setText("사용할 언어를 선택하여 주십시오.");
-        changeLocalePanel.add(label1, new com.intellij.uiDesigner.core.GridConstraints(0, 0, 1, 2, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_NONE, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        changeLocalePanel.add(label1, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         koreanButton = new JButton();
         koreanButton.setBackground(new Color(-2039584));
         koreanButton.setBorderPainted(false);
@@ -88,7 +90,7 @@ public class ChangeLocale {
         koreanButton.setForeground(new Color(-11645362));
         koreanButton.setHideActionText(false);
         koreanButton.setText("한국어");
-        changeLocalePanel.add(koreanButton, new com.intellij.uiDesigner.core.GridConstraints(1, 0, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        changeLocalePanel.add(koreanButton, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         englishButton = new JButton();
         englishButton.setBackground(new Color(-2039584));
         englishButton.setBorderPainted(false);
@@ -99,7 +101,7 @@ public class ChangeLocale {
         englishButton.setForeground(new Color(-11645362));
         englishButton.setHideActionText(false);
         englishButton.setText("English");
-        changeLocalePanel.add(englishButton, new com.intellij.uiDesigner.core.GridConstraints(1, 1, 1, 1, com.intellij.uiDesigner.core.GridConstraints.ANCHOR_CENTER, com.intellij.uiDesigner.core.GridConstraints.FILL_BOTH, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_SHRINK | com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_CAN_GROW, com.intellij.uiDesigner.core.GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        changeLocalePanel.add(englishButton, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
