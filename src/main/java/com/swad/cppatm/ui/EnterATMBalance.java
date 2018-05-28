@@ -27,6 +27,7 @@ public class EnterATMBalance {
     private JTextField dollar10;
     private JTextField dollar50;
     private JTextField dollar20;
+    private JTextField bills[];
 
     public String setLocalizedString(ATMSystem system, String ko, String en) {
         if (system.getState().getLocale() == Locale.en_US) {
@@ -38,23 +39,42 @@ public class EnterATMBalance {
 
     public EnterATMBalance(final JFrame parentFrame, final ATMSystem system) {
 
+
         confirmButton.setText(setLocalizedString(system, "확인", "Insert"));
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 int[] billAmount = new int[11];
-                billAmount[0] = Integer.parseInt(won1000.getText());
-                billAmount[1] = Integer.parseInt(won5000.getText());
-                billAmount[2] = Integer.parseInt(won10000.getText());
-                billAmount[3] = Integer.parseInt(won50000.getText());
-                billAmount[4] = Integer.parseInt(dollar1.getText());
-                billAmount[5] = Integer.parseInt(dollar2.getText());
-                billAmount[6] = Integer.parseInt(dollar5.getText());
-                billAmount[7] = Integer.parseInt(dollar10.getText());
-                billAmount[8] = Integer.parseInt(dollar20.getText());
-                billAmount[9] = Integer.parseInt(dollar50.getText());
-                billAmount[10] = Integer.parseInt(dollar100.getText());
+                bills = new JTextField[10];
+                bills[0] = won1000;
+                bills[1] = won5000;
+                bills[2] = won10000;
+                bills[3] = won50000;
+                bills[4] = dollar1;
+                bills[5] = dollar2;
+                bills[6] = dollar5;
+                bills[7] = dollar10;
+                bills[8] = dollar20;
+                bills[9] = dollar50;
+//                billAmount[0] = Integer.parseInt(won1000.getText());
+//                billAmount[1] = Integer.parseInt(won5000.getText());
+//                billAmount[2] = Integer.parseInt(won10000.getText());
+//                billAmount[3] = Integer.parseInt(won50000.getText());
+//                billAmount[4] = Integer.parseInt(dollar1.getText());
+//                billAmount[5] = Integer.parseInt(dollar2.getText());
+//                billAmount[6] = Integer.parseInt(dollar5.getText());
+//                billAmount[7] = Integer.parseInt(dollar10.getText());
+//                billAmount[8] = Integer.parseInt(dollar20.getText());
+//                billAmount[9] = Integer.parseInt(dollar50.getText());
+//                billAmount[10] = Integer.parseInt(dollar100.getText());
 
+                for (int i = 0; i < 10; i++) {
+                    if (bills[i].getText().equals("")) {
+                        billAmount[i] = 0;
+                    } else {
+                        billAmount[i] = Integer.parseInt((bills[i].getText()));
+                    }
+                }
                 try {
                     system.enterATMBalance(billAmount);
                 } catch (OverflowBillException e1) {
@@ -69,7 +89,7 @@ public class EnterATMBalance {
                         JOptionPane.ERROR_MESSAGE);
                 }
 
-                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
+                parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
                 parentFrame.pack();
                 parentFrame.invalidate();
                 parentFrame.validate();
