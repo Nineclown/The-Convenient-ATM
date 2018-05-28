@@ -69,7 +69,7 @@ public class EnterATMBalance {
                         JOptionPane.ERROR_MESSAGE);
                 }
 
-                parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
+                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
                 parentFrame.pack();
                 parentFrame.invalidate();
                 parentFrame.validate();
@@ -80,7 +80,7 @@ public class EnterATMBalance {
         discardButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
+                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
                 parentFrame.pack();
                 parentFrame.invalidate();
                 parentFrame.validate();
