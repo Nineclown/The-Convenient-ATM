@@ -48,12 +48,16 @@ public class EnterBill {
             @Override
             public void mousePressed(MouseEvent e) {
                 int[] values = new int[11];
-
-                values[0] = Integer.parseInt(thousandField.getText());
-                values[1] = Integer.parseInt(fiveThousandField.getText());
-                values[2] = Integer.parseInt(tenThousandField.getText());
-                values[3] = Integer.parseInt(fiftyThousandField.getText());
-
+                try {
+                    values[0] = Integer.parseInt(thousandField.getText());
+                    values[1] = Integer.parseInt(fiveThousandField.getText());
+                    values[2] = Integer.parseInt(tenThousandField.getText());
+                    values[3] = Integer.parseInt(fiftyThousandField.getText());
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(parentFrame, "올바른 숫자를 입력해주세요", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                ;
                 if (values[0] + values[1] + values[2] + values[3] > 100) {
                     JOptionPane.showMessageDialog(parentFrame, "지폐의 수가 너무 많습니다, 일부만 다시 넣어주세요", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
