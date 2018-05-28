@@ -89,6 +89,10 @@ public class Account {
         this.password = password;
     }
 
+    public void unfreezeAccount() {
+        this.state = true;
+    }
+
     /**
      * Change balance
      *

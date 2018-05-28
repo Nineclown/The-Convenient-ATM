@@ -39,8 +39,11 @@ public class EnterAdminInfo extends JFrame {
         try {
             system.enterAdminInfo(password, contact);
         } catch (DataStoreError er) {
-            JOptionPane.showMessageDialog(parentFrame, "Failed to add Admin", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(parentFrame, setLocalizedString(system, "관리자를 추가할 수 없습니다.", "Failed to add admin."), "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (InvalidAdminException ex) {
+            JOptionPane.showMessageDialog(parentFrame, setLocalizedString(system, "비밀번호 또는 연락처가 올바르지 않습니다.", "Invalid password or contact."), "Error", JOptionPane.ERROR_MESSAGE);
         }
+
         Admin newAdmin = system.getAdmins()[system.getAdmins().length - 1];
         JOptionPane.showMessageDialog(parentFrame, "Admin added\nYour AdminId : " + newAdmin.getId(), "Info", JOptionPane.INFORMATION_MESSAGE);
 

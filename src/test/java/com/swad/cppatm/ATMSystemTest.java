@@ -16,13 +16,13 @@ import static org.junit.Assert.*;
 
 @RunWith(SerenityRunner.class)
 public class ATMSystemTest {
-    public ATMSystem system;
+    private ATMSystem system;
 
     @Before
     public void initATMSystem() throws Exception {
         this.system = new ATMSystem();
         this.system.selectFunction(FunctionType.Deposit);
-}
+    }
 
     @Test(expected = InvalidBillException.class)
     public void enterBillRaisesExceptionIfLengthIsInvalid() throws InvalidBillException, DataStoreError, OverflowBillException {
@@ -45,24 +45,14 @@ public class ATMSystemTest {
 
     @Test
     public void enterBillAmountToWithdrawAsDollarCorrectlyWorking() {
+        int[] initialAmount = {500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500};
+
         try {
             system.selectFunction(FunctionType.ForeignWithdraw);
-        } catch (NoneOfFunctionSelected e) {
-
-        }
-
-        try {
             system.enterAccountInfo(Bank.HANA, "123456789012345");
-        } catch (Exception e) {
-
-        }
-
-        int []initialAmount = {500,500,500,500,500,500,500,500,500,500,500};
-
-        try {
             system.getBalance().setATMBalance(initialAmount);
-        } catch (OverflowBillException ex) {
-
+        } catch (Exception ex) {
+            fail(ex.getClass().getSimpleName());
         }
 
         try {
@@ -71,19 +61,15 @@ public class ATMSystemTest {
             fail(e.getClass().getSimpleName());
         }
 
-        assertEquals(500-2, system.getBalance().getATMBalance()[10]);
+        assertEquals(500 - 2, system.getBalance().getATMBalance()[10]);
     }
 
     @Test
     public void enterAccountInfoChangesProperty() {
         try {
             system.enterAccountInfo(Bank.HANA, "123456789012345");
-        } catch (AccountDoesNotExist | DataStoreError e) {
-            fail(e.getClass().getSimpleName());
-        } catch (NoneOfFunctionSelected e) {
-
-        } catch (FrozenAccountException e) {
-
+        } catch (AccountDoesNotExist | DataStoreError | NoneOfFunctionSelected | FrozenAccountException ex) {
+            fail(ex.getClass().getSimpleName());
         }
 
         assertNotNull(system.getAccount());
@@ -95,63 +81,52 @@ public class ATMSystemTest {
     public void enterPasswordSuccess() {
         try {
             system.enterAccountInfo(Bank.HANA, "123456789012345");
-        } catch (AccountDoesNotExist e) {
-            fail("throw AccountDoesNotExist " + e.getMessage());
-        } catch (DataStoreError e) {
-            fail("throw DataStoreError " + e.getMessage());
-        } catch (NoneOfFunctionSelected e) {
-
-        } catch (FrozenAccountException e) {
-            fail("throw FrozenAccountError" + e.getMessage());
+        } catch (AccountDoesNotExist | DataStoreError | NoneOfFunctionSelected | FrozenAccountException e) {
+            fail(e.getClass().getSimpleName());
         }
 
         try {
             system.enterPassword(5555);
-        } catch (InvalidPasswordException e) {
-            fail("throw InvalidPasswordException " + e.getMessage());
-        } catch (AccountDoesNotExist e) {
-            fail("throw AccountDoesNotExist" + e.getMessage());
-        } catch(DataStoreError | NegativeBalanceError e){
-
-        } catch (FrozenAccountException e) {
-            fail("Account is Frozen");
+        } catch (InvalidPasswordException | AccountDoesNotExist | DataStoreError | NegativeBalanceError | FrozenAccountException ex) {
+            fail(ex.getClass().getSimpleName());
         }
 
         // PASS
     }
 
-    @Test(expected = FrozenAccountException.class)
-    public void enterPasswordFreezesAccountWhenInvalidInputIsRepeatForFiveTimes() throws FrozenAccountException {
+    @Test
+    public void enterPasswordFreezesAccountWhenInvalidInputRepeatsForFiveTimes() {
+        int index;
         try {
             system.enterAccountInfo(Bank.HANA, "123456789012345t");
-        } catch (AccountDoesNotExist e) {
-            fail("throw AccountDoesNotExist" + e.getMessage());
-        } catch (DataStoreError e) {
-            fail("throw DataStoreError" + e.getMessage());
-        } catch (NoneOfFunctionSelected e) {
-
-        } catch (FrozenAccountException e) {
-
+        } catch (AccountDoesNotExist | DataStoreError | NoneOfFunctionSelected ex) {
+            fail(ex.getClass().getSimpleName());
+        } catch (FrozenAccountException ex) {
+            // If account is saved as frozen, unfreeze it.
+            system.getAccount().unfreezeAccount();
         }
 
-        while(true){
+        for ( index = 0 ; index < 5 ; index++ ) {
             System.out.println("Input Password");
+
             try {
                 system.enterPassword(0000);
-            } catch (AccountDoesNotExist e) {
-                fail("throw AccountDoesNotExist" + e.getMessage());
-            } catch (DataStoreError | NegativeBalanceError e) {
-                fail("throw Error");
-            } catch (InvalidPasswordException e){
-
+            } catch (AccountDoesNotExist | DataStoreError | NegativeBalanceError ex) {
+                fail(ex.getClass().getSimpleName());
+            } catch (FrozenAccountException ex) {
+                break;
+            } catch (InvalidPasswordException ex) {
+                System.out.println("Invalid password input for " + (index+1) + " times");
             }
         }
+
+        assertEquals(5 - 1, index);
     }
 
     @Test
     public void calcBillAmountCorrectlyWorking() {
         int[] result = system.calcBillAmount(100000, "WON");
-        int[] expectedResult = {0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, };
+        int[] expectedResult = {0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0,};
 
         assertArrayEquals(expectedResult, result);
 
@@ -177,9 +152,7 @@ public class ATMSystemTest {
             fail("throw TooFewUser" + e.getMessage());
         }
 
-        assertEquals(system.getCashAmount(), 1000/5);
-
-
+        assertEquals(system.getCashAmount(), 1000 / 5);
     }
 
     @Test
@@ -208,8 +181,8 @@ public class ATMSystemTest {
     public void enterAdminInfoCorrectlyWorking() {
         try {
             system.enterAdminInfo("1234", "01012341234");
-        } catch (DataStoreError er) {
-
+        } catch (DataStoreError | InvalidAdminException ex) {
+            fail(ex.getClass().getSimpleName());
         }
         Admin[] admins = system.getAdmins();
 
@@ -219,10 +192,8 @@ public class ATMSystemTest {
         try {
             system.authorizeAdmin(admins[admins.length - 1].getId(), "1234");
             system.selectFunction(FunctionType.RemoveAdmin);
-        } catch (InvalidAdminException ex) {
-            fail("DeleteFailed");
-        } catch (NoneOfFunctionSelected ex) {
-
+        } catch (InvalidAdminException | NoneOfFunctionSelected ex) {
+            fail(ex.getClass().getSimpleName());
         }
     }
 
@@ -231,7 +202,7 @@ public class ATMSystemTest {
         this.system.enterUserId("123456789012356");
         String[] string;
         string = this.system.getUser().getCardList();
-        assertTrue(string[0].equals("123456789012345678"));
+        assertEquals("123456789012345678", string[0]);
     }
 
     @Test
@@ -240,13 +211,12 @@ public class ATMSystemTest {
 
         try {
             system.enterAccountInfo(Bank.HANA, "123456789012345");
-            system.enterPeriodToQuery(new Date(2016-1900,5-1,1),
-                new Date(2018-1900,5-1,30));
-        } catch (AccountDoesNotExist | DataStoreError ex) {
-
-        } catch (FrozenAccountException e) {
-
+            system.enterPeriodToQuery(new Date(2016 - 1900, 5 - 1, 1),
+                new Date(2018 - 1900, 5 - 1, 30));
+        } catch (AccountDoesNotExist | DataStoreError | FrozenAccountException ex) {
+            fail(ex.getClass().getSimpleName());
         }
+
         assertTrue(system.getTransactionList().length > 0);
     }
 
