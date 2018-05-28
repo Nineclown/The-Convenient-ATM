@@ -39,16 +39,25 @@ public class EnterBillAsDollar {
             public void mousePressed(MouseEvent e) {
                 int[] values = new int[11];
 
-                values[4] = Integer.parseInt(dollarOneField.getText());
-                values[5] = Integer.parseInt(dollarTwoField.getText());
-                values[6] = Integer.parseInt(dollarFiveField.getText());
-                values[7] = Integer.parseInt(dollarTenField.getText());
-                values[8] = Integer.parseInt(dollarTwentyField.getText());
-                values[9] = Integer.parseInt(dollarFiftyField.getText());
-                values[10] = Integer.parseInt(dollarHundredField.getText());
-
+                try {
+                    values[4] = Integer.parseInt(dollarOneField.getText());
+                    values[5] = Integer.parseInt(dollarTwoField.getText());
+                    values[6] = Integer.parseInt(dollarFiveField.getText());
+                    values[7] = Integer.parseInt(dollarTenField.getText());
+                    values[8] = Integer.parseInt(dollarTwentyField.getText());
+                    values[9] = Integer.parseInt(dollarFiftyField.getText());
+                    values[10] = Integer.parseInt(dollarHundredField.getText());
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(parentFrame, "올바른 숫자를 입력해주세요", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 if (values[4] + values[5] + values[6] + values[7] + values[8] + values[9] + values[10] > 100) {
                     JOptionPane.showMessageDialog(parentFrame, "지폐의 수가 너무 많습니다, 일부만 다시 넣어주세요", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                if (values[4] + values[5] + values[6] + values[7] + values[8] + values[9] + values[10] == 0) {
+                    JOptionPane.showMessageDialog(parentFrame, "0원을 입금할 수 없습니다", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
