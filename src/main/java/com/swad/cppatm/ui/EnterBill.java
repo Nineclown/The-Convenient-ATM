@@ -59,11 +59,6 @@ public class EnterBill {
                     return;
                 }
 
-                if (values[0] + values[1] + values[2] + values[3] == 0) {
-                    JOptionPane.showMessageDialog(parentFrame, "0원을 입금할 수 없습니다", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-
                 switch (system.getFunction()) {
                     case Deposit:
                         try {
