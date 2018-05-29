@@ -29,7 +29,7 @@ public class EnterDate {
     EnterDate(final JFrame parentFrame, final ATMSystem system) {
         startLabel.setText(setLocalizedString(system, "시작", "Start"));
         endLabel.setText(setLocalizedString(system, "끝", "End"));
-        
+
         cancelButton.setText(setLocalizedString(system, "취소", "Cancel"));
         cancelButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -115,18 +115,18 @@ public class EnterDate {
         enterDatePanel = new JPanel();
         enterDatePanel.setLayout(new GridLayoutManager(3, 3, new Insets(0, 0, 0, 0), -1, -1));
         enterDatePanel.setBackground(new Color(-1));
-        final JLabel label1 = new JLabel();
-        Font label1Font = this.$$$getFont$$$(null, -1, 20, label1.getFont());
-        if (label1Font != null) label1.setFont(label1Font);
-        label1.setForeground(new Color(-16777216));
-        label1.setText("시작");
-        enterDatePanel.add(label1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JLabel label2 = new JLabel();
-        Font label2Font = this.$$$getFont$$$(null, -1, 20, label2.getFont());
-        if (label2Font != null) label2.setFont(label2Font);
-        label2.setForeground(new Color(-16777216));
-        label2.setText("끝");
-        enterDatePanel.add(label2, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        startLabel = new JLabel();
+        Font startLabelFont = this.$$$getFont$$$(null, -1, 20, startLabel.getFont());
+        if (startLabelFont != null) startLabel.setFont(startLabelFont);
+        startLabel.setForeground(new Color(-16777216));
+        startLabel.setText("시작");
+        enterDatePanel.add(startLabel, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        endLabel = new JLabel();
+        Font endLabelFont = this.$$$getFont$$$(null, -1, 20, endLabel.getFont());
+        if (endLabelFont != null) endLabel.setFont(endLabelFont);
+        endLabel.setForeground(new Color(-16777216));
+        endLabel.setText("끝");
+        enterDatePanel.add(endLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         startDateField = new JTextField();
         Font startDateFieldFont = this.$$$getFont$$$(null, -1, 20, startDateField.getFont());
         if (startDateFieldFont != null) startDateField.setFont(startDateFieldFont);

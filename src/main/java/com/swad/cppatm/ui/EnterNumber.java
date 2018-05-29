@@ -4,6 +4,7 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.FunctionType;
+import com.swad.cppatm.enums.Locale;
 import com.swad.cppatm.exceptions.*;
 import com.swad.cppatm.ui.components.JNumberTextField;
 
@@ -32,16 +33,20 @@ public class EnterNumber extends JFrame {
     private JLabel currencyLabel;
     private boolean splitPayFlag = false;
 
+    private String setLocalizedString(ATMSystem system, String ko, String en) {
+        return system.getState().getLocale() == Locale.en_US ? en : ko;
+    }
+
     EnterNumber(final JFrame parentFrame, final ATMSystem system) {
         if (system.getFunction() == FunctionType.ForeignWithdraw) {
-            currencyLabel.setText("달러");
+            currencyLabel.setText(setLocalizedString(system, "달러", "Dollar"));
         }
         if (system.getFunction() == FunctionType.SplitPay) {
-            titleLabel.setText("총 받아야 할 금액을 입력하여 주십시오.");
+            titleLabel.setText(setLocalizedString(system, "총 받아야 할 금액을 입력하여 주십시오.", "Please enter total cash amount to get"));
         }
 
         if (system.getFunction() == FunctionType.Transfer) {
-            titleLabel.setText("보내실 금액을 입력하여 주십시오.");
+            titleLabel.setText(setLocalizedString(system, "보내실 금액을 입력하여 주십시오.", "Please enter cash amount to send"));
         }
 
         a1Button.addMouseListener(new MouseAdapter() {
@@ -104,6 +109,8 @@ public class EnterNumber extends JFrame {
                 numberField.setText(numberField.getText() + "0");
             }
         });
+
+        BSButton.setText(setLocalizedString(system, "정정", "BS"));
         BSButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -114,6 +121,7 @@ public class EnterNumber extends JFrame {
                 numberField.setText(numberField.getText().substring(0, numberField.getText().length() - 1));
             }
         });
+        clearButton.setText(setLocalizedString(system, "지우기", "Clear"));
         clearButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -124,6 +132,7 @@ public class EnterNumber extends JFrame {
                 numberField.setText("");
             }
         });
+        confirmButton.setText(setLocalizedString(system, "입력", "Confirm"));
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
