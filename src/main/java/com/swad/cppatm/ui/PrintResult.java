@@ -4,6 +4,7 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.FunctionType;
+import com.swad.cppatm.enums.Locale;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,11 +16,23 @@ public class PrintResult {
     private JTextField accountBalanceField;
     private JButton confirmButton;
     private JPanel printResultPanel;
+    private JLabel accountLabel;
+    private JLabel balanceLabel;
+    private JLabel titleLabel;
 
-    public PrintResult(final JFrame parentFrame, final ATMSystem system) {
+    private String setLocalizedString(ATMSystem system, String ko, String en) {
+        return system.getState().getLocale() == Locale.en_US ? en : ko;
+    }
+
+    PrintResult(final JFrame parentFrame, final ATMSystem system) {
         accountNumberField.setText(system.getAccount().getAccountNo());
         accountBalanceField.setText(Integer.toString(system.getAccount().getBalance()));
 
+        titleLabel.setText(setLocalizedString(system, "요청하신 거래가 정상적으로 처리되었습니다.", "Transaction is processed correctly."));
+        accountLabel.setText(setLocalizedString(system, "계좌번호", "Account No"));
+        balanceLabel.setText(setLocalizedString(system, "잔액", "Current Balance"));
+
+        confirmButton.setText(setLocalizedString(system, "확인", "Confirm"));
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
