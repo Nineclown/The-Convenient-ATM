@@ -97,7 +97,7 @@ public class EnterBill {
         discardButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if (system.getFunction() == FunctionType.ChangeATMBalance) {
+                if (parentFrame.getTitle().equals("Admin Interface for C++ ATM")) {
                     parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
 
                 } else {
