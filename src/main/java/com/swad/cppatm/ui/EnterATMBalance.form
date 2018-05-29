@@ -6,6 +6,7 @@
       <xy x="20" y="20" width="800" height="600"/>
     </constraints>
     <properties>
+      <background color="-1"/>
       <minimumSize width="800" height="600"/>
       <preferredSize width="800" height="600"/>
     </properties>
@@ -16,10 +17,13 @@
           <grid row="8" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <background color="-10592674"/>
+          <font size="24"/>
+          <foreground color="-1"/>
           <text value="Button"/>
         </properties>
       </component>
-      <component id="9e514" class="javax.swing.JTextField" binding="won50000">
+      <component id="69b02" class="com.swad.cppatm.ui.components.JNumberTextField" binding="won50000">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -30,7 +34,7 @@
           <horizontalAlignment value="11"/>
         </properties>
       </component>
-      <component id="a96f4" class="javax.swing.JTextField" binding="won10000">
+      <component id="e5c7c" class="com.swad.cppatm.ui.components.JNumberTextField" binding="won10000">
         <constraints>
           <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -41,7 +45,7 @@
           <horizontalAlignment value="11"/>
         </properties>
       </component>
-      <component id="b2f79" class="javax.swing.JTextField" binding="won5000">
+      <component id="bed72" class="com.swad.cppatm.ui.components.JNumberTextField" binding="won5000">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -52,7 +56,7 @@
           <horizontalAlignment value="11"/>
         </properties>
       </component>
-      <component id="927f" class="javax.swing.JTextField" binding="won1000">
+      <component id="f90a0" class="com.swad.cppatm.ui.components.JNumberTextField" binding="won1000">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -63,7 +67,7 @@
           <horizontalAlignment value="11"/>
         </properties>
       </component>
-      <component id="f066b" class="javax.swing.JTextField" binding="dollar1">
+      <component id="2ea56" class="com.swad.cppatm.ui.components.JNumberTextField" binding="dollar1">
         <constraints>
           <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -74,7 +78,7 @@
           <horizontalAlignment value="11"/>
         </properties>
       </component>
-      <component id="c96d5" class="javax.swing.JTextField" binding="dollar2">
+      <component id="71ebf" class="com.swad.cppatm.ui.components.JNumberTextField" binding="dollar2">
         <constraints>
           <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -85,7 +89,7 @@
           <horizontalAlignment value="11"/>
         </properties>
       </component>
-      <component id="a3660" class="javax.swing.JTextField" binding="dollar5">
+      <component id="edf2c" class="com.swad.cppatm.ui.components.JNumberTextField" binding="dollar5">
         <constraints>
           <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -97,7 +101,7 @@
           <text value=""/>
         </properties>
       </component>
-      <component id="5867b" class="javax.swing.JTextField" binding="dollar10">
+      <component id="53429" class="com.swad.cppatm.ui.components.JNumberTextField" binding="dollar10">
         <constraints>
           <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -115,6 +119,7 @@
         </constraints>
         <properties>
           <font size="20"/>
+          <foreground color="-16777216"/>
           <text value="₩1000"/>
         </properties>
       </component>
@@ -123,6 +128,9 @@
           <grid row="8" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <background color="-10592674"/>
+          <font size="24"/>
+          <foreground color="-1"/>
           <text value="Button"/>
         </properties>
       </component>
@@ -132,6 +140,7 @@
         </constraints>
         <properties>
           <font size="20"/>
+          <foreground color="-16777216"/>
           <text value="₩5000"/>
         </properties>
       </component>
@@ -141,6 +150,7 @@
         </constraints>
         <properties>
           <font size="20"/>
+          <foreground color="-16777216"/>
           <text value="₩10000"/>
         </properties>
       </component>
@@ -150,6 +160,7 @@
         </constraints>
         <properties>
           <font size="20"/>
+          <foreground color="-16777216"/>
           <text value="₩50000"/>
         </properties>
       </component>
@@ -159,10 +170,11 @@
         </constraints>
         <properties>
           <font size="20"/>
+          <foreground color="-16777216"/>
           <text value="$1"/>
         </properties>
       </component>
-      <component id="9bf40" class="javax.swing.JTextField" binding="dollar100">
+      <component id="3d1f" class="com.swad.cppatm.ui.components.JNumberTextField" binding="dollar100">
         <constraints>
           <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -180,10 +192,11 @@
         </constraints>
         <properties>
           <font size="20"/>
+          <foreground color="-16777216"/>
           <text value="$100"/>
         </properties>
       </component>
-      <component id="c3989" class="javax.swing.JTextField" binding="dollar50">
+      <component id="a2e72" class="com.swad.cppatm.ui.components.JNumberTextField" binding="dollar50">
         <constraints>
           <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -200,10 +213,11 @@
         </constraints>
         <properties>
           <font size="20"/>
+          <foreground color="-16777216"/>
           <text value="$50"/>
         </properties>
       </component>
-      <component id="d5eb8" class="javax.swing.JTextField" binding="dollar20">
+      <component id="77524" class="com.swad.cppatm.ui.components.JNumberTextField" binding="dollar20">
         <constraints>
           <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -214,12 +228,13 @@
           <horizontalAlignment value="11"/>
         </properties>
       </component>
-      <component id="11ee9" class="javax.swing.JLabel">
+      <component id="11ee9" class="javax.swing.JLabel" binding="titleLabel">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font size="20"/>
+          <foreground color="-16777216"/>
           <text value="Input ATM Balance"/>
         </properties>
       </component>
@@ -229,6 +244,7 @@
         </constraints>
         <properties>
           <font size="20"/>
+          <foreground color="-16777216"/>
           <text value="$2"/>
         </properties>
       </component>
@@ -238,6 +254,7 @@
         </constraints>
         <properties>
           <font size="20"/>
+          <foreground color="-16777216"/>
           <text value="$5"/>
         </properties>
       </component>
@@ -247,6 +264,7 @@
         </constraints>
         <properties>
           <font size="20"/>
+          <foreground color="-16777216"/>
           <text value="$10"/>
         </properties>
       </component>
@@ -256,6 +274,7 @@
         </constraints>
         <properties>
           <font size="20"/>
+          <foreground color="-16777216"/>
           <text value="$20"/>
         </properties>
       </component>

@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="enterBillPanel" layout-manager="GridLayoutManager" row-count="16" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="500" height="388"/>
+      <xy x="20" y="20" width="500" height="415"/>
     </constraints>
     <properties>
       <background color="-1"/>
@@ -20,7 +20,7 @@
           <text value="지폐를 입력하여 주십시오."/>
         </properties>
       </component>
-      <component id="955dc" class="javax.swing.JTextField" binding="dollarOneField">
+      <component id="e82db" class="com.swad.cppatm.ui.components.JNumberTextField" binding="dollarOneField">
         <constraints>
           <grid row="1" column="1" row-span="2" col-span="1" vsize-policy="6" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -38,10 +38,10 @@
         <properties>
           <font size="20"/>
           <foreground color="-16777216"/>
-          <text value="1달러권"/>
+          <text value="$1"/>
         </properties>
       </component>
-      <component id="82ecb" class="javax.swing.JTextField" binding="dollarTwoField">
+      <component id="6d38" class="com.swad.cppatm.ui.components.JNumberTextField" binding="dollarTwoField">
         <constraints>
           <grid row="3" column="1" row-span="2" col-span="1" vsize-policy="6" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -59,7 +59,7 @@
         <properties>
           <font size="20"/>
           <foreground color="-16777216"/>
-          <text value="2달러권"/>
+          <text value="$2"/>
         </properties>
       </component>
       <component id="f1049" class="javax.swing.JLabel">
@@ -69,10 +69,10 @@
         <properties>
           <font size="20"/>
           <foreground color="-16777216"/>
-          <text value="5달러권"/>
+          <text value="$5"/>
         </properties>
       </component>
-      <component id="1c1f5" class="javax.swing.JTextField" binding="dollarFiveField">
+      <component id="dc111" class="com.swad.cppatm.ui.components.JNumberTextField" binding="dollarFiveField">
         <constraints>
           <grid row="5" column="1" row-span="2" col-span="1" vsize-policy="6" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -90,10 +90,10 @@
         <properties>
           <font size="20"/>
           <foreground color="-16777216"/>
-          <text value="10달러권"/>
+          <text value="$10"/>
         </properties>
       </component>
-      <component id="be15f" class="javax.swing.JTextField" binding="dollarTenField">
+      <component id="b1a3d" class="com.swad.cppatm.ui.components.JNumberTextField" binding="dollarTenField">
         <constraints>
           <grid row="7" column="1" row-span="2" col-span="1" vsize-policy="6" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -104,81 +104,6 @@
           <foreground color="-16777216"/>
         </properties>
       </component>
-      <component id="ab7e0" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="1" column="2" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font size="20"/>
-          <foreground color="-16777216"/>
-          <text value="장"/>
-        </properties>
-      </component>
-      <component id="de718" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="3" column="2" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font size="20"/>
-          <foreground color="-16777216"/>
-          <text value="장"/>
-        </properties>
-      </component>
-      <component id="f129d" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="5" column="2" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font size="20"/>
-          <foreground color="-16777216"/>
-          <text value="장"/>
-        </properties>
-      </component>
-      <component id="7be12" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="7" column="2" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font size="20"/>
-          <foreground color="-16777216"/>
-          <text value="장"/>
-        </properties>
-      </component>
-      <splitpane id="9c400">
-        <constraints>
-          <grid row="15" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="-1" height="60"/>
-          </grid>
-        </constraints>
-        <properties>
-          <background color="-1"/>
-        </properties>
-        <border type="none"/>
-        <children>
-          <component id="32039" class="javax.swing.JButton" binding="confirmButton">
-            <constraints>
-              <splitpane position="left"/>
-            </constraints>
-            <properties>
-              <background color="-10592674"/>
-              <font size="20"/>
-              <foreground color="-1"/>
-              <text value="입력"/>
-            </properties>
-          </component>
-          <component id="2468a" class="javax.swing.JButton" binding="discardButton">
-            <constraints>
-              <splitpane position="right"/>
-            </constraints>
-            <properties>
-              <background color="-10592674"/>
-              <font size="20"/>
-              <foreground color="-1"/>
-              <text value="취소"/>
-            </properties>
-          </component>
-        </children>
-      </splitpane>
       <component id="729c6" class="javax.swing.JLabel">
         <constraints>
           <grid row="9" column="0" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -186,7 +111,7 @@
         <properties>
           <font size="20"/>
           <foreground color="-16777216"/>
-          <text value="20달러권"/>
+          <text value="$20"/>
         </properties>
       </component>
       <component id="5f38d" class="javax.swing.JLabel">
@@ -196,7 +121,7 @@
         <properties>
           <font size="20"/>
           <foreground color="-16777216"/>
-          <text value="50달러권"/>
+          <text value="$50"/>
         </properties>
       </component>
       <component id="ca937" class="javax.swing.JLabel">
@@ -206,10 +131,10 @@
         <properties>
           <font size="20"/>
           <foreground color="-16777216"/>
-          <text value="100달러권"/>
+          <text value="$100"/>
         </properties>
       </component>
-      <component id="11ca2" class="javax.swing.JTextField" binding="dollarTwentyField">
+      <component id="9bf58" class="com.swad.cppatm.ui.components.JNumberTextField" binding="dollarTwentyField">
         <constraints>
           <grid row="9" column="1" row-span="2" col-span="1" vsize-policy="6" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -220,7 +145,7 @@
           <foreground color="-16777216"/>
         </properties>
       </component>
-      <component id="f207a" class="javax.swing.JTextField" binding="dollarFiftyField">
+      <component id="8dede" class="com.swad.cppatm.ui.components.JNumberTextField" binding="dollarFiftyField">
         <constraints>
           <grid row="11" column="1" row-span="2" col-span="1" vsize-policy="6" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -231,7 +156,7 @@
           <foreground color="-16777216"/>
         </properties>
       </component>
-      <component id="870bf" class="javax.swing.JTextField" binding="dollarHundredField">
+      <component id="2120a" class="com.swad.cppatm.ui.components.JNumberTextField" binding="dollarHundredField">
         <constraints>
           <grid row="13" column="1" row-span="2" col-span="1" vsize-policy="6" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -242,36 +167,44 @@
           <foreground color="-16777216"/>
         </properties>
       </component>
-      <component id="d8825" class="javax.swing.JLabel">
+      <grid id="fdad6" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="9" column="2" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="15" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font size="20"/>
-          <foreground color="-16777216"/>
-          <text value="장"/>
+          <background color="-1"/>
         </properties>
-      </component>
-      <component id="27212" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="11" column="2" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font size="20"/>
-          <foreground color="-16777216"/>
-          <text value="장"/>
-        </properties>
-      </component>
-      <component id="b862d" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="13" column="2" row-span="2" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font size="20"/>
-          <foreground color="-16777216"/>
-          <text value="장"/>
-        </properties>
-      </component>
+        <border type="none"/>
+        <children>
+          <component id="e8921" class="javax.swing.JButton" binding="confirmButton">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="-1" height="60"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-10592674"/>
+              <font size="20"/>
+              <foreground color="-1"/>
+              <text value="Button"/>
+            </properties>
+          </component>
+          <component id="9338c" class="javax.swing.JButton" binding="discardButton">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="-1" height="60"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-10592674"/>
+              <font size="20"/>
+              <foreground color="-1"/>
+              <text value="Button"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
     </children>
   </grid>
 </form>

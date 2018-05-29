@@ -5,6 +5,7 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.exceptions.*;
+import com.swad.cppatm.ui.components.JNumberTextField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +14,7 @@ import java.awt.event.MouseEvent;
 
 public class EnterNumber extends JFrame {
     private JPanel enterNumberPanel;
-    private JTextField numberField;
+    private JNumberTextField numberField;
     private JButton a1Button;
     private JButton a2Button;
     private JButton a3Button;
@@ -31,7 +32,7 @@ public class EnterNumber extends JFrame {
     private JLabel currencyLabel;
     private boolean splitPayFlag = false;
 
-    public EnterNumber(final JFrame parentFrame, final ATMSystem system) {
+    EnterNumber(final JFrame parentFrame, final ATMSystem system) {
         if (system.getFunction() == FunctionType.ForeignWithdraw) {
             currencyLabel.setText("달러");
         }
@@ -42,6 +43,7 @@ public class EnterNumber extends JFrame {
         if (system.getFunction() == FunctionType.Transfer) {
             titleLabel.setText("보내실 금액을 입력하여 주십시오.");
         }
+
         a1Button.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -125,7 +127,7 @@ public class EnterNumber extends JFrame {
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                int insertNumber = Integer.parseInt(numberField.getText());
+                int insertNumber = numberField.getNumber();
 
                 switch (system.getFunction()) {
                     case Withdraw:
@@ -269,7 +271,7 @@ public class EnterNumber extends JFrame {
         if (label1Font != null) label1.setFont(label1Font);
         label1.setText("");
         panel1.add(label1, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        numberField = new JTextField();
+        numberField = new JNumberTextField();
         Font numberFieldFont = this.$$$getFont$$$(null, -1, 30, numberField.getFont());
         if (numberFieldFont != null) numberField.setFont(numberFieldFont);
         numberField.setHorizontalAlignment(11);

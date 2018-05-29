@@ -8,6 +8,7 @@ import com.swad.cppatm.enums.Locale;
 import com.swad.cppatm.exceptions.DataStoreError;
 import com.swad.cppatm.exceptions.InvalidBillException;
 import com.swad.cppatm.exceptions.OverflowBillException;
+import com.swad.cppatm.ui.components.JNumberTextField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,10 +16,10 @@ import java.awt.event.*;
 
 public class EnterBill {
     private JPanel enterBillPanel;
-    private JTextField thousandField;
-    private JTextField fiveThousandField;
-    private JTextField tenThousandField;
-    private JTextField fiftyThousandField;
+    private JNumberTextField thousandField;
+    private JNumberTextField fiveThousandField;
+    private JNumberTextField tenThousandField;
+    private JNumberTextField fiftyThousandField;
     private JButton discardButton;
     private JButton confirmButton;
     private JLabel thousandLabel;
@@ -35,7 +36,7 @@ public class EnterBill {
         }
     }
 
-    public EnterBill(final JFrame parentFrame, final ATMSystem system) {
+    EnterBill(final JFrame parentFrame, final ATMSystem system) {
         titleLabel.setText(setLocalizedString(system, "지폐를 입력하여 주십시오.", "Please Insert bills."));
         thousandField.setText("0");
         fiveThousandField.setText("0");
@@ -48,16 +49,12 @@ public class EnterBill {
             @Override
             public void mousePressed(MouseEvent e) {
                 int[] values = new int[11];
-                try {
-                    values[0] = Integer.parseInt(thousandField.getText());
-                    values[1] = Integer.parseInt(fiveThousandField.getText());
-                    values[2] = Integer.parseInt(tenThousandField.getText());
-                    values[3] = Integer.parseInt(fiftyThousandField.getText());
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(parentFrame, "올바른 숫자를 입력해주세요", "Error", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-                ;
+
+                values[0] = thousandField.getNumber();
+                values[1] = fiveThousandField.getNumber();
+                values[2] = tenThousandField.getNumber();
+                values[3] = fiftyThousandField.getNumber();
+
                 if (values[0] + values[1] + values[2] + values[3] > 100) {
                     JOptionPane.showMessageDialog(parentFrame, "지폐의 수가 너무 많습니다, 일부만 다시 넣어주세요", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
@@ -142,67 +139,64 @@ public class EnterBill {
         titleLabel.setForeground(new Color(-16777216));
         titleLabel.setText("지폐를 입력하여 주십시오.");
         enterBillPanel.add(titleLabel, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        thousandField = new JTextField();
-        Font thousandFieldFont = this.$$$getFont$$$(null, -1, 20, thousandField.getFont());
+        thousandField = new JNumberTextField();
+        Font thousandFieldFont = this.$$$getFont$$$(null, -1, 24, thousandField.getFont());
         if (thousandFieldFont != null) thousandField.setFont(thousandFieldFont);
-        thousandField.setForeground(new Color(-16777216));
         enterBillPanel.add(thousandField, new GridConstraints(1, 1, 2, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, -1), null, 0, false));
         thousandLabel = new JLabel();
         Font thousandLabelFont = this.$$$getFont$$$(null, -1, 20, thousandLabel.getFont());
         if (thousandLabelFont != null) thousandLabel.setFont(thousandLabelFont);
         thousandLabel.setForeground(new Color(-16777216));
-        thousandLabel.setText("\\ 1000");
+        thousandLabel.setText("₩ 1000");
         enterBillPanel.add(thousandLabel, new GridConstraints(1, 0, 2, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        fiveThousandField = new JTextField();
-        Font fiveThousandFieldFont = this.$$$getFont$$$(null, -1, 20, fiveThousandField.getFont());
+        fiveThousandField = new JNumberTextField();
+        Font fiveThousandFieldFont = this.$$$getFont$$$(null, -1, 24, fiveThousandField.getFont());
         if (fiveThousandFieldFont != null) fiveThousandField.setFont(fiveThousandFieldFont);
-        fiveThousandField.setForeground(new Color(-16777216));
         enterBillPanel.add(fiveThousandField, new GridConstraints(3, 1, 2, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, -1), null, 0, false));
         fiveThousandLabel = new JLabel();
         Font fiveThousandLabelFont = this.$$$getFont$$$(null, -1, 20, fiveThousandLabel.getFont());
         if (fiveThousandLabelFont != null) fiveThousandLabel.setFont(fiveThousandLabelFont);
         fiveThousandLabel.setForeground(new Color(-16777216));
-        fiveThousandLabel.setText("\\ 5000");
+        fiveThousandLabel.setText("₩ 5000");
         enterBillPanel.add(fiveThousandLabel, new GridConstraints(3, 0, 2, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         tenThousandLabel = new JLabel();
         Font tenThousandLabelFont = this.$$$getFont$$$(null, -1, 20, tenThousandLabel.getFont());
         if (tenThousandLabelFont != null) tenThousandLabel.setFont(tenThousandLabelFont);
         tenThousandLabel.setForeground(new Color(-16777216));
-        tenThousandLabel.setText("\\ 10000");
+        tenThousandLabel.setText("₩ 10000");
         enterBillPanel.add(tenThousandLabel, new GridConstraints(5, 0, 2, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        tenThousandField = new JTextField();
-        Font tenThousandFieldFont = this.$$$getFont$$$(null, -1, 20, tenThousandField.getFont());
+        tenThousandField = new JNumberTextField();
+        Font tenThousandFieldFont = this.$$$getFont$$$(null, -1, 24, tenThousandField.getFont());
         if (tenThousandFieldFont != null) tenThousandField.setFont(tenThousandFieldFont);
-        tenThousandField.setForeground(new Color(-16777216));
         enterBillPanel.add(tenThousandField, new GridConstraints(5, 1, 2, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, -1), null, 0, false));
         fiftyThousandLabel = new JLabel();
         Font fiftyThousandLabelFont = this.$$$getFont$$$(null, -1, 20, fiftyThousandLabel.getFont());
         if (fiftyThousandLabelFont != null) fiftyThousandLabel.setFont(fiftyThousandLabelFont);
         fiftyThousandLabel.setForeground(new Color(-16777216));
-        fiftyThousandLabel.setText("\\ 50000");
+        fiftyThousandLabel.setText("₩ 50000");
         enterBillPanel.add(fiftyThousandLabel, new GridConstraints(7, 0, 2, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        fiftyThousandField = new JTextField();
-        Font fiftyThousandFieldFont = this.$$$getFont$$$(null, -1, 20, fiftyThousandField.getFont());
+        fiftyThousandField = new JNumberTextField();
+        Font fiftyThousandFieldFont = this.$$$getFont$$$(null, -1, 24, fiftyThousandField.getFont());
         if (fiftyThousandFieldFont != null) fiftyThousandField.setFont(fiftyThousandFieldFont);
-        fiftyThousandField.setForeground(new Color(-16777216));
         enterBillPanel.add(fiftyThousandField, new GridConstraints(7, 1, 2, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, -1), null, 0, false));
-        final JSplitPane splitPane1 = new JSplitPane();
-        splitPane1.setBackground(new Color(-1));
-        enterBillPanel.add(splitPane1, new GridConstraints(9, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(-1, 60), null, 0, false));
+        final JPanel panel1 = new JPanel();
+        panel1.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
+        panel1.setBackground(new Color(-1));
+        enterBillPanel.add(panel1, new GridConstraints(9, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         confirmButton = new JButton();
         confirmButton.setBackground(new Color(-10592674));
-        Font confirmButtonFont = this.$$$getFont$$$(null, -1, 20, confirmButton.getFont());
+        Font confirmButtonFont = this.$$$getFont$$$(null, -1, 24, confirmButton.getFont());
         if (confirmButtonFont != null) confirmButton.setFont(confirmButtonFont);
         confirmButton.setForeground(new Color(-1));
-        confirmButton.setText("입력");
-        splitPane1.setLeftComponent(confirmButton);
+        confirmButton.setText("Button");
+        panel1.add(confirmButton, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         discardButton = new JButton();
         discardButton.setBackground(new Color(-10592674));
-        Font discardButtonFont = this.$$$getFont$$$(null, -1, 20, discardButton.getFont());
+        Font discardButtonFont = this.$$$getFont$$$(null, -1, 24, discardButton.getFont());
         if (discardButtonFont != null) discardButton.setFont(discardButtonFont);
         discardButton.setForeground(new Color(-1));
-        discardButton.setText("취소");
-        splitPane1.setRightComponent(discardButton);
+        discardButton.setText("Button");
+        panel1.add(discardButton, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
