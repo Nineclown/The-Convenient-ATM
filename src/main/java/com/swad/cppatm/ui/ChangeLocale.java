@@ -2,6 +2,7 @@ package com.swad.cppatm.ui;
 
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.swad.cppatm.Main;
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.Locale;
 
@@ -15,20 +16,19 @@ public class ChangeLocale {
     private JButton koreanButton;
     private JButton englishButton;
 
-    public ChangeLocale(final JFrame parentFrame, final ATMSystem system) {
+    ChangeLocale(final JFrame parentFrame, final ATMSystem system) {
+        Main application = Main.getInstance();
+
+        System.out.println("ChangeLocale() : applicaton is " + application);
+        System.out.println("ChangeLocale(): userFrame is " + System.identityHashCode(application.userFrame));
+        System.out.println("ChangeLocale(): adminFrame is " + System.identityHashCode(application.adminFrame));
+
         koreanButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 system.changeLocale(Locale.ko_KR);
 
-                if (parentFrame.getTitle().equals("Admin Interface for C++ ATM")) {
-                    parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
-                } else {
-                    parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
-                }
-
-                parentFrame.invalidate();
-                parentFrame.validate();
+                application.initializeScreen();
             }
         });
         englishButton.addMouseListener(new MouseAdapter() {
@@ -36,14 +36,7 @@ public class ChangeLocale {
             public void mousePressed(MouseEvent e) {
                 system.changeLocale(Locale.en_US);
 
-                if (parentFrame.getTitle().equals("Admin Interface for C++ ATM")) {
-                    parentFrame.setContentPane(new AdminSelectFunction(parentFrame, system).getPanel());
-                } else {
-                    parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
-                }
-
-                parentFrame.invalidate();
-                parentFrame.validate();
+                application.initializeScreen();
             }
         });
     }
