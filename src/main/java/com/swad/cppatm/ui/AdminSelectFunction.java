@@ -33,6 +33,8 @@ public class AdminSelectFunction extends JFrame {
     }
 
     AdminSelectFunction(final JFrame parentFrame, final ATMSystem system) {
+        system.removeFunctionSelection();
+
         atmStateLabel.setText(system.getState().available() ? "Active" : "Frozen");
 
         addAdminButton.setText(setLocalizedString(system, "관리자 추가", "Add Admin"));
