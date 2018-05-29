@@ -39,7 +39,7 @@ public class ATMSystemTest {
 
     @Test(expected = AccountDoesNotExist.class)
     public void enterAccountInfoRaisesExceptionIfAccountDoesNotExistOnDataStore()
-        throws AccountDoesNotExist, FrozenAccountException, DataStoreError, NoneOfFunctionSelected {
+        throws AccountDoesNotExist, FrozenAccountException, DataStoreError, NoneOfFunctionSelected, SameAccountTransferException {
         system.enterAccountInfo(Bank.WOORI, "DOESNOTEXIST");
     }
 
@@ -68,7 +68,7 @@ public class ATMSystemTest {
     public void enterAccountInfoChangesProperty() {
         try {
             system.enterAccountInfo(Bank.HANA, "123456789012345");
-        } catch (AccountDoesNotExist | DataStoreError | NoneOfFunctionSelected | FrozenAccountException ex) {
+        } catch (AccountDoesNotExist | DataStoreError | NoneOfFunctionSelected | FrozenAccountException | SameAccountTransferException ex) {
             fail(ex.getClass().getSimpleName());
         }
 
@@ -81,8 +81,8 @@ public class ATMSystemTest {
     public void enterPasswordSuccess() {
         try {
             system.enterAccountInfo(Bank.HANA, "123456789012345");
-        } catch (AccountDoesNotExist | DataStoreError | NoneOfFunctionSelected | FrozenAccountException e) {
-            fail(e.getClass().getSimpleName());
+        } catch (AccountDoesNotExist | DataStoreError | NoneOfFunctionSelected | FrozenAccountException | SameAccountTransferException ex) {
+            fail(ex.getClass().getSimpleName());
         }
 
         try {
@@ -99,7 +99,7 @@ public class ATMSystemTest {
         int index;
         try {
             system.enterAccountInfo(Bank.HANA, "123456789012345t");
-        } catch (AccountDoesNotExist | DataStoreError | NoneOfFunctionSelected ex) {
+        } catch (AccountDoesNotExist | DataStoreError | NoneOfFunctionSelected | SameAccountTransferException ex) {
             fail(ex.getClass().getSimpleName());
         } catch (FrozenAccountException ex) {
             // If account is saved as frozen, unfreeze it.
@@ -186,7 +186,7 @@ public class ATMSystemTest {
         } catch (DataStoreError | InvalidAdminException ex) {
             fail(ex.getClass().getSimpleName());
         }
-        
+
         Admin[] admins = system.getAdmins();
 
         assertEquals("1234", admins[admins.length - 1].getPassword());
@@ -216,7 +216,7 @@ public class ATMSystemTest {
             system.enterAccountInfo(Bank.HANA, "123456789012345");
             system.enterPeriodToQuery(new Date(2016 - 1900, 5 - 1, 1),
                 new Date(2018 - 1900, 5 - 1, 30));
-        } catch (AccountDoesNotExist | DataStoreError | FrozenAccountException ex) {
+        } catch (AccountDoesNotExist | DataStoreError | FrozenAccountException | SameAccountTransferException ex) {
             fail(ex.getClass().getSimpleName());
         }
 
