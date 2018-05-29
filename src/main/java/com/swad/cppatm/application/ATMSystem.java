@@ -109,8 +109,8 @@ public class ATMSystem {
 
     public void selectFunction(FunctionType function) throws NoneOfFunctionSelected, MultipleFunctionsExecuted {
         // 중복 실행 불가!
-        if ( (Arrays.asList(FunctionType.getUserFunctions()).contains(function) && Arrays.asList(FunctionType.getAdminFunctions()).contains(this.function) ) ||
-             (Arrays.asList(FunctionType.getAdminFunctions()).contains(function) && Arrays.asList(FunctionType.getUserFunctions()).contains(this.function) )) {
+        if ((Arrays.asList(FunctionType.getUserFunctions()).contains(function) && Arrays.asList(FunctionType.getAdminFunctions()).contains(this.function)) ||
+            (Arrays.asList(FunctionType.getAdminFunctions()).contains(function) && Arrays.asList(FunctionType.getUserFunctions()).contains(this.function))) {
             throw new MultipleFunctionsExecuted();
         }
 
@@ -212,7 +212,7 @@ public class ATMSystem {
         this.function = function;
     }
 
-    public void enterAccountInfo(Bank bank, String accountNo) throws AccountDoesNotExist, DataStoreError, FrozenAccountException, NoneOfFunctionSelected {
+    public void enterAccountInfo(Bank bank, String accountNo) throws AccountDoesNotExist, DataStoreError, FrozenAccountException, NoneOfFunctionSelected, SameAccountTransferException{
         DataStore dataStore = new DataStore();
         this.account = dataStore.loadAccountData(bank, accountNo);
         retry = 0;
@@ -248,6 +248,8 @@ public class ATMSystem {
                 //Transfer enter Account from.
                 if (this.fromTransaction.getAccount() == null) {
                     this.fromTransaction.setAccount(this.account);
+                } else if (this.fromTransaction.getAccount().getAccountNo().equals(this.account.getAccountNo())) {
+                    throw new SameAccountTransferException();
                 } else {
                     this.toTransaction.setAccount(this.account);
                 }

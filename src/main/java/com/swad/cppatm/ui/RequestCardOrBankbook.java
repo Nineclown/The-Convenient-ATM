@@ -6,10 +6,7 @@ import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.Bank;
 import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.enums.Locale;
-import com.swad.cppatm.exceptions.AccountDoesNotExist;
-import com.swad.cppatm.exceptions.DataStoreError;
-import com.swad.cppatm.exceptions.FrozenAccountException;
-import com.swad.cppatm.exceptions.NoneOfFunctionSelected;
+import com.swad.cppatm.exceptions.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -49,7 +46,6 @@ public class RequestCardOrBankbook {
             JOptionPane.showMessageDialog(parentFrame, "BankName is Invaild.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-
         if (bankbookNumberField.getText().length() == 0) {
             JOptionPane.showMessageDialog(parentFrame, "No number at all.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
@@ -68,6 +64,9 @@ public class RequestCardOrBankbook {
             return;
         } catch (FrozenAccountException ex) {
             JOptionPane.showMessageDialog(parentFrame, "Account is frozen", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        } catch (SameAccountTransferException ex) {
+            JOptionPane.showMessageDialog(parentFrame, "Can't transfer to yourself", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
