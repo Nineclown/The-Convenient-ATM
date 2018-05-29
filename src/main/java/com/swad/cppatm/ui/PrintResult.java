@@ -76,18 +76,18 @@ public class PrintResult {
         printResultPanel.setBackground(new Color(-1));
         printResultPanel.setMinimumSize(new Dimension(800, 600));
         printResultPanel.setPreferredSize(new Dimension(800, 600));
-        final JLabel label1 = new JLabel();
-        Font label1Font = this.$$$getFont$$$(null, -1, 20, label1.getFont());
-        if (label1Font != null) label1.setFont(label1Font);
-        label1.setForeground(new Color(-16777216));
-        label1.setText("계좌번호");
-        printResultPanel.add(label1, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JLabel label2 = new JLabel();
-        Font label2Font = this.$$$getFont$$$(null, -1, 20, label2.getFont());
-        if (label2Font != null) label2.setFont(label2Font);
-        label2.setForeground(new Color(-16777216));
-        label2.setText("잔액");
-        printResultPanel.add(label2, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        accountLabel = new JLabel();
+        Font accountLabelFont = this.$$$getFont$$$(null, -1, 20, accountLabel.getFont());
+        if (accountLabelFont != null) accountLabel.setFont(accountLabelFont);
+        accountLabel.setForeground(new Color(-16777216));
+        accountLabel.setText("계좌번호");
+        printResultPanel.add(accountLabel, new GridConstraints(1, 0, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        balanceLabel = new JLabel();
+        Font balanceLabelFont = this.$$$getFont$$$(null, -1, 20, balanceLabel.getFont());
+        if (balanceLabelFont != null) balanceLabel.setFont(balanceLabelFont);
+        balanceLabel.setForeground(new Color(-16777216));
+        balanceLabel.setText("잔액");
+        printResultPanel.add(balanceLabel, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         accountNumberField = new JTextField();
         accountNumberField.setEditable(false);
         Font accountNumberFieldFont = this.$$$getFont$$$(null, -1, 20, accountNumberField.getFont());
@@ -105,12 +105,12 @@ public class PrintResult {
         confirmButton.setForeground(new Color(-1));
         confirmButton.setText("확인");
         printResultPanel.add(confirmButton, new GridConstraints(3, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        final JLabel label3 = new JLabel();
-        Font label3Font = this.$$$getFont$$$(null, -1, 20, label3.getFont());
-        if (label3Font != null) label3.setFont(label3Font);
-        label3.setForeground(new Color(-16777216));
-        label3.setText("요청하신 거래가 정상적으로 처리되었습니다.");
-        printResultPanel.add(label3, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        titleLabel = new JLabel();
+        Font titleLabelFont = this.$$$getFont$$$(null, -1, 20, titleLabel.getFont());
+        if (titleLabelFont != null) titleLabel.setFont(titleLabelFont);
+        titleLabel.setForeground(new Color(-16777216));
+        titleLabel.setText("요청하신 거래가 정상적으로 처리되었습니다.");
+        printResultPanel.add(titleLabel, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
