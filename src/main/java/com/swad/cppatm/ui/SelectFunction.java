@@ -44,7 +44,7 @@ public class SelectFunction extends JFrame {
                     system.selectFunction(FunctionType.Deposit);
                 } catch (NoneOfFunctionSelected exception) {
                     JOptionPane.showMessageDialog(parentFrame,
-                        "ATM is Freezed",
+                        "ATM is froze",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
                     return;
@@ -64,7 +64,7 @@ public class SelectFunction extends JFrame {
                     system.selectFunction(FunctionType.ForeignDeposit);
                 } catch (NoneOfFunctionSelected ex) {
                     JOptionPane.showMessageDialog(parentFrame,
-                        "ATM is Freezed",
+                        "ATM is froze",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
                     return;
@@ -84,7 +84,7 @@ public class SelectFunction extends JFrame {
                     system.selectFunction(FunctionType.Withdraw);
                 } catch (NoneOfFunctionSelected ex) {
                     JOptionPane.showMessageDialog(parentFrame,
-                        "ATM is Freezed",
+                        "ATM is froze",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
                     return;
@@ -104,7 +104,7 @@ public class SelectFunction extends JFrame {
                     system.selectFunction(FunctionType.QueryBalance);
                 } catch (NoneOfFunctionSelected ex) {
                     JOptionPane.showMessageDialog(parentFrame,
-                        "ATM is Freezed",
+                        "ATM is froze",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
                     return;
@@ -125,7 +125,7 @@ public class SelectFunction extends JFrame {
 
                 } catch (NoneOfFunctionSelected ex) {
                     JOptionPane.showMessageDialog(parentFrame,
-                        "ATM is Freezed",
+                        "ATM is froze",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
                     return;
@@ -145,7 +145,7 @@ public class SelectFunction extends JFrame {
                     system.selectFunction(FunctionType.QueryTransactionList);
                 } catch (NoneOfFunctionSelected ex) {
                     JOptionPane.showMessageDialog(parentFrame,
-                        "ATM is Freezed",
+                        "ATM is froze",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
                     return;
@@ -165,7 +165,7 @@ public class SelectFunction extends JFrame {
                     system.selectFunction(FunctionType.ReportLostCard);
                 } catch (NoneOfFunctionSelected ex) {
                     JOptionPane.showMessageDialog(parentFrame,
-                        "ATM is Freezed",
+                        "ATM is froze",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
                     return;
@@ -184,7 +184,7 @@ public class SelectFunction extends JFrame {
                     system.selectFunction(FunctionType.GetLotteryPrize);
                 } catch (NoneOfFunctionSelected ex) {
                     JOptionPane.showMessageDialog(parentFrame,
-                        "ATM is Freezed",
+                        "ATM is froze",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
                     return;
@@ -203,7 +203,7 @@ public class SelectFunction extends JFrame {
                     system.selectFunction(FunctionType.ChangeLocale);
                 } catch (NoneOfFunctionSelected ex) {
                     JOptionPane.showMessageDialog(parentFrame,
-                        "ATM is Freezed",
+                        "ATM is froze",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
                     return;
@@ -223,7 +223,7 @@ public class SelectFunction extends JFrame {
                     system.selectFunction(FunctionType.Transfer);
                 } catch (NoneOfFunctionSelected ex) {
                     JOptionPane.showMessageDialog(parentFrame,
-                        "ATM is Freezed",
+                        "ATM is froze",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
                     return;
@@ -243,7 +243,7 @@ public class SelectFunction extends JFrame {
                     system.selectFunction(FunctionType.SplitPay);
                 } catch (NoneOfFunctionSelected ex) {
                     JOptionPane.showMessageDialog(parentFrame,
-                        "ATM is Freezed",
+                        "ATM is froze",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
                     return;

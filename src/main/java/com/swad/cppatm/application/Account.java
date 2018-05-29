@@ -32,7 +32,7 @@ public class Account {
         this.password = 0;
         this.balance = 0;
         this.state = true;
-        this.transactions = new ArrayList<Transaction>();
+        this.transactions = new ArrayList<>();
     }
 
     // Getter
@@ -42,7 +42,10 @@ public class Account {
      *
      * @return Account's balance
      */
-    public boolean getState(){return this.state;}
+    public boolean getState() {
+        return this.state;
+    }
+
     public int getBalance() {
         return this.balance;
     }
@@ -99,7 +102,7 @@ public class Account {
      * @param cashAmount amount of cash
      */
     public void changeBalance(int cashAmount) throws NegativeBalanceError {
-        if ( (balance + cashAmount) < 0 ) {
+        if ((balance + cashAmount) < 0) {
             throw new NegativeBalanceError();
         }
 
@@ -136,7 +139,7 @@ public class Account {
         this.state = false;
         try {
             this.saveAccount();
-        }catch(DataStoreError e){
+        } catch (DataStoreError e) {
 
         }
     }
@@ -149,13 +152,14 @@ public class Account {
      * @return Transaction history
      */
     public ArrayList<Transaction> getTransactions(Date start, Date end) {
-        ArrayList<Transaction> list = new ArrayList<Transaction>();
+        ArrayList<Transaction> list = new ArrayList<>();
 
-        for(Transaction t : transactions){
-            if(t.getTime().compareTo(start) > 0 && t.getTime().compareTo(end) < 0){
+        for (Transaction t : transactions) {
+            if (t.getTime().compareTo(start) > 0 && t.getTime().compareTo(end) < 0) {
                 list.add(t);
             }
         }
+
         return list;
     }
 
@@ -163,15 +167,10 @@ public class Account {
      * Save account data to DataStore
      */
     public void saveAccount() throws DataStoreError {
-        if(datastore == null){
+        if (datastore == null) {
             datastore = new DataStore();
         }
 
-        try {
-            datastore.saveAccountData(this);
-        } catch (DataStoreError e) {
-            throw e;
-        }
+        datastore.saveAccountData(this);
     }
-
 }

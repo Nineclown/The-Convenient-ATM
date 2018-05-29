@@ -58,7 +58,7 @@ public class Transaction {
 
     public void calcFee() {
         int fee;
-        if(this.tcType == TransactionType.ReceiveTransfer){
+        if (this.tcType == TransactionType.ReceiveTransfer) {
             return;
         }
 

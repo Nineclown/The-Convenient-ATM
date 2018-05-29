@@ -11,13 +11,15 @@ public class SystemState {
         return this.state;
     }
 
-    public void changeSystemLocale(Locale locale) {
+    void changeSystemLocale(Locale locale) {
         this.locale = locale;
     }
 
-    public void toggleSystem() {
+    void toggleSystem() {
         this.state = !state;
     }
 
-    public Locale getLocale(){return this.locale;}
+    public Locale getLocale() {
+        return this.locale;
+    }
 }

@@ -442,8 +442,8 @@ public class ATMSystem {
         }
 
         System.out.print("Export Bills : ");
-        for (int i = 0; i < billAmount.length; i++) {
-            System.out.print(-billAmount[i] + "/");
+        for (int bills : billAmount) {
+            System.out.print(-bills + "/");
         }
         System.out.println();
     }
@@ -454,26 +454,27 @@ public class ATMSystem {
         int[] billType;
         int length;
 
-        if (cashType.equals(("WON"))) {
-            billType = new int[]{50000, 10000};
-            length = billType.length;
-            for (int i = 0; i < length; i++) {
-                int bill = cashAmount / billType[i];
-                bills[3 - i] = bill;
-                cashAmount -= billType[i] * bill;
-            }
-        } else if (cashType.equals("Dollar")) {
-            billType = new int[]{
-                100, 50, 20, 10, 5, 2, 1
-            };
-            length = billType.length;
-            for (int i = 0; i < length; i++) {
-                int bill = cashAmount / billType[i];
-                bills[10 - i] = bill;
-                cashAmount -= billType[i] * bill;
-            }
-        } else {
-            return null;
+        switch (cashType) {
+            case "WON":
+                billType = new int[]{50000, 10000};
+                length = billType.length;
+                for (int i = 0; i < length; i++) {
+                    int bill = cashAmount / billType[i];
+                    bills[3 - i] = bill;
+                    cashAmount -= billType[i] * bill;
+                }
+                break;
+            case "Dollar":
+                billType = new int[]{100, 50, 20, 10, 5, 2, 1};
+                length = billType.length;
+                for (int i = 0; i < length; i++) {
+                    int bill = cashAmount / billType[i];
+                    bills[10 - i] = bill;
+                    cashAmount -= billType[i] * bill;
+                }
+                break;
+            default:
+                return null;
         }
         return bills;
     }
@@ -493,8 +494,8 @@ public class ATMSystem {
                 currency = Double.parseDouble(inputLine.substring(inputLine.indexOf(':') + 1, inputLine.length() - 1));
             }
         } catch (Exception e) {
-
         }
+
         return currency;
     }
 
@@ -580,9 +581,9 @@ public class ATMSystem {
     }
 
     public void authorizeAdmin(String adminId, String adminPw) throws InvalidAdminException {
-        for (int i = 0; i < this.admins.size(); i++) {
-            if (this.admins.get(i).checkAdminAccount(adminId, adminPw)) {
-                this.currentAdmin = this.admins.get(i);
+        for (Admin admin : this.admins) {
+            if (admin.checkAdminAccount(adminId, adminPw)) {
+                this.currentAdmin = admin;
                 return;
             }
         }

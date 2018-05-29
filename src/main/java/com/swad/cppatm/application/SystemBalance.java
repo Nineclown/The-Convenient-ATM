@@ -11,7 +11,7 @@ public class SystemBalance {
     private int upAlarmLimit;
     private int downAlarmLimit;
 
-    public SystemBalance() {
+    SystemBalance() {
         this.topLimit = 1000;
         this.bottomLimit = 0;
         this.upAlarmLimit = 900;
@@ -26,19 +26,17 @@ public class SystemBalance {
     }
 
     public void changeSystemBalance(int[] billAmount) throws OverflowBillException, AdminAlarmException {
-        int min = topLimit;
-        int max = bottomLimit;
         int[] temp = new int[11];
-        boolean isExecption = false;
+        boolean overflow = false;
 
         for (int i = 0; i < this.current.length; i++) {
             temp[i] = billAmount[i] + current[i];
             if (temp[i] < bottomLimit || temp[i] > topLimit) {
-                isExecption = true;
+                overflow = true;
             }
         }
 
-        if (isExecption) {
+        if (overflow) {
             throw new OverflowBillException();
         } else {
             System.arraycopy(temp, 0, current, 0, temp.length);
@@ -54,8 +52,8 @@ public class SystemBalance {
     public void setATMBalance(int[] billAmount) throws OverflowBillException {
         boolean isException = false;
 
-        for (int i = 0; i < billAmount.length; i++) {
-            if (billAmount[i] > topLimit || billAmount[i] < bottomLimit) {
+        for (int bills : billAmount) {
+            if (bills > topLimit || bills < bottomLimit) {
                 isException = true;
             }
         }
