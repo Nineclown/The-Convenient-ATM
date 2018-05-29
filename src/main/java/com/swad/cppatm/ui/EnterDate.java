@@ -3,6 +3,7 @@ package com.swad.cppatm.ui;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.swad.cppatm.application.ATMSystem;
+import com.swad.cppatm.enums.Locale;
 import com.swad.cppatm.exceptions.AccountDoesNotExist;
 
 import javax.swing.*;
@@ -18,9 +19,18 @@ public class EnterDate {
     private JTextField endDateField;
     private JButton cancelButton;
     private JButton confirmButton;
+    private JLabel startLabel;
+    private JLabel endLabel;
 
-    public EnterDate(final JFrame parentFrame, final ATMSystem system) {
+    private String setLocalizedString(ATMSystem system, String ko, String en) {
+        return system.getState().getLocale() == Locale.en_US ? en : ko;
+    }
 
+    EnterDate(final JFrame parentFrame, final ATMSystem system) {
+        startLabel.setText(setLocalizedString(system, "시작", "Start"));
+        endLabel.setText(setLocalizedString(system, "끝", "End"));
+        
+        cancelButton.setText(setLocalizedString(system, "취소", "Cancel"));
         cancelButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
@@ -31,33 +41,34 @@ public class EnterDate {
             }
         });
 
+        confirmButton.setText(setLocalizedString(system, "확인", "Confirm"));
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
                 Date start, end;
+
                 if (!startDateField.getText().matches("^\\d{8}$") && !endDateField.getText().matches("^\\d{8}$")) {
                     JOptionPane.showMessageDialog(parentFrame, "Invalid date format", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
-                int startyear, startmonth, startdate;
-                int endyear, endmonth, enddate;
+                int startYear, startMonth, startDate;
+                int endYear, endMonth, endDate;
 
-                startyear = Integer.parseInt(startDateField.getText().substring(0, 4));
-                startmonth = Integer.parseInt(startDateField.getText().substring(4, 6));
-                startdate = Integer.parseInt(startDateField.getText().substring(6, 8));
-                endyear = Integer.parseInt(endDateField.getText().substring(0, 4));
-                endmonth = Integer.parseInt(endDateField.getText().substring(4, 6));
-                enddate = Integer.parseInt(endDateField.getText().substring(6, 8));
+                startYear = Integer.parseInt(startDateField.getText().substring(0, 4));
+                startMonth = Integer.parseInt(startDateField.getText().substring(4, 6));
+                startDate = Integer.parseInt(startDateField.getText().substring(6, 8));
+                endYear = Integer.parseInt(endDateField.getText().substring(0, 4));
+                endMonth = Integer.parseInt(endDateField.getText().substring(4, 6));
+                endDate = Integer.parseInt(endDateField.getText().substring(6, 8));
 
-                if (startmonth > 12 || endmonth > 12 || startdate > 31 || enddate > 31 || startyear < 1900 || endyear < 1900) {
+                if (startMonth > 12 || endMonth > 12 || startDate > 31 || endDate > 31 || startYear < 1900 || endYear < 1900) {
                     JOptionPane.showMessageDialog(parentFrame, "Invalid date format", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
-                start = new Date(startyear - 1900, startmonth - 1, startdate);
-                end = new Date(endyear - 1900, endmonth - 1, enddate + 1);
-
+                start = new Date(startYear - 1900, startMonth - 1, startDate);
+                end = new Date(endYear - 1900, endMonth - 1, endDate + 1);
 
                 if (start.compareTo(end) >= 0) {
                     JOptionPane.showMessageDialog(parentFrame, "시작일이 끝나는 날보다 큽니다.", "Error", JOptionPane.ERROR_MESSAGE);

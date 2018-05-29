@@ -10,7 +10,7 @@
     </properties>
     <border type="none"/>
     <children>
-      <component id="958cc" class="javax.swing.JLabel">
+      <component id="958cc" class="javax.swing.JLabel" binding="startLabel">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -20,7 +20,7 @@
           <text value="시작"/>
         </properties>
       </component>
-      <component id="daca4" class="javax.swing.JLabel">
+      <component id="daca4" class="javax.swing.JLabel" binding="endLabel">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
