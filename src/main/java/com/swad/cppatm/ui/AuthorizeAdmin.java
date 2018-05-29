@@ -3,6 +3,7 @@ package com.swad.cppatm.ui;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.swad.cppatm.application.ATMSystem;
+import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.enums.Locale;
 import com.swad.cppatm.exceptions.InvalidAdminException;
 
@@ -12,6 +13,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 
 public class AuthorizeAdmin extends JFrame {
     private JPanel authorizeAdminPanel;
@@ -30,7 +32,7 @@ public class AuthorizeAdmin extends JFrame {
         }
     }
 
-    public void next(JFrame parentFrame, ATMSystem system) {
+    private void next(JFrame parentFrame, ATMSystem system) {
         String id = adminIdField.getText();
         String password = new String(adminPwField.getPassword());
 
@@ -51,6 +53,8 @@ public class AuthorizeAdmin extends JFrame {
     }
 
     public AuthorizeAdmin(final JFrame parentFrame, final ATMSystem system) {
+        system.removeFunctionSelection();
+
         atmStateLabel.setText(system.getState().available() ? "Active" : "Frozen");
 
         adminIdLabel.setText(setLocalizedString(system, "아이디", "ID"));
@@ -60,7 +64,12 @@ public class AuthorizeAdmin extends JFrame {
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                next(parentFrame, system);
+                if (Arrays.asList(FunctionType.getUserFunctions()).contains(system.getFunction())) {
+                    JOptionPane.showMessageDialog(parentFrame, setLocalizedString(system,
+                        "사용자 기능과 관리자 기능은 동시에 실행할 수 없습니다.", "User and admin can't access atm simultaneously."), "Error", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    next(parentFrame, system);
+                }
             }
         });
         adminPwField.addKeyListener(new KeyAdapter() {

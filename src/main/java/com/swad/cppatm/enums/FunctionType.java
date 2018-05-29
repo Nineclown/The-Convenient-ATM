@@ -17,5 +17,14 @@ public enum FunctionType {
     RemoveAdmin,
     QueryATMBalance,
     ToggleATMState,
-    ChangeATMBalance,
+    ChangeATMBalance;
+
+    public static FunctionType[] getUserFunctions() {
+        return new FunctionType[]{ Deposit, Withdraw, ForeignDeposit, ForeignWithdraw, Transfer, SplitPay,
+            QueryTransactionList, QueryBalance, GetLotteryPrize, ReportLostCard, ChangeLocale };
+    }
+
+    public static FunctionType[] getAdminFunctions() {
+        return new FunctionType[]{ AddAdmin, RemoveAdmin, QueryATMBalance, ToggleATMState, ChangeATMBalance };
+    }
 }

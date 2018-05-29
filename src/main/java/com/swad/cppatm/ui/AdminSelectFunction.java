@@ -5,12 +5,14 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.enums.Locale;
+import com.swad.cppatm.exceptions.MultipleFunctionsExecuted;
 import com.swad.cppatm.exceptions.NoneOfFunctionSelected;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 
 public class AdminSelectFunction extends JFrame {
     private JButton addAdminButton;
@@ -30,7 +32,7 @@ public class AdminSelectFunction extends JFrame {
         }
     }
 
-    public AdminSelectFunction(final JFrame parentFrame, final ATMSystem system) {
+    AdminSelectFunction(final JFrame parentFrame, final ATMSystem system) {
         atmStateLabel.setText(system.getState().available() ? "Active" : "Frozen");
 
         addAdminButton.setText(setLocalizedString(system, "관리자 추가", "Add Admin"));
@@ -39,7 +41,7 @@ public class AdminSelectFunction extends JFrame {
             public void mousePressed(MouseEvent e) {
                 try {
                     system.selectFunction(FunctionType.AddAdmin);
-                } catch (NoneOfFunctionSelected ex) {
+                } catch (NoneOfFunctionSelected | MultipleFunctionsExecuted ex) {
                     return;
                 }
 
@@ -55,7 +57,7 @@ public class AdminSelectFunction extends JFrame {
             public void mousePressed(MouseEvent e) {
                 try {
                     system.selectFunction(FunctionType.RemoveAdmin);
-                } catch (NoneOfFunctionSelected ex) {
+                } catch (NoneOfFunctionSelected | MultipleFunctionsExecuted ex) {
                     JOptionPane.showMessageDialog(parentFrame, "관리자를 삭제 할 수 없습니다.", "Info", JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
@@ -74,7 +76,7 @@ public class AdminSelectFunction extends JFrame {
             public void mousePressed(MouseEvent e) {
                 try {
                     system.selectFunction(FunctionType.QueryATMBalance);
-                } catch (NoneOfFunctionSelected ex) {
+                } catch (NoneOfFunctionSelected | MultipleFunctionsExecuted ex) {
                     return;
                 }
                 parentFrame.setContentPane(new QueryATMBalance(parentFrame, system).getPanel());
@@ -91,7 +93,7 @@ public class AdminSelectFunction extends JFrame {
 
                 try {
                     system.selectFunction(FunctionType.ToggleATMState);
-                } catch (NoneOfFunctionSelected ex) {
+                } catch (NoneOfFunctionSelected | MultipleFunctionsExecuted ex) {
                     return;
                 }
 
@@ -111,7 +113,7 @@ public class AdminSelectFunction extends JFrame {
             public void mousePressed(MouseEvent e) {
                 try {
                     system.selectFunction(FunctionType.ChangeATMBalance);
-                } catch (NoneOfFunctionSelected ex) {
+                } catch (NoneOfFunctionSelected | MultipleFunctionsExecuted ex) {
                     return;
                 }
 
@@ -127,7 +129,8 @@ public class AdminSelectFunction extends JFrame {
             public void mousePressed(MouseEvent e) {
                 try {
                     system.selectFunction(FunctionType.ChangeLocale);
-                } catch (NoneOfFunctionSelected ex) {
+                } catch (NoneOfFunctionSelected | MultipleFunctionsExecuted ex) {
+                    return;
                 }
 
                 parentFrame.setContentPane(new ChangeLocale(parentFrame, system).getPanel());

@@ -142,7 +142,7 @@ public class ATMSystemTest {
     }
 
     @Test
-    public void enterNumberOfUsersSuccessfullyDivideCashAmount() throws NoneOfFunctionSelected {
+    public void enterNumberOfUsersSuccessfullyDivideCashAmount() throws NoneOfFunctionSelected, MultipleFunctionsExecuted {
         system.selectFunction(FunctionType.SplitPay);
         system.setCashAmount(1000);
 
@@ -179,11 +179,14 @@ public class ATMSystemTest {
 
     @Test
     public void enterAdminInfoCorrectlyWorking() {
+        system.removeFunctionSelection();
+
         try {
             system.enterAdminInfo("1234", "01012341234");
         } catch (DataStoreError | InvalidAdminException ex) {
             fail(ex.getClass().getSimpleName());
         }
+        
         Admin[] admins = system.getAdmins();
 
         assertEquals("1234", admins[admins.length - 1].getPassword());
@@ -192,7 +195,7 @@ public class ATMSystemTest {
         try {
             system.authorizeAdmin(admins[admins.length - 1].getId(), "1234");
             system.selectFunction(FunctionType.RemoveAdmin);
-        } catch (InvalidAdminException | NoneOfFunctionSelected ex) {
+        } catch (InvalidAdminException | NoneOfFunctionSelected | MultipleFunctionsExecuted ex) {
             fail(ex.getClass().getSimpleName());
         }
     }
@@ -206,7 +209,7 @@ public class ATMSystemTest {
     }
 
     @Test
-    public void enterPeriodToQueryDoesGetTransactions() throws NoneOfFunctionSelected {
+    public void enterPeriodToQueryDoesGetTransactions() throws NoneOfFunctionSelected, MultipleFunctionsExecuted {
         system.selectFunction(FunctionType.QueryTransactionList);
 
         try {

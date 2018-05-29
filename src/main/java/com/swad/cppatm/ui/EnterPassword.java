@@ -212,7 +212,7 @@ public class EnterPassword extends JFrame {
                     return;
                 }
 
-                switch (system.getFunction()) {
+                    switch (system.getFunction()) {
                     case Withdraw:
                         parentFrame.setContentPane(new EnterNumber(parentFrame, system).getPanel());
                         break;

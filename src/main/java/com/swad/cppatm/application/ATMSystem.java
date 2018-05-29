@@ -12,6 +12,7 @@ import java.net.URL;
 import java.net.HttpURLConnection;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.function.Function;
 
 
 public class ATMSystem {
@@ -92,6 +93,10 @@ public class ATMSystem {
         return this.user;
     }
 
+    public void removeFunctionSelection() {
+        this.function = null;
+    }
+
     public ATMSystem() {
         this.cashAmount = 0;
         this.selectedCardNumber = "";
@@ -102,8 +107,13 @@ public class ATMSystem {
         this.balance = new SystemBalance();
     }
 
-    public void selectFunction(FunctionType function) throws NoneOfFunctionSelected {
-        this.function = function;
+    public void selectFunction(FunctionType function) throws NoneOfFunctionSelected, MultipleFunctionsExecuted {
+        // 중복 실행 불가!
+        if ( (Arrays.asList(FunctionType.getUserFunctions()).contains(function) && Arrays.asList(FunctionType.getAdminFunctions()).contains(this.function) ) ||
+             (Arrays.asList(FunctionType.getAdminFunctions()).contains(function) && Arrays.asList(FunctionType.getUserFunctions()).contains(this.function) )) {
+            throw new MultipleFunctionsExecuted();
+        }
+
         switch (function) {
             case Deposit:
                 if (!state.available()) {
@@ -198,6 +208,8 @@ public class ATMSystem {
             default:
                 throw new NoneOfFunctionSelected();
         }
+
+        this.function = function;
     }
 
     public void enterAccountInfo(Bank bank, String accountNo) throws AccountDoesNotExist, DataStoreError, FrozenAccountException, NoneOfFunctionSelected {

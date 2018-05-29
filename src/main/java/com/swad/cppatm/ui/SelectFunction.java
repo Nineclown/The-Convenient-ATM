@@ -6,6 +6,7 @@ import com.intellij.uiDesigner.core.Spacer;
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.enums.Locale;
+import com.swad.cppatm.exceptions.MultipleFunctionsExecuted;
 import com.swad.cppatm.exceptions.NoneOfFunctionSelected;
 
 import javax.swing.*;
@@ -36,6 +37,8 @@ public class SelectFunction extends JFrame {
     }
 
     public SelectFunction(final JFrame parentFrame, final ATMSystem system) {
+        system.removeFunctionSelection();
+
         depositButton.setText(setLocalizedString(system, "입금", "Deposit"));
         depositButton.addMouseListener(new MouseAdapter() {
             @Override
@@ -47,6 +50,8 @@ public class SelectFunction extends JFrame {
                         "ATM is froze",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
+                    return;
+                } catch (MultipleFunctionsExecuted ex) {
                     return;
                 }
 
@@ -68,6 +73,8 @@ public class SelectFunction extends JFrame {
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
                     return;
+                } catch (MultipleFunctionsExecuted ex) {
+                    return;
                 }
 
                 parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
@@ -88,6 +95,8 @@ public class SelectFunction extends JFrame {
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
                     return;
+                } catch (MultipleFunctionsExecuted ex) {
+                    return;
                 }
 
                 parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
@@ -107,6 +116,8 @@ public class SelectFunction extends JFrame {
                         "ATM is froze",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
+                    return;
+                } catch (MultipleFunctionsExecuted ex) {
                     return;
                 }
 
@@ -129,6 +140,8 @@ public class SelectFunction extends JFrame {
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
                     return;
+                } catch (MultipleFunctionsExecuted ex) {
+                    return;
                 }
 
                 parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
@@ -148,6 +161,8 @@ public class SelectFunction extends JFrame {
                         "ATM is froze",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
+                    return;
+                } catch (MultipleFunctionsExecuted ex) {
                     return;
                 }
 
@@ -169,7 +184,10 @@ public class SelectFunction extends JFrame {
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
                     return;
+                } catch (MultipleFunctionsExecuted ex) {
+                    return;
                 }
+
                 parentFrame.setContentPane(new EnterUserID(parentFrame, system).getPanel());
                 parentFrame.pack();
                 parentFrame.invalidate();
@@ -188,7 +206,10 @@ public class SelectFunction extends JFrame {
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
                     return;
+                } catch (MultipleFunctionsExecuted ex) {
+                    return;
                 }
+
                 parentFrame.setContentPane(new EnterLottery(parentFrame, system).getPanel());
                 parentFrame.pack();
                 parentFrame.invalidate();
@@ -206,6 +227,8 @@ public class SelectFunction extends JFrame {
                         "ATM is froze",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
+                    return;
+                } catch (MultipleFunctionsExecuted ex) {
                     return;
                 }
 
@@ -227,6 +250,8 @@ public class SelectFunction extends JFrame {
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
                     return;
+                } catch (MultipleFunctionsExecuted ex) {
+                    return;
                 }
 
                 parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
@@ -246,6 +271,8 @@ public class SelectFunction extends JFrame {
                         "ATM is froze",
                         "Error",
                         JOptionPane.ERROR_MESSAGE);
+                    return;
+                } catch (MultipleFunctionsExecuted ex) {
                     return;
                 }
 
