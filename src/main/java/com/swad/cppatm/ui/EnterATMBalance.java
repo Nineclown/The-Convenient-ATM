@@ -56,7 +56,12 @@ public class EnterATMBalance {
                 bills[10] = dollar100;
 
                 for (int i = 0; i < 11; i++) {
-                    billAmount[i] = bills[i].getNumber();
+                    if (bills[i].getText().equals("")) {
+                        billAmount[i] = 0;
+                    } else {
+                        billAmount[i] = bills[i].getNumber();
+
+                    }
                 }
 
                 try {
