@@ -6,6 +6,7 @@ import com.intellij.uiDesigner.core.Spacer;
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.Locale;
 import com.swad.cppatm.exceptions.UserDoestNotExist;
+import com.swad.cppatm.ui.components.JNumberTextField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -118,14 +119,14 @@ public class EnterUserID {
         residentNumberLabel.setForeground(new Color(-16777216));
         residentNumberLabel.setText("주민등록번호");
         enterUserIDPanel.add(residentNumberLabel, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        idField = new JTextField();
-        Font idFieldFont = this.$$$getFont$$$(null, -1, 20, idField.getFont());
-        if (idFieldFont != null) idField.setFont(idFieldFont);
-        enterUserIDPanel.add(idField, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         final Spacer spacer2 = new Spacer();
         enterUserIDPanel.add(spacer2, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final Spacer spacer3 = new Spacer();
         enterUserIDPanel.add(spacer3, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
+        final JNumberTextField jNumberTextField1 = new JNumberTextField();
+        Font jNumberTextField1Font = this.$$$getFont$$$(null, -1, 20, jNumberTextField1.getFont());
+        if (jNumberTextField1Font != null) jNumberTextField1.setFont(jNumberTextField1Font);
+        enterUserIDPanel.add(jNumberTextField1, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
     }
 
     /**
