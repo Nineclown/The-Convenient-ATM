@@ -47,8 +47,8 @@ public class RequestCardOrBankbook {
             JOptionPane.showMessageDialog(parentFrame, "BankName is Invaild.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if (bankbookNumberField.getText().length() == 0) {
-            JOptionPane.showMessageDialog(parentFrame, "No number at all.", "Error", JOptionPane.ERROR_MESSAGE);
+        if (!bankbookNumberField.getText().matches("^\\d{13,14}$")) {
+            JOptionPane.showMessageDialog(parentFrame, "Invalid bankbook format", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
