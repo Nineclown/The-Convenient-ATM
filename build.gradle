@@ -18,6 +18,8 @@ version '1.0-SNAPSHOT'
 
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'findbugs'
+apply plugin: 'jdepend'
 apply plugin: 'net.serenity-bdd.aggregator'
 
 sourceCompatibility = 1.8
@@ -53,6 +55,29 @@ dependencies {
     testCompile('org.assertj:assertj-core:1.7.0')
     testCompile('org.slf4j:slf4j-simple:1.7.7')
 }
+
+tasks.withType(JDepend) {
+    reports {
+        xml.enabled true
+    }
+
+}
+
+tasks.withType(FindBugs) {
+    reports {
+        xml.enabled false
+        html.enabled true
+    }
+}
+
+findbugs {
+    ignoreFailures true
+}
+
+jdepend {
+    ignoreFailures true
+}
+
 /*
 sonarqube {
     properties {
