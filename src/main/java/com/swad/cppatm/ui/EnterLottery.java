@@ -6,6 +6,7 @@ import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.application.Lottery;
 import com.swad.cppatm.enums.Locale;
 import com.swad.cppatm.exceptions.LotteryFailed;
+import com.swad.cppatm.ui.components.JNumberTextField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,16 +15,16 @@ import java.awt.event.MouseEvent;
 
 public class EnterLottery {
     private JPanel enterLotteryPanel;
-    private JTextField textField1;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JTextField textField6;
+    private JNumberTextField textField1;
+    private JNumberTextField textField2;
+    private JNumberTextField textField3;
+    private JNumberTextField textField4;
+    private JNumberTextField textField5;
+    private JNumberTextField textField6;
     private JButton cancelButton;
     private JButton confirmButton;
     private JLabel titleLabel;
-    private JTextField weekField;
+    private JNumberTextField weekField;
     private JLabel weekLabel;
 
     public String setLocalizedString(ATMSystem system, String ko, String en) {
@@ -45,14 +46,14 @@ public class EnterLottery {
                 int[] values;
 
                 try {
-                    week = Integer.parseInt(weekField.getText());
+                    week = weekField.getNumber();
                     values = new int[]{
-                        Integer.parseInt(textField1.getText()),
-                        Integer.parseInt(textField2.getText()),
-                        Integer.parseInt(textField3.getText()),
-                        Integer.parseInt(textField4.getText()),
-                        Integer.parseInt(textField5.getText()),
-                        Integer.parseInt(textField6.getText()),
+                        textField1.getNumber(),
+                        textField2.getNumber(),
+                        textField3.getNumber(),
+                        textField4.getNumber(),
+                        textField5.getNumber(),
+                        textField6.getNumber()
                     };
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(parentFrame,
@@ -141,32 +142,8 @@ public class EnterLottery {
      */
     private void $$$setupUI$$$() {
         enterLotteryPanel = new JPanel();
-        enterLotteryPanel.setLayout(new GridLayoutManager(4, 6, new Insets(0, 0, 0, 0), -1, -1));
+        enterLotteryPanel.setLayout(new GridLayoutManager(4, 6, new Insets(0, 0, 0, 0), -1, -1, true, false));
         enterLotteryPanel.setBackground(new Color(-1));
-        textField1 = new JTextField();
-        Font textField1Font = this.$$$getFont$$$(null, -1, 36, textField1.getFont());
-        if (textField1Font != null) textField1.setFont(textField1Font);
-        enterLotteryPanel.add(textField1, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        textField2 = new JTextField();
-        Font textField2Font = this.$$$getFont$$$(null, -1, 36, textField2.getFont());
-        if (textField2Font != null) textField2.setFont(textField2Font);
-        enterLotteryPanel.add(textField2, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        textField3 = new JTextField();
-        Font textField3Font = this.$$$getFont$$$(null, -1, 36, textField3.getFont());
-        if (textField3Font != null) textField3.setFont(textField3Font);
-        enterLotteryPanel.add(textField3, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        textField4 = new JTextField();
-        Font textField4Font = this.$$$getFont$$$(null, -1, 36, textField4.getFont());
-        if (textField4Font != null) textField4.setFont(textField4Font);
-        enterLotteryPanel.add(textField4, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        textField5 = new JTextField();
-        Font textField5Font = this.$$$getFont$$$(null, -1, 36, textField5.getFont());
-        if (textField5Font != null) textField5.setFont(textField5Font);
-        enterLotteryPanel.add(textField5, new GridConstraints(2, 4, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
-        textField6 = new JTextField();
-        Font textField6Font = this.$$$getFont$$$(null, -1, 36, textField6.getFont());
-        if (textField6Font != null) textField6.setFont(textField6Font);
-        enterLotteryPanel.add(textField6, new GridConstraints(2, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         cancelButton = new JButton();
         cancelButton.setBackground(new Color(-10592674));
         cancelButton.setEnabled(true);
@@ -189,16 +166,40 @@ public class EnterLottery {
         titleLabel.setForeground(new Color(-16777216));
         titleLabel.setText("로또 번호를 입력하여 주십시오.");
         enterLotteryPanel.add(titleLabel, new GridConstraints(0, 0, 1, 6, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        weekField = new JTextField();
-        Font weekFieldFont = this.$$$getFont$$$(null, -1, 20, weekField.getFont());
-        if (weekFieldFont != null) weekField.setFont(weekFieldFont);
-        enterLotteryPanel.add(weekField, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         weekLabel = new JLabel();
         Font weekLabelFont = this.$$$getFont$$$(null, -1, 20, weekLabel.getFont());
         if (weekLabelFont != null) weekLabel.setFont(weekLabelFont);
         weekLabel.setForeground(new Color(-16777216));
         weekLabel.setText("주차");
         enterLotteryPanel.add(weekLabel, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        textField1 = new JNumberTextField();
+        Font textField1Font = this.$$$getFont$$$(null, -1, 20, textField1.getFont());
+        if (textField1Font != null) textField1.setFont(textField1Font);
+        enterLotteryPanel.add(textField1, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        textField2 = new JNumberTextField();
+        Font textField2Font = this.$$$getFont$$$(null, -1, 20, textField2.getFont());
+        if (textField2Font != null) textField2.setFont(textField2Font);
+        enterLotteryPanel.add(textField2, new GridConstraints(2, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        textField3 = new JNumberTextField();
+        Font textField3Font = this.$$$getFont$$$(null, -1, 20, textField3.getFont());
+        if (textField3Font != null) textField3.setFont(textField3Font);
+        enterLotteryPanel.add(textField3, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        textField4 = new JNumberTextField();
+        Font textField4Font = this.$$$getFont$$$(null, -1, 20, textField4.getFont());
+        if (textField4Font != null) textField4.setFont(textField4Font);
+        enterLotteryPanel.add(textField4, new GridConstraints(2, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        textField5 = new JNumberTextField();
+        Font textField5Font = this.$$$getFont$$$(null, -1, 20, textField5.getFont());
+        if (textField5Font != null) textField5.setFont(textField5Font);
+        enterLotteryPanel.add(textField5, new GridConstraints(2, 4, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        textField6 = new JNumberTextField();
+        Font textField6Font = this.$$$getFont$$$(null, -1, 20, textField6.getFont());
+        if (textField6Font != null) textField6.setFont(textField6Font);
+        enterLotteryPanel.add(textField6, new GridConstraints(2, 5, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        weekField = new JNumberTextField();
+        Font weekFieldFont = this.$$$getFont$$$(null, -1, 20, weekField.getFont());
+        if (weekFieldFont != null) weekField.setFont(weekFieldFont);
+        enterLotteryPanel.add(weekField, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
     }
 
     /**
