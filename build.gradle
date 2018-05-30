@@ -18,7 +18,7 @@ findbugs{
     ignoreFailures true
 }
 
-tasks.withType(FindBugs){
+tasks.withType(findBugs){
     reports{
         xml.enable false
         html.enable tre
