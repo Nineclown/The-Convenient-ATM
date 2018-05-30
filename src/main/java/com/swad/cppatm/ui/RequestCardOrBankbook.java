@@ -7,6 +7,7 @@ import com.swad.cppatm.enums.Bank;
 import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.enums.Locale;
 import com.swad.cppatm.exceptions.*;
+import com.swad.cppatm.ui.components.JNumberTextField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -179,7 +180,7 @@ public class RequestCardOrBankbook {
      */
     private void $$$setupUI$$$() {
         requestCardOrBankbookPanel = new JPanel();
-        requestCardOrBankbookPanel.setLayout(new GridLayoutManager(5, 5, new Insets(30, 30, 30, 30), -1, -1));
+        requestCardOrBankbookPanel.setLayout(new GridLayoutManager(4, 5, new Insets(30, 30, 30, 30), -1, -1));
         requestCardOrBankbookPanel.setBackground(new Color(-1));
         requestCardOrBankbookPanel.setForeground(new Color(-11645362));
         requestCardOrBankbookPanel.setMinimumSize(new Dimension(800, 600));
@@ -201,12 +202,12 @@ public class RequestCardOrBankbook {
         if (numberLabelFont != null) numberLabel.setFont(numberLabelFont);
         numberLabel.setForeground(new Color(-16777216));
         numberLabel.setText("통장번호");
-        requestCardOrBankbookPanel.add(numberLabel, new GridConstraints(2, 0, 2, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        requestCardOrBankbookPanel.add(numberLabel, new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JPanel panel1 = new JPanel();
         panel1.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), 30, 30));
         panel1.setBackground(new Color(-1));
         panel1.setForeground(new Color(-1));
-        requestCardOrBankbookPanel.add(panel1, new GridConstraints(4, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        requestCardOrBankbookPanel.add(panel1, new GridConstraints(3, 0, 1, 5, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
         confirmButton = new JButton();
         confirmButton.setBackground(new Color(-10592674));
         Font confirmButtonFont = this.$$$getFont$$$(null, -1, 20, confirmButton.getFont());
@@ -233,16 +234,16 @@ public class RequestCardOrBankbook {
         if (buttonKookminFont != null) buttonKookmin.setFont(buttonKookminFont);
         buttonKookmin.setText("국민은행");
         requestCardOrBankbookPanel.add(buttonKookmin, new GridConstraints(1, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
-        bankbookNumberField = new JTextField();
-        Font bankbookNumberFieldFont = this.$$$getFont$$$(null, -1, 24, bankbookNumberField.getFont());
-        if (bankbookNumberFieldFont != null) bankbookNumberField.setFont(bankbookNumberFieldFont);
-        requestCardOrBankbookPanel.add(bankbookNumberField, new GridConstraints(2, 2, 2, 3, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, -1), null, 0, false));
         buttonWoori = new JRadioButton();
         buttonWoori.setBackground(new Color(-1));
         Font buttonWooriFont = this.$$$getFont$$$(null, -1, 20, buttonWoori.getFont());
         if (buttonWooriFont != null) buttonWoori.setFont(buttonWooriFont);
         buttonWoori.setText("우리은행");
         requestCardOrBankbookPanel.add(buttonWoori, new GridConstraints(1, 4, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
+        bankbookNumberField = new JNumberTextField();
+        Font bankbookNumberFieldFont = this.$$$getFont$$$(null, -1, 20, bankbookNumberField.getFont());
+        if (bankbookNumberFieldFont != null) bankbookNumberField.setFont(bankbookNumberFieldFont);
+        requestCardOrBankbookPanel.add(bankbookNumberField, new GridConstraints(2, 2, 1, 3, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
     }
 
     /**

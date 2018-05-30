@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.swad.cppatm.ui.RequestCardOrBankbook">
-  <grid id="27dc6" binding="requestCardOrBankbookPanel" layout-manager="GridLayoutManager" row-count="5" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="requestCardOrBankbookPanel" layout-manager="GridLayoutManager" row-count="4" column-count="5" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="30" left="30" bottom="30" right="30"/>
     <constraints>
       <xy x="20" y="20" width="800" height="600"/>
@@ -35,7 +35,7 @@
       </component>
       <component id="3fd32" class="javax.swing.JLabel" binding="numberLabel">
         <constraints>
-          <grid row="2" column="0" row-span="2" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font size="20"/>
@@ -46,7 +46,7 @@
       <grid id="4a3d2" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="30" vgap="30">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+          <grid row="3" column="0" row-span="1" col-span="5" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <background color="-1"/>
@@ -102,16 +102,6 @@
           <text value="국민은행"/>
         </properties>
       </component>
-      <component id="bc5f9" class="javax.swing.JTextField" binding="bankbookNumberField">
-        <constraints>
-          <grid row="2" column="2" row-span="2" col-span="3" vsize-policy="6" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <font size="24"/>
-        </properties>
-      </component>
       <component id="ac236" class="javax.swing.JRadioButton" binding="buttonWoori">
         <constraints>
           <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -120,6 +110,14 @@
           <background color="-1"/>
           <font size="20"/>
           <text value="우리은행"/>
+        </properties>
+      </component>
+      <component id="d72c1" class="com.swad.cppatm.ui.components.JNumberTextField" binding="bankbookNumberField">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font size="20"/>
         </properties>
       </component>
     </children>
