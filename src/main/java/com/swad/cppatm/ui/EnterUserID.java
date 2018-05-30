@@ -19,7 +19,7 @@ public class EnterUserID {
     private JLabel residentNumberLabel;
     private JButton confirmButton;
     private JButton cancelButton;
-    private JTextField idField;
+    private JNumberTextField idField;
 
     private String setLocalizedString(ATMSystem system, String ko, String en) {
         return system.getState().getLocale() == Locale.en_US ? en : ko;
@@ -33,11 +33,15 @@ public class EnterUserID {
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                String userId = idField.getText();
-                if (userId.length() < 13) {
-                    JOptionPane.showMessageDialog(parentFrame, "INVALID ID", "Error", JOptionPane.ERROR_MESSAGE);
+
+
+                if (!idField.getText().matches("^\\d{13}$")) {
+                    JOptionPane.showMessageDialog(parentFrame, "Invalid resident Number format", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+
+                String userId = idField.getText();
+
                 try {
                     system.enterUserId(userId);
                 } catch (UserDoestNotExist exception) {
@@ -123,10 +127,10 @@ public class EnterUserID {
         enterUserIDPanel.add(spacer2, new GridConstraints(2, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, 1, GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         final Spacer spacer3 = new Spacer();
         enterUserIDPanel.add(spacer3, new GridConstraints(0, 0, 1, 4, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, 1, null, null, null, 0, false));
-        final JNumberTextField jNumberTextField1 = new JNumberTextField();
-        Font jNumberTextField1Font = this.$$$getFont$$$(null, -1, 20, jNumberTextField1.getFont());
-        if (jNumberTextField1Font != null) jNumberTextField1.setFont(jNumberTextField1Font);
-        enterUserIDPanel.add(jNumberTextField1, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        idField = new JNumberTextField();
+        Font idFieldFont = this.$$$getFont$$$(null, -1, 20, idField.getFont());
+        if (idFieldFont != null) idField.setFont(idFieldFont);
+        enterUserIDPanel.add(idField, new GridConstraints(2, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
     }
 
     /**
