@@ -36,13 +36,20 @@ public class EnterAdminInfo extends JFrame {
         String password = new String(adminPwField.getPassword());
         String contact = adminContactField.getText();
 
+        if (!password.matches("^(\\w{4,})$")) {
+            JOptionPane.showMessageDialog(parentFrame, "Invalid Password format", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!contact.matches("^(0\\d{8,10})$")) {
+            JOptionPane.showMessageDialog(parentFrame, "Invalid Contact format", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         try {
             system.enterAdminInfo(password, contact);
         } catch (DataStoreError er) {
             JOptionPane.showMessageDialog(parentFrame, setLocalizedString(system, "관리자를 추가할 수 없습니다.", "Failed to add admin."), "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        } catch (InvalidAdminException ex) {
-            JOptionPane.showMessageDialog(parentFrame, setLocalizedString(system, "비밀번호 또는 연락처가 올바르지 않습니다.", "Invalid password or contact."), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 

@@ -183,7 +183,7 @@ public class ATMSystemTest {
 
         try {
             system.enterAdminInfo("1234", "01012341234");
-        } catch (DataStoreError | InvalidAdminException ex) {
+        } catch (DataStoreError ex) {
             fail(ex.getClass().getSimpleName());
         }
 

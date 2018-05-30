@@ -602,7 +602,7 @@ public class ATMSystem {
         throw new InvalidAdminException();
     }
 
-    public void enterAdminInfo(String adminPw, String contact) throws DataStoreError, InvalidAdminException {
+    public void enterAdminInfo(String adminPw, String contact) throws DataStoreError {
         DataStore dataStore = new DataStore();
         Admin newAdmin = new Admin(this.createAdminId(), adminPw, contact);
 

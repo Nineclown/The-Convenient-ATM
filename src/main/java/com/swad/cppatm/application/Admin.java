@@ -9,22 +9,10 @@ public class Admin {
     private String password;
     private String contact;
 
-    public Admin(String id, String password, String contact) throws InvalidAdminException {
-        if (!this.checkPassword(password) || !this.checkContact(contact)) {
-            throw new InvalidAdminException();
-        }
-
+    public Admin(String id, String password, String contact){
         this.id = id;
         this.password = password;
         this.contact = contact;
-    }
-
-    private boolean checkPassword(String password) {
-        return Pattern.matches("^(\\d{4})$", password);
-    }
-
-    private boolean checkContact(String contact) {
-        return Pattern.matches("^(0\\d{8,10})$", contact);
     }
 
     public String getId() {
