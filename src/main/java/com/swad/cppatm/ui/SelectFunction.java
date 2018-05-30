@@ -238,7 +238,7 @@ public class SelectFunction extends JFrame {
                 parentFrame.validate();
             }
         });
-        transferButton.setText(setLocalizedString(system, "송금", "Transfer"));
+        transferButton.setText(setLocalizedString(system, "이체", "Transfer"));
         transferButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
