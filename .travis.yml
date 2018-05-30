@@ -1,18 +1,28 @@
 language: java
 jdk:
-- oraclejdk8
+  - oraclejdk8
 before_install:
-- chmod +x gradlew
+  - chmod +x gradlew
+
 install: true
-##start
-#addons:
-#  sonarcloud:
-#    organization: nineclown-github
-#    token:
-#      secure: 20cccee07ce13984260fc360c226cdc1ad1b0ed5
+
+#start
+addons:
+  sonarcloud:
+    organization: "nineclown-github"
+    token:
+      secure: ${SONAR_TOKEN}
 script:
-  - "./gradlew clean check build"
-cache: "$HOME/.m2/repository $HOME/.gradle .gradle"
+  - ./gradlew sonarqube
+
+#cache: "$HOME/.m2/repository $HOME/.gradle .gradle"
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'
+    - '$HOME/.gradle'
+    - '.gradle'
 
 #before_deploy:
 #     - git config --local user.name "nineclown"
