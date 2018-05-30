@@ -1,13 +1,29 @@
 group 'com.swad.cppatm'
 version '1.0-SNAPSHOT'
 
+plugins{
+    id "org.sonarqube" version "2.6"
+}
+
 apply plugin: 'java'
 apply plugin: 'idea'
+apply plugin: 'findbugs'
 apply plugin: 'net.serenity-bdd.aggregator'
 
 sourceCompatibility = 1.8
 
 compileJava.options.encoding = 'UTF-8'
+
+findbugs{
+    ignoreFailures true
+}
+
+tasks.withType(FindBugs){
+    reports{
+        xml.enable false
+        html.enable tre
+    }
+}
 
 buildscript {
     repositories {
