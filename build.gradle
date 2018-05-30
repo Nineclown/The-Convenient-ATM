@@ -21,7 +21,7 @@ findbugs{
 tasks.withType(findBugs){
     reports{
         xml.enable false
-        html.enable tre
+        html.enable true
     }
 }
 
