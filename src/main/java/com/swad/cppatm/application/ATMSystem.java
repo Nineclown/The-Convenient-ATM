@@ -557,16 +557,13 @@ public class ATMSystem {
         this.requestStopCard(cardNumber);
     }
 
-    public void requestStopCard(String cardNumber) {
+    public void requestStopCard(String cardNumber){
         System.out.println(cardNumber + "카드를 중지처리하였습니다");
-    }
-
-    public void removeCard(String cardNumber) throws DataStoreError {
-        this.user.removeCard(cardNumber);
-    }
-
-    public void saveUser() throws DataStoreError {
-        this.user.saveUser();
+        try {
+            this.user.removeCard(cardNumber);
+        }catch(DataStoreError e){
+            //Ignore Error.
+        }
     }
 
     public void askRenewCard(boolean answer) throws DataStoreError {
@@ -576,7 +573,7 @@ public class ATMSystem {
     }
 
     public void requestRenewCard(String cardNumber) {
-        System.out.println(cardNumber + "카드를 재발급하였습니다");
+        System.out.println(cardNumber + "카드 재발급을 신청하였습니다");
     }
 
     public void changeLocale(Locale locale) {
