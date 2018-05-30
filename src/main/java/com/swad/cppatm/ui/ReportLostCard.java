@@ -83,14 +83,9 @@ public class ReportLostCard extends JFrame {
             public void mousePressed(MouseEvent e) {
                 for (int i = 0; i < checkBox.length; i++) {
                     if (!cardFields[i].getText().equals("") && checkBox[i].isSelected()) {
-                        try {
-                            system.selectCard(card[i]);
-                            JOptionPane.showMessageDialog(parentFrame, card[i].toString() + " 카드를 중지처리하였습니다", "Info", JOptionPane.INFORMATION_MESSAGE);
-                            system.removeCard(card[i]);
-                            system.saveUser();
-                        } catch (DataStoreError ex) {
-                        }
-                        ;
+                        system.selectCard(card[i]);
+                        JOptionPane.showMessageDialog(parentFrame, card[i].toString() + " 카드를 중지처리하였습니다", "Info", JOptionPane.INFORMATION_MESSAGE);
+
                         int answer = JOptionPane.showConfirmDialog(parentFrame.getContentPane(), "재발급을 신청하시겠습니까?", "카드 재발급", JOptionPane.YES_NO_OPTION);
                         switch (answer) {
                             case JOptionPane.YES_OPTION:

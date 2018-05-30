@@ -26,7 +26,6 @@ public class User {
                 break;
             }
         }
-
         this.saveUser();
     }
 
