@@ -4,30 +4,30 @@ jdk:
 before_install:
 - chmod +x gradlew
 install: true
-#start
-addons:
-  sonarcloud:
-    organization: nineclown-github
-    token:
-      secure: 20cccee07ce13984260fc360c226cdc1ad1b0ed5
+##start
+#addons:
+#  sonarcloud:
+#    organization: nineclown-github
+#    token:
+#      secure: 20cccee07ce13984260fc360c226cdc1ad1b0ed5
 script:
   - "./gradlew clean check build"
 cache: "$HOME/.m2/repository $HOME/.gradle .gradle"
 
-before_deploy:
-     - git config --local user.name "nineclown"
-     - git config --local user.email "oring315@gmail.com"
-     - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
-deploy:
-  provider: releases
-  api_key:
-    secure: YToHW75tmhg4MosB8NRwAt1XrQRhyZGGqJD2+EFDy6jQNB/c2pvLv0dXtHchEGoml8DAwyontDXayRopbXAiZJQE/U5Fx0UiecUnEq84ZDRlskoeWpZGbejylF1jI1TCVUF8wsMvhj4HG5A25rDF6jEeSiK1v7coLoCuSe6SiY/vSEApKbA0v0RIEzrCDEwooFImxtKxmIZ3X5KlHe3zRGpzmXwo3f68B60c3j8zi/xxUMGlqjpuI87wHeXbd2fFPD1PuYKRDTAh7PKEqNk3bOaH5zFuJ+Cx/aC0LBpafRvadVC1kSRofEQZNmkanKYzzOfmRZ7HikQPsJG0lq+r2qiX7Evnndtsuu2DcrIH9k58t55Wa5hD8JPYF+NCvy9q5I70DDHGl9Q5ZGu1qrsTCQd6CGg1w+E2SEQgQd1Qg5xD0dzl4VwALAJ849oBeZ9hdiD/qvy954VQ5COAesxc7MLTBp3iiFM4jQFUiIZQUe6oi4NzwbTPUpAYsm763OZfO75GgdSS/LxARsf4bbYGFJ8uiP3nH6LxHU6hjP1RjEHYSOi/aQZ7L5MgBmyFN1lyrmjVQbGgm6BI254HHYmgZ1JKCQAj8zDRc3LiLKn7JtoHxthz7kauiSqpWt1FJf142ZJrRi+o6Nkv/zm7vGz1zjpii623EImhrR7pTjxk8xg=
-  file_glob: true
-  file:
+#before_deploy:
+#     - git config --local user.name "nineclown"
+#     - git config --local user.email "oring315@gmail.com"
+#     - git tag "$(date +'%Y%m%d%H%M%S')-$(git log --format=%h -1)"
+#deploy:
+#  provider: releases
+#  api_key:
+#    secure: YToHW75tmhg4MosB8NRwAt1XrQRhyZGGqJD2+EFDy6jQNB/c2pvLv0dXtHchEGoml8DAwyontDXayRopbXAiZJQE/U5Fx0UiecUnEq84ZDRlskoeWpZGbejylF1jI1TCVUF8wsMvhj4HG5A25rDF6jEeSiK1v7coLoCuSe6SiY/vSEApKbA0v0RIEzrCDEwooFImxtKxmIZ3X5KlHe3zRGpzmXwo3f68B60c3j8zi/xxUMGlqjpuI87wHeXbd2fFPD1PuYKRDTAh7PKEqNk3bOaH5zFuJ+Cx/aC0LBpafRvadVC1kSRofEQZNmkanKYzzOfmRZ7HikQPsJG0lq+r2qiX7Evnndtsuu2DcrIH9k58t55Wa5hD8JPYF+NCvy9q5I70DDHGl9Q5ZGu1qrsTCQd6CGg1w+E2SEQgQd1Qg5xD0dzl4VwALAJ849oBeZ9hdiD/qvy954VQ5COAesxc7MLTBp3iiFM4jQFUiIZQUe6oi4NzwbTPUpAYsm763OZfO75GgdSS/LxARsf4bbYGFJ8uiP3nH6LxHU6hjP1RjEHYSOi/aQZ7L5MgBmyFN1lyrmjVQbGgm6BI254HHYmgZ1JKCQAj8zDRc3LiLKn7JtoHxthz7kauiSqpWt1FJf142ZJrRi+o6Nkv/zm7vGz1zjpii623EImhrR7pTjxk8xg=
+#  file_glob: true
+#  file:
 #     - "/home/travis/build/Nineclown/The-Convenient-ATM/build/reports/jdepend/*"
-     - "/home/travis/build/Nineclown/The-Convenient-ATM/build/reports/findbugs/*"
-     - "/home/travis/build/Nineclown/The-Convenient-ATM/build/libs/*.jar"
-  skip_cleanup : true
-  on:
-    all_branches: true
-    repo: Nineclown/The-Convenient-ATM
+#     - "/home/travis/build/Nineclown/The-Convenient-ATM/build/reports/findbugs/*"
+#     - "/home/travis/build/Nineclown/The-Convenient-ATM/build/libs/*.jar"
+#  skip_cleanup : true
+#  on:
+#    all_branches: true
+#    repo: Nineclown/The-Convenient-ATM
