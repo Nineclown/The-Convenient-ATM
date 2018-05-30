@@ -12,7 +12,6 @@ addons:
       secure: 20cccee07ce13984260fc360c226cdc1ad1b0ed5
 script:
   - "./gradlew clean check build"
-  - "sonar-scanner"
 cache: "$HOME/.m2/repository $HOME/.gradle .gradle"
 
 before_deploy:
