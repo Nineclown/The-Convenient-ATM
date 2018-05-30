@@ -200,6 +200,13 @@ public class EnterNumber extends JFrame {
                         parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
                         break;
                     case Transfer:
+                        if (insertNumber > 1000) {
+                            JOptionPane.showMessageDialog(parentFrame, "출금하려는 금액이 너무 큽니다. 다시 입력해주세요.", "Error", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        } else if (insertNumber == 0) {
+                            JOptionPane.showMessageDialog(parentFrame, "0원을 출금할 수 없습니다. 다시 입력해주세요.", "Error", JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
                         try {
                             system.enterCashAmountToTransfer(insertNumber * 10000);
                         } catch (DataStoreError | NegativeBalanceError ex) {
