@@ -36,6 +36,11 @@ public class AuthorizeAdmin extends JFrame {
         String id = adminIdField.getText();
         String password = new String(adminPwField.getPassword());
 
+        if (Arrays.asList(FunctionType.getUserFunctions()).contains(system.getFunction())) {
+            JOptionPane.showMessageDialog(parentFrame, setLocalizedString(system,
+                "사용자 기능과 관리자 기능은 동시에 실행할 수 없습니다.", "User and admin can't access atm simultaneously."), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
         try {
             system.authorizeAdmin(id, password);
         } catch (InvalidAdminException exception) {
@@ -64,12 +69,7 @@ public class AuthorizeAdmin extends JFrame {
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if (Arrays.asList(FunctionType.getUserFunctions()).contains(system.getFunction())) {
-                    JOptionPane.showMessageDialog(parentFrame, setLocalizedString(system,
-                        "사용자 기능과 관리자 기능은 동시에 실행할 수 없습니다.", "User and admin can't access atm simultaneously."), "Error", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    next(parentFrame, system);
-                }
+                next(parentFrame, system);
             }
         });
         adminPwField.addKeyListener(new KeyAdapter() {
