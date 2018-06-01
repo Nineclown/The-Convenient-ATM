@@ -31,7 +31,7 @@ jar {
     manifest {
         attributes 'Title': 'My Application', 'Version': version, 'Main-Class': 'com.swad.cppatm.Main'
     }
-    archiveName 'C++ ATM.jar'
+    archiveName 'CPP_ATM.jar'
     dependsOn configurations.runtime
     from {
         configurations.compile.collect {it.isDirectory()? it: zipTree(it)}
@@ -63,26 +63,26 @@ tasks.withType(JDepend) {
 
 tasks.withType(FindBugs) {
     reports {
-        xml.enabled false
-        html.enabled true
+        xml.enabled = false
+        html.enabled = true
     }
 }
 
 findbugs {
-
     ignoreFailures true //test fail을 build fail에 영향을 주지 않게 한다.
-//    toolVersion = "3.0.1"
-//    sourceSets = [sourceSets.main]
-//    reportsDir = file("$project.buildDir/findbugsReports")
-//    effort = "max"
-//    showProgress = true
-//    reportLevel = "high"
-//    visitors = ["FindSqlInjection", "SwitchFallthrough"]
-//    omitVisitors = ["FindNonShortCircuit"]
-//    includeFilter = file("$rootProject.projectDir/config/findbugs/includeFilter.xml")
-//    excludeFilter = file("$rootProject.projectDir/config/findbugs/excludeFilter.xml")
-//    excludeBugsFilter = file("$rootProject.projectDir/config/findbugs/excludeBugsFilter.xml")
+    toolVersion = "3.0.1"
+    sourceSets = [sourceSets.main]
+    reportsDir = file("$project.buildDir/reports/findbugsReports")
+    effort = "max"
+    showProgress = true
+    reportLevel = "low"
+    //visitors = ["FindSqlInjection", "SwitchFallthrough"]
+    //omitVisitors = ["FindNonShortCircuit"]
+    //includeFilter = file("$rootProject.projectDir/config/findbugs/includeFilter.xml")
+    excludeFilter = file("$rootProject.projectDir/config/findbugs/excludeFilter.xml")
+    //excludeBugsFilter = file("$rootProject.projectDir/config/findbugs/excludeBugsFilter.xml")
 }
+
 
 jdepend {
     ignoreFailures true
