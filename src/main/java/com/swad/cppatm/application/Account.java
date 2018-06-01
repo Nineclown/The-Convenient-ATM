@@ -155,9 +155,9 @@ public class Account {
         ArrayList<Transaction> list = new ArrayList<>();
 
         for (Transaction t : transactions) {
-            if (t.getTime().compareTo(start) > 0 && t.getTime().compareTo(end) < 0) {
+            if (t.getTime().compareTo(start) >= 0 && t.getTime().compareTo(end) < 0) {
                 list.add(t);
-            }
+        }
         }
 
         return list;
