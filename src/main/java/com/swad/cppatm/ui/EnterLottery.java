@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Date;
 
 public class EnterLottery {
     private JPanel enterLotteryPanel;
@@ -63,8 +64,18 @@ public class EnterLottery {
                     return;
                 }
 
+                long weekMax = (new Date().getTime() - new Date(102, 10, 30).getTime()) / (7 * 24 * 60 * 60 * 1000);
+
+                if (week <= 0 || week > weekMax) {
+                    JOptionPane.showMessageDialog(parentFrame,
+                        setLocalizedString(system, "잘못된 주차입니다.", "Incorrect week No."),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
                 for (int i = 0; i < values.length; i++) {
-                    if (values[i] < 0 || values[i] > 45) {
+                    if (values[i] <= 0 || values[i] > 45) {
                         JOptionPane.showMessageDialog(parentFrame,
                             setLocalizedString(system, "올바르지 않은 번호입니다.", "Incorrect number."),
                             "Error",
