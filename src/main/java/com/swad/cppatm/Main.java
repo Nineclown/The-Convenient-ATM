@@ -25,8 +25,6 @@ public class Main {
     }
 
     public void initializeScreen() {
-        System.out.println("Main.refreshScreen is called!");
-
         this.userFrame.setVisible(false);
         this.userFrame.pack();
         this.userFrame.setContentPane(new SelectFunction(application.userFrame, system).getPanel());
@@ -36,7 +34,7 @@ public class Main {
 
         this.adminFrame.setVisible(false);
         this.adminFrame.pack();
-        this.adminFrame.setContentPane(new AuthorizeAdmin(application.adminFrame, system).getPanel());
+        this.adminFrame.setContentPane(new AdminSelectFunction(application.adminFrame, system).getPanel());
         this.adminFrame.invalidate();
         this.adminFrame.validate();
         this.adminFrame.setVisible(true);
@@ -46,10 +44,6 @@ public class Main {
         application = Main.getInstance();
 
         application.system = new ATMSystem();
-
-        System.out.println("main(): application is " + application);
-        System.out.println("main(): userFrame is " + System.identityHashCode(application.userFrame));
-        System.out.println("main(): adminFrame is " + System.identityHashCode(application.adminFrame));
 
         application.userFrame.setContentPane(new SelectFunction(application.userFrame, application.system).getPanel());
         application.userFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

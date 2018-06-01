@@ -23,6 +23,7 @@ public class AdminSelectFunction extends JFrame {
     private JButton queryATMBalanceButton;
     private JButton changeLocaleButton;
     private JLabel atmStateLabel;
+    private JButton logoutButton;
 
     public String setLocalizedString(ATMSystem system, String ko, String en) {
         if (system.getState().getLocale() == Locale.en_US) {
@@ -32,7 +33,7 @@ public class AdminSelectFunction extends JFrame {
         }
     }
 
-    AdminSelectFunction(final JFrame parentFrame, final ATMSystem system) {
+    public AdminSelectFunction(final JFrame parentFrame, final ATMSystem system) {
         system.removeFunctionSelection();
 
         atmStateLabel.setText(system.getState().available() ? "Active" : "Frozen");
@@ -142,6 +143,16 @@ public class AdminSelectFunction extends JFrame {
                 parentFrame.validate();
             }
         });
+
+        logoutButton.setText(setLocalizedString(system, "로그아웃", "Logout"));
+        logoutButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
+                parentFrame.invalidate();
+                parentFrame.validate();
+            }
+        });
     }
 
     public JPanel getPanel() {
@@ -164,7 +175,7 @@ public class AdminSelectFunction extends JFrame {
      */
     private void $$$setupUI$$$() {
         adminSelectFunctionPanel = new JPanel();
-        adminSelectFunctionPanel.setLayout(new GridLayoutManager(3, 3, new Insets(30, 30, 30, 30), 10, 30, true, false));
+        adminSelectFunctionPanel.setLayout(new GridLayoutManager(4, 3, new Insets(30, 30, 30, 30), 10, 30, true, false));
         adminSelectFunctionPanel.setBackground(new Color(-1));
         adminSelectFunctionPanel.setForeground(new Color(-1));
         adminSelectFunctionPanel.setMinimumSize(new Dimension(800, 600));
@@ -221,6 +232,13 @@ public class AdminSelectFunction extends JFrame {
         toggleStateButton.setForeground(new Color(-1));
         toggleStateButton.setText("Toggle State");
         adminSelectFunctionPanel.add(toggleStateButton, new GridConstraints(1, 2, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, new Dimension(150, 100), null, 0, false));
+        logoutButton = new JButton();
+        logoutButton.setBackground(new Color(-10592674));
+        Font logoutButtonFont = this.$$$getFont$$$(null, -1, 20, logoutButton.getFont());
+        if (logoutButtonFont != null) logoutButton.setFont(logoutButtonFont);
+        logoutButton.setForeground(new Color(-1));
+        logoutButton.setText("Logout");
+        adminSelectFunctionPanel.add(logoutButton, new GridConstraints(3, 2, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, new Dimension(150, 50), null, 0, false));
     }
 
     /**
