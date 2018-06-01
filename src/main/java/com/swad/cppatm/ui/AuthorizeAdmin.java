@@ -45,10 +45,9 @@ public class AuthorizeAdmin extends JFrame {
             system.authorizeAdmin(id, password);
         } catch (InvalidAdminException exception) {
             JOptionPane.showMessageDialog(parentFrame,
-                "Invalid ID or Password.",
-                "Authentication Failed",
+                setLocalizedString(system, "아이디 또는 비밀번호가 틀립니다.", "Invalid ID or Password."),
+                "Error",
                 JOptionPane.ERROR_MESSAGE);
-
             return;
         }
 

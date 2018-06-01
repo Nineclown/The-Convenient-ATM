@@ -179,12 +179,18 @@ public class EnterPassword extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 if (passwordField.getPassword().length != 4) {
-                    JOptionPane.showMessageDialog(parentFrame, "Password is invalid", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(parentFrame,
+                        setLocalizedString(system, "잘못된 비밀번호 형식입니다.", "Invalid Password Format."),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
                 if (!system.getAccount().isAccountEnabled()) {
-                    JOptionPane.showMessageDialog(parentFrame, "Account is frozen", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(parentFrame,
+                        setLocalizedString(system, "계좌가 정지되었습니다.", "Account is Frozen"),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
                     parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
                     parentFrame.pack();
                     parentFrame.invalidate();
@@ -198,12 +204,21 @@ public class EnterPassword extends JFrame {
                     JOptionPane.showMessageDialog(parentFrame, "???", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 } catch (InvalidPasswordException ex) {
-                    JOptionPane.showMessageDialog(parentFrame, "Password is invalid", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(parentFrame,
+                        setLocalizedString(system, "잘못된 비밀번호 입니다.", "Password is invalid."),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
                     return;
                 } catch (NegativeBalanceError ex) {
-                    JOptionPane.showMessageDialog(parentFrame, "잔액이 부족합니다.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(parentFrame,
+                        setLocalizedString(system, "잔액이 부족합니다.", "Not Enough Balance"),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
                 } catch (FrozenAccountException ex) {
-                    JOptionPane.showMessageDialog(parentFrame, "계좌가 정지되었습니다.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(parentFrame,
+                        setLocalizedString(system, "계좌가 정지되었습니다.", "Account is Frozen"),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
 
                     parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
                     parentFrame.pack();

@@ -56,12 +56,18 @@ public class EnterBill {
                 values[3] = fiftyThousandField.getNumber();
 
                 if (values[0] + values[1] + values[2] + values[3] > 100) {
-                    JOptionPane.showMessageDialog(parentFrame, "지폐의 수가 너무 많습니다, 일부만 다시 넣어주세요", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(parentFrame,
+                        setLocalizedString(system, "지폐의 수가 너무 많습니다, 일부만 다시 넣어주세요.", "Too many bills, please insert some of bills again."),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
                 if (values[0] + values[1] + values[2] + values[3] == 0) {
-                    JOptionPane.showMessageDialog(parentFrame, "0원을 입금할 수 없습니다", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(parentFrame,
+                        setLocalizedString(system, "0원을 입금할 수 없습니다.", "Can't Deposit 0 won."),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -77,7 +83,10 @@ public class EnterBill {
                             parentFrame.validate();
                             return;
                         } catch (OverflowBillException ex) {
-                            JOptionPane.showMessageDialog(parentFrame, "해당 거래를 진행할 수 없습니다. 관리자에게 연락해주세요.", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(parentFrame,
+                                setLocalizedString(system, "거래를 진행할 수 없습니다. 관리자에게 연락해주세요.", "Can't process transaction, please contact to admin"),
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
 
                             parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
                             parentFrame.pack();

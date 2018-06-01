@@ -63,8 +63,10 @@ public class AdminSelectFunction extends JFrame {
                     JOptionPane.showMessageDialog(parentFrame, "관리자를 삭제 할 수 없습니다.", "Info", JOptionPane.INFORMATION_MESSAGE);
                     return;
                 }
-
-                JOptionPane.showMessageDialog(parentFrame, "Admin deleted", "Info", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(parentFrame,
+                    setLocalizedString(system, "관리자가 삭제되었습니다.", "Admin deleted"),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
 
                 parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
                 parentFrame.invalidate();

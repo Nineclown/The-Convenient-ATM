@@ -84,17 +84,26 @@ public class ReportLostCard extends JFrame {
                 for (int i = 0; i < checkBox.length; i++) {
                     if (!cardFields[i].getText().equals("") && checkBox[i].isSelected()) {
                         system.selectCard(card[i]);
-                        JOptionPane.showMessageDialog(parentFrame, card[i].toString() + " 카드를 중지처리하였습니다", "Info", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(parentFrame,
+                            setLocalizedString(system, card[i].toString() + " 카드를 중지처리하였습니다", card[i].toString() + " is now closed"),
+                            "Info",
+                            JOptionPane.INFORMATION_MESSAGE);
 
-                        int answer = JOptionPane.showConfirmDialog(parentFrame.getContentPane(), "재발급을 신청하시겠습니까?", "카드 재발급", JOptionPane.YES_NO_OPTION);
+                        int answer = JOptionPane.showConfirmDialog(parentFrame.getContentPane(),
+                            setLocalizedString(system, "재발급을 신청하시겠습니까?", "Want to renew card?"),
+                            "Renew Card",
+                            JOptionPane.YES_NO_OPTION);
                         switch (answer) {
                             case JOptionPane.YES_OPTION:
                                 try {
                                     system.askRenewCard(true);
                                 } catch (DataStoreError ex) {
                                 }
-                                ;
-                                JOptionPane.showMessageDialog(parentFrame, card[i].toString() + " 카드를 재발급 처리하였습니다", "Info", JOptionPane.INFORMATION_MESSAGE);
+
+                                JOptionPane.showMessageDialog(parentFrame,
+                                    setLocalizedString(system, card[i].toString() + " 카드를 재발급 요청하였습니다", card[i].toString() + " is requested to renew"),
+                                    "Info",
+                                    JOptionPane.INFORMATION_MESSAGE);
                             case JOptionPane.NO_OPTION:
                                 parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
                                 parentFrame.invalidate();

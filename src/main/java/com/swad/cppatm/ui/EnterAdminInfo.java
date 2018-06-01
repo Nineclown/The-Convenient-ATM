@@ -36,25 +36,37 @@ public class EnterAdminInfo extends JFrame {
         String password = new String(adminPwField.getPassword());
         String contact = adminContactField.getText();
 
-        if (!password.matches("^(\\w{4,})$")) {
-            JOptionPane.showMessageDialog(parentFrame, "Invalid Password format", "Error", JOptionPane.ERROR_MESSAGE);
+        if (!password.matches("^(\\d{4})$")) {
+            JOptionPane.showMessageDialog(parentFrame,
+                setLocalizedString(system, "잘못된 비밀번호 형식입니다.", "Invalid Password format."),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         if (!contact.matches("^(0\\d{8,10})$")) {
-            JOptionPane.showMessageDialog(parentFrame, "Invalid Contact format", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(parentFrame,
+                setLocalizedString(system, "잘못된 전화번호 형식입니다.", "Invalid Contact format."),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         try {
             system.enterAdminInfo(password, contact);
         } catch (DataStoreError er) {
-            JOptionPane.showMessageDialog(parentFrame, setLocalizedString(system, "관리자를 추가할 수 없습니다.", "Failed to add admin."), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(parentFrame,
+                setLocalizedString(system, "관리자를 추가할 수 없습니다.", "Failed to add admin"),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
             return;
         }
 
         Admin newAdmin = system.getAdmins()[system.getAdmins().length - 1];
-        JOptionPane.showMessageDialog(parentFrame, "Admin added\nYour AdminId : " + newAdmin.getId(), "Info", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(parentFrame,
+            setLocalizedString(system, "관리자가 추가되었습니다\n새로운 관리자 ID : " + newAdmin.getId(), "Admin added\nYour AdminId : " + newAdmin.getId()),
+            "Info",
+            JOptionPane.INFORMATION_MESSAGE);
 
         parentFrame.setContentPane(new AuthorizeAdmin(parentFrame, system).getPanel());
         parentFrame.invalidate();

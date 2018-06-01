@@ -19,9 +19,6 @@ public class ChangeLocale {
     ChangeLocale(final JFrame parentFrame, final ATMSystem system) {
         Main application = Main.getInstance();
 
-        System.out.println("ChangeLocale() : applicaton is " + application);
-        System.out.println("ChangeLocale(): userFrame is " + System.identityHashCode(application.userFrame));
-        System.out.println("ChangeLocale(): adminFrame is " + System.identityHashCode(application.adminFrame));
 
         koreanButton.addMouseListener(new MouseAdapter() {
             @Override

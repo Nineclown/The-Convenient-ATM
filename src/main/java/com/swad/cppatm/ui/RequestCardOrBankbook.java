@@ -44,11 +44,17 @@ public class RequestCardOrBankbook {
         } else if (buttonKookmin.isSelected()) {
             bank = Bank.KOOKMIN;
         } else {
-            JOptionPane.showMessageDialog(parentFrame, "BankName is Invaild.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(parentFrame,
+                setLocalizedString(system, "은행 선택이 잘 못 되었습니다.", "Bank name is invalid."),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (!bankbookNumberField.getText().matches("^\\d{13,14}$")) {
-            JOptionPane.showMessageDialog(parentFrame, "Invalid bankbook format", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(parentFrame,
+                setLocalizedString(system, "잘못된 계좌번호 형식입니다.", "Invalid bankbook format."),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -58,16 +64,25 @@ public class RequestCardOrBankbook {
             system.enterAccountInfo(bank, accountNo);
         } catch (NoneOfFunctionSelected ex) {
         } catch (DataStoreError ex) {
-            JOptionPane.showMessageDialog(parentFrame, "Load Error", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(parentFrame, ex.getClass().getSimpleName(), "Error", JOptionPane.ERROR_MESSAGE);
             return;
         } catch (AccountDoesNotExist ex) {
-            JOptionPane.showMessageDialog(parentFrame, "Can't Find Account", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(parentFrame,
+                setLocalizedString(system, "계좌를 찾을 수 없습니다.", "Can't Find Account."),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
             return;
         } catch (FrozenAccountException ex) {
-            JOptionPane.showMessageDialog(parentFrame, "Account is frozen", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(parentFrame,
+                setLocalizedString(system, "정지된 계좌입니다.", "Account is Frozen"),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
             return;
         } catch (SameAccountTransferException ex) {
-            JOptionPane.showMessageDialog(parentFrame, "Can't transfer to yourself", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(parentFrame,
+                setLocalizedString(system, "자신에게 이체 할 수 없습니다..", "Can't transfer to yourself"),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
             return;
         }
 
@@ -105,7 +120,6 @@ public class RequestCardOrBankbook {
                 break;
             default:
                 parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
-                JOptionPane.showMessageDialog(parentFrame, "unknown error", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
         parentFrame.pack();

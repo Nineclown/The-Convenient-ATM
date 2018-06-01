@@ -141,10 +141,16 @@ public class EnterNumber extends JFrame {
                 switch (system.getFunction()) {
                     case Withdraw:
                         if (insertNumber > 100) {
-                            JOptionPane.showMessageDialog(parentFrame, "출금하려는 금액이 너무 큽니다. 다시 입력해주세요.", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(parentFrame,
+                                setLocalizedString(system, "출금하려는 금액이 너무 큽니다. 다시 입력해주세요.", "Too many amount to withdraw, Please enter again."),
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
                             return;
                         } else if (insertNumber == 0) {
-                            JOptionPane.showMessageDialog(parentFrame, "0원을 출금할 수 없습니다. 다시 입력해주세요.", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(parentFrame,
+                                setLocalizedString(system, "0원을 출금할 수 없습니다. 다시 입력해주세요.", "Can't withdraw 0 won, Please enter again."),
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
                             return;
                         }
 
@@ -158,7 +164,10 @@ public class EnterNumber extends JFrame {
                             parentFrame.validate();
                             return;
                         } catch (OverflowBillException ex) {
-                            JOptionPane.showMessageDialog(parentFrame, "해당 거래를 진행할 수 없습니다. 관리자에게 연락해주세요.", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(parentFrame,
+                                setLocalizedString(system, "거래를 진행할 수 없습니다. 관리자에게 연락해주세요.", "Can't process transaction, please contact to admin"),
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
 
                             parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
                             parentFrame.pack();
@@ -171,10 +180,16 @@ public class EnterNumber extends JFrame {
                         break;
                     case ForeignWithdraw:
                         if (insertNumber > 5000) {
-                            JOptionPane.showMessageDialog(parentFrame, "출금하려는 금액이 너무 큽니다. 다시 입력해주세요.", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(parentFrame,
+                                setLocalizedString(system, "출금하려는 금액이 너무 큽니다. 다시 입력해주세요.", "Too many amount to withdraw, Please enter again."),
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
                             return;
                         } else if (insertNumber == 0) {
-                            JOptionPane.showMessageDialog(parentFrame, "0원을 출금할 수 없습니다. 다시 입력해주세요.", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(parentFrame,
+                                setLocalizedString(system, "0원을 출금할 수 없습니다. 다시 입력해주세요.", "Can't withdraw 0 dollar, Please enter again."),
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
                             return;
                         }
 
@@ -188,8 +203,10 @@ public class EnterNumber extends JFrame {
                             parentFrame.validate();
                             return;
                         } catch (OverflowBillException ex) {
-                            JOptionPane.showMessageDialog(parentFrame, "해당 거래를 진행할 수 없습니다. 관리자에게 연락해주세요.", "Error", JOptionPane.ERROR_MESSAGE);
-
+                            JOptionPane.showMessageDialog(parentFrame,
+                                setLocalizedString(system, "거래를 진행할 수 없습니다. 관리자에게 연락해주세요.", "Can't process transaction, please contact to admin"),
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
                             parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
                             parentFrame.pack();
                             parentFrame.invalidate();
@@ -201,10 +218,16 @@ public class EnterNumber extends JFrame {
                         break;
                     case Transfer:
                         if (insertNumber > 1000) {
-                            JOptionPane.showMessageDialog(parentFrame, "출금하려는 금액이 너무 큽니다. 다시 입력해주세요.", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(parentFrame,
+                                setLocalizedString(system, "이체하려는 금액이 너무 큽니다. 다시 입력해주세요.", "Too many amount to transfer, Please enter again."),
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
                             return;
                         } else if (insertNumber == 0) {
-                            JOptionPane.showMessageDialog(parentFrame, "0원을 출금할 수 없습니다. 다시 입력해주세요.", "Error", JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.showMessageDialog(parentFrame,
+                                setLocalizedString(system, "0원을 이체할 수 없습니다. 다시 입력해주세요.", "Can't transfer 0 dollar, Please enter again."),
+                                "Error",
+                                JOptionPane.ERROR_MESSAGE);
                             return;
                         }
                         try {
@@ -224,7 +247,11 @@ public class EnterNumber extends JFrame {
                         if (splitPayFlag) {
                             try {
                                 if (insertNumber > 10) {
-                                    JOptionPane.showMessageDialog(parentFrame, "사람 수가 너무 많습니다.", "Error", JOptionPane.ERROR_MESSAGE);
+                                    JOptionPane.showMessageDialog(parentFrame,
+                                        setLocalizedString(system, "사람 수가 너무 많습니다.", "Too many people to split pay"),
+                                        "Error",
+                                        JOptionPane.ERROR_MESSAGE);
+                                    return;
                                 }
                                 system.enterNumberOfUsers(insertNumber);
                                 parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
@@ -236,8 +263,8 @@ public class EnterNumber extends JFrame {
                             }
                         } else {
                             system.enterTotalCashAmountToGet(insertNumber * 10000);
-                            titleLabel.setText("총 이체 할 인원 수를 입력하여 주십시오.");
-                            currencyLabel.setText("명");
+                            titleLabel.setText(setLocalizedString(system, "총 이체 할 인원 수를 입력하여 주십시오.", "Please enter people number to split pay"));
+                            currencyLabel.setText(setLocalizedString(system, "명", "Persons"));
                             numberField.setText("");
                             splitPayFlag = true;
                         }

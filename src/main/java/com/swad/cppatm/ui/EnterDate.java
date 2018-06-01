@@ -49,7 +49,10 @@ public class EnterDate {
                 Date start, end;
 
                 if (!startDateField.getText().matches("^\\d{8}$") && !endDateField.getText().matches("^\\d{8}$")) {
-                    JOptionPane.showMessageDialog(parentFrame, "Invalid date format", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(parentFrame,
+                        setLocalizedString(system, "잘못된 날짜 형식입니다.", "Invalid date format"),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -64,7 +67,10 @@ public class EnterDate {
                 endDate = Integer.parseInt(endDateField.getText().substring(6, 8));
 
                 if (startMonth > 12 || endMonth > 12 || startDate > 31 || endDate > 31 || startYear < 1900 || endYear < 1900) {
-                    JOptionPane.showMessageDialog(parentFrame, "Invalid date format", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(parentFrame,
+                        setLocalizedString(system, "잘못된 날짜 형식입니다.", "Invalid date format"),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -72,7 +78,10 @@ public class EnterDate {
                 end = new Date(endYear - 1900, endMonth - 1, endDate + 1);
 
                 if (start.compareTo(end) >= 0) {
-                    JOptionPane.showMessageDialog(parentFrame, "시작일이 끝나는 날보다 큽니다.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(parentFrame,
+                        setLocalizedString(system, "시작일이 끝나는 날보다 큽니다.", "start date is after than end date."),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 

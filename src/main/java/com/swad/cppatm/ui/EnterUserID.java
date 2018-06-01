@@ -36,7 +36,10 @@ public class EnterUserID {
 
 
                 if (!idField.getText().matches("^\\d{13}$")) {
-                    JOptionPane.showMessageDialog(parentFrame, "Invalid resident Number format", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(parentFrame,
+                        setLocalizedString(system, "잘못된 주민번호 형식입니다.", "Invalid resident number Format."),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
@@ -45,7 +48,10 @@ public class EnterUserID {
                 try {
                     system.enterUserId(userId);
                 } catch (UserDoestNotExist exception) {
-                    JOptionPane.showMessageDialog(parentFrame, "CAN'T FIND A USER", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(parentFrame,
+                        setLocalizedString(system, "사용자를 조회할 수 없습니다.", "Can't find User."),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
                     return;
                 }
 
