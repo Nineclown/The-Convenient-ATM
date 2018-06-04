@@ -301,9 +301,8 @@ public class ATMSystem {
     public void enterBillAsDollar(int[] billAmount) throws InvalidBillException, DataStoreError, OverflowBillException {
         int totalDollar = 0;
 
-        if (billAmount.length != 11) {
-            throw new InvalidBillException();
-        } else if ((billAmount[0] != 0) || (billAmount[1] != 0) || (billAmount[2] != 0) && (billAmount[3] != 0)) {
+        if ((billAmount.length != 11) || ((billAmount[0] != 0) || (billAmount[1] != 0) || (billAmount[2] != 0) && (billAmount[3] != 0)))
+        {
             throw new InvalidBillException();
         }
 
