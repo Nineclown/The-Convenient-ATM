@@ -267,10 +267,10 @@ public class ATMSystem {
             throw new InvalidBillException();
         }
 
-        total += BillType.count(BillType.Thousand, billAmount[0]);
-        total += BillType.count(BillType.FiveThousand, billAmount[1]);
-        total += BillType.count(BillType.TenThousand, billAmount[2]);
-        total += BillType.count(BillType.FiftyThousand, billAmount[3]);
+        total += BillType.count(BillType.THOUSAND, billAmount[0]);
+        total += BillType.count(BillType.FIVE_THOUSAND, billAmount[1]);
+        total += BillType.count(BillType.TEN_THOUSAND, billAmount[2]);
+        total += BillType.count(BillType.FIFTY_THOUSAND, billAmount[3]);
 
 
         this.toTransaction.setAmount(total);
@@ -306,13 +306,13 @@ public class ATMSystem {
             throw new InvalidBillException();
         }
 
-        totalDollar += BillType.dollarCount(BillType.DollarOne, billAmount[4]);
-        totalDollar += BillType.dollarCount(BillType.DollarTwo, billAmount[5]);
-        totalDollar += BillType.dollarCount(BillType.DollarFive, billAmount[6]);
-        totalDollar += BillType.dollarCount(BillType.DollarTen, billAmount[7]);
-        totalDollar += BillType.dollarCount(BillType.DollarTwenty, billAmount[8]);
-        totalDollar += BillType.dollarCount(BillType.DollarFifty, billAmount[9]);
-        totalDollar += BillType.dollarCount(BillType.DollarHundred, billAmount[10]);
+        totalDollar += BillType.dollarCount(BillType.DOLLAR_ONE, billAmount[4]);
+        totalDollar += BillType.dollarCount(BillType.DOLLAR_TWO, billAmount[5]);
+        totalDollar += BillType.dollarCount(BillType.DOLLAR_FIVE, billAmount[6]);
+        totalDollar += BillType.dollarCount(BillType.DOLLAR_TEN, billAmount[7]);
+        totalDollar += BillType.dollarCount(BillType.DOLLAR_TWENTY, billAmount[8]);
+        totalDollar += BillType.dollarCount(BillType.DOLLAR_FIFTY, billAmount[9]);
+        totalDollar += BillType.dollarCount(BillType.DOLLAR_HUNDRED, billAmount[10]);
 
         this.cashAmount = (int) (this.getCurrency() * totalDollar);
         System.out.print(this.fromTransaction);
