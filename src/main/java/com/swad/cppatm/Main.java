@@ -5,8 +5,8 @@ import com.swad.cppatm.application.ATMSystem;
 import javax.swing.*;
 
 public class Main {
-    public JFrame userFrame;
-    public JFrame adminFrame;
+    private JFrame userFrame;
+    private JFrame adminFrame;
     private ATMSystem system;
     private static Main application;
 
