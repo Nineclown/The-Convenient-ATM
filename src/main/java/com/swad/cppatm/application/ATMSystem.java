@@ -3,6 +3,7 @@ package com.swad.cppatm.application;
 import com.swad.cppatm.enums.*;
 import com.swad.cppatm.exceptions.*;
 
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -188,6 +189,7 @@ public class ATMSystem {
                     DataStore dataStore = new DataStore();
                     dataStore.saveAdminData(admins);
                 } catch (DataStoreError er) {
+                    //DataStroeError, File System Error.
                 }
                 break;
             case ToggleATMState:
@@ -233,7 +235,7 @@ public class ATMSystem {
                 try {
                     this.toTransaction.processTransaction();
                 } catch (NegativeBalanceError e) {
-
+                    //GetLotteryPrize Don't make Negative balance Error.
                 }
                 break;
             case Transfer:
@@ -364,8 +366,6 @@ public class ATMSystem {
             try {
                 this.fromTransaction.processTransaction();
                 this.toTransaction.addAmount(cashAmount);
-            } catch (NegativeBalanceError e) {
-                throw e;
             } finally {
                 if (numberOfUser > 0) {
                     this.fromTransaction = new Transaction(TransactionType.SendTransfer);
@@ -492,12 +492,13 @@ public class ATMSystem {
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             con.setRequestMethod("GET");
             con.getResponseCode();
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"));
             String inputLine;
             if ((inputLine = in.readLine()) != null) {
                 currency = Double.parseDouble(inputLine.substring(inputLine.indexOf(':') + 1, inputLine.length() - 1));
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
+            //IOException
         }
 
         return currency;
