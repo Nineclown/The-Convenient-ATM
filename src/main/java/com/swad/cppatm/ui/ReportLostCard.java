@@ -8,6 +8,7 @@ import com.swad.cppatm.enums.Locale;
 import com.swad.cppatm.exceptions.DataStoreError;
 import com.swad.cppatm.exceptions.UserDoestNotExist;
 
+import javax.print.attribute.standard.JobPriority;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -93,26 +94,20 @@ public class ReportLostCard extends JFrame {
                             setLocalizedString(system, "재발급을 신청하시겠습니까?", "Want to renew card?"),
                             "Renew Card",
                             JOptionPane.YES_NO_OPTION);
-                        switch (answer) {
-                            case JOptionPane.YES_OPTION:
-                                try {
-                                    system.askRenewCard(true);
-                                } catch (DataStoreError ex) {
-                                }
-
-                                JOptionPane.showMessageDialog(parentFrame,
-                                    setLocalizedString(system, card[i].toString() + " 카드를 재발급 요청하였습니다", card[i].toString() + " is requested to renew"),
-                                    "Info",
-                                    JOptionPane.INFORMATION_MESSAGE);
-                            case JOptionPane.NO_OPTION:
-                                parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
-                                parentFrame.invalidate();
-                                parentFrame.validate();
-                                break;
+                        if (answer == 0) {
+                            try {
+                                system.askRenewCard(true);
+                            } catch (DataStoreError ex) {
+                            }
                         }
+                        JOptionPane.showMessageDialog(parentFrame, setLocalizedString(system, card[i].toString() + " 카드를 재발급 요청하였습니다", card[i].toString() + " is requested to renew"),
+                            "Info",
+                            JOptionPane.INFORMATION_MESSAGE);
+                        parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
+                        parentFrame.invalidate();
+                        parentFrame.validate();
                     }
                 }
-
 
             }
         });
