@@ -12,7 +12,6 @@ import java.net.URL;
 import java.net.HttpURLConnection;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.function.Function;
 
 
 public class ATMSystem {
@@ -140,12 +139,6 @@ public class ATMSystem {
                 this.toTransaction = new Transaction(TransactionType.ForeignWithdraw);
                 break;
             case Transfer:
-                if (!state.available()) {
-                    throw new NoneOfFunctionSelected();
-                }
-                this.fromTransaction = new Transaction(TransactionType.SendTransfer);
-                this.toTransaction = new Transaction(TransactionType.ReceiveTransfer);
-                break;
             case SplitPay:
                 if (!state.available()) {
                     throw new NoneOfFunctionSelected();
@@ -212,7 +205,7 @@ public class ATMSystem {
         this.function = function;
     }
 
-    public void enterAccountInfo(Bank bank, String accountNo) throws AccountDoesNotExist, DataStoreError, FrozenAccountException, NoneOfFunctionSelected, SameAccountTransferException{
+    public void enterAccountInfo(Bank bank, String accountNo) throws AccountDoesNotExist, DataStoreError, FrozenAccountException, NoneOfFunctionSelected, SameAccountTransferException {
         DataStore dataStore = new DataStore();
         this.account = dataStore.loadAccountData(bank, accountNo);
         retry = 0;
@@ -557,11 +550,11 @@ public class ATMSystem {
         this.requestStopCard(cardNumber);
     }
 
-    public void requestStopCard(String cardNumber){
+    public void requestStopCard(String cardNumber) {
         System.out.println(cardNumber + "카드를 중지처리하였습니다");
         try {
             this.user.removeCard(cardNumber);
-        }catch(DataStoreError e){
+        } catch (DataStoreError e) {
             //Ignore Error.
         }
     }
