@@ -104,6 +104,7 @@ public class ReportLostCard extends JFrame {
                                     setLocalizedString(system, card[i].toString() + " 카드를 재발급 요청하였습니다", card[i].toString() + " is requested to renew"),
                                     "Info",
                                     JOptionPane.INFORMATION_MESSAGE);
+                                break;
                             case JOptionPane.NO_OPTION:
                                 parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
                                 parentFrame.invalidate();
