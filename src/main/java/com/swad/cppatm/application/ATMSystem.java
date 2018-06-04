@@ -478,7 +478,7 @@ public class ATMSystem {
                 }
                 break;
             default:
-                return null;
+                return new int[]{0,0,0,0,0,0,0,0,0,0,0};
         }
         return bills;
     }
