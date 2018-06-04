@@ -38,14 +38,14 @@ public class EnterNumber extends JFrame {
     }
 
     EnterNumber(final JFrame parentFrame, final ATMSystem system) {
-        if (system.getFunction() == FunctionType.ForeignWithdraw) {
+        if (system.getFunction() == FunctionType.FOREIGN_WITHDRAW) {
             currencyLabel.setText(setLocalizedString(system, "달러", "Dollar"));
         }
-        if (system.getFunction() == FunctionType.SplitPay) {
+        if (system.getFunction() == FunctionType.SPLIT_PAY) {
             titleLabel.setText(setLocalizedString(system, "총 받아야 할 금액을 입력하여 주십시오.", "Please enter total cash amount to get"));
         }
 
-        if (system.getFunction() == FunctionType.Transfer) {
+        if (system.getFunction() == FunctionType.TRANSFER) {
             titleLabel.setText(setLocalizedString(system, "보내실 금액을 입력하여 주십시오.", "Please enter cash amount to send"));
         }
 
@@ -139,7 +139,7 @@ public class EnterNumber extends JFrame {
                 int insertNumber = numberField.getNumber();
 
                 switch (system.getFunction()) {
-                    case Withdraw:
+                    case WITHDRAW:
                         if (insertNumber > 100) {
                             JOptionPane.showMessageDialog(parentFrame,
                                 setLocalizedString(system, "출금하려는 금액이 너무 큽니다. 다시 입력해주세요.", "Too many amount to withdraw, Please enter again."),
@@ -178,7 +178,7 @@ public class EnterNumber extends JFrame {
 
                         parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
                         break;
-                    case ForeignWithdraw:
+                    case FOREIGN_WITHDRAW:
                         if (insertNumber > 5000) {
                             JOptionPane.showMessageDialog(parentFrame,
                                 setLocalizedString(system, "출금하려는 금액이 너무 큽니다. 다시 입력해주세요.", "Too many amount to withdraw, Please enter again."),
@@ -216,7 +216,7 @@ public class EnterNumber extends JFrame {
 
                         parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
                         break;
-                    case Transfer:
+                    case TRANSFER:
                         if (insertNumber > 1000) {
                             JOptionPane.showMessageDialog(parentFrame,
                                 setLocalizedString(system, "이체하려는 금액이 너무 큽니다. 다시 입력해주세요.", "Too many amount to transfer, Please enter again."),
@@ -243,7 +243,7 @@ public class EnterNumber extends JFrame {
 
                         parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
                         break;
-                    case SplitPay:
+                    case SPLIT_PAY:
                         if (splitPayFlag) {
                             try {
                                 if (insertNumber > 10) {

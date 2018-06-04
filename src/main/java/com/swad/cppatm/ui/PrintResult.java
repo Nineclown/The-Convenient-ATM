@@ -36,7 +36,7 @@ public class PrintResult {
         confirmButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if (system.getFunction() == FunctionType.SplitPay) {
+                if (system.getFunction() == FunctionType.SPLIT_PAY) {
                     if (system.getNumberUser() > 0) {
                         parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
                     } else {

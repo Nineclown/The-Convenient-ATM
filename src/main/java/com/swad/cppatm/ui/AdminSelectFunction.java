@@ -12,7 +12,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Arrays;
 
 public class AdminSelectFunction extends JFrame {
     private JButton addAdminButton;
@@ -43,7 +42,7 @@ public class AdminSelectFunction extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 try {
-                    system.selectFunction(FunctionType.AddAdmin);
+                    system.selectFunction(FunctionType.ADD_ADMIN);
                 } catch (NoneOfFunctionSelected | MultipleFunctionsExecuted ex) {
                     return;
                 }
@@ -59,7 +58,7 @@ public class AdminSelectFunction extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 try {
-                    system.selectFunction(FunctionType.RemoveAdmin);
+                    system.selectFunction(FunctionType.REMOVE_ADMIN);
                 } catch (NoneOfFunctionSelected | MultipleFunctionsExecuted ex) {
                     JOptionPane.showMessageDialog(parentFrame, "관리자를 삭제 할 수 없습니다.", "Info", JOptionPane.INFORMATION_MESSAGE);
                     return;
@@ -80,7 +79,7 @@ public class AdminSelectFunction extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 try {
-                    system.selectFunction(FunctionType.QueryATMBalance);
+                    system.selectFunction(FunctionType.QUERY_ATM_BALANCE);
                 } catch (NoneOfFunctionSelected | MultipleFunctionsExecuted ex) {
                     return;
                 }
@@ -97,7 +96,7 @@ public class AdminSelectFunction extends JFrame {
                 String state;
 
                 try {
-                    system.selectFunction(FunctionType.ToggleATMState);
+                    system.selectFunction(FunctionType.TOGGLE_ATM_STATE);
                 } catch (NoneOfFunctionSelected | MultipleFunctionsExecuted ex) {
                     return;
                 }
@@ -117,7 +116,7 @@ public class AdminSelectFunction extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 try {
-                    system.selectFunction(FunctionType.ChangeATMBalance);
+                    system.selectFunction(FunctionType.CHANGE_ATM_BALANCE);
                 } catch (NoneOfFunctionSelected | MultipleFunctionsExecuted ex) {
                     return;
                 }
@@ -133,7 +132,7 @@ public class AdminSelectFunction extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 try {
-                    system.selectFunction(FunctionType.ChangeLocale);
+                    system.selectFunction(FunctionType.CHANGE_LOCALE);
                 } catch (NoneOfFunctionSelected | MultipleFunctionsExecuted ex) {
                     return;
                 }

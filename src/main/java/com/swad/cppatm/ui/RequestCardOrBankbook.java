@@ -88,13 +88,13 @@ public class RequestCardOrBankbook {
 
 
         switch (system.getFunction()) {
-            case Deposit:
+            case DEPOSIT:
                 parentFrame.setContentPane(new EnterBill(parentFrame, system).getPanel());
                 break;
-            case ForeignDeposit:
+            case FOREIGN_DEPOSIT:
                 parentFrame.setContentPane(new EnterBillAsDollar(parentFrame, system).getPanel());
                 break;
-            case SplitPay:
+            case SPLIT_PAY:
                 if (system.getFromTransaction().getAccount() != null) {
                     parentFrame.setContentPane(new EnterPassword(parentFrame, system).getPanel());
                 } else {
@@ -102,20 +102,20 @@ public class RequestCardOrBankbook {
                 }
 
                 break;
-            case Withdraw:
-            case ForeignWithdraw:
-            case QueryBalance:
-            case QueryTransactionList:
+            case WITHDRAW:
+            case FOREIGN_WITHDRAW:
+            case QUERY_BALANCE:
+            case QUERY_TRANSACTION_LIST:
                 parentFrame.setContentPane(new EnterPassword(parentFrame, system).getPanel());
                 break;
-            case Transfer:
+            case TRANSFER:
                 if (system.getToTransaction().getAccount() != null) {
                     parentFrame.setContentPane(new EnterNumber(parentFrame, system).getPanel());
                 } else {
                     parentFrame.setContentPane(new EnterPassword(parentFrame, system).getPanel());
                 }
                 break;
-            case GetLotteryPrize:
+            case GET_LOTTERY_PRIZE:
                 parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
                 break;
             default:
@@ -136,7 +136,7 @@ public class RequestCardOrBankbook {
         buttonWoori.setText(setLocalizedString(system, "우리은행", "Woori Bank"));
         buttonKookmin.setText(setLocalizedString(system, "국민은행", "Kookmin Bank"));
 
-        if (system.getFunction() == FunctionType.Transfer && system.getFromTransaction().getAccount() != null) {
+        if (system.getFunction() == FunctionType.TRANSFER && system.getFromTransaction().getAccount() != null) {
             this.titleLabel.setText(setLocalizedString(system, "상대방의 계좌 번호를 입력하여 주십시오.", "Please enter account number."));
         }
 

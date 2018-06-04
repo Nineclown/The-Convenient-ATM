@@ -35,7 +35,7 @@ public class EnterPassword extends JFrame {
     }
 
     public EnterPassword(final JFrame parentFrame, final ATMSystem system) {
-        if (system.getFunction() == FunctionType.SplitPay) {
+        if (system.getFunction() == FunctionType.SPLIT_PAY) {
             amountLabel.setText("이체 금액 : " + system.getCashAmount());
         }
 
@@ -228,22 +228,22 @@ public class EnterPassword extends JFrame {
                 }
 
                     switch (system.getFunction()) {
-                    case Withdraw:
+                    case WITHDRAW:
                         parentFrame.setContentPane(new EnterNumber(parentFrame, system).getPanel());
                         break;
-                    case ForeignWithdraw:
+                    case FOREIGN_WITHDRAW:
                         parentFrame.setContentPane(new EnterNumber(parentFrame, system).getPanel());
                         break;
-                    case QueryTransactionList:
+                    case QUERY_TRANSACTION_LIST:
                         parentFrame.setContentPane(new EnterDate(parentFrame, system).getPanel());
                         break;
-                    case QueryBalance:
+                    case QUERY_BALANCE:
                         parentFrame.setContentPane(new QueryBalance(parentFrame, system).getPanel());
                         break;
-                    case Transfer:
+                    case TRANSFER:
                         parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
                         break;
-                    case SplitPay:
+                    case SPLIT_PAY:
                         parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
                         break;
                     default:

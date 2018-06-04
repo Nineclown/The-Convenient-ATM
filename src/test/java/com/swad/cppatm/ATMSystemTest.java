@@ -21,7 +21,7 @@ public class ATMSystemTest {
     @Before
     public void initATMSystem() throws Exception {
         this.system = new ATMSystem();
-        this.system.selectFunction(FunctionType.Deposit);
+        this.system.selectFunction(FunctionType.DEPOSIT);
     }
 
     @Test(expected = InvalidBillException.class)
@@ -48,7 +48,7 @@ public class ATMSystemTest {
         int[] initialAmount = {500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500};
 
         try {
-            system.selectFunction(FunctionType.ForeignWithdraw);
+            system.selectFunction(FunctionType.FOREIGN_WITHDRAW);
             system.enterAccountInfo(Bank.HANA, "123456789012345");
             system.getBalance().setATMBalance(initialAmount);
         } catch (Exception ex) {
@@ -143,7 +143,7 @@ public class ATMSystemTest {
 
     @Test
     public void enterNumberOfUsersSuccessfullyDivideCashAmount() throws NoneOfFunctionSelected, MultipleFunctionsExecuted {
-        system.selectFunction(FunctionType.SplitPay);
+        system.selectFunction(FunctionType.SPLIT_PAY);
         system.setCashAmount(1000);
 
         try {
@@ -194,7 +194,7 @@ public class ATMSystemTest {
 
         try {
             system.authorizeAdmin(admins[admins.length - 1].getId(), "1234");
-            system.selectFunction(FunctionType.RemoveAdmin);
+            system.selectFunction(FunctionType.REMOVE_ADMIN);
         } catch (InvalidAdminException | NoneOfFunctionSelected | MultipleFunctionsExecuted ex) {
             fail(ex.getClass().getSimpleName());
         }
@@ -210,7 +210,7 @@ public class ATMSystemTest {
 
     @Test
     public void enterPeriodToQueryDoesGetTransactions() throws NoneOfFunctionSelected, MultipleFunctionsExecuted {
-        system.selectFunction(FunctionType.QueryTransactionList);
+        system.selectFunction(FunctionType.QUERY_TRANSACTION_LIST);
 
         try {
             system.enterAccountInfo(Bank.HANA, "123456789012345");

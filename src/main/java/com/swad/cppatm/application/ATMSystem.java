@@ -115,67 +115,67 @@ public class ATMSystem {
         }
 
         switch (function) {
-            case Deposit:
+            case DEPOSIT:
                 if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 this.toTransaction = new Transaction(TransactionType.DEPOSIT);
                 break;
-            case Withdraw:
+            case WITHDRAW:
                 if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 this.toTransaction = new Transaction(TransactionType.WITHDRAW);
                 break;
-            case ForeignDeposit:
+            case FOREIGN_DEPOSIT:
                 if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 this.toTransaction = new Transaction(TransactionType.FOREIGN_DEPOSIT);
                 break;
-            case ForeignWithdraw:
+            case FOREIGN_WITHDRAW:
                 if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 this.toTransaction = new Transaction(TransactionType.FOREIGN_WITHDRAW);
                 break;
-            case Transfer:
-            case SplitPay:
+            case TRANSFER:
+            case SPLIT_PAY:
                 if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 this.fromTransaction = new Transaction(TransactionType.SEND_TRANSFER);
                 this.toTransaction = new Transaction(TransactionType.RECEIVE_TRANSFER);
                 break;
-            case QueryBalance:
+            case QUERY_BALANCE:
                 if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 break;
-            case QueryTransactionList:
+            case QUERY_TRANSACTION_LIST:
                 if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 break;
-            case GetLotteryPrize:
+            case GET_LOTTERY_PRIZE:
                 if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 break;
-            case ReportLostCard:
+            case REPORT_LOST_CARD:
                 if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 break;
-            case ChangeLocale:
+            case CHANGE_LOCALE:
                 if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
                 break;
             // Admin only functions
-            case AddAdmin:
+            case ADD_ADMIN:
                 break;
-            case RemoveAdmin:
+            case REMOVE_ADMIN:
                 if (this.currentAdmin == null) {
                     throw new NoneOfFunctionSelected();
                 }
@@ -192,12 +192,12 @@ public class ATMSystem {
                     //DataStroeError, File System Error.
                 }
                 break;
-            case ToggleATMState:
+            case TOGGLE_ATM_STATE:
                 this.state.toggleSystem();
                 break;
-            case QueryATMBalance:
+            case QUERY_ATM_BALANCE:
                 break;
-            case ChangeATMBalance:
+            case CHANGE_ATM_BALANCE:
                 break;
             default:
                 throw new NoneOfFunctionSelected();
@@ -224,22 +224,22 @@ public class ATMSystem {
         }
 
         switch (this.function) {
-            case Deposit:
-            case ForeignDeposit:
-            case Withdraw:
-            case ForeignWithdraw:
+            case DEPOSIT:
+            case FOREIGN_DEPOSIT:
+            case WITHDRAW:
+            case FOREIGN_WITHDRAW:
                 this.toTransaction.setAccount(this.account);
                 break;
-            case GetLotteryPrize:
+            case GET_LOTTERY_PRIZE:
                 this.toTransaction.setAccount(this.account);
                 try {
                     this.toTransaction.processTransaction();
                 } catch (NegativeBalanceError e) {
-                    //GetLotteryPrize Don't make Negative balance Error.
+                    //GET_LOTTERY_PRIZE Don't make Negative balance Error.
                 }
                 break;
-            case Transfer:
-                //Transfer enter Account from.
+            case TRANSFER:
+                //TRANSFER enter Account from.
                 if (this.fromTransaction.getAccount() == null) {
                     this.fromTransaction.setAccount(this.account);
                 } else if (this.fromTransaction.getAccount().getAccountNo().equals(this.account.getAccountNo())) {
@@ -248,15 +248,18 @@ public class ATMSystem {
                     this.toTransaction.setAccount(this.account);
                 }
                 break;
-            case SplitPay:
+            case SPLIT_PAY:
                 if (this.toTransaction.getAccount() == null) {
                     this.toTransaction.setAccount(this.account);
                 } else {
                     this.fromTransaction.setAccount(this.account);
                 }
                 break;
-            case QueryBalance:
-            case QueryTransactionList:
+            case QUERY_BALANCE:
+            case QUERY_TRANSACTION_LIST:
+                break;
+            default :
+                //Do Nothing.
                 break;
         }
     }
@@ -361,7 +364,7 @@ public class ATMSystem {
         }
 
         //Split Pat Process Transaction After enter Password.
-        if (this.function == FunctionType.SplitPay) {
+        if (this.function == FunctionType.SPLIT_PAY) {
             numberOfUser--;
             try {
                 this.fromTransaction.processTransaction();

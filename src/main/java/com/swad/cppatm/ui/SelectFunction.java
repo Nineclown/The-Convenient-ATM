@@ -44,7 +44,7 @@ public class SelectFunction extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 try {
-                    system.selectFunction(FunctionType.Deposit);
+                    system.selectFunction(FunctionType.DEPOSIT);
                 } catch (NoneOfFunctionSelected exception) {
                     JOptionPane.showMessageDialog(parentFrame,
                         setLocalizedString(system, "현재 ATM을 사용 할 수 없습니다.", "Can't use ATM now"),
@@ -66,7 +66,7 @@ public class SelectFunction extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 try {
-                    system.selectFunction(FunctionType.ForeignDeposit);
+                    system.selectFunction(FunctionType.FOREIGN_DEPOSIT);
                 } catch (NoneOfFunctionSelected ex) {
                     JOptionPane.showMessageDialog(parentFrame,
                         setLocalizedString(system, "현재 ATM을 사용 할 수 없습니다.", "Can't use ATM now"),
@@ -88,7 +88,7 @@ public class SelectFunction extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 try {
-                    system.selectFunction(FunctionType.Withdraw);
+                    system.selectFunction(FunctionType.WITHDRAW);
                 } catch (NoneOfFunctionSelected ex) {
                     JOptionPane.showMessageDialog(parentFrame,
                         setLocalizedString(system, "현재 ATM을 사용 할 수 없습니다.", "Can't use ATM now"),
@@ -110,7 +110,7 @@ public class SelectFunction extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 try {
-                    system.selectFunction(FunctionType.QueryBalance);
+                    system.selectFunction(FunctionType.QUERY_BALANCE);
                 } catch (NoneOfFunctionSelected ex) {
                     JOptionPane.showMessageDialog(parentFrame,
                         "ATM is froze",
@@ -132,7 +132,7 @@ public class SelectFunction extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 try {
-                    system.selectFunction(FunctionType.ForeignWithdraw);
+                    system.selectFunction(FunctionType.FOREIGN_WITHDRAW);
 
                 } catch (NoneOfFunctionSelected ex) {
                     JOptionPane.showMessageDialog(parentFrame,
@@ -155,7 +155,7 @@ public class SelectFunction extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 try {
-                    system.selectFunction(FunctionType.QueryTransactionList);
+                    system.selectFunction(FunctionType.QUERY_TRANSACTION_LIST);
                 } catch (NoneOfFunctionSelected ex) {
                     JOptionPane.showMessageDialog(parentFrame,
                         setLocalizedString(system, "현재 ATM을 사용 할 수 없습니다.", "Can't use ATM now"),
@@ -177,7 +177,7 @@ public class SelectFunction extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 try {
-                    system.selectFunction(FunctionType.ReportLostCard);
+                    system.selectFunction(FunctionType.REPORT_LOST_CARD);
                 } catch (NoneOfFunctionSelected ex) {
                     JOptionPane.showMessageDialog(parentFrame,
                         setLocalizedString(system, "현재 ATM을 사용 할 수 없습니다.", "Can't use ATM now"),
@@ -199,7 +199,7 @@ public class SelectFunction extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 try {
-                    system.selectFunction(FunctionType.GetLotteryPrize);
+                    system.selectFunction(FunctionType.GET_LOTTERY_PRIZE);
                 } catch (NoneOfFunctionSelected ex) {
                     JOptionPane.showMessageDialog(parentFrame,
                         setLocalizedString(system, "현재 ATM을 사용 할 수 없습니다.", "Can't use ATM now"),
@@ -221,7 +221,7 @@ public class SelectFunction extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 try {
-                    system.selectFunction(FunctionType.ChangeLocale);
+                    system.selectFunction(FunctionType.CHANGE_LOCALE);
                 } catch (NoneOfFunctionSelected ex) {
                     JOptionPane.showMessageDialog(parentFrame,
                         setLocalizedString(system, "현재 ATM을 사용 할 수 없습니다.", "Can't use ATM now"),
@@ -243,7 +243,7 @@ public class SelectFunction extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 try {
-                    system.selectFunction(FunctionType.Transfer);
+                    system.selectFunction(FunctionType.TRANSFER);
                 } catch (NoneOfFunctionSelected ex) {
                     JOptionPane.showMessageDialog(parentFrame,
                         setLocalizedString(system, "현재 ATM을 사용 할 수 없습니다.", "Can't use ATM now"),
@@ -265,7 +265,7 @@ public class SelectFunction extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 try {
-                    system.selectFunction(FunctionType.SplitPay);
+                    system.selectFunction(FunctionType.SPLIT_PAY);
                 } catch (NoneOfFunctionSelected ex) {
                     JOptionPane.showMessageDialog(parentFrame,
                         setLocalizedString(system, "현재 ATM을 사용 할 수 없습니다.", "Can't use ATM now"),

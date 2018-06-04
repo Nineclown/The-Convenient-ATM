@@ -3,7 +3,6 @@ package com.swad.cppatm.ui;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.swad.cppatm.application.ATMSystem;
-import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.enums.Locale;
 import com.swad.cppatm.exceptions.DataStoreError;
 import com.swad.cppatm.exceptions.InvalidBillException;
@@ -72,7 +71,7 @@ public class EnterBill {
                 }
 
                 switch (system.getFunction()) {
-                    case Deposit:
+                    case DEPOSIT:
                         try {
                             system.enterBill(values);
                         } catch (DataStoreError | InvalidBillException ex) {
