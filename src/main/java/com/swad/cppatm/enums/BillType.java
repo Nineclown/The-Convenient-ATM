@@ -14,8 +14,8 @@ public enum BillType {
         return this.value;
     }
 
-    public static int wonSize = 4;
-    public static int dollarSize = 7;
+    public final static int wonSize = 4;
+    public final static int dollarSize = 7;
 
     public static int count(BillType type, int billAmount) {
         switch (type) {
