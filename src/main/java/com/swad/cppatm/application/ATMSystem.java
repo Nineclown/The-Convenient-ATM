@@ -188,7 +188,6 @@ public class ATMSystem {
                     DataStore dataStore = new DataStore();
                     dataStore.saveAdminData(admins);
                 } catch (DataStoreError er) {
-
                 }
                 break;
             case ToggleATMState:
@@ -263,9 +262,8 @@ public class ATMSystem {
     public void enterBill(int[] billAmount) throws InvalidBillException, DataStoreError, OverflowBillException {
         int total = 0;
 
-        if (billAmount.length != 11) {
-            throw new InvalidBillException();
-        } else if ((billAmount[4] != 0) || (billAmount[5] != 0) || (billAmount[6] != 0) && (billAmount[7] != 0) || (billAmount[8] != 0) || (billAmount[9] != 0) || (billAmount[10] != 0)) {
+        if ((billAmount.length != 11) || ((billAmount[4] != 0) ||
+            (billAmount[5] != 0) || (billAmount[6] != 0) && (billAmount[7] != 0) || (billAmount[8] != 0) || (billAmount[9] != 0) || (billAmount[10] != 0))) {
             throw new InvalidBillException();
         }
 
