@@ -8,12 +8,10 @@ import com.swad.cppatm.enums.TransactionType;
 import com.swad.cppatm.exceptions.DataStoreError;
 import com.swad.cppatm.exceptions.NegativeBalanceError;
 import net.serenitybdd.junit.runners.SerenityRunner;
-import net.thucydides.core.annotations.Managed;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.openqa.selenium.WebDriver;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,7 +61,7 @@ public class AccountTest {
         Date startToday = new Date(today.getYear(), today.getMonth(), today.getDate());
         Date endToday = new Date(today.getYear(), today.getMonth(), today.getDate()+1);
 
-        Transaction transaction = new Transaction(TransactionType.Deposit);
+        Transaction transaction = new Transaction(TransactionType.DEPOSIT);
         transaction.setAccount(account);
         transaction.setAmount(5100);
         transaction.setTime();

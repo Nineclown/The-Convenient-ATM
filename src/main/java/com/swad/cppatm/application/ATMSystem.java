@@ -119,33 +119,33 @@ public class ATMSystem {
                 if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
-                this.toTransaction = new Transaction(TransactionType.Deposit);
+                this.toTransaction = new Transaction(TransactionType.DEPOSIT);
                 break;
             case Withdraw:
                 if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
-                this.toTransaction = new Transaction(TransactionType.Withdraw);
+                this.toTransaction = new Transaction(TransactionType.WITHDRAW);
                 break;
             case ForeignDeposit:
                 if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
-                this.toTransaction = new Transaction(TransactionType.ForeignDeposit);
+                this.toTransaction = new Transaction(TransactionType.FOREIGN_DEPOSIT);
                 break;
             case ForeignWithdraw:
                 if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
-                this.toTransaction = new Transaction(TransactionType.ForeignWithdraw);
+                this.toTransaction = new Transaction(TransactionType.FOREIGN_WITHDRAW);
                 break;
             case Transfer:
             case SplitPay:
                 if (!state.available()) {
                     throw new NoneOfFunctionSelected();
                 }
-                this.fromTransaction = new Transaction(TransactionType.SendTransfer);
-                this.toTransaction = new Transaction(TransactionType.ReceiveTransfer);
+                this.fromTransaction = new Transaction(TransactionType.SEND_TRANSFER);
+                this.toTransaction = new Transaction(TransactionType.RECEIVE_TRANSFER);
                 break;
             case QueryBalance:
                 if (!state.available()) {
@@ -368,7 +368,7 @@ public class ATMSystem {
                 this.toTransaction.addAmount(cashAmount);
             } finally {
                 if (numberOfUser > 0) {
-                    this.fromTransaction = new Transaction(TransactionType.SendTransfer);
+                    this.fromTransaction = new Transaction(TransactionType.SEND_TRANSFER);
                     this.fromTransaction.setAmount(-cashAmount);
                 } else {
                     this.toTransaction.processTransaction();
@@ -523,7 +523,7 @@ public class ATMSystem {
 
         this.numberOfUser = userNumber;
         this.cashAmount = this.cashAmount / userNumber;
-        this.fromTransaction = new Transaction(TransactionType.SendTransfer);
+        this.fromTransaction = new Transaction(TransactionType.SEND_TRANSFER);
         fromTransaction.setAmount(-this.cashAmount);
     }
 
@@ -578,7 +578,7 @@ public class ATMSystem {
             throw new LotteryFailed();
         }
 
-        this.toTransaction = new Transaction(TransactionType.Deposit);
+        this.toTransaction = new Transaction(TransactionType.DEPOSIT);
         this.toTransaction.setAmount(result);
     }
 

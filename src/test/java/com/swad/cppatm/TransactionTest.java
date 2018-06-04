@@ -29,7 +29,7 @@ public class TransactionTest {
     @Test
     public void calcFeeTest() {
         Account account = new DataStore().loadAccountData(Bank.WOORI, "110412644105");
-        Transaction transaction = new Transaction(TransactionType.Deposit);
+        Transaction transaction = new Transaction(TransactionType.DEPOSIT);
         transaction.setAccount(account);
         transaction.setAmount(10000);
         transaction.calcFee();
@@ -39,7 +39,7 @@ public class TransactionTest {
     @Test
     public void processTransactionTest() {
         Account account = new DataStore().loadAccountData(Bank.HANA, "123456789012345t");
-        Transaction transaction = new Transaction(TransactionType.Deposit);
+        Transaction transaction = new Transaction(TransactionType.DEPOSIT);
         transaction.setAccount(account);
         transaction.setAmount(10000);
         try {
@@ -56,7 +56,7 @@ public class TransactionTest {
     @Test(expected = NegativeBalanceError.class)
     public void processTransactionBalanceMustBePositive() throws NegativeBalanceError {
         Account account = new DataStore().loadAccountData(Bank.HANA, "123456789012345");
-        Transaction transaction = new Transaction(TransactionType.Withdraw);
+        Transaction transaction = new Transaction(TransactionType.WITHDRAW);
 
         transaction.setAccount(account);
         transaction.setAmount(-99999999);

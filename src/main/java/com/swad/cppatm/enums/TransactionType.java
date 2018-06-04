@@ -1,10 +1,10 @@
 package com.swad.cppatm.enums;
 
 public enum TransactionType {
-    Deposit,
-    ForeignDeposit,
-    Withdraw,
-    ForeignWithdraw,
-    SendTransfer,
-    ReceiveTransfer
+    DEPOSIT,
+    FOREIGN_DEPOSIT,
+    WITHDRAW,
+    FOREIGN_WITHDRAW,
+    SEND_TRANSFER,
+    RECEIVE_TRANSFER
 }
