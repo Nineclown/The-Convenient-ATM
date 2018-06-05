@@ -21,7 +21,6 @@ public class ATMSystemTest {
     @Before
     public void initATMSystem() throws Exception {
         this.system = new ATMSystem();
-        this.system.selectFunction(FunctionType.DEPOSIT);
     }
 
     @Test(expected = InvalidBillException.class)
