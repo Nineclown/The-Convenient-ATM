@@ -1,9 +1,5 @@
 package com.swad.cppatm.application;
 
-import com.swad.cppatm.exceptions.InvalidAdminException;
-
-import java.util.regex.Pattern;
-
 public class Admin {
     private String id;
     private String password;
@@ -28,9 +24,6 @@ public class Admin {
     }
 
     public boolean checkAdminAccount(String adminID, String adminPW) {
-        if (this.id.equals(adminID) && this.password.equals(adminPW)) {
-            return true;
-        }
-        return false;
+        return this.id.equals(adminID) && this.password.equals(adminPW);
     }
 }
