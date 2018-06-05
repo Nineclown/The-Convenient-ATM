@@ -70,35 +70,32 @@ public class EnterBill {
                     return;
                 }
 
-                switch (system.getFunction()) {
-                    case DEPOSIT:
-                        try {
-                            system.enterBill(values);
-                        } catch (DataStoreError | InvalidBillException ex) {
-                            ex.printStackTrace();
-                            parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
-                            parentFrame.pack();
-                            parentFrame.invalidate();
-                            parentFrame.validate();
-                            return;
-                        } catch (OverflowBillException ex) {
-                            JOptionPane.showMessageDialog(parentFrame,
-                                setLocalizedString(system, "거래를 진행할 수 없습니다. 관리자에게 연락해주세요.", "Can't process transaction, please contact to admin"),
-                                "Error",
-                                JOptionPane.ERROR_MESSAGE);
 
-                            parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
-                            parentFrame.pack();
-                            parentFrame.invalidate();
-                            parentFrame.validate();
-                            return;
-                        }
-                        parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
-                        parentFrame.pack();
-                        parentFrame.invalidate();
-                        parentFrame.validate();
-                        break;
+                try {
+                    system.enterBill(values);
+                } catch (DataStoreError | InvalidBillException ex) {
+                    parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
+                    parentFrame.pack();
+                    parentFrame.invalidate();
+                    parentFrame.validate();
+                    return;
+                } catch (OverflowBillException ex) {
+                    JOptionPane.showMessageDialog(parentFrame,
+                        setLocalizedString(system, "거래를 진행할 수 없습니다. 관리자에게 연락해주세요.", "Can't process transaction, please contact to admin"),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+
+                    parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());
+                    parentFrame.pack();
+                    parentFrame.invalidate();
+                    parentFrame.validate();
+                    return;
                 }
+                parentFrame.setContentPane(new PrintResult(parentFrame, system).getPanel());
+                parentFrame.pack();
+                parentFrame.invalidate();
+                parentFrame.validate();
+
             }
         });
         discardButton.setText(setLocalizedString(system, "취소", "Discard"));
