@@ -5,9 +5,10 @@ import com.swad.cppatm.enums.TransactionType;
 import com.swad.cppatm.exceptions.DataStoreError;
 import com.swad.cppatm.exceptions.NegativeBalanceError;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Transaction {
+public class Transaction implements Serializable {
     private TransactionType tcType;
     private transient Account account;
     private int amount;
