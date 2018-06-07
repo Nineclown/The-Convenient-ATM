@@ -3,12 +3,9 @@ package com.swad.cppatm.ui;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.swad.cppatm.application.ATMSystem;
-import com.swad.cppatm.application.DataStore;
 import com.swad.cppatm.enums.Locale;
 import com.swad.cppatm.exceptions.DataStoreError;
-import com.swad.cppatm.exceptions.UserDoestNotExist;
 
-import javax.print.attribute.standard.JobPriority;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -26,10 +23,12 @@ public class ReportLostCard extends JFrame {
     private JTextField cardNumberField4;
     private JTextField[] cardFields;
     private JCheckBox[] checkBox;
+
     private JLabel[] cardLabels;
     private JPanel reportLostCardPanel;
     private JButton cancelButton;
     private JButton confirmButton;
+
     private ButtonGroup buttongroup;
     private JLabel titleLabel;
     private JLabel cardNumberLabel2;
@@ -86,7 +85,7 @@ public class ReportLostCard extends JFrame {
                     if (!cardFields[i].getText().equals("") && checkBox[i].isSelected()) {
                         system.selectCard(card[i]);
                         JOptionPane.showMessageDialog(parentFrame,
-                            setLocalizedString(system, card[i].toString() + " 카드를 중지처리하였습니다", card[i].toString() + " is now closed"),
+                            setLocalizedString(system, card[i] + " 카드를 중지처리하였습니다", card[i] + " is now closed"),
                             "Info",
                             JOptionPane.INFORMATION_MESSAGE);
 
@@ -100,7 +99,7 @@ public class ReportLostCard extends JFrame {
                             } catch (DataStoreError ex) {
                             }
                         }
-                        JOptionPane.showMessageDialog(parentFrame, setLocalizedString(system, card[i].toString() + " 카드를 재발급 요청하였습니다", card[i].toString() + " is requested to renew"),
+                        JOptionPane.showMessageDialog(parentFrame, setLocalizedString(system, card[i] + " 카드를 재발급 요청하였습니다", card[i] + " is requested to renew"),
                             "Info",
                             JOptionPane.INFORMATION_MESSAGE);
                         parentFrame.setContentPane(new SelectFunction(parentFrame, system).getPanel());

@@ -4,10 +4,8 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.application.Admin;
-import com.swad.cppatm.enums.FunctionType;
 import com.swad.cppatm.enums.Locale;
 import com.swad.cppatm.exceptions.DataStoreError;
-import com.swad.cppatm.exceptions.InvalidAdminException;
 
 import javax.swing.*;
 import java.awt.*;

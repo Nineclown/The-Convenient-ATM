@@ -12,7 +12,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Date;
-import java.util.regex.Pattern;
 
 public class EnterDate {
     private JPanel enterDatePanel;

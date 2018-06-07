@@ -1,7 +1,10 @@
 package com.swad.cppatm;
 
-import com.swad.cppatm.ui.*;
 import com.swad.cppatm.application.ATMSystem;
+import com.swad.cppatm.ui.AdminSelectFunction;
+import com.swad.cppatm.ui.AuthorizeAdmin;
+import com.swad.cppatm.ui.SelectFunction;
+
 import javax.swing.*;
 
 public class Main {
