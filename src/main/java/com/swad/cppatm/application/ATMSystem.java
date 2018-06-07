@@ -583,7 +583,7 @@ public class ATMSystem {
     }
 
     public void enterATMBalance(int[] billAmount) throws InvalidBillException, OverflowBillException {
-        if (billAmount.length != (BillType.wonSize + BillType.dollarSize)) {
+        if (billAmount.length != (BillType.WON_SIZE + BillType.DOLLAR_SIZE)) {
             throw new InvalidBillException();
         }
 
