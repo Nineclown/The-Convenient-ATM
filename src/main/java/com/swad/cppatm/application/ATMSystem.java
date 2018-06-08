@@ -3,16 +3,15 @@ package com.swad.cppatm.application;
 import com.swad.cppatm.enums.*;
 import com.swad.cppatm.exceptions.*;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-
-import java.net.URL;
-import java.net.HttpURLConnection;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 
 
 public class ATMSystem {
@@ -108,78 +107,47 @@ public class ATMSystem {
     }
 
     public void selectFunction(FunctionType function) throws NoneOfFunctionSelected, MultipleFunctionsExecuted {
+        if(!state.available() && Arrays.asList(FunctionType.getUserFunctions()).contains(function)){
+            throw new NoneOfFunctionSelected();
+        }
+
         // 중복 실행 불가!
-        if ((Arrays.asList(FunctionType.getUserFunctions()).contains(function) && Arrays.asList(FunctionType.getAdminFunctions()).contains(this.function)) ||
-            (Arrays.asList(FunctionType.getAdminFunctions()).contains(function) && Arrays.asList(FunctionType.getUserFunctions()).contains(this.function))) {
+        if (this.function != null) {
             throw new MultipleFunctionsExecuted();
         }
 
         switch (function) {
             case DEPOSIT:
-                if (!state.available()) {
-                    throw new NoneOfFunctionSelected();
-                }
                 this.toTransaction = new Transaction(TransactionType.DEPOSIT);
                 break;
             case WITHDRAW:
-                if (!state.available()) {
-                    throw new NoneOfFunctionSelected();
-                }
                 this.toTransaction = new Transaction(TransactionType.WITHDRAW);
                 break;
             case FOREIGN_DEPOSIT:
-                if (!state.available()) {
-                    throw new NoneOfFunctionSelected();
-                }
                 this.toTransaction = new Transaction(TransactionType.FOREIGN_DEPOSIT);
                 break;
             case FOREIGN_WITHDRAW:
-                if (!state.available()) {
-                    throw new NoneOfFunctionSelected();
-                }
                 this.toTransaction = new Transaction(TransactionType.FOREIGN_WITHDRAW);
                 break;
             case TRANSFER:
             case SPLIT_PAY:
-                if (!state.available()) {
-                    throw new NoneOfFunctionSelected();
-                }
                 this.fromTransaction = new Transaction(TransactionType.SEND_TRANSFER);
                 this.toTransaction = new Transaction(TransactionType.RECEIVE_TRANSFER);
                 break;
             case QUERY_BALANCE:
-                if (!state.available()) {
-                    throw new NoneOfFunctionSelected();
-                }
                 break;
             case QUERY_TRANSACTION_LIST:
-                if (!state.available()) {
-                    throw new NoneOfFunctionSelected();
-                }
                 break;
             case GET_LOTTERY_PRIZE:
-                if (!state.available()) {
-                    throw new NoneOfFunctionSelected();
-                }
                 break;
             case REPORT_LOST_CARD:
-                if (!state.available()) {
-                    throw new NoneOfFunctionSelected();
-                }
                 break;
             case CHANGE_LOCALE:
-                if (!state.available()) {
-                    throw new NoneOfFunctionSelected();
-                }
                 break;
             // Admin only functions
             case ADD_ADMIN:
                 break;
             case REMOVE_ADMIN:
-                if (this.currentAdmin == null) {
-                    throw new NoneOfFunctionSelected();
-                }
-
                 if (this.admins.size() <= 1) {
                     throw new NoneOfFunctionSelected();
                 }
@@ -614,7 +582,7 @@ public class ATMSystem {
     }
 
     public void enterATMBalance(int[] billAmount) throws InvalidBillException, OverflowBillException {
-        if (billAmount.length != (BillType.wonSize + BillType.dollarSize)) {
+        if (billAmount.length != (BillType.WON_SIZE + BillType.DOLLAR_SIZE)) {
             throw new InvalidBillException();
         }
 

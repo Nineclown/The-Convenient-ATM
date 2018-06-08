@@ -21,7 +21,6 @@ public class ATMSystemTest {
     @Before
     public void initATMSystem() throws Exception {
         this.system = new ATMSystem();
-        this.system.selectFunction(FunctionType.DEPOSIT);
     }
 
     @Test(expected = InvalidBillException.class)
@@ -67,8 +66,9 @@ public class ATMSystemTest {
     @Test
     public void enterAccountInfoChangesProperty() {
         try {
+            system.selectFunction(FunctionType.DEPOSIT);
             system.enterAccountInfo(Bank.HANA, "123456789012345");
-        } catch (AccountDoesNotExist | DataStoreError | NoneOfFunctionSelected | FrozenAccountException | SameAccountTransferException ex) {
+        } catch (Exception ex) {
             fail(ex.getClass().getSimpleName());
         }
 
@@ -80,8 +80,9 @@ public class ATMSystemTest {
     @Test
     public void enterPasswordSuccess() {
         try {
+            system.selectFunction(FunctionType.DEPOSIT);
             system.enterAccountInfo(Bank.HANA, "123456789012345");
-        } catch (AccountDoesNotExist | DataStoreError | NoneOfFunctionSelected | FrozenAccountException | SameAccountTransferException ex) {
+        } catch (Exception ex) {
             fail(ex.getClass().getSimpleName());
         }
 
@@ -98,15 +99,16 @@ public class ATMSystemTest {
     public void enterPasswordFreezesAccountWhenInvalidInputRepeatsForFiveTimes() {
         int index;
         try {
+            system.selectFunction(FunctionType.DEPOSIT);
             system.enterAccountInfo(Bank.HANA, "123456789012345t");
-        } catch (AccountDoesNotExist | DataStoreError | NoneOfFunctionSelected | SameAccountTransferException ex) {
-            fail(ex.getClass().getSimpleName());
         } catch (FrozenAccountException ex) {
             // If account is saved as frozen, unfreeze it.
             system.getAccount().unfreezeAccount();
+        } catch (Exception ex) {
+            fail(ex.getClass().getSimpleName());
         }
 
-        for ( index = 0 ; index < 5 ; index++ ) {
+        for (index = 0; index < 5; index++) {
             System.out.println("Input Password");
 
             try {
@@ -116,7 +118,7 @@ public class ATMSystemTest {
             } catch (FrozenAccountException ex) {
                 break;
             } catch (InvalidPasswordException ex) {
-                System.out.println("Invalid password input for " + (index+1) + " times");
+                System.out.println("Invalid password input for " + (index + 1) + " times");
             }
         }
 

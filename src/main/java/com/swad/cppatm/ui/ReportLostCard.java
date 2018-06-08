@@ -4,7 +4,6 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.swad.cppatm.application.ATMSystem;
 import com.swad.cppatm.enums.Locale;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -22,10 +21,12 @@ public class ReportLostCard extends JFrame {
     private JTextField cardNumberField4;
     private JTextField[] cardFields;
     private JCheckBox[] checkBox;
+
     private JLabel[] cardLabels;
     private JPanel reportLostCardPanel;
     private JButton cancelButton;
     private JButton confirmButton;
+
     private ButtonGroup buttongroup;
     private JLabel titleLabel;
     private JLabel cardNumberLabel2;

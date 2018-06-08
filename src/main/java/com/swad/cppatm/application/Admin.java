@@ -1,6 +1,8 @@
 package com.swad.cppatm.application;
 
-public class Admin {
+import java.io.Serializable;
+
+public class Admin implements Serializable {
     private String id;
     private String password;
     private String contact;

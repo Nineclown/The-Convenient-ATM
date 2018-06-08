@@ -2,9 +2,10 @@ package com.swad.cppatm.application;
 
 import com.swad.cppatm.exceptions.DataStoreError;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class User {
+public class User implements Serializable {
 
     private String userId;
     private String userName;

@@ -11,6 +11,13 @@ gradle clean test # Run unit test
 gradle bulid
 ```
 
+## Static Analysis
+
+```sh
+gradle check # Run Jdepend & findbugs
+gradle sonarqube # Run sonarqube
+```
+
 ## Read also
 
 [Serenity Documentation](http://www.thucydides.info/docs/serenity)

@@ -4,13 +4,14 @@ import com.swad.cppatm.enums.Bank;
 import com.swad.cppatm.exceptions.DataStoreError;
 import com.swad.cppatm.exceptions.NegativeBalanceError;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
 /**
  * Account class
  */
-public class Account {
+public class Account implements Serializable {
 
     private Bank bank;
     private String accountNumber;

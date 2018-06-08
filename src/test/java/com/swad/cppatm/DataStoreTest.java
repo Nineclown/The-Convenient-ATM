@@ -12,7 +12,8 @@ import org.junit.runner.RunWith;
 
 import java.io.File;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SerenityRunner.class)
 public class DataStoreTest {
