@@ -53,7 +53,7 @@ public class Main {
 
         application.adminFrame.setContentPane(new AuthorizeAdmin(application.adminFrame, application.system).getPanel());
         application.adminFrame.setLocation(1000, 100);
-        application.adminFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        application.adminFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         application.adminFrame.pack();
         application.adminFrame.setVisible(true);
     }

@@ -139,7 +139,7 @@ public class Account {
         this.state = false;
         try {
             this.saveAccount();
-        } catch (DataStoreError e) {
+        } catch (DataStoreError ignored) {
 
         }
     }

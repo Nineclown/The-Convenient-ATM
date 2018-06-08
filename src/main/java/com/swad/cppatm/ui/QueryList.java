@@ -10,7 +10,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.MessageFormat;
-import java.util.ArrayList;
 
 public class QueryList extends JFrame {
     private JTextField accountBalanceField;

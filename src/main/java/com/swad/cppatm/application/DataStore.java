@@ -95,7 +95,7 @@ public class DataStore {
             admins = gson.fromJson(br, new TypeToken<ArrayList<Admin>>() {
             }.getType());
         } catch (IOException e) {
-            admins = new ArrayList<Admin>();
+            admins = new ArrayList<>();
         }
 
         return admins;

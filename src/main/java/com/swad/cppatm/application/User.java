@@ -8,7 +8,7 @@ public class User {
 
     private String userId;
     private String userName;
-    private ArrayList<String> cardList = new ArrayList<String>();
+    private ArrayList<String> cardList = new ArrayList<>();
     private transient DataStore dataStore = new DataStore();
 
     public String getUserId() {

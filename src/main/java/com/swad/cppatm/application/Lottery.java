@@ -1,5 +1,6 @@
 package com.swad.cppatm.application;
 
+import java.io.IOException;
 import java.net.URL;
 import java.net.HttpURLConnection;
 import java.io.BufferedReader;
@@ -10,7 +11,7 @@ import java.io.InputStreamReader;
  * Lottery class
  */
 public class Lottery {
-    private int week = 0;
+    private int week;
     private int[] numbers = new int[6];
 
     /**
@@ -21,9 +22,7 @@ public class Lottery {
      */
     public Lottery(int week, int[] numbers) {
         this.week = week;
-        for (int i = 0; i < 6; i++) {
-            this.numbers[i] = numbers[i];
-        }
+        System.arraycopy(numbers, 0, this.numbers, 0, 6);
     }
 
     /**
@@ -47,8 +46,9 @@ public class Lottery {
                 rank = Integer.parseInt(inputLine.substring(2, 3));
             }
 
-        } catch (Exception e) {
-
+        } catch (IOException e) {
+            //Network Error
+            return 0;
         }
 
         switch (rank) {

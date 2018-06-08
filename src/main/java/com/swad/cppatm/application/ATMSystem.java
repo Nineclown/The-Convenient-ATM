@@ -62,7 +62,7 @@ public class ATMSystem {
     }
 
     public Transaction[] getTransactionList() {
-        return this.transactionList.stream().toArray(Transaction[]::new);
+        return this.transactionList.toArray(new Transaction[0]);
     }
 
     public FunctionType getFunction() {
@@ -82,7 +82,7 @@ public class ATMSystem {
     }
 
     public Admin[] getAdmins() {
-        return this.admins.stream().toArray(Admin[]::new);
+        return this.admins.toArray(new Admin[0]);
     }
 
     public Admin getCurrentAdmin() {
@@ -560,7 +560,7 @@ public class ATMSystem {
         }
     }
 
-    public void askRenewCard(boolean answer) throws DataStoreError {
+    public void askRenewCard(boolean answer) {
         if (answer) {
             requestRenewCard(selectedCardNumber);
         }
