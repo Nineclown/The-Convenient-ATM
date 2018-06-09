@@ -8,7 +8,6 @@ import com.swad.cppatm.enums.Locale;
 import com.swad.cppatm.exceptions.DataStoreError;
 import com.swad.cppatm.exceptions.NegativeBalanceError;
 import com.swad.cppatm.exceptions.OverflowBillException;
-import com.swad.cppatm.exceptions.TooFewUser;
 import com.swad.cppatm.ui.components.JNumberTextField;
 
 import javax.swing.*;
@@ -248,22 +247,25 @@ public class EnterNumber extends JFrame {
                         break;
                     case SPLIT_PAY:
                         if (splitPayFlag) {
-                            try {
-                                if (insertNumber > 10) {
-                                    JOptionPane.showMessageDialog(parentFrame,
-                                        setLocalizedString(system, "사람 수가 너무 많습니다.", "Too many people to split pay"),
-                                        "Error",
-                                        JOptionPane.ERROR_MESSAGE);
-                                    return;
-                                }
-                                system.enterNumberOfUsers(insertNumber);
-                                parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
-                                parentFrame.pack();
-                                parentFrame.invalidate();
-                                parentFrame.validate();
-                            } catch (TooFewUser ex1) {
-                                JOptionPane.showMessageDialog(parentFrame, "사람 수가 너무 적습니다.", "Error", JOptionPane.ERROR_MESSAGE);
+                            if (insertNumber > 10) {
+                                JOptionPane.showMessageDialog(parentFrame,
+                                    setLocalizedString(system, "사람 수가 너무 많습니다.", "Too many people to split pay"),
+                                    "Error",
+                                    JOptionPane.ERROR_MESSAGE);
+                                return;
                             }
+                            if (insertNumber <= 0) {
+                                JOptionPane.showMessageDialog(parentFrame,
+                                    setLocalizedString(system, "사람 수가 너무 적습니다.", "Too few people to split pay"),
+                                    "Error",
+                                    JOptionPane.ERROR_MESSAGE);
+                                return;
+                            }
+                            system.enterNumberOfUsers(insertNumber);
+                            parentFrame.setContentPane(new RequestCardOrBankbook(parentFrame, system).getPanel());
+                            parentFrame.pack();
+                            parentFrame.invalidate();
+                            parentFrame.validate();
                         } else {
                             system.enterTotalCashAmountToGet(insertNumber * 10000);
                             titleLabel.setText(setLocalizedString(system, "총 이체 할 인원 수를 입력하여 주십시오.", "Please enter people number to split pay"));

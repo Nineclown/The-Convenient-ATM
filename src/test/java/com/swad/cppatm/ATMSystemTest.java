@@ -138,21 +138,11 @@ public class ATMSystemTest {
         assertArrayEquals(expectedResult, result);
     }
 
-    @Test(expected = TooFewUser.class)
-    public void enterNumberOfUsersInputIsZero() throws TooFewUser {
-        system.enterNumberOfUsers(0);
-    }
-
     @Test
     public void enterNumberOfUsersSuccessfullyDivideCashAmount() throws NoneOfFunctionSelected, MultipleFunctionsExecuted {
         system.selectFunction(FunctionType.SPLIT_PAY);
         system.setCashAmount(1000);
-
-        try {
-            system.enterNumberOfUsers(5);
-        } catch (TooFewUser e) {
-            fail("throw TooFewUser" + e.getMessage());
-        }
+        system.enterNumberOfUsers(5);
 
         assertEquals(system.getCashAmount(), 1000 / 5);
     }

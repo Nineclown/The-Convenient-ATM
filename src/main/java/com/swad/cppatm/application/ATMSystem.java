@@ -19,8 +19,8 @@ public class ATMSystem {
     private int numberOfUser;
     private int retry;
     private String selectedCardNumber;
-    private String alarmMessage;
-    private String exportMessage;
+    private static final String alarmMessage = "Alter to Admin";
+    private static final String exportMessage = "Export Bills: ";
     private Account account;
 
     private Transaction fromTransaction;
@@ -98,8 +98,6 @@ public class ATMSystem {
     }
 
     public ATMSystem() {
-        alarmMessage = new String("Alter to Admin");
-        exportMessage = new String("Expore Bills: ");
         this.cashAmount = 0;
         this.selectedCardNumber = "";
         DataStore dataStore = new DataStore();
@@ -255,9 +253,9 @@ public class ATMSystem {
             balance.changeSystemBalance(billAmount);
         } catch (AdminAlarmException e) {
             System.out.println(alarmMessage);
-            //Alarm to Admin;
+            //Alarm to Admin.
         } catch (OverflowBillException e) {
-            System.out.print("exportMessage : ");
+            System.out.print(exportMessage);
             for (int i = 0; i < billAmount.length; i++) {
                 System.out.print(-billAmount[i] + "/");
             }
@@ -302,7 +300,7 @@ public class ATMSystem {
             System.out.println(alarmMessage);
             //Alarm to Admin
         } catch (OverflowBillException e) {
-            System.out.print("exportMessage : ");
+            System.out.print(exportMessage);
             for (int i = 0; i < billAmount.length; i++) {
                 System.out.print(-billAmount[i] + "/");
             }
@@ -361,7 +359,7 @@ public class ATMSystem {
             balance.changeSystemBalance(billAmount);
         } catch (AdminAlarmException e) {
             System.out.println(alarmMessage);
-            //Alarm to admin;
+            //Alarm to admin.
         } catch (OverflowBillException e) {
             state.toggleSystem();
             throw e;
@@ -382,7 +380,7 @@ public class ATMSystem {
             throw e;
         }
 
-        System.out.print("exportMessage : ");
+        System.out.print(exportMessage);
         for (int i = 0; i < billAmount.length; i++) {
             System.out.print(-billAmount[i] + "/");
         }
@@ -398,7 +396,7 @@ public class ATMSystem {
             balance.changeSystemBalance(billAmount);
         } catch (AdminAlarmException e) {
             System.out.println(alarmMessage);
-            //Alarm to admin;
+            //Alarm to admin.
         } catch (OverflowBillException e) {
             state.toggleSystem();
             throw e;
@@ -408,6 +406,7 @@ public class ATMSystem {
             this.toTransaction.processTransaction();
         } catch (NegativeBalanceError e) {
             for (int i = 0; i < billAmount.length; i++) {
+                billAmount[i] = -billAmount[i];
                 billAmount[i] = -billAmount[i];
             }
             try {
@@ -419,7 +418,7 @@ public class ATMSystem {
             throw e;
         }
 
-        System.out.print("exportMessage : ");
+        System.out.print(exportMessage);
         for (int bills : billAmount) {
             System.out.print(-bills + "/");
         }
@@ -490,11 +489,7 @@ public class ATMSystem {
         this.cashAmount = cashAmount;
     }
 
-    public void enterNumberOfUsers(int userNumber) throws TooFewUser {
-        if (userNumber == 0) {
-            throw new TooFewUser();
-        }
-
+    public void enterNumberOfUsers(int userNumber){
         this.numberOfUser = userNumber;
         this.cashAmount = this.cashAmount / userNumber;
         this.fromTransaction = new Transaction(TransactionType.SEND_TRANSFER);
