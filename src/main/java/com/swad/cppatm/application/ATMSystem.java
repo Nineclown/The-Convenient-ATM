@@ -19,7 +19,8 @@ public class ATMSystem {
     private int numberOfUser;
     private int retry;
     private String selectedCardNumber;
-
+    private String alarmMessage;
+    private String exportMessage;
     private Account account;
 
     private Transaction fromTransaction;
@@ -97,6 +98,8 @@ public class ATMSystem {
     }
 
     public ATMSystem() {
+        alarmMessage = new String("Alter to Admin");
+        exportMessage = new String("Expore Bills: ");
         this.cashAmount = 0;
         this.selectedCardNumber = "";
         DataStore dataStore = new DataStore();
@@ -251,10 +254,10 @@ public class ATMSystem {
         try {
             balance.changeSystemBalance(billAmount);
         } catch (AdminAlarmException e) {
-            System.out.println("Alter to admin");
+            System.out.println(alarmMessage);
             //Alarm to Admin;
         } catch (OverflowBillException e) {
-            System.out.print("Export Bills : ");
+            System.out.print("exportMessage : ");
             for (int i = 0; i < billAmount.length; i++) {
                 System.out.print(-billAmount[i] + "/");
             }
@@ -296,10 +299,10 @@ public class ATMSystem {
         try {
             balance.changeSystemBalance(billAmount);
         } catch (AdminAlarmException e) {
-            System.out.println("Alter to admin");
+            System.out.println(alarmMessage);
             //Alarm to Admin
         } catch (OverflowBillException e) {
-            System.out.print("Export Bills : ");
+            System.out.print("exportMessage : ");
             for (int i = 0; i < billAmount.length; i++) {
                 System.out.print(-billAmount[i] + "/");
             }
@@ -357,7 +360,7 @@ public class ATMSystem {
         try {
             balance.changeSystemBalance(billAmount);
         } catch (AdminAlarmException e) {
-            System.out.println("Alter to admin");
+            System.out.println(alarmMessage);
             //Alarm to admin;
         } catch (OverflowBillException e) {
             state.toggleSystem();
@@ -379,7 +382,7 @@ public class ATMSystem {
             throw e;
         }
 
-        System.out.print("Export Bills : ");
+        System.out.print("exportMessage : ");
         for (int i = 0; i < billAmount.length; i++) {
             System.out.print(-billAmount[i] + "/");
         }
@@ -394,7 +397,7 @@ public class ATMSystem {
         try {
             balance.changeSystemBalance(billAmount);
         } catch (AdminAlarmException e) {
-            System.out.println("Alter to admin");
+            System.out.println(alarmMessage);
             //Alarm to admin;
         } catch (OverflowBillException e) {
             state.toggleSystem();
@@ -416,7 +419,7 @@ public class ATMSystem {
             throw e;
         }
 
-        System.out.print("Export Bills : ");
+        System.out.print("exportMessage : ");
         for (int bills : billAmount) {
             System.out.print(-bills + "/");
         }
